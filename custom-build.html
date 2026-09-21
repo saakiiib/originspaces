@@ -527,6 +527,65 @@
 </body>
 
   <script>
+    const CONFIG_USE_CASES = [
+      { id: 'annex', name: 'Residential Garden Annex (Caravan Act)', tag: 'Caravan Act Permitted' },
+      { id: 'cafe', name: 'Commercial Coffee Shop / Food Kiosk', tag: 'Flip-Up Serving Hatch' },
+      { id: 'office', name: 'Acoustic Garden Workspace', tag: 'Soundproof & Cat6' },
+      { id: 'glamping', name: 'Luxury Holiday Glamping Suite', tag: '4-Season Part L' },
+      { id: 'retail', name: 'Retail Pop-Up / Brand Pavilion', tag: 'Full Glass Front' }
+    ];
+
+    const CONFIG_SIZES = [
+      { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: '£24,800' },
+      { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: '£27,200' },
+      { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: '£36,400' },
+      { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: '£45,900' }
+    ];
+
+    const CONFIG_INSULATION = [
+      { id: 'uk-part-l-100mm', name: '100mm PIR Core (UK Part L Building Regs)', rating: 'U ≤ 0.18 W/m²K &bull; All-Season UK Heat Retaining' },
+      { id: 'rockwool-noncombustible', name: '100mm Rockwool (A1 Non-Combustible Fire Rated)', rating: 'BS 476 Part 7 Fire Rated &bull; High Acoustic Dampening' }
+    ];
+
+    const CONFIG_FACADES = [
+      { id: 'charcoal-composite', name: 'Charcoal Slatted Composite', desc: 'Anthracite contemporary look' },
+      { id: 'natural-cedar', name: 'Natural Western Red Cedar', desc: 'Architectural luxury timber' },
+      { id: 'textured-sandstone', name: 'Textured Sandstone Panel', desc: 'Mineral aesthetic' }
+    ];
+
+    const CONFIG_ADDONS = [
+      { id: 'ensuite-bathroom', label: 'Factory Pre-Fitted Ensuite with Shower, Vanity & Dual-Flush WC' },
+      { id: 'fitted-kitchenette', label: 'Turnkey Kitchenette / Bar Counter with Sink & Induction' },
+      { id: 'uk-consumer-unit', label: 'BS 7671 UK Consumer Unit with RCBO Circuit Breakers' },
+      { id: 'inverter-heatpump', label: 'Split-System Heat Pump AC (Whisper-Quiet Heating & Cooling)' },
+      { id: 'solar-prep', label: 'Pre-Wired Roof Solar PV Conduits & Inverter Ready' },
+      { id: 'acoustic-lining', label: 'Extra Acoustic Rockwool Internal Soundproofing' }
+    ];
+
+    const CONFIG_DELIVERY = [
+      {
+        id: 'warehouse-hiab',
+        name: 'Direct UK Site Delivery with Hiab Crane Offload',
+        badge: 'Most Popular',
+        desc: 'Dispatched directly from our UK central warehouse to your property or plot. Our rigid flatbed truck with on-board hydraulic Hiab crane offloads and positions the unit onto your prepared foundation pads or ground screws.',
+        dispatch: 'Dispatched from UK Central Warehouse'
+      },
+      {
+        id: 'turnkey-installation',
+        name: 'Full White-Glove Warehouse Delivery & Turnkey Unfolding',
+        badge: 'Zero-Effort',
+        desc: 'Complete turnkey service from UK warehouse to handover: flatbed delivery, crane offloading, hydraulic unfolding of side wings, mechanical seal lock-in, and full electrical & plumbing connection check by our technician team.',
+        dispatch: 'UK Warehouse + On-Site Crew'
+      },
+      {
+        id: 'depot-collection',
+        name: 'Client / Haulier Collection from UK Warehouse Depot',
+        badge: 'Ex-Warehouse',
+        desc: 'Arrange your own haulage or collection directly from our central UK logistics hub. Overhead gantry crane loading onto your transport vehicle is provided free of charge by our depot crew.',
+        dispatch: 'Collect at UK Logistics Depot'
+      }
+    ];
+
     let configState = {
       step: 1,
       useCase: 'annex',
@@ -539,13 +598,7 @@
     };
 
     document.addEventListener('DOMContentLoaded', () => {
-      renderApplicationShowcase('annex');
-      renderSpace('kensington');
-      renderMaterial('glass');
-      renderGallery();
-      renderFiles();
       renderConfiguratorOptions();
-      renderFAQs();
       updateLiveBill();
       if (window.lucide) {
         lucide.createIcons();
@@ -860,9 +913,6 @@
     }
 
 
-    renderConfiguratorOptions();
-    updateLiveBill();
-    if (window.lucide) lucide.createIcons();
   </script>
 </body>
 </html>
