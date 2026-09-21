@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Downloads | HomeSpaces Modular UK</title>
-  <meta name="description" content="HomeSpaces technical library: brochures, CAD drawings, BIM families, installation manuals and care guides." />
+  <title>Downloads | OriginSpaces Modular UK</title>
+  <meta name="description" content="OriginSpaces technical library: brochures, CAD drawings, BIM families, installation manuals and care guides." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -190,7 +190,7 @@
         </div>
       </div>
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6b7280] gap-4">
-        <span>&copy; 2026 HomeSpaces Modular UK Ltd. All rights reserved. Registered in England &amp; Wales.</span>
+        <span>&copy; 2026 OriginSpaces Modular UK Ltd. All rights reserved. Registered in England &amp; Wales.</span>
         <div class="flex items-center gap-4">
           <a href="privacy.html" class="hover:text-[#9ca3af]">Privacy Policy</a>
           <span>&bull;</span>
@@ -285,7 +285,7 @@
     function downloadFile(idx) {
       const f = FILES[idx];
       if (!f) return;
-      const body = ['HomeSpaces Technical File Request', '', 'Ref: ' + f.ref, 'Suite: ' + f.suite, 'Title: ' + f.title, 'Format: ' + f.format + ' | Size: ' + f.size + ' | ' + f.rev, '', 'Request the full file via the enquiry form and our studio will issue it within one working day.'].join('\n');
+      const body = ['OriginSpaces Technical File Request', '', 'Ref: ' + f.ref, 'Suite: ' + f.suite, 'Title: ' + f.title, 'Format: ' + f.format + ' | Size: ' + f.size + ' | ' + f.rev, '', 'Request the full file via the enquiry form and our studio will issue it within one working day.'].join('\n');
       const blob = new Blob([body], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);

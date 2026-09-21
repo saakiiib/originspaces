@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product Details | HomeSpaces Modular UK</title>
+  <title>Product Details | OriginSpaces Modular UK</title>
   <meta name="description" content="Turnkey architectural specification: configure models, finishes, glazing and upgrades with video, gallery and 3D views." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -396,7 +396,7 @@
         </div>
       </div>
       <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6b7280] gap-4">
-        <span>&copy; 2026 HomeSpaces Modular UK Ltd. All rights reserved.</span>
+        <span>&copy; 2026 OriginSpaces Modular UK Ltd. All rights reserved.</span>
         <div class="flex items-center gap-4">
           <a href="privacy.html" class="hover:text-[#9ca3af]">Privacy Policy</a>
           <span>&bull;</span>
@@ -730,7 +730,7 @@
       document.getElementById('spec-leadtime').textContent = p.leadTime || '—';
       document.getElementById('spec-title').textContent = p.name;
       document.getElementById('spec-tagline').textContent = p.tagline;
-      document.title = p.name + ' | HomeSpaces Modular UK';
+      document.title = p.name + ' | OriginSpaces Modular UK';
     }
 
     function renderModels() {
@@ -884,7 +884,7 @@
 
     function downloadSpecFile(kind) {
       const p = currentProduct;
-      const body = ['HomeSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), 'Configured total: ' + gbp(currentTotal().total) + ' (excl. VAT)', '', 'The studio will issue this file within one working day.'].join('\n');
+      const body = ['OriginSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), 'Configured total: ' + gbp(currentTotal().total) + ' (excl. VAT)', '', 'The studio will issue this file within one working day.'].join('\n');
       const blob = new Blob([body], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
