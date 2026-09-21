@@ -118,7 +118,7 @@
         <a href="about.html" class="hover:text-[#1a1d24] transition-colors">About</a>
         <!-- Collection with hover mega menu -->
         <div class="relative group">
-          <a href="#collections-section" class="flex items-center gap-1 hover:text-[#1a1d24] transition-colors py-6">
+          <a href="collections.html" class="flex items-center gap-1 hover:text-[#1a1d24] transition-colors py-6">
             <span>Collection</span>
             <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
           </a>
@@ -191,7 +191,7 @@
     <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-[#e5e2da] px-6 py-5 space-y-4">
       <a href="#home" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Home</a>
       <a href="about.html" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">About</a>
-      <a href="#collections-section" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#9a7b4f]">Collection</a>
+      <a href="collections.html" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#9a7b4f]">Collection</a>
       <a href="downloads.html" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Downloads</a>
       <a href="gallery.html" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Gallery</a>
       <a href="contact.html" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Contact</a>
@@ -312,7 +312,7 @@
       <!-- Action Bar -->
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-6xl mx-auto">
         <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <a href="#collections-section" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-6 py-3.5 transition-all duration-300 rounded-md shadow-xs">
+          <a href="collections.html" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-6 py-3.5 transition-all duration-300 rounded-md shadow-xs">
             <span>Explore Collections</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </a>
@@ -362,7 +362,7 @@
 
       <!-- Continue divider - scrolls to Explore Our Collections -->
       <div class="mt-10 text-center">
-        <button onclick="document.getElementById('collections-section').scrollIntoView({behavior:'smooth'})" class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.3em] text-[#6b7280] hover:text-[#9a7b4f] transition-colors font-semibold">
+        <button onclick="window.location.href='collections.html'" class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.3em] text-[#6b7280] hover:text-[#9a7b4f] transition-colors font-semibold">
           <span>Continue to collections &amp; interior fittings</span>
           <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
         </button>
@@ -1542,11 +1542,11 @@
         <div>
           <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Collections</span>
           <ul class="space-y-2 text-xs text-[#c9c4b7]">
-            <li><a href="#collections-section" onclick="openCollectionsModal('Kitchen')" class="hover:text-white transition-colors">The Architectural Kitchen</a></li>
-            <li><a href="#collections-section" onclick="openCollectionsModal('Bath & Wellness')" class="hover:text-white transition-colors">Sanctuary &amp; Bath</a></li>
-            <li><a href="#collections-section" onclick="openCollectionsModal('Sculptural Lighting')" class="hover:text-white transition-colors">Sculptural Illumination</a></li>
-            <li><a href="#collections-section" onclick="openCollectionsModal('Architectural Joinery')" class="hover:text-white transition-colors">Architectural Joinery</a></li>
-            <li><a href="#collections-section" onclick="openCollectionsModal('Hardware & Surfaces')" class="hover:text-white transition-colors">Hardware &amp; Tactile Details</a></li>
+            <li><a href="collections.html" class="hover:text-white transition-colors">The Architectural Kitchen</a></li>
+            <li><a href="collections.html" class="hover:text-white transition-colors">Sanctuary &amp; Bath</a></li>
+            <li><a href="collections.html" class="hover:text-white transition-colors">Sculptural Illumination</a></li>
+            <li><a href="collections.html" class="hover:text-white transition-colors">Architectural Joinery</a></li>
+            <li><a href="collections.html" class="hover:text-white transition-colors">Hardware &amp; Tactile Details</a></li>
             <li class="pt-1"><a href="collections.html" target="_blank" rel="noopener noreferrer" class="text-[#9a7b4f] hover:underline font-mono font-semibold block">Dedicated Collection Page &rarr;</a></li>
           </ul>
         </div>
@@ -2046,7 +2046,7 @@
               <button onclick="preSelectConfigUseCase('${appId}')" class="px-6 py-3.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.14em] transition-all shadow-xs">
                 ${data.configLabel || 'Configure This Spec'}
               </button>
-              <button onclick="document.getElementById('collections-section').scrollIntoView({behavior:'smooth'})" class="text-xs font-mono uppercase tracking-[0.14em] text-[#374151] hover:text-[#9a7b4f] font-semibold transition-colors">
+              <button onclick="window.location.href='collections.html'" class="text-xs font-mono uppercase tracking-[0.14em] text-[#374151] hover:text-[#9a7b4f] font-semibold transition-colors">
                 Explore the collections &rarr;
               </button>
             </div>
