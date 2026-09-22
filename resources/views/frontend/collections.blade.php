@@ -93,8 +93,8 @@
 
         /* products server-rendered by Blade; JS only filters visible cards */
 
-    let activeCollectionCat = @json($activeCategory);
-    let collectionSearch = '';
+    var activeCollectionCat = @json($activeCategory);
+    var collectionSearch = '';
 
     function filterCollection(cat, btn) {
       activeCollectionCat = cat;

@@ -18,7 +18,7 @@ class DownloadController extends Controller
                 ->addIndexColumn()
                 ->addColumn('product', fn ($r) => $r->product?->name ?? '-')
                 ->addColumn('status', fn ($r) => '<div class="form-check form-switch"><input type="checkbox" class="form-check-input toggle-status" data-id="'.$r->id.'" '.($r->status ? 'checked' : '').'></div>')
-                ->addColumn('action', fn ($r) => '<a class="btn btn-sm btn-soft-info" href="'.url($r->file).'" target="_blank"><i class="ri-download-line"></i></a> <button class="btn btn-sm btn-soft-secondary editBtn" data-id="'.$r->id.'"><i class="ri-pencil-fill"></i> Edit</button> <button class="btn btn-sm btn-soft-danger deleteBtn" data-delete-url="'.route('downloads.delete', $r->id).'" data-method="DELETE" data-table="#downloadTable"><i class="ri-delete-bin-fill"></i></button>')
+                ->addColumn('action', fn ($r) => ($r->file ? '<a class="btn btn-sm btn-soft-info" href="'.url($r->file).'" target="_blank"><i class="ri-download-line"></i></a> ' : '').'<button class="btn btn-sm btn-soft-secondary editBtn" data-id="'.$r->id.'"><i class="ri-pencil-fill"></i> Edit</button> <button class="btn btn-sm btn-soft-danger deleteBtn" data-delete-url="'.route('downloads.delete', $r->id).'" data-method="DELETE" data-table="#downloadTable"><i class="ri-delete-bin-fill"></i></button>')
                 ->rawColumns(['status', 'action'])
                 ->make(true);
         }

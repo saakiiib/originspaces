@@ -324,3 +324,11 @@ test('page seo update persists', function () {
 
     expect($seo->fresh()->meta_title)->toBe('Custom Build UK');
 });
+
+test('downloads table renders rows without files', function () {
+    Download::create(['title' => 'No file yet', 'file' => null, 'format' => 'PDF', 'status' => true]);
+
+    $response = $this->actingAs(adminUser())->get(route('downloads.index'), ['X-Requested-With' => 'XMLHttpRequest']);
+
+    $response->assertOk();
+});

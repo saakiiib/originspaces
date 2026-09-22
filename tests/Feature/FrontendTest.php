@@ -46,6 +46,14 @@ test('all public pages render with layout shell', function () {
     }
 });
 
+test('frontend page scripts are spa-safe', function () {
+    foreach (glob(resource_path('views/frontend/*.blade.php')) as $file) {
+        $html = file_get_contents($file);
+        expect($html)->not->toContain('DOMContentLoaded', basename($file).' must init directly, DOMContentLoaded never fires after SPA navigation');
+        expect(preg_match('/^    (const|let) (?=[A-Za-z_$])/m', $html))->toBe(0, basename($file).' must not use top-level const/let, the engine re-executes scripts on every navigation');
+    }
+});
+
 test('icons render server-side as svg on every page', function () {
     seedShowcase();
 
@@ -64,10 +72,10 @@ test('home injects dynamic JSON hooks', function () {
     $this->get('/')
         ->assertOk()
         ->assertSee('data-spa-content', false)
-        ->assertSee('const PRODUCTS =', false)
-        ->assertSee('const FAQS =', false)
-        ->assertSee('const GALLERY =', false)
-        ->assertSee('const FILES =', false)
+        ->assertSee('var PRODUCTS =', false)
+        ->assertSee('var FAQS =', false)
+        ->assertSee('var GALLERY =', false)
+        ->assertSee('var FILES =', false)
         ->assertSee('Featured Products', false)
         ->assertSee('faq-item', false)
         ->assertSee('youtube.com/embed/U7lB7lf-hAk', false)
@@ -206,6 +214,6 @@ test('gallery and downloads pages carry server JSON', function () {
     GalleryCategory::create(['name' => 'Exterior', 'slug' => 'exterior']);
     Download::create(['title' => 'Lookbook', 'file' => null, 'format' => 'PDF Spec', 'status' => true]);
 
-    $this->get('/gallery')->assertOk()->assertSee('const GALLERY =', false)->assertSee('gallery-item', false);
+    $this->get('/gallery')->assertOk()->assertSee('var GALLERY =', false)->assertSee('gallery-item', false);
     $this->get('/downloads')->assertOk()->assertSee('file-row', false)->assertSee('Lookbook', false);
 });

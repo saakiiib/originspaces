@@ -77,8 +77,8 @@
     /* toggleMobileMenu lives in header partial */
 
     /* files server-rendered by Blade; JS only filters visible rows */
-    let activeFileFormat = 'all';
-    let fileSearch = '';
+    var activeFileFormat = 'all';
+    var fileSearch = '';
 
     function filterFiles(format, btn) {
       activeFileFormat = format;

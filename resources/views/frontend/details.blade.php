@@ -303,23 +303,23 @@
 <script>
     /* toggleMobileMenu lives in header partial */
 
-    const PRODUCTS = []; // single product injected below
+    var PRODUCTS = []; // single product injected below
 
-    const CATEGORY_VIDEO = {}; // video comes server-side
+    var CATEGORY_VIDEO = {}; // video comes server-side
 
-    const CONFIG_OPTIONS = @json($optionsJson["config"]);
-    const FINISH_OPTIONS = @json($optionsJson["finish"]);
-    const GLAZING_OPTIONS = @json($optionsJson["glazing"]);
-    const UPGRADE_OPTIONS = @json($optionsJson["upgrade"]);
+    var CONFIG_OPTIONS = @json($optionsJson["config"]);
+    var FINISH_OPTIONS = @json($optionsJson["finish"]);
+    var GLAZING_OPTIONS = @json($optionsJson["glazing"]);
+    var UPGRADE_OPTIONS = @json($optionsJson["upgrade"]);
 
-    let currentProduct = null;
-    let selConfig = (CONFIG_OPTIONS.find(o => o.default) || CONFIG_OPTIONS[0] || {}).id || null;
-    let selFinish = (FINISH_OPTIONS.find(o => o.default) || FINISH_OPTIONS[0] || {}).id || null;
-    let selGlazing = (GLAZING_OPTIONS.find(o => o.default) || GLAZING_OPTIONS[0] || {}).id || null;
-    let selUpgrades = [];
-    let activeMediaTab = 'video';
-    let galleryIdx = 0;
-    let hotspotsOn = true;
+    var currentProduct = null;
+    var selConfig = (CONFIG_OPTIONS.find(o => o.default) || CONFIG_OPTIONS[0] || {}).id || null;
+    var selFinish = (FINISH_OPTIONS.find(o => o.default) || FINISH_OPTIONS[0] || {}).id || null;
+    var selGlazing = (GLAZING_OPTIONS.find(o => o.default) || GLAZING_OPTIONS[0] || {}).id || null;
+    var selUpgrades = [];
+    var activeMediaTab = 'video';
+    var galleryIdx = 0;
+    var hotspotsOn = true;
 
     function parseBasePrice(p) {
       const m = String(p.price || '').replace(/[^0-9]/g, '');
@@ -577,8 +577,8 @@
       return plates;
     }
 
-    let galleryPlate = 'all';
-    let gallerySel = 0;
+    var galleryPlate = 'all';
+    var gallerySel = 0;
 
     function galleryPlates() {
       const g = detailGallery();
@@ -722,14 +722,14 @@
 
     /* Floor plan plates */
     /* Floor plan plates (geometry slots are static; zone content is admin-driven) */
-    const ZONE_SLOTS = [
+    var ZONE_SLOTS = [
       { x: 55, y: 45, w: 150, h: 140 }, { x: 215, y: 45, w: 230, h: 270 },
       { x: 455, y: 45, w: 130, h: 150 }, { x: 55, y: 195, w: 150, h: 120 },
       { x: 455, y: 205, w: 130, h: 110 },
     ];
-    const FLOOR_ZONES = @json($zonesJson);
+    var FLOOR_ZONES = @json($zonesJson);
     FLOOR_ZONES.forEach((z, i) => Object.assign(z, ZONE_SLOTS[i % ZONE_SLOTS.length]));
-    let activeZone = (FLOOR_ZONES[0] || {}).id || null;
+    var activeZone = (FLOOR_ZONES[0] || {}).id || null;
 
     function selectZone(id) {
       activeZone = id;
@@ -770,8 +770,8 @@
     }
 
     /* 3D massing viewer (Three.js) */
-    let renderer3d = null, scene3d = null, camera3d = null, controls3d = null, villa3d = null;
-    let unfoldT = 1, explodeT = 0, spinOn = true, raf3d = false;
+    var renderer3d = null, scene3d = null, camera3d = null, controls3d = null, villa3d = null;
+    var unfoldT = 1, explodeT = 0, spinOn = true, raf3d = false;
     function buildCube() {
       const stage = document.getElementById('model3d-stage');
       const label = document.getElementById('model3d-label');

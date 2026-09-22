@@ -1370,7 +1370,7 @@
 @endsection
 @section('script')
 <script>
-    const APPLICATIONS = {
+    var APPLICATIONS = {
       annex: {
         id: 'annex',
         title: 'Residential Garden Annex',
@@ -1488,7 +1488,7 @@
       }
     };
 
-    const CONFIG_USE_CASES = [
+    var CONFIG_USE_CASES = [
       { id: 'annex', name: 'Residential Garden Annex (Caravan Act)', tag: 'Caravan Act Permitted' },
       { id: 'cafe', name: 'Commercial Coffee Shop / Food Kiosk', tag: 'Flip-Up Serving Hatch' },
       { id: 'office', name: 'Acoustic Garden Workspace', tag: 'Soundproof & Cat6' },
@@ -1496,25 +1496,25 @@
       { id: 'retail', name: 'Retail Pop-Up / Brand Pavilion', tag: 'Full Glass Front' }
     ];
 
-    const CONFIG_SIZES = [
+    var CONFIG_SIZES = [
       { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: '£24,800' },
       { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: '£27,200' },
       { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: '£36,400' },
       { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: '£45,900' }
     ];
 
-    const CONFIG_INSULATION = [
+    var CONFIG_INSULATION = [
       { id: 'uk-part-l-100mm', name: '100mm PIR Core (UK Part L Building Regs)', rating: 'U ≤ 0.18 W/m²K &bull; All-Season UK Heat Retaining' },
       { id: 'rockwool-noncombustible', name: '100mm Rockwool (A1 Non-Combustible Fire Rated)', rating: 'BS 476 Part 7 Fire Rated &bull; High Acoustic Dampening' }
     ];
 
-    const CONFIG_FACADES = [
+    var CONFIG_FACADES = [
       { id: 'charcoal-composite', name: 'Charcoal Slatted Composite', desc: 'Anthracite contemporary look' },
       { id: 'natural-cedar', name: 'Natural Western Red Cedar', desc: 'Architectural luxury timber' },
       { id: 'textured-sandstone', name: 'Textured Sandstone Panel', desc: 'Mineral aesthetic' }
     ];
 
-    const CONFIG_ADDONS = [
+    var CONFIG_ADDONS = [
       { id: 'ensuite-bathroom', label: 'Factory Pre-Fitted Ensuite with Shower, Vanity & Dual-Flush WC' },
       { id: 'fitted-kitchenette', label: 'Turnkey Kitchenette / Bar Counter with Sink & Induction' },
       { id: 'uk-consumer-unit', label: 'BS 7671 UK Consumer Unit with RCBO Circuit Breakers' },
@@ -1523,7 +1523,7 @@
       { id: 'acoustic-lining', label: 'Extra Acoustic Rockwool Internal Soundproofing' }
     ];
 
-    const CONFIG_DELIVERY = [
+    var CONFIG_DELIVERY = [
       {
         id: 'warehouse-hiab',
         name: 'Direct UK Site Delivery with Hiab Crane Offload',
@@ -1547,9 +1547,9 @@
       }
     ];
 
-    const FAQS = @json($faqsJson);
+    var FAQS = @json($faqsJson);
 
-    let configState = {
+    var configState = {
       step: 1,
       useCase: 'annex',
       modelSize: '30ft-bifold',
@@ -1560,18 +1560,8 @@
       postcode: ''
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderApplicationShowcase('annex');
-      renderSpace('kensington');
-      renderMaterial('glass');
-      renderGallery();
-      renderFiles();
-      renderConfiguratorOptions();
-      updateLiveBill();
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-    });
+    // Page init runs at the end of this script (see bottom): it must execute
+    // on hard load AND on every SPA injection, where DOMContentLoaded never fires.
 
     function selectApplication(appId) {
       document.querySelectorAll('.app-tab-btn').forEach(btn => {
@@ -1636,7 +1626,7 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    const SPACES = {
+    var SPACES = {
       kensington: {
         name: 'The Kensington Townhouse',
         loc: 'London SW7 &middot; United Kingdom &middot; Victorian Restoration + Contemporary Extension',
@@ -1731,7 +1721,7 @@
       if (target) target.scrollIntoView({ behavior: 'smooth' });
     }
 
-    const MATERIALS = {
+    var MATERIALS = {
       stone: {
         origin: 'Friuli-Venezia Giulia, Northern Italy',
         name: 'Grigio Carnico Marble',
@@ -1815,9 +1805,9 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    const FILES = @json($filesJson);
-    let activeFileFormat = 'all';
-    let fileSearch = '';
+    var FILES = @json($filesJson);
+    var activeFileFormat = 'all';
+    var fileSearch = '';
 
     function filterFiles(format, btn) {
       activeFileFormat = format;
@@ -2223,11 +2213,11 @@
       window.__footerOpenEnquiry(title || 'Request Factory Quote & CAD Pack', null, looksLikeConfig ? summary : '');
     }
 
-    const GALLERY = @json($galleryJson);
-    const GALLERY_CATS = @json($galleryCatsJson);
-    let activeGalleryCat = 'all';
-    let galleryView = [];
-    let galleryIdx = 0;
+    var GALLERY = @json($galleryJson);
+    var GALLERY_CATS = @json($galleryCatsJson);
+    var activeGalleryCat = 'all';
+    var galleryView = [];
+    var galleryIdx = 0;
 
         function galleryThumb(g, size) {
       if (g.src) return g.src;
@@ -2300,9 +2290,9 @@
     });
 
     // Hero video theater - Angle 01 is the studio YouTube film, Angle 02 is the mp4 interior tour
-    const HERO_MP4_INTERIOR = 'https://assets.mixkit.co/videos/preview/mixkit-modern-kitchen-island-and-living-room-41584-large.mp4';
-    let heroMode = 'yt';
-    let heroYtMuted = true;
+    var HERO_MP4_INTERIOR = 'https://assets.mixkit.co/videos/preview/mixkit-modern-kitchen-island-and-living-room-41584-large.mp4';
+    var heroMode = 'yt';
+    var heroYtMuted = true;
     function heroYt(cmd) {
       const f = document.getElementById('hero-yt-frame');
       if (f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: '' }), '*');
@@ -2370,7 +2360,7 @@
       }
     }
 
-    let heroTheaterWide = false;
+    var heroTheaterWide = false;
     function toggleHeroTheater() {
       const stage = document.getElementById('hero-video-theater-stage');
       const label = document.getElementById('hero-theater-text');
@@ -2393,7 +2383,7 @@
     // ==========================================
     // ARCHITECTURAL COLLECTIONS & SPECIFICATION DATA
     // ==========================================
-    const PRODUCTS = @json($productsJson);
+    var PRODUCTS = @json($productsJson);
 
 
     // Open catalog directly from external button or card
@@ -2536,6 +2526,19 @@
 
     function downloadCadSimulation(modelCode) {
       showToast('CAD Package Queued', `Downloading technical BIM/DWG package for ${modelCode}`);
+    }
+
+    // Page init: runs on hard load (script sits at body end, DOM ready) and on
+    // every SPA injection. DOMContentLoaded would never fire after SPA navigation.
+    renderApplicationShowcase('annex');
+    renderSpace('kensington');
+    renderMaterial('glass');
+    renderGallery();
+    renderFiles();
+    renderConfiguratorOptions();
+    updateLiveBill();
+    if (window.lucide) {
+      lucide.createIcons();
     }
   </script>
 @endsection

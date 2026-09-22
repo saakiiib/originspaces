@@ -60,10 +60,10 @@
 <script>
     /* toggleMobileMenu lives in header partial */
 
-    const GALLERY = @json($galleryJson);
-    let activeGalleryCat = 'all';
-    let galleryView = [];
-    let galleryIdx = 0;
+    var GALLERY = @json($galleryJson);
+    var activeGalleryCat = 'all';
+    var galleryView = [];
+    var galleryIdx = 0;
 
     function galleryThumb(g, size) {
       if (g.src) return g.src;

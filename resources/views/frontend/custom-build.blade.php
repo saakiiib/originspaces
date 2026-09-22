@@ -277,7 +277,7 @@
     if (window.lucide) lucide.createIcons();
   </script>
 <script>
-    const CONFIG_USE_CASES = [
+    var CONFIG_USE_CASES = [
       { id: 'annex', name: 'Residential Garden Annex (Caravan Act)', tag: 'Caravan Act Permitted' },
       { id: 'cafe', name: 'Commercial Coffee Shop / Food Kiosk', tag: 'Flip-Up Serving Hatch' },
       { id: 'office', name: 'Acoustic Garden Workspace', tag: 'Soundproof & Cat6' },
@@ -285,25 +285,25 @@
       { id: 'retail', name: 'Retail Pop-Up / Brand Pavilion', tag: 'Full Glass Front' }
     ];
 
-    const CONFIG_SIZES = [
+    var CONFIG_SIZES = [
       { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: '£24,800' },
       { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: '£27,200' },
       { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: '£36,400' },
       { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: '£45,900' }
     ];
 
-    const CONFIG_INSULATION = [
+    var CONFIG_INSULATION = [
       { id: 'uk-part-l-100mm', name: '100mm PIR Core (UK Part L Building Regs)', rating: 'U ≤ 0.18 W/m²K &bull; All-Season UK Heat Retaining' },
       { id: 'rockwool-noncombustible', name: '100mm Rockwool (A1 Non-Combustible Fire Rated)', rating: 'BS 476 Part 7 Fire Rated &bull; High Acoustic Dampening' }
     ];
 
-    const CONFIG_FACADES = [
+    var CONFIG_FACADES = [
       { id: 'charcoal-composite', name: 'Charcoal Slatted Composite', desc: 'Anthracite contemporary look' },
       { id: 'natural-cedar', name: 'Natural Western Red Cedar', desc: 'Architectural luxury timber' },
       { id: 'textured-sandstone', name: 'Textured Sandstone Panel', desc: 'Mineral aesthetic' }
     ];
 
-    const CONFIG_ADDONS = [
+    var CONFIG_ADDONS = [
       { id: 'ensuite-bathroom', label: 'Factory Pre-Fitted Ensuite with Shower, Vanity & Dual-Flush WC' },
       { id: 'fitted-kitchenette', label: 'Turnkey Kitchenette / Bar Counter with Sink & Induction' },
       { id: 'uk-consumer-unit', label: 'BS 7671 UK Consumer Unit with RCBO Circuit Breakers' },
@@ -312,7 +312,7 @@
       { id: 'acoustic-lining', label: 'Extra Acoustic Rockwool Internal Soundproofing' }
     ];
 
-    const CONFIG_DELIVERY = [
+    var CONFIG_DELIVERY = [
       {
         id: 'warehouse-hiab',
         name: 'Direct UK Site Delivery with Hiab Crane Offload',
@@ -336,7 +336,7 @@
       }
     ];
 
-    let configState = {
+    var configState = {
       step: 1,
       useCase: 'annex',
       modelSize: '30ft-bifold',
@@ -347,13 +347,8 @@
       postcode: ''
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-      renderConfiguratorOptions();
-      updateLiveBill();
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-    });
+    // Page init runs at the end of this script (see bottom): it must execute
+    // on hard load AND on every SPA injection, where DOMContentLoaded never fires.
 
 
 
@@ -364,8 +359,8 @@
 
 
 
-    let activeFileFormat = 'all';
-    let fileSearch = '';
+    var activeFileFormat = 'all';
+    var fileSearch = '';
 
 
 
@@ -629,6 +624,14 @@
       var src = document.getElementById('enquiry-source');
       if (src) src.value = 'custom-build';
       window.__footerOpenEnquiry(title ? `Enquiry: ${title}` : 'Request Factory Quote & CAD Pack', null, summary || '');
+    }
+
+    // Page init: runs on hard load (script sits at body end, DOM ready) and on
+    // every SPA injection. DOMContentLoaded would never fire after SPA navigation.
+    renderConfiguratorOptions();
+    updateLiveBill();
+    if (window.lucide) {
+      lucide.createIcons();
     }
 
 
