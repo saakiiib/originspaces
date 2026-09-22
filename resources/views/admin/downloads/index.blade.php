@@ -24,7 +24,7 @@ $(function () {
     $('.select2').select2({ width: '100%' });
     const t = $('#downloadTable').DataTable({ processing: true, serverSide: true, ajax: "{{ route('downloads.index') }}",
         columns: [{ data: 'DT_RowIndex', orderable: false, searchable: false }, { data: 'title' }, { data: 'ref' }, { data: 'format' }, { data: 'size' }, { data: 'product' }, { data: 'status', orderable: false, searchable: false }, { data: 'action', orderable: false, searchable: false }] });
-    $('#newBtn').click(() => { $('#mainForm')[0].reset(); $('#format').val('').trigger('change'); $('#product_id').val('').trigger('change'); $('#remove_file').prop('checked', false); $('#currentFileBox').hide(); $('#codeid').val(''); $('#saveBtn').val('Create').html('Create'); $('#formBox').show(300); $('#newBtn').hide(); scrollDownloadFormTop(); });
+    $('#newBtn').click(() => { $('#mainForm')[0].reset(); $('#format').val('').trigger('change'); $('#product_id').val('').trigger('change'); $('#remove_file').prop('checked', false); $('#currentFileBox').hide(); $('#codeid').val(''); $('#saveBtn').val('Create').html('Create'); $('#formBox').show(300); $('#newBtn').hide(); pagetop(); });
     $('#cancelBtn').click(() => { $('#formBox').hide(); $('#newBtn').show(); });
     $('#saveBtn').click(function () {
         const create = $(this).val() === 'Create';
@@ -34,15 +34,8 @@ $(function () {
             success: d => { showSuccess(d.message); $('#formBox').hide(); $('#newBtn').show(); t.ajax.reload(null, false); },
             error: xhr => showError(xhr.status === 422 ? Object.values(xhr.responseJSON.errors)[0][0] : (xhr.responseJSON?.message ?? 'Error')) });
     });
-    $(document).on('click', '.editBtn', function () { $.get("{{ url('/admin/downloads') }}/" + $(this).data('id') + '/edit', d => { $('#codeid').val(d.id); $('#title').val(d.title); $('#ref').val(d.ref); $('#format').val(d.format).trigger('change'); $('#rev').val(d.rev); $('#product_id').val(d.product_id).trigger('change'); $('#remove_file').prop('checked', false); if (d.file) { $('#currentFileName').html('<a href="' + d.file + '" target="_blank">Current file</a>'); $('#currentFileBox').show(); } else { $('#currentFileBox').hide(); } $('#saveBtn').val('Update').html('Update'); $('#formBox').show(300); $('#newBtn').hide(); scrollDownloadFormTop(); }); });
+    $(document).on('click', '.editBtn', function () { $.get("{{ url('/admin/downloads') }}/" + $(this).data('id') + '/edit').done(d => { try { $('#codeid').val(d.id); $('#title').val(d.title); $('#ref').val(d.ref); $('#format').val(d.format).trigger('change'); $('#rev').val(d.rev); $('#product_id').val(d.product_id).trigger('change'); $('#remove_file').prop('checked', false); if (d.file) { $('#currentFileName').html('<a href="' + d.file + '" target="_blank">Current file</a>'); $('#currentFileBox').show(); } else { $('#currentFileBox').hide(); } $('#saveBtn').val('Update').html('Update'); } catch (e) { console.error(e); } $('#formBox').show(); $('#newBtn').hide(); pagetop(); }).fail(xhr => showError(xhr.responseJSON?.message ?? 'Could not load record')); });
     $(document).on('change', '.toggle-status', function () { $.post("{{ route('downloads.toggleStatus') }}", { id: $(this).data('id') }, d => { showSuccess(d.message); t.ajax.reload(null, false); }); });
-    function scrollDownloadFormTop() {
-        var box = document.getElementById('formBox');
-        if (box) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-        if (typeof pagetop === 'function') pagetop();
-    }
 });
 </script>
 @endsection
