@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Download;
 use App\Models\Enquiry;
 use App\Models\Faq;
@@ -124,4 +125,152 @@ test('admin product and enquiry pages render', function () {
     $this->actingAs($admin)->get(route('faqs.index'))->assertOk();
     $this->actingAs($admin)->get(route('galleries.index'))->assertOk();
     $this->actingAs($admin)->get(route('downloads.index'))->assertOk();
+});
+
+test('every admin page renders', function () {
+    $admin = adminUser();
+
+    foreach ([
+        'admin.dashboard', 'admin.companyDetails', 'allcategory',
+        'slider.index', 'testimonial.index', 'page-seo.index',
+        'admin.contacts.index', 'floor-zones.index', 'faq-categories.index',
+        'gallery-categories.index', 'admin.profile',
+    ] as $route) {
+        $this->actingAs($admin)->get(route($route))->assertOk($route);
+    }
+});
+
+test('category update persists SEO and video via HTTP', function () {
+    $admin = adminUser();
+    $cat = Category::create(['name' => 'Pods', 'slug' => 'pods']);
+
+    $this->actingAs($admin)->post(route('category.update'), [
+        'codeid' => $cat->id, 'name' => 'Pods',
+        'video_url' => 'https://example.com/cat.mp4',
+        'meta_title' => 'Pods UK', 'meta_description' => 'D',
+        'meta_keywords' => 'pods', 'parent_id' => null,
+    ])->assertOk();
+
+    $cat->refresh();
+    expect($cat->video_url)->toBe('https://example.com/cat.mp4')
+        ->and($cat->meta_title)->toBe('Pods UK');
+});
+
+test('option quick-edit with name only keeps other fields', function () {
+    $admin = adminUser();
+    $product = Product::create(['name' => 'P4', 'slug' => 'p4', 'model_code' => 'M-4']);
+    $opt = ProductOption::create([
+        'product_id' => $product->id, 'group' => 'finish', 'name' => 'Oak',
+        'subtitle' => 'Natural matt', 'price_delta' => 1500,
+        'swatch_color' => '#5A4636', 'is_default' => true,
+    ]);
+
+    // manage blade quick-edit sends name only
+    $this->actingAs($admin)->post(route('product-options.update', $opt->id), [
+        'name' => 'Smoked Oak',
+    ])->assertOk();
+
+    $opt->refresh();
+    expect($opt->name)->toBe('Smoked Oak')
+        ->and($opt->subtitle)->toBe('Natural matt')
+        ->and((float) $opt->price_delta)->toBe(1500.0)
+        ->and($opt->swatch_color)->toBe('#5A4636')
+        ->and($opt->is_default)->toBeTrue();
+});
+
+test('only one default option per group', function () {
+    $admin = adminUser();
+    $product = Product::create(['name' => 'P5', 'slug' => 'p5', 'model_code' => 'M-5']);
+    $first = ProductOption::create([
+        'product_id' => $product->id, 'group' => 'config', 'name' => 'A', 'is_default' => true,
+    ]);
+
+    $this->actingAs($admin)->post(route('product-options.store', $product->id), [
+        'group' => 'config', 'name' => 'B', 'is_default' => 1,
+    ])->assertOk();
+
+    expect($first->fresh()->is_default)->toBeFalse();
+});
+
+test('product sort list and update work', function () {
+    $admin = adminUser();
+    $a = Product::create(['name' => 'SA', 'slug' => 'sa', 'model_code' => 'S-A', 'sort_order' => 0]);
+    $b = Product::create(['name' => 'SB', 'slug' => 'sb', 'model_code' => 'S-B', 'sort_order' => 1]);
+
+    $this->actingAs($admin)->get(route('products.sortList'))->assertOk()->assertJsonCount(2);
+    $this->actingAs($admin)->post(route('products.sortUpdate'), [
+        'ids' => [$b->id, $a->id],
+    ])->assertOk();
+
+    expect($a->fresh()->sort_order)->toBe(1)->and($b->fresh()->sort_order)->toBe(0);
+});
+
+test('product child CRUD roundtrip', function () {
+    $admin = adminUser();
+    $product = Product::create(['name' => 'P6', 'slug' => 'p6', 'model_code' => 'M-6']);
+
+    // image requires a file
+    $this->actingAs($admin)->post(route('product-images.store', $product->id), [])
+        ->assertStatus(302)->assertInvalid('image');
+
+    $this->actingAs($admin)->post(route('product-materials.store', $product->id), ['name' => 'Steel'])
+        ->assertOk();
+    $mat = $product->materials()->firstOrFail();
+    $this->actingAs($admin)->post(route('product-materials.update', $mat->id), ['name' => 'Steel X'])
+        ->assertOk();
+    $this->actingAs($admin)->delete(route('product-materials.delete', $mat->id))->assertOk();
+
+    $this->actingAs($admin)->post(route('product-specs.store', $product->id), ['point' => 'Fast build'])
+        ->assertOk();
+    $this->actingAs($admin)->get(route('product-specs.list', $product->id))->assertOk();
+
+    $this->actingAs($admin)->post(route('product-tech-specs.store', $product->id), [
+        'label' => 'U-Value', 'value' => '0.16',
+    ])->assertOk();
+    $tech = $product->techSpecs()->where('label', 'U-Value')->firstOrFail();
+    $this->actingAs($admin)->delete(route('product-tech-specs.delete', $tech->id))->assertOk();
+
+    // documents require a file
+    $this->actingAs($admin)->post(route('product-documents.store', $product->id), ['title' => 'X'])
+        ->assertStatus(302)->assertInvalid('file');
+
+    // downloads require a file
+    $this->actingAs($admin)->post(route('downloads.store'), [
+        'title' => 'Lookbook', 'format' => 'PDF Spec',
+    ])->assertStatus(302)->assertInvalid('file');
+});
+
+test('supporting module toggles flip status', function () {
+    $admin = adminUser();
+    $zone = FloorZone::create(['name' => 'Z', 'status' => true]);
+    $faqCat = FaqCategory::create(['name' => 'FC', 'slug' => 'fc', 'status' => true]);
+    $faq = Faq::create(['faq_category_id' => $faqCat->id, 'question' => 'Q', 'answer' => 'A', 'status' => true]);
+    $galCat = GalleryCategory::create(['name' => 'GC', 'slug' => 'gc', 'status' => true]);
+    $gal = Gallery::create(['gallery_category_id' => $galCat->id, 'image' => '/x.webp', 'status' => true]);
+    $enq = Enquiry::create(['name' => 'N', 'email' => 'n@example.com', 'status' => true]);
+
+    foreach ([
+        [route('floor-zones.toggleStatus'), $zone],
+        [route('faq-categories.toggleStatus'), $faqCat],
+        [route('faqs.toggleStatus'), $faq],
+        [route('gallery-categories.toggleStatus'), $galCat],
+        [route('galleries.toggleStatus'), $gal],
+        [route('enquiries.toggleStatus'), $enq],
+        [route('admin.contacts.toggleStatus'), Contact::create(['name' => 'C', 'subject' => 'S', 'message' => 'Hi', 'status' => true])],
+    ] as [$url, $model]) {
+        $this->actingAs($admin)->post($url, ['id' => $model->id])->assertOk();
+        expect($model->fresh()->status)->toBeFalse();
+    }
+});
+
+test('page seo update persists', function () {
+    $admin = adminUser();
+    $this->actingAs($admin)->get(route('page-seo.index'))->assertOk();
+    $seo = PageSeo::where('page_key', 'custom-build')->firstOrFail();
+
+    $this->actingAs($admin)->post(route('page-seo.update'), [
+        'id' => $seo->id, 'meta_title' => 'Custom Build UK',
+    ])->assertOk();
+
+    expect($seo->fresh()->meta_title)->toBe('Custom Build UK');
 });

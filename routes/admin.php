@@ -81,6 +81,8 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'is_admin']], funct
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.delete');
     Route::post('/products/toggle-status', [ProductController::class, 'toggleStatus'])->name('products.toggleStatus');
     Route::post('/products/toggle-featured', [ProductController::class, 'toggleFeatured'])->name('products.toggleFeatured');
+    Route::get('/product-sort-list', [ProductController::class, 'sortList'])->name('products.sortList');
+    Route::post('/product-sort-update', [ProductController::class, 'sortUpdate'])->name('products.sortUpdate');
 
     // Product children (per-product workspace tabs)
     Route::get('/products/{product}/images', [ProductImageController::class, 'list'])->name('product-images.list');

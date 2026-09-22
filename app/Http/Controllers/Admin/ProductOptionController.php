@@ -52,18 +52,28 @@ class ProductOptionController extends Controller
     {
         $option = ProductOption::findOrFail($id);
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'sometimes|required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'price_delta' => 'nullable|numeric|min:0',
             'swatch_color' => 'nullable|string|max:20',
         ]);
-        $option->update([
-            'name' => $request->name,
-            'subtitle' => $request->subtitle,
-            'price_delta' => $request->price_delta ?: null,
-            'swatch_color' => $option->group === 'finish' ? $request->swatch_color : null,
-            'is_default' => $request->boolean('is_default'),
-        ]);
+
+        // Partial update: only touch keys actually sent (quick-edit sends name only).
+        $data = [];
+        foreach (['name', 'subtitle', 'price_delta', 'swatch_color'] as $key) {
+            if ($request->has($key)) {
+                $data[$key] = $request->input($key) ?: null;
+            }
+        }
+        if ($option->group !== 'finish') {
+            unset($data['swatch_color']);
+        }
+        if ($request->has('is_default')) {
+            $data['is_default'] = $request->boolean('is_default');
+        }
+        if ($data !== []) {
+            $option->update($data);
+        }
         if ($option->is_default) {
             ProductOption::where('product_id', $option->product_id)->where('group', $option->group)->where('id', '!=', $option->id)->update(['is_default' => false]);
         }

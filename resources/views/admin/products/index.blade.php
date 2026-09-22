@@ -13,6 +13,7 @@
             </select>
         </div>
         <div class="col text-end">
+            <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#sortModal" id="sortBtn"><i class="ri-sort-asc align-middle me-1"></i> Sort</button>
             <button type="button" class="btn btn-primary" id="newBtn">Add New Product</button>
         </div>
     </div>
@@ -131,9 +132,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="sortModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Sort Products</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p class="text-muted"><i class="ri-drag-move-2-line align-middle me-1"></i> Drag and drop to reorder. Changes save automatically.</p>
+                <div id="sortableProducts" class="sortable-list" style="min-height:150px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('script')
+<style>
+.sortable-list .sort-item{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:8px 12px;margin-bottom:8px}
+.sortable-list .sort-item img{width:48px;height:36px;object-fit:cover;border-radius:6px}
+.sortable-list .sort-handle{cursor:move;color:#9aa0a6}
+.ui-sortable-helper{box-shadow:0 6px 18px rgba(0,0,0,.12)}
+</style>
+<script>
 <script>
 $(function () {
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
@@ -213,6 +236,22 @@ $(function () {
     $(document).on('change', '.toggle-featured', function () {
         $.post("{{ route('products.toggleFeatured') }}", { id: $(this).data('id') }, d => { showSuccess(d.message); table.ajax.reload(null, false); });
     });
+
+    let sortLoaded = false;
+    function loadSortList() {
+        $.get("{{ route('products.sortList') }}", list => {
+            $('#sortableProducts').html(list.map(p => `<div class="sort-item" data-id="${p.id}"><span class="sort-handle"><i class="ri-drag-move-line fs-5"></i></span>${p.image ? `<img src="${p.image}">` : ''}<span><strong>${p.name}</strong><br><small class="text-muted">${p.model_code ?? ''}</small></span></div>`).join('') || '<p class="text-muted">No products yet.</p>');
+            sortLoaded = true;
+            $('#sortableProducts').sortable({
+                handle: '.sort-handle',
+                update: () => {
+                    const ids = $('#sortableProducts').sortable('toArray', { attribute: 'data-id' });
+                    $.post("{{ route('products.sortUpdate') }}", { ids }, d => { showSuccess(d.message); table.ajax.reload(null, false); });
+                }
+            });
+        });
+    }
+    $('#sortModal').on('show.bs.modal', () => { if (!sortLoaded) loadSortList(); });
 });
 </script>
 @endsection
