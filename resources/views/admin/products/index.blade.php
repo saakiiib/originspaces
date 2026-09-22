@@ -74,12 +74,12 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Hero Image</label>
-                                <input type="file" class="form-control" id="hero_image" accept="image/*" onchange="previewImage(event, '#preview-hero')">
+                                <input type="file" class="form-control" id="hero_image" name="hero_image" accept="image/*" onchange="previewImage(event, '#preview-hero')">
                                 <img id="preview-hero" src="#" class="img-thumbnail mt-2" style="display:none;max-width:250px;">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Video URL <small class="text-muted">empty = use category video</small></label>
-                                <input type="url" class="form-control" id="video_url" name="video_url" placeholder="https://...mp4">
+                                <label class="form-label">Video URL <small class="text-muted">mp4, YouTube or Vimeo · empty = category video</small></label>
+                                <input type="text" class="form-control" id="video_url" name="video_url" placeholder=https://...mp4 or YouTube link">
                                 <div class="form-check mt-2">
                                     <input type="checkbox" class="form-check-input" id="show_3d" name="show_3d" value="1" checked>
                                     <label class="form-check-label" for="show_3d">Show 3D viewer tab</label>
@@ -88,6 +88,11 @@
                                     <input type="checkbox" class="form-check-input" id="is_featured" name="is_featured" value="1">
                                     <label class="form-check-label" for="is_featured">Featured product</label>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">3D Model File <small class="text-muted">.glb / .gltf · shown in the 3D tab</small></label>
+                                <input type="file" class="form-control" id="model_3d" name="model_3d" accept=".glb,.gltf">
+                                <small id="model3d-current" class="text-muted"></small>
                             </div>
                             <div class="col-12"><hr><h6>SEO (frontend meta tags)</h6></div>
                             <div class="col-md-6">
@@ -104,7 +109,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Meta Image <small class="text-muted">1200x630</small></label>
-                                <input type="file" class="form-control" id="meta_image" accept="image/*" onchange="previewImage(event, '#preview-meta')">
+                                <input type="file" class="form-control" id="meta_image" name="meta_image" accept="image/*" onchange="previewImage(event, '#preview-meta')">
                                 <img id="preview-meta" src="#" class="img-thumbnail mt-2" style="display:none;max-width:200px;">
                             </div>
                         </div>
@@ -157,7 +162,6 @@
 .ui-sortable-helper{box-shadow:0 6px 18px rgba(0,0,0,.12)}
 </style>
 <script>
-<script>
 $(function () {
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
     $('.select2').select2({ width: '100%' });
@@ -189,6 +193,7 @@ $(function () {
         $('#addBtn').val('Create').html('Create');
         $('#cardTitle').text('Add New Product');
         $('#preview-hero,#preview-meta').hide();
+        $('#model_3d').val(''); $('#model3d-current').html('');
         $('.summernote').summernote('code', '');
         $('#show_3d').prop('checked', true);
     }
@@ -219,6 +224,7 @@ $(function () {
             $('#base_price').val(d.base_price); $('#lead_time').val(d.lead_time);
             $('#dimensions').val(d.dimensions); $('#warranty').val(d.warranty);
             $('#video_url').val(d.video_url);
+            $('#model3d-current').html(d.model_3d ? 'Current: <a href="' + d.model_3d + '" target="_blank">view 3D file</a>' : '');
             $('#show_3d').prop('checked', !!d.show_3d); $('#is_featured').prop('checked', !!d.is_featured);
             $('#meta_title').val(d.meta_title); $('#meta_keywords').val(d.meta_keywords); $('#meta_description').val(d.meta_description);
             if (d.hero_image) $('#preview-hero').attr('src', d.hero_image).show();

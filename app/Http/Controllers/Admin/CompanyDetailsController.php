@@ -12,7 +12,7 @@ class CompanyDetailsController extends Controller
 {
     public function index()
     {
-        $data = CompanyDetails::firstOrCreate();
+        $data = CompanyDetails::cached();
 
         return view('admin.company.index', compact('data'));
     }

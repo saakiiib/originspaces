@@ -1,228 +1,107 @@
-@extends('frontend.master')
-@section('title', 'About Us')
-
+@extends('frontend.layout')
+@section('title', 'About | OriginSpaces Modular UK')
 @section('content')
-<div class="container page-hero">
-    <div class="crumbs d-inline-flex">
-        <a @spa href="{{ route('home') }}">Home</a>
-        <span class="sep">›</span>
-        <span class="cur">About Us</span>
-    </div>
-    <div class="mt-4">
-        <span class="eyebrow">Our Story</span>
-        <h1 class="mt-2" style="font-weight:800;color:#132238">About {{ $company->company_name ?? config('app.name') }}</h1>
-    </div>
-</div>
 
-{{-- About Intro --}}
-<section class="container pb-5">
-    <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-            @if($company->company_logo)
-                <img src="{{ asset('uploads/company/' . $company->company_logo) }}" alt="{{ $company->company_name }}" class="img-fluid" style="border-radius:var(--radius-lg);box-shadow:var(--shadow-glow)">
-            @endif
-        </div>
-        <div class="col-lg-6">
-            @if($company->about_us)
-                <div style="color:#334155;line-height:1.8">{!! $company->about_us !!}</div>
-            @else
-                <span class="eyebrow">Who We Are</span>
-                <h2 class="mt-2 mb-3" style="font-weight:800;color:#132238">Your Trusted Electronics Partner</h2>
-                <p style="font-size:1.05rem;color:#334155;line-height:1.8">Welcome to {{ $company->company_name ?? config('app.name') }}. We are Habiganj's #1 Walton authorized electronics showroom, committed to bringing genuine products with manufacturer warranty right to your doorstep.</p>
-                <p style="color:#6B7A94;line-height:1.8">Since our founding, we've served thousands of happy customers with top-quality electronics, transparent pricing, and dedicated after-sales support. Our mission is to make quality electronics accessible to everyone in the region.</p>
-            @endif
-        </div>
-    </div>
-</section>
 
-{{-- Mission & Vision --}}
-<section class="pb-5" style="background:linear-gradient(180deg,rgba(248,250,252,.6),rgba(255,255,255,.4))">
-    <div class="container">
-        <div class="row g-4">
-            <div class="col-md-6">
-                <div class="card-premium" style="padding:2rem;height:100%">
-                    <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(21,147,165,.12),rgba(31,71,122,.06));display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-                        <i class="bi bi-crosshair" style="font-size:1.4rem;color:#1593A5"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3" style="color:#132238">Our Mission</h4>
-                    <p style="color:#334155;line-height:1.8">To provide genuine, high-quality electronics at fair prices with exceptional customer service. We aim to be the most trusted electronics destination in Bangladesh, ensuring every customer gets the best value, expert guidance, and reliable after-sales support.</p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card-premium" style="padding:2rem;height:100%">
-                    <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,rgba(15,76,156,.12),rgba(37,99,235,.06));display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-                        <i class="bi bi-eye" style="font-size:1.4rem;color:#0F4C9C"></i>
-                    </div>
-                    <h4 class="fw-bold mb-3" style="color:#132238">Our Vision</h4>
-                    <p style="color:#334155;line-height:1.8">To become Bangladesh's leading electronics retail chain, recognized for innovation, trust, and customer satisfaction. We envision a future where every household has access to modern technology through our expanding network of showrooms and online presence.</p>
-                </div>
-            </div>
-        </div>
+  <!-- Page Hero -->
+  <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto text-center max-w-3xl">
+      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— About OriginSpaces</span>
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Direct UK Import,<br />Factory Precision.</h1>
+      <p class="mt-5 text-sm sm:text-base text-[#374151] leading-relaxed max-w-2xl mx-auto">Precision-engineered factory buildings with full UK compliance, turnkey finishes and nationwide delivery. Build-to-order CAD, video PDI, customs handled, UK warehouse fulfilment, helical screw piles.</p>
     </div>
-</section>
+  </section>
 
-{{-- Key Numbers --}}
-<section class="container pb-5">
-    <div class="sec-head text-center" style="justify-content:center">
-        <div>
-            <span class="eyebrow">Our Impact</span>
-            <h2 class="section-title" style="color:#132238">Numbers That Speak</h2>
-        </div>
-    </div>
-    <div class="row g-3 text-center">
-        <div class="col-6 col-md-3">
-            <div class="card-premium" style="padding:1.8rem 1rem">
-                <h2 class="fw-bold mb-1" style="color:#1593A5;font-size:2rem">5,000+</h2>
-                <small style="color:#6B7A94;font-size:.85rem">Happy Customers</small>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card-premium" style="padding:1.8rem 1rem">
-                <h2 class="fw-bold mb-1" style="color:#0F4C9C;font-size:2rem">500+</h2>
-                <small style="color:#6B7A94;font-size:.85rem">Products Available</small>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card-premium" style="padding:1.8rem 1rem">
-                <h2 class="fw-bold mb-1" style="color:#16A34A;font-size:2rem">100%</h2>
-                <small style="color:#6B7A94;font-size:.85rem">Genuine Products</small>
-            </div>
-        </div>
-        <div class="col-6 col-md-3">
-            <div class="card-premium" style="padding:1.8rem 1rem">
-                <h2 class="fw-bold mb-1" style="color:#1593A5;font-size:2rem">24/7</h2>
-                <small style="color:#6B7A94;font-size:.85rem">Customer Support</small>
-            </div>
-        </div>
-    </div>
-</section>
+  @if($company->about_us)
+  <section class="py-14 md:py-20 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+    <div class="max-w-3xl mx-auto text-sm sm:text-[15px] text-[#374151] leading-relaxed space-y-4">{!! $company->about_us !!}</div>
+  </section>
+  @endif
 
-{{-- Our Values --}}
-<section class="container pb-5">
-    <div class="sec-head">
-        <div>
-            <span class="eyebrow">Why Choose Us</span>
-            <h2 class="section-title" style="color:#132238">Our Values</h2>
+  <!-- Philosophy -->
+  <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— The OriginSpaces Philosophy</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold leading-[1.15]">Designed for <em class="italic text-[#9a7b4f]">Modern Living.</em><br />Engineered for Generations.</h2>
+        <p class="mt-5 text-sm sm:text-[15px] text-[#374151] leading-relaxed">We reject transient decorative trends in favour of timeless architectural permanence. Every surface, tap, handle, and joinery module is conceived as an enduring component of your interior envelope — grounded in the geological weight of natural marble, the warmth of quarter-sawn British oak, and the calibrated precision of solid forged brass.</p>
+        <blockquote class="mt-6 border-l-2 border-[#9a7b4f] pl-4 text-sm text-[#374151] italic leading-relaxed">“An interior should calm the senses before demanding admiration. True luxury is not ornamentation — it is the quiet harmony of materials that age with dignified grace.”</blockquote>
+        <p class="mt-2 text-[11px] font-mono uppercase tracking-wider text-[#9a7b4f] font-semibold">Julian Vance · Head of Architecture &amp; Design, OriginSpaces London</p>
+      </div>
+      <div class="relative w-full max-w-[520px] ml-auto">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85" alt="Modern residence at dusk" class="w-full rounded-2xl border border-[#e5e2da] shadow-lg object-cover aspect-[4/3]" />
+        <div class="absolute -bottom-5 left-5 bg-white rounded-xl border border-[#e5e2da] shadow-xl px-4 py-3 flex items-center gap-3">
+          <span class="w-9 h-9 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
+            <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f]"></i>
+          </span>
+          <span>
+            <span class="block text-[10px] font-mono uppercase tracking-widest text-[#1a1d24] font-bold">UK 25-Year Guarantee</span>
+            <span class="block text-[11px] text-[#6b7280]">Exhaustive trade testing &amp; WRAS certification</span>
+          </span>
         </div>
+      </div>
     </div>
-    <div class="row g-3">
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-shield-check"></i></div>
-                <h6 class="mb-1">Quality Assurance</h6>
-                <small>Genuine products with manufacturer warranty</small>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-truck"></i></div>
-                <h6 class="mb-1">Fast Delivery</h6>
-                <small>Free delivery across Habiganj district</small>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-headset"></i></div>
-                <h6 class="mb-1">24/7 Support</h6>
-                <small>Always here to help you</small>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-cash-stack"></i></div>
-                <h6 class="mb-1">Best Prices</h6>
-                <small>Competitive pricing on all products</small>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-arrow-return-left"></i></div>
-                <h6 class="mb-1">Easy Returns</h6>
-                <small>Hassle-free 7-day return policy</small>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="value-card">
-                <div class="ic"><i class="bi bi-credit-card"></i></div>
-                <h6 class="mb-1">0% EMI</h6>
-                <small>Easy installment plans available</small>
-            </div>
-        </div>
-    </div>
-</section>
+  </section>
 
-{{-- Why Shop With Us --}}
-<section class="pb-5" style="background:linear-gradient(180deg,rgba(248,250,252,.6),rgba(255,255,255,.4))">
-    <div class="container">
-        <div class="sec-head text-center" style="justify-content:center">
-            <div>
-                <span class="eyebrow">Our Promise</span>
-                <h2 class="section-title" style="color:#132238">Why Shop With Us?</h2>
-            </div>
+  <!-- Tenets -->
+  <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">How We Work</span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight">Three Tenets, Every Build</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="bg-white p-7 rounded-2xl border border-[#e5e2da] shadow-xs">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[#9a7b4f] font-bold block mb-2">Tenet 01</span>
+          <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold mb-2">Geological Weight</h3>
+          <p class="text-sm text-[#374151] leading-relaxed">Monolithic stone, honest mass, materials chosen for decades — not seasons.</p>
         </div>
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-6">
-                <div class="d-flex gap-3 mb-4">
-                    <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(21,147,165,.12),rgba(31,71,122,.06));display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                        <i class="bi bi-patch-check-fill" style="color:#1593A5;font-size:1.2rem"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-1" style="color:#132238">Walton Authorized Dealer</h6>
-                        <p style="color:#6B7A94;font-size:.9rem;margin:0;line-height:1.6">We are an officially authorized dealer for Walton products, ensuring you receive genuine items with full manufacturer warranty coverage.</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-3 mb-4">
-                    <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(22,163,74,.12),rgba(22,163,74,.06));display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                        <i class="bi bi-geo-alt-fill" style="color:#16A34A;font-size:1.2rem"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-1" style="color:#132238">Local Showroom, Personal Touch</h6>
-                        <p style="color:#6B7A94;font-size:.9rem;margin:0;line-height:1.6">Visit our showroom to experience products hands-on. Our expert staff helps you choose the right electronics for your needs and budget.</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-3 mb-4">
-                    <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(15,76,156,.12),rgba(37,99,235,.06));display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                        <i class="bi bi-headset" style="color:#0F4C9C;font-size:1.2rem"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-1" style="color:#132238">After-Sales Support</h6>
-                        <p style="color:#6B7A94;font-size:.9rem;margin:0;line-height:1.6">Our relationship doesn't end at the sale. We provide dedicated after-sales service, warranty claims, and technical support whenever you need it.</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-3">
-                    <div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(220,38,38,.04));display:flex;align-items:center;justify-content:center;flex-shrink:0">
-                        <i class="bi bi-heart-fill" style="color:#DC2626;font-size:1.2rem"></i>
-                    </div>
-                    <div>
-                        <h6 class="fw-bold mb-1" style="color:#132238">Customer First</h6>
-                        <p style="color:#6B7A94;font-size:.9rem;margin:0;line-height:1.6">Every decision we make is driven by what's best for our customers. From product selection to delivery, your satisfaction is our top priority.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card-premium text-center" style="padding:2.5rem;background:linear-gradient(135deg,#F7F8FA,#F7F8FA);border-color:rgba(21,147,165,.15)">
-                    <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#1593A5,#1F477A);display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 12px 30px -8px rgba(21,147,165,.4)">
-                        <i class="bi bi-award-fill" style="font-size:2rem;color:#fff"></i>
-                    </div>
-                    <h4 class="fw-bold mb-2" style="color:#132238">Trusted Since Day One</h4>
-                    <p style="color:#6B7A94;line-height:1.7;margin-bottom:1.5rem">We believe in building long-term relationships with our customers through honesty, quality, and exceptional service.</p>
-                    <a @spa href="{{ route('contact') }}" class="btn btn-primary" style="border-radius:14px;padding:.65rem 1.8rem;font-weight:700;font-size:.9rem;box-shadow:0 12px 30px -8px rgba(21,147,165,.4)">
-                        <i class="bi bi-chat-dots me-1"></i> Get in Touch
-                    </a>
-                </div>
-            </div>
+        <div class="bg-white p-7 rounded-2xl border border-[#e5e2da] shadow-xs">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[#9a7b4f] font-bold block mb-2">Tenet 02</span>
+          <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold mb-2">Engineering Discipline</h3>
+          <p class="text-sm text-[#374151] leading-relaxed">Robotic factory tolerance to &plusmn;2mm, 50-point PDI before any unit ships to site.</p>
         </div>
+        <div class="bg-white p-7 rounded-2xl border border-[#e5e2da] shadow-xs">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[#9a7b4f] font-bold block mb-2">Tenet 03</span>
+          <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold mb-2">Living Patina</h3>
+          <p class="text-sm text-[#374151] leading-relaxed">Unlacquered brass, smoked oak and honed stone that age with dignified grace.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-@if($company->google_map)
-<section class="pb-5" style="background:linear-gradient(180deg,rgba(248,250,252,.6),rgba(255,255,255,.4))">
-    <div class="container">
-        <div class="contact-card" style="padding:0;overflow:hidden;border-radius:16px">
-            <div style="width:100%;height:400px">{!! $company->google_map !!}</div>
+  <!-- Compliance strip -->
+  <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-7">
+        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Compliance at a Glance</span>
+        <h2 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold tracking-tight mb-4">Built for British Standards</h2>
+        <ul class="space-y-2.5 text-sm text-[#374151]">
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> BS 7671 electrics, 230V plug-and-play</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> UK Building Regulations / Part L (U &le; 0.18)</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> Permitted Development / Caravan Sites Act 1968</li>
+          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> 50-point PDI, 25-year structural guarantee</li>
+        </ul>
+      </div>
+      <div class="lg:col-span-5">
+        <div class="bg-[#181b20] text-white rounded-2xl p-7 sm:p-8 text-center">
+          <h3 class="font-serif text-2xl font-semibold">See It Before You Commit</h3>
+          <p class="text-sm text-[#c9c4b7] mt-2 mb-6">Configure your exact footprint, insulation and interior — engineered build-to-order, delivered from our UK warehouse.</p>
+          <div class="flex flex-col gap-2.5">
+            <a @spa href="{{ route('custom-build') }}" class="w-full py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all text-center">Custom Build</a>
+            <a @spa href="{{ route('contact') }}" class="w-full py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all text-center">Talk to the Studio</a>
+          </div>
         </div>
+      </div>
     </div>
-</section>
-@endif
+  </section>
 
+  <!-- Footer -->
+  
+@endsection
+@section('script')
+<script>
+    /* toggleMobileMenu lives in header partial */
+    if (window.lucide) lucide.createIcons();
+  </script>
 @endsection

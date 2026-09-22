@@ -21,8 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(['frontend.*', 'auth.*', 'errors.*'], function ($view) {
-            $view->with('company', CompanyDetails::firstOrCreate());
+        View::composer('*', function ($view) {
+            if (! $view->offsetExists('company')) {
+                $view->with('company', CompanyDetails::cached());
+            }
         });
     }
 }

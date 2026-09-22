@@ -2,9 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-layout="vertical" data-topbar="light" data-sidebar="light"
     data-sidebar-size="lg">
 
-@php
-    $company = App\Models\CompanyDetails::firstOrCreate();
-@endphp
+{{-- $company shared globally via AppServiceProvider (cached) --}}
 
 <head>
     <meta charset="utf-8" />

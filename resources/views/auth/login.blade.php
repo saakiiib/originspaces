@@ -1,97 +1,92 @@
-@extends('auth.master')
+@extends('frontend.layout')
+@section('title', 'Login | OriginSpaces Modular UK')
+@section('content')
 
-@section('title', 'Login')
-
-@section('auth-content')
-<div class="auth-card">
-    <div class="text-center mb-4">
-        <h2 style="font-weight:800;color:#132238;margin-bottom:.35rem">Welcome Back</h2>
-        <p style="color:#6B7A94;font-size:.9rem;margin-bottom:0">Sign in to your account to continue</p>
+  <!-- Page Hero -->
+  <section class="pt-8 md:pt-10 pb-8 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-md mx-auto text-center">
+      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— Account Access</span>
+      <h1 class="font-serif text-4xl sm:text-5xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Welcome Back</h1>
+      <p class="mt-4 text-sm text-[#374151] leading-relaxed">Sign in to your account to continue.</p>
     </div>
+  </section>
 
-    @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius:12px;border:none;background:rgba(220,38,38,.08);color:#DC2626;font-size:.88rem">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" style="font-size:.7rem"></button>
-        </div>
-    @endif
+  <!-- Login Card -->
+  <section class="py-8 md:py-12 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5]">
+    <div class="max-w-md mx-auto bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-8 shadow-xs">
+      @if(session('error'))
+        <div class="mb-4 p-3.5 rounded-xl bg-red-50 border border-red-200 text-sm text-red-700">{{ session('error') }}</div>
+      @endif
+      @if(session('status'))
+        <div class="mb-4 p-3.5 rounded-xl bg-green-50 border border-green-200 text-sm text-green-700">{{ session('status') }}</div>
+      @endif
 
-    @if(session('status'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert" style="border-radius:12px;border:none;background:rgba(22,163,74,.08);color:#16A34A;font-size:.88rem">
-            {{ session('status') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" style="font-size:.7rem"></button>
-        </div>
-    @endif
-
-    <form method="POST" action="{{ route('login') }}">
+      <form method="POST" action="{{ route('login') }}" class="space-y-4">
         @csrf
         @if(request()->has('redirect'))
-            <input type="hidden" name="redirect" value="{{ request('redirect') }}">
+          <input type="hidden" name="redirect" value="{{ request('redirect') }}">
         @endif
 
-        <div class="mb-3">
-            <label for="login" class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Email or Phone</label>
-            <div class="input-group">
-                <span class="input-group-text" style="background:#F8FAFC;border:1px solid #E6ECF5;border-right:none;border-radius:12px 0 0 12px;color:#6B7A94"><i class="bi bi-person"></i></span>
-                <input id="login" type="text"
-                    class="form-control @error('login') is-invalid @enderror"
-                    name="login" value="{{ old('login') }}" placeholder="Email or 01XXXXXXXXX" required autofocus
-                    style="border-radius:0 12px 12px 0;border-color:#E6ECF5;font-size:.9rem">
-            </div>
-            @error('login')
-                <small class="text-danger" style="font-size:.8rem">{{ $message }}</small>
-            @enderror
+        <div>
+          <label for="login" class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Email or Phone</label>
+          <div class="relative">
+            <i data-lucide="user" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input id="login" type="text" name="login" value="{{ old('login') }}" placeholder="Email or 01XXXXXXXXX" required autofocus
+              class="w-full border border-[#e5e2da] rounded-lg py-3 pl-10 pr-4 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none placeholder:text-[#9ca3af]" />
+          </div>
+          @error('login')
+            <p class="text-xs text-red-600 mt-1.5">{{ $message }}</p>
+          @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="password" class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Password</label>
-            <div class="input-group">
-                <span class="input-group-text" style="background:#F8FAFC;border:1px solid #E6ECF5;border-right:none;border-radius:12px 0 0 12px;color:#6B7A94"><i class="bi bi-lock"></i></span>
-                <input id="password" type="password"
-                    class="form-control @error('password') is-invalid @enderror"
-                    name="password" placeholder="Enter your password" required
-                    style="border-radius:0;border-color:#E6ECF5;font-size:.9rem">
-                <button class="btn" type="button" onclick="togglePass()"
-                    style="background:#F8FAFC;border:1px solid #E6ECF5;border-left:none;border-radius:0 12px 12px 0;color:#6B7A94">
-                    <i class="bi bi-eye" id="passIcon"></i>
-                </button>
-            </div>
-            @error('password')
-                <small class="text-danger" style="font-size:.8rem">{{ $message }}</small>
-            @enderror
+        <div>
+          <label for="password" class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Password</label>
+          <div class="relative">
+            <i data-lucide="lock" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input id="password" type="password" name="password" placeholder="Enter your password" required
+              class="w-full border border-[#e5e2da] rounded-lg py-3 pl-10 pr-12 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none placeholder:text-[#9ca3af]" />
+            <button type="button" onclick="togglePass()" aria-label="Show password"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] hover:text-[#9a7b4f] transition-colors">
+              <span id="passShow"><i data-lucide="eye" class="w-4 h-4"></i></span>
+              <span id="passHide" class="hidden"><i data-lucide="eye-off" class="w-4 h-4"></i></span>
+            </button>
+          </div>
+          @error('password')
+            <p class="text-xs text-red-600 mt-1.5">{{ $message }}</p>
+          @enderror
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} style="border-color:#E6ECF5">
-                <label class="form-check-label" for="remember" style="font-size:.88rem;color:#6B7A94">Remember me</label>
-            </div>
-            @if(Route::has('password.request'))
-                <a @spa href="{{ route('password.request') }}" style="font-size:.88rem;color:#0F4C9C;font-weight:600;text-decoration:none">Forgot password?</a>
-            @endif
-        </div>
+        <label class="flex items-center gap-2 text-sm text-[#6b7280] cursor-pointer">
+          <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="w-4 h-4 accent-[#9a7b4f]" />
+          <span>Remember me</span>
+        </label>
 
-        <button type="submit" class="btn btn-primary btn-lg w-100" style="border-radius:14px;padding:.75rem;font-weight:700;font-size:.95rem;box-shadow:0 12px 30px -8px rgba(21,147,165,.4)">
-            <i class="bi bi-box-arrow-in-right"></i> Sign In
+        <button type="submit" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2">
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <span>Sign In</span>
         </button>
-    </form>
-
-    <div class="text-center mt-4 pt-3" style="border-top:1px solid #E6ECF5">
-        <p style="color:#6B7A94;font-size:.9rem;margin-bottom:0">Don't have an account? <a @spa href="{{ route('register') }}" style="color:#0F4C9C;font-weight:700;text-decoration:none">Create one</a></p>
+      </form>
     </div>
-</div>
+  </section>
 
+@endsection
+@section('script')
 <script>
-function togglePass() {
-    var input = document.getElementById('password');
-    var icon = document.getElementById('passIcon');
-    if (input.type === 'password') {
+    function togglePass() {
+      var input = document.getElementById('password');
+      var show = document.getElementById('passShow');
+      var hide = document.getElementById('passHide');
+      if (!input) return;
+      if (input.type === 'password') {
         input.type = 'text';
-        icon.classList.replace('bi-eye', 'bi-eye-slash');
-    } else {
+        if (show) show.classList.add('hidden');
+        if (hide) hide.classList.remove('hidden');
+      } else {
         input.type = 'password';
-        icon.classList.replace('bi-eye-slash', 'bi-eye');
+        if (show) show.classList.remove('hidden');
+        if (hide) hide.classList.add('hidden');
+      }
     }
-}
+    if (window.lucide) lucide.createIcons();
 </script>
 @endsection

@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('subject');
+            $table->string('postcode')->nullable();
+            $table->string('topic')->nullable();
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->text('message');
             $table->boolean('status')->default(0);
             $table->timestamps();

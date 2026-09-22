@@ -14,7 +14,7 @@ class HomeController extends Controller
             if ($user->user_type == '1') {
                 return redirect()->route('admin.dashboard');
             } elseif ($user->user_type == '0') {
-                return redirect()->route('user.dashboard');
+                return redirect()->route('home');
             }
         } else {
             return redirect()->route('login');

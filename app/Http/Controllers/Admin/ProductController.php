@@ -71,6 +71,7 @@ class ProductController extends Controller
             'base_price' => 'nullable|numeric|min:0',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
             'meta_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'model_3d' => 'nullable|file|max:51200',
         ]);
 
         $product = new Product($request->only([
@@ -90,6 +91,9 @@ class ProductController extends Controller
         }
         if ($request->hasFile('meta_image')) {
             $product->meta_image = $this->storeWebp($request->file('meta_image'), 'uploads/products/', 1200, 80);
+        }
+        if ($request->hasFile('model_3d')) {
+            $product->model_3d = $this->storeModel3d($request->file('model_3d'));
         }
 
         $product->save();
@@ -113,6 +117,7 @@ class ProductController extends Controller
             'base_price' => 'nullable|numeric|min:0',
             'hero_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
             'meta_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'model_3d' => 'nullable|file|max:51200',
         ]);
 
         $product->fill($request->only([
@@ -136,6 +141,10 @@ class ProductController extends Controller
             $this->deleteFile($product->meta_image);
             $product->meta_image = $this->storeWebp($request->file('meta_image'), 'uploads/products/', 1200, 80);
         }
+        if ($request->hasFile('model_3d')) {
+            $this->deleteFile($product->model_3d);
+            $product->model_3d = $this->storeModel3d($request->file('model_3d'));
+        }
 
         $product->save();
 
@@ -157,6 +166,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $this->deleteFile($product->hero_image);
         $this->deleteFile($product->meta_image);
+        $this->deleteFile($product->model_3d);
         foreach ($product->images as $img) {
             $this->deleteFile($img->image);
         }
@@ -201,6 +211,23 @@ class ProductController extends Controller
         }
 
         return response()->json(['message' => 'Sort order updated successfully']);
+    }
+
+    /** Store an uploaded .glb/.gltf model as-is (no image conversion). */
+    private function storeModel3d($file): string
+    {
+        $ext = strtolower($file->getClientOriginalExtension());
+        if (! in_array($ext, ['glb', 'gltf'])) {
+            abort(422, '3D model must be a .glb or .gltf file.');
+        }
+        $dir = public_path('uploads/products/3d/');
+        if (! file_exists($dir)) {
+            mkdir($dir, 0755, true);
+        }
+        $name = mt_rand(10000000, 99999999).'.'.$ext;
+        $file->move($dir, $name);
+
+        return '/uploads/products/3d/'.$name;
     }
 
     private function storeWebp($file, string $dir, int $width, int $quality): string

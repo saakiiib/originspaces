@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>{{ 'Business Name' }}</label>
                                         <input type="text"
@@ -65,7 +65,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>{{ 'Email 2' }}</label>
                                         <input type="email" class="form-control @error('email2') is-invalid @enderror"
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>{{ 'Phone 3' }}</label>
                                         <input type="text" inputmode="tel" class="form-control @error('phone3') is-invalid @enderror"
@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-3 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>{{ 'Phone 4' }}</label>
                                         <input type="text" inputmode="tel" class="form-control @error('phone4') is-invalid @enderror"
@@ -128,7 +128,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>{{ 'Address 2' }}</label>
                                         <input type="text"
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 d-none">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label>Address 3</label>
                                         <input type="text"
@@ -146,7 +146,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Website' }}</label>
                                         <input type="url" class="form-control @error('website') is-invalid @enderror"
@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Tawk.to' }}</label>
                                         <input type="url" class="form-control @error('tawkto') is-invalid @enderror"
@@ -213,7 +213,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'App Store Link' }}</label>
                                         <input type="url"
@@ -223,7 +223,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Google Play Store Link' }}</label>
                                         <input type="url"
@@ -233,7 +233,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Footer Link' }}</label>
                                         <input type="url"
@@ -242,7 +242,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Currency' }}</label>
                                         <select class="form-control" id="currency" name="currency">
@@ -259,7 +259,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'VAT Percent' }}</label>
                                         <input type="number"
@@ -268,7 +268,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Company Registration Number' }}</label>
                                         <input type="text"
@@ -278,7 +278,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Bank' }}</label>
                                         <input type="text" class="form-control @error('bank') is-invalid @enderror"
@@ -286,7 +286,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Account Number' }}</label>
                                         <input type="text"
@@ -296,7 +296,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Sort Code' }}</label>
                                         <input type="text"
@@ -305,7 +305,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4 d-none">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'VAT Number' }}</label>
                                         <input type="text"
@@ -314,7 +314,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 d-none">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label>{{ 'Footer Content' }}</label>
                                         <textarea name="footer_content" id="footer_content"
@@ -424,7 +424,6 @@
                                     </div>
                                 </div>
 
-                                {{--
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Google Site Verification</label>
@@ -454,7 +453,6 @@
                                             value="{{ $data->facebook_pixel_id ?? '' }}" placeholder="1234567890">
                                     </div>
                                 </div>
-                                --}}
 
                             </div>
                         </div>

@@ -1,125 +1,155 @@
-@extends('frontend.master')
-@section('title', 'Contact Us')
-
+@extends('frontend.layout')
+@section('title', 'Contact | OriginSpaces Modular UK')
 @section('content')
-<div class="container page-hero">
-    <div class="crumbs d-inline-flex">
-        <a @spa href="{{ route('home') }}">Home</a>
-        <span class="sep">›</span>
-        <span class="cur">Contact Us</span>
-    </div>
-    <div class="mt-4">
-        <span class="eyebrow">Get in Touch</span>
-        <h1 class="mt-2" style="font-weight:800;color:#132238">Contact Us</h1>
-        <p class="mx-auto" style="max-width:620px;color:#6B7A94">We're here to help — reach out for support, partnership, or vendor onboarding. Our team responds within 24 hours.</p>
-    </div>
-</div>
 
-<section class="container pb-4">
-    <div class="row g-3">
-        <div class="col-md-3 col-6"><div class="value-card"><div class="ic"><i class="bi bi-headset"></i></div><h6 class="mb-1">24/7 Support</h6><small>Always available</small></div></div>
-        <div class="col-md-3 col-6"><div class="value-card"><div class="ic"><i class="bi bi-chat-dots-fill"></i></div><h6 class="mb-1">Live Chat</h6><small>Instant response</small></div></div>
-        <div class="col-md-3 col-6"><div class="value-card"><div class="ic"><i class="bi bi-envelope-fill"></i></div><h6 class="mb-1">Email</h6><small>Within 24h</small></div></div>
-        <div class="col-md-3 col-6"><div class="value-card"><div class="ic"><i class="bi bi-telephone-fill"></i></div><h6 class="mb-1">Call Us</h6><small>{{ $company->phone1 ?? '' }}</small>@if($company->phone2)<br><small>{{ $company->phone2 }}</small>@endif</div></div>
-    </div>
-</section>
 
-<section class="container pb-5">
-    <div class="row g-4">
-        <div class="col-lg-5">
-            <div class="contact-card">
-                <h5 style="font-weight:700;color:#132238">Head Office</h5>
-                <ul class="list-unstyled contact-info mb-4">
-                    @if($company->address1)
-                        <li><span class="ic"><i class="bi bi-geo-alt-fill"></i></span><div><b>{{ $company->address1 }}</b><br><small>{{ $company->address2 ?? '' }}</small></div></li>
-                    @endif
-                    @if($company->phone1)
-                        <li><span class="ic"><i class="bi bi-telephone-fill"></i></span><div><b>{{ $company->phone1 }}</b>@if($company->phone2)<br><small>{{ $company->phone2 }}</small>@endif</div></li>
-                    @endif
-                    @if($company->email1)
-                        <li><span class="ic"><i class="bi bi-envelope-fill"></i></span><div><b>{{ $company->email1 }}</b></div></li>
-                    @endif
-                </ul>
-                <div class="d-flex gap-2">
-                    @if($company->facebook)<a href="{{ $company->facebook }}" target="_blank" class="icon-btn" style="background:rgba(21,147,165,.08);color:#1593A5"><i class="bi bi-facebook"></i></a>@endif
-                    @if($company->instagram)<a href="{{ $company->instagram }}" target="_blank" class="icon-btn" style="background:rgba(21,147,165,.08);color:#1593A5"><i class="bi bi-instagram"></i></a>@endif
-                    @if($company->twitter)<a href="{{ $company->twitter }}" target="_blank" class="icon-btn" style="background:rgba(21,147,165,.08);color:#1593A5"><i class="bi bi-twitter-x"></i></a>@endif
-                    @if($company->youtube)<a href="{{ $company->youtube }}" target="_blank" class="icon-btn" style="background:rgba(21,147,165,.08);color:#1593A5"><i class="bi bi-youtube"></i></a>@endif
-                    @if($company->linkedin)<a href="{{ $company->linkedin }}" target="_blank" class="icon-btn" style="background:rgba(21,147,165,.08);color:#1593A5"><i class="bi bi-linkedin"></i></a>@endif
-                </div>
-            </div>
+  <!-- Page Hero -->
+  <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto text-center max-w-3xl">
+      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— Contact the Studio</span>
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Talk to Us About<br />Your Project.</h1>
+      <p class="mt-5 text-sm sm:text-base text-[#374151] leading-relaxed max-w-2xl mx-auto">Quotes, CAD packs, compliance documents and callbacks — the studio replies within one working day.</p>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <section class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <!-- Info -->
+      <div class="lg:col-span-5 space-y-5">
+        <div class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-7 shadow-xs">
+          <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
+            <i data-lucide="phone" class="w-4 h-4"></i>
+            <span>Studio Line</span>
+          </div>
+          <p class="font-serif text-2xl text-[#1a1d24] font-semibold">{{ $company->phone1 ?: '+44 (0)20 7946 0880' }}</p>
+          <p class="text-xs text-[#6b7280] mt-1">{{ $company->opening_time ?: 'Mon–Sat, 10:00–18:00' }}</p>
+          @if($company->email1)<p class="text-sm text-[#374151] mt-2"><a href="mailto:{{ $company->email1 }}" class="text-[#9a7b4f] font-semibold hover:underline">{{ $company->email1 }}</a></p>@endif
         </div>
-        <div class="col-lg-7">
-            <div class="contact-card">
-                <h5 style="font-weight:700;color:#132238">Send Us a Message</h5>
-                <form id="contactForm" class="row g-3" data-captcha-answer="{{ $captchaAnswer }}">
-                    @csrf
-                    <div class="col-md-6">
-                        <label class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Name <span style="color:#DC2626">*</span></label>
-                        <input class="form-control" name="name" required style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Email</label>
-                        <input type="email" class="form-control" name="email" style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Phone</label>
-                        <input class="form-control" name="phone" placeholder="+880..." style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem">
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Subject <span style="color:#DC2626">*</span></label>
-                        <input class="form-control" name="subject" required style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem">
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">Message <span style="color:#DC2626">*</span></label>
-                        <textarea class="form-control" name="message" rows="5" required style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem;resize:vertical"></textarea>
-                    </div>
-                    <div class="col-md-6">
-                        <label id="captchaLabel" class="form-label" style="font-weight:600;color:#132238;font-size:.88rem">{{ $captchaQuestion }}</label>
-                        <input type="text" class="form-control" name="captcha" id="captchaInput" placeholder="Your answer" required autocomplete="off" style="border-radius:12px;border-color:#E6ECF5;font-size:.9rem;padding:.7rem 1rem">
-                    </div>
-                    <div class="col-md-6 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100" style="border-radius:14px;padding:.75rem;font-weight:700;font-size:.9rem;box-shadow:0 12px 30px -8px rgba(21,147,165,.4)">Send Message <i class="bi bi-send-fill ms-1"></i></button>
-                    </div>
-                </form>
-            </div>
+        <div class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-7 shadow-xs">
+          <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
+            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <span>Showrooms</span>
+          </div>
+          <ul class="space-y-3 text-sm text-[#374151]">
+            <li><strong class="text-[#1a1d24] block">Head Office</strong>{{ $company->address1 ?: 'Mayfair Flagship, 14 Berkeley Square, W1J 6BQ' }}</li>
+            @if($company->address2)<li><strong class="text-[#1a1d24] block">Showroom</strong>{{ $company->address2 }}</li>@endif
+            @if($company->address3)<li><strong class="text-[#1a1d24] block">Warehouse</strong>{{ $company->address3 }}</li>@endif
+            @if(!$company->address2 && !$company->address3)
+            <li><strong class="text-[#1a1d24] block">Edinburgh</strong>28 Dundas St, EH3 6JN</li>
+            <li><strong class="text-[#1a1d24] block">Chipping Campden</strong>GL55 6AT</li>
+            @endif
+          </ul>
         </div>
+        <div class="bg-[#181b20] text-white rounded-2xl p-6 sm:p-7">
+          <h3 class="font-serif text-xl font-semibold">Prefer to configure first?</h3>
+          <p class="text-xs text-[#9ca3af] mt-1.5 mb-4">Build your exact footprint and interior, then send it straight to the studio.</p>
+          <a @spa href="{{ route('custom-build') }}" class="block w-full py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all text-center">Open Factory Configurator</a>
+        </div>
+      </div>
+      <!-- Form -->
+      <div class="lg:col-span-7">
+        <form onsubmit="return handleContactSubmit(event)" class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-9 shadow-xs space-y-4">
+          <div id="contact-form-fields" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Full Name *</label>
+                <input type="text" id="contact-name" required placeholder="Jane Smith" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Email *</label>
+                <input type="email" id="contact-email" required placeholder="jane@example.co.uk" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Topic</label>
+                <select id="contact-topic" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none bg-white">
+                  <option>Factory quote &amp; CAD pack</option>
+                  <option>Compliance documents</option>
+                  <option>Callback request</option>
+                  <option>Showroom visit</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Site Postcode</label>
+                <input type="text" id="contact-postcode" placeholder="e.g. GL54 3AA" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Project Details *</label>
+              <textarea id="contact-message" rows="5" required placeholder="Plot size, intended use, timelines — anything that helps us quote accurately." class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none"></textarea>
+            </div>
+            <button type="submit" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Send Enquiry</button>
+            <p class="text-[11px] text-center text-[#6b7280]">No spam, no obligation — studio reply within one working day.</p>
+          </div>
+          <div id="contact-form-success" class="hidden text-center py-10">
+            <span class="w-14 h-14 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="check" class="w-6 h-6 text-[#9a7b4f]"></i>
+            </span>
+            <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold">Enquiry received.</h3>
+            <p class="text-sm text-[#374151] mt-2">Thank you — the studio will reply within one working day.</p>
+          </div>
+        </form>
+      </div>
     </div>
-</section>
+  </section>
 
-@if($company->google_map)
-<section class="container pb-5">
-    <div class="contact-card" style="padding:0;overflow:hidden;border-radius:16px">
-        <div style="width:100%;height:400px">{!! $company->google_map !!}</div>
+  @if($company->google_map)
+  <!-- Showroom Map -->
+  <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
+        <i data-lucide="map-pin" class="w-4 h-4"></i>
+        <span>Find the Studio</span>
+      </div>
+      <div class="contact-map rounded-2xl border border-[#e5e2da] overflow-hidden shadow-xs bg-white">
+        <div class="w-full h-[380px] md:h-[440px]">{!! $company->google_map !!}</div>
+      </div>
     </div>
-</section>
-<style>.contact-card iframe{width:100%!important;height:100%!important;border:none!important}</style>
-@endif
+  </section>
+  <style>.contact-map iframe{width:100%!important;height:100%!important;border:0!important}</style>
+  @endif
 
 @endsection
-
 @section('script')
 <script>
-$(document).off('submit.contact').on('submit.contact', '#contactForm', function(e) {
-    e.preventDefault();
-    var form = this;
-    var answer = parseInt($('#captchaInput').val());
-    if (answer !== parseInt($(form).data('captcha-answer'))) {
-        showSmartNotify({ type: 'error', title: 'Error!', message: 'Incorrect answer. Please try again.' });
-        return;
-    }
-    $.ajax({
-        url: "{{ route('contact.store') }}",
-        type: "POST",
-        data: $(form).serialize(),
-        success: function(res) {
-            showSmartNotify({ type: 'success', title: 'Success!', message: res.message });
-            form.reset();
-        },
-        error: function(xhr) {
-            showSmartNotify({ type: 'error', title: 'Error!', message: 'Something went wrong' });
+    /* toggleMobileMenu lives in header partial */
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      var csrf = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
+      var form = e.target;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      fetch("{{ route('contact.store') }}", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf, 'Accept': 'application/json' },
+        body: JSON.stringify({
+          name: document.getElementById('contact-name').value,
+          email: document.getElementById('contact-email').value,
+          topic: document.getElementById('contact-topic').value,
+          postcode: document.getElementById('contact-postcode').value,
+          message: document.getElementById('contact-message').value,
+        }),
+      }).then(function (r) {
+        if (btn) btn.disabled = false;
+        if (!r.ok) {
+          return r.json().catch(function(){ return {}; }).then(function (d) {
+            var msg = d.message || (d.errors ? Object.values(d.errors)[0][0] : 'Please check the form.');
+            if (window.showToast) showToast('Something went wrong', msg);
+          });
         }
-    });
-});
-</script>
+        document.getElementById('contact-form-fields').classList.add('hidden');
+        document.getElementById('contact-form-success').classList.remove('hidden');
+        if (window.lucide) lucide.createIcons();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }).catch(function () {
+        if (btn) btn.disabled = false;
+        if (window.showToast) showToast('Something went wrong', 'Please try again.');
+      });
+      return false;
+    }
+    if (window.lucide) lucide.createIcons();
+  </script>
 @endsection

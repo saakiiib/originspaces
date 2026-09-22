@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('company_name')->nullable();
             $table->string('business_name')->nullable();
-            $table->decimal('opening_cash_balance')->default(0);
+            $table->decimal('opening_cash_balance')->nullable();
             $table->string('company_logo')->nullable();
             $table->string('footer_logo')->nullable();
             $table->string('fav_icon')->nullable();

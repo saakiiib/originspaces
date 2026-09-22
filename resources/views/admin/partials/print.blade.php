@@ -1,6 +1,4 @@
-@php
-    $company = \App\Models\CompanyDetails::first();
-@endphp
+{{-- $company shared globally via AppServiceProvider (cached) --}}
 
 {{-- This will only show when printing --}}
 <div class="print-header" style="display: none;">

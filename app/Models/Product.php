@@ -10,7 +10,7 @@ class Product extends Model
 {
     protected $fillable = [
         'category_id', 'name', 'slug', 'model_code', 'tagline', 'description',
-        'dimensions', 'lead_time', 'warranty', 'base_price', 'hero_image', 'video_url',
+        'dimensions', 'lead_time', 'warranty', 'base_price', 'hero_image', 'video_url', 'model_3d',
         'show_3d', 'is_featured', 'status', 'sort_order',
         'meta_title', 'meta_description', 'meta_keywords', 'meta_image',
     ];

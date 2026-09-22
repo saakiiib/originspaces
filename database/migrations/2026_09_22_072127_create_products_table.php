@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('base_price', 12, 2)->nullable();
             $table->string('hero_image')->nullable();
             $table->string('video_url')->nullable();
+            $table->string('model_3d')->nullable();
             $table->boolean('show_3d')->default(true);
             $table->boolean('is_featured')->default(false);
             $table->boolean('status')->default(true);

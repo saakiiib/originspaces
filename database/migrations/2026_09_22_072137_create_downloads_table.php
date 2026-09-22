@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('ref')->nullable();
             $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
             $table->string('title');
-            $table->string('file');
+            $table->string('file')->nullable();
             $table->string('format')->default('PDF Spec');
             $table->string('size')->nullable();
             $table->string('rev')->nullable();

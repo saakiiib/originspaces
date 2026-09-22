@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\CompanyDetails;
 use App\Models\Contact;
 use App\Models\Download;
 use App\Models\Enquiry;
@@ -14,6 +15,7 @@ use App\Models\Product;
 use App\Models\ProductOption;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 
 uses(RefreshDatabase::class);
 
@@ -125,6 +127,54 @@ test('admin product and enquiry pages render', function () {
     $this->actingAs($admin)->get(route('faqs.index'))->assertOk();
     $this->actingAs($admin)->get(route('galleries.index'))->assertOk();
     $this->actingAs($admin)->get(route('downloads.index'))->assertOk();
+});
+
+test('product store accepts glb model and youtube url', function () {
+    $admin = adminUser();
+    $file = UploadedFile::fake()->create('villa.glb', 120, 'model/gltf-binary');
+
+    $res = $this->actingAs($admin)->post(route('products.store'), [
+        'name' => 'GLB Villa', 'model_code' => 'GLB-01',
+        'video_url' => 'https://youtu.be/dQw4w9WgXcQ', 'model_3d' => $file,
+    ])->assertOk()->json();
+
+    $product = Product::find($res['id']);
+    expect($product->model_3d)->toStartWith('/uploads/products/3d/')->toEndWith('.glb');
+    expect(file_exists(public_path($product->model_3d)))->toBeTrue();
+    @unlink(public_path($product->model_3d));
+
+    $this->actingAs($admin)->post(route('products.store'), [
+        'name' => 'Bad Model', 'model_code' => 'BAD-01',
+        'model_3d' => UploadedFile::fake()->create('notes.txt', 10, 'text/plain'),
+    ])->assertStatus(422);
+});
+
+test('company details page exposes hidden fields and saves them', function () {
+    $admin = adminUser();
+
+    $html = $this->actingAs($admin)->get(route('admin.companyDetails'))->assertOk()->getContent();
+    foreach (['business_name', 'email2', 'phone3', 'address2', 'website', 'tawkto', 'google_analytics_id', 'facebook_pixel_id', 'vat_number', 'footer_content'] as $field) {
+        expect($html)->toContain('name="'.$field.'"');
+    }
+
+    $this->actingAs($admin)->post(route('admin.companyDetails'), [
+        'company_name' => 'OriginSpaces', 'website' => 'https://example.com',
+        'phone3' => '+44111', 'google_analytics_id' => 'G-TEST123', 'vat_number' => 'GB123',
+    ])->assertRedirect();
+
+    $data = CompanyDetails::first();
+    expect($data->website)->toBe('https://example.com')
+        ->and($data->google_analytics_id)->toBe('G-TEST123')
+        ->and($data->vat_number)->toBe('GB123');
+});
+
+test('admin pages have no broken nested script tags', function () {
+    $admin = adminUser();
+
+    foreach (['products.index', 'allcategory', 'faqs.index', 'galleries.index', 'downloads.index'] as $route) {
+        $html = $this->actingAs($admin)->get(route($route))->assertOk()->getContent();
+        expect($html)->not->toContain("<script>\n<script>");
+    }
 });
 
 test('every admin page renders', function () {
