@@ -31,7 +31,7 @@
             <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
             <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['catLabel'] }}</span>
             <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#1a1d24] items-center justify-center hidden group-hover:flex">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+              <x-icon name="maximize-2" class="w-3.5 h-3.5" />
             </span>
           </button>
         @empty
@@ -60,7 +60,30 @@
 <script>
     /* toggleMobileMenu lives in header partial */
 
-    const GALLERY = @json($galleryJson);    function renderGallery() {
+    const GALLERY = @json($galleryJson);
+    let activeGalleryCat = 'all';
+    let galleryView = [];
+    let galleryIdx = 0;
+
+    function galleryThumb(g, size) {
+      if (g.src) return g.src;
+      return 'https://images.unsplash.com/' + g.id + '?auto=format&fit=crop&w=' + size + '&q=80';
+    }
+
+    function filterGallery(cat, btn) {
+      activeGalleryCat = cat;
+      document.querySelectorAll('.gallery-pill').forEach(function (p) {
+        p.classList.remove('bg-[#181b20]', 'text-white', 'border-[#181b20]');
+        p.classList.add('bg-white', 'text-[#6b7280]', 'border', 'border-[#e5e2da]', 'hover:text-[#9a7b4f]', 'hover:border-[#9a7b4f]');
+      });
+      if (btn) {
+        btn.classList.remove('bg-white', 'text-[#6b7280]', 'border', 'border-[#e5e2da]', 'hover:text-[#9a7b4f]', 'hover:border-[#9a7b4f]');
+        btn.classList.add('bg-[#181b20]', 'text-white', 'border', 'border-[#181b20]');
+      }
+      renderGallery();
+    }
+
+    function renderGallery() {
       // Grid is server-rendered; only toggle visibility.
       document.querySelectorAll('#gallery-grid .gallery-item').forEach(function (el) {
         var show = (activeGalleryCat === 'all' || el.getAttribute('data-cat') === activeGalleryCat);

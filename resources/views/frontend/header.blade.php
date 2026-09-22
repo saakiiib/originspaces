@@ -14,7 +14,7 @@
       <div class="relative group">
         <a @spa href="{{ route('collections') }}" class="flex items-center gap-1 hover:text-[#1a1d24] transition-colors py-6 {{ request()->routeIs('collections', 'product.show') ? 'text-[#1a1d24]' : '' }}">
           <span>Collection</span>
-          <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+          <x-icon name="chevron-down" class="w-3.5 h-3.5" />
         </a>
         <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full w-[860px] max-w-[90vw] bg-white rounded-2xl border border-[#e5e2da] shadow-2xl p-8 z-50">
           <div class="flex items-start justify-between pb-5 border-b border-[#e5e2da] mb-6">
@@ -24,7 +24,7 @@
             </div>
             <a @spa href="{{ route('collections') }}" class="text-[11px] font-mono uppercase tracking-widest text-[#6b7280] hover:text-[#9a7b4f] font-semibold flex items-center gap-1 shrink-0 mt-2">
               <span>View all products</span>
-              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+              <x-icon name="arrow-up-right" class="w-3.5 h-3.5" />
             </a>
           </div>
           <div class="grid grid-cols-5 gap-5">
@@ -52,17 +52,17 @@
     <div class="hidden sm:flex items-center gap-2.5">
       <a @spa href="{{ route('custom-build') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
         <span>Custom Build</span>
-        <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+        <x-icon name="arrow-right" class="w-3.5 h-3.5" />
       </a>
       <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
-        <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5"></i>
+        <x-icon name="sliders-horizontal" class="w-3.5 h-3.5" />
         <span>Explore Products</span>
       </a>
     </div>
 
     <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg text-[#1a1d24] hover:bg-[#e5e2da]/60">
-      <i data-lucide="menu" id="menu-icon-open" class="w-6 h-6"></i>
-      <i data-lucide="x" id="menu-icon-close" class="w-6 h-6 hidden"></i>
+      <x-icon name="menu" id="menu-icon-open" class="w-6 h-6" />
+      <x-icon name="x" id="menu-icon-close" class="w-6 h-6 hidden" />
     </button>
   </div>
 

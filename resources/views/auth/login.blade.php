@@ -30,7 +30,7 @@
         <div>
           <label for="login" class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Email or Phone</label>
           <div class="relative">
-            <i data-lucide="user" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <x-icon name="user" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input id="login" type="text" name="login" value="{{ old('login') }}" placeholder="Email or 01XXXXXXXXX" required autofocus
               class="w-full border border-[#e5e2da] rounded-lg py-3 pl-10 pr-4 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none placeholder:text-[#9ca3af]" />
           </div>
@@ -42,13 +42,13 @@
         <div>
           <label for="password" class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Password</label>
           <div class="relative">
-            <i data-lucide="lock" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <x-icon name="lock" class="w-4 h-4 text-[#9a7b4f] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input id="password" type="password" name="password" placeholder="Enter your password" required
               class="w-full border border-[#e5e2da] rounded-lg py-3 pl-10 pr-12 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none placeholder:text-[#9ca3af]" />
             <button type="button" onclick="togglePass()" aria-label="Show password"
               class="absolute right-3 top-1/2 -translate-y-1/2 text-[#6b7280] hover:text-[#9a7b4f] transition-colors">
-              <span id="passShow"><i data-lucide="eye" class="w-4 h-4"></i></span>
-              <span id="passHide" class="hidden"><i data-lucide="eye-off" class="w-4 h-4"></i></span>
+              <span id="passShow"><x-icon name="eye" class="w-4 h-4" /></span>
+              <span id="passHide" class="hidden"><x-icon name="eye-off" class="w-4 h-4" /></span>
             </button>
           </div>
           @error('password')
@@ -62,7 +62,7 @@
         </label>
 
         <button type="submit" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2">
-          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          <x-icon name="arrow-right" class="w-4 h-4" />
           <span>Sign In</span>
         </button>
       </form>

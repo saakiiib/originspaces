@@ -17,7 +17,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-14">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#9a7b4f]/30 text-[#9a7b4f] text-xs font-mono font-semibold uppercase tracking-[0.2em] mb-4">
-          <i data-lucide="wrench" class="w-4 h-4"></i>
+          <x-icon name="wrench" class="w-4 h-4" />
           <span>Direct Chinese Factory Production</span>
         </div>
 
@@ -63,7 +63,7 @@
             <div class="pt-4 flex justify-end">
               <button onclick="goToConfigStep(2)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Footprint &amp; Chassis</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -81,7 +81,7 @@
               <button onclick="goToConfigStep(1)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="goToConfigStep(3)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Insulation &amp; Facade</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -106,7 +106,7 @@
               <button onclick="goToConfigStep(2)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="goToConfigStep(4)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Equipment &amp; UK Delivery</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -132,7 +132,7 @@
               <div class="flex items-center justify-between mb-2.5">
                 <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold">UK Warehouse Dispatch &amp; On-Site Delivery Method</label>
                 <span class="text-[11px] font-mono text-[#9a7b4f] font-semibold flex items-center gap-1">
-                  <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+                  <x-icon name="truck" class="w-3.5 h-3.5" />
                   Central UK Warehouse Dispatch
                 </span>
               </div>
@@ -141,7 +141,7 @@
               <!-- Postcode Input -->
               <div class="mt-4 p-4 bg-[#FAF9F5] border border-[#E5E2DA] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div class="flex items-center gap-2.5">
-                  <i data-lucide="truck" class="w-5 h-5 text-[#9a7b4f] shrink-0"></i>
+                  <x-icon name="truck" class="w-5 h-5 text-[#9a7b4f] shrink-0" />
                   <div>
                     <span class="text-xs font-semibold text-[#1a1d24] block">UK Delivery Postcode or County (Optional)</span>
                     <span class="text-[11px] text-[#6b7280] block">Allows our logistics dispatch team to pre-calculate haulage route and crane access</span>
@@ -158,7 +158,7 @@
 
               <!-- Warehouse PDI Guarantee Banner -->
               <div class="mt-3 p-3 bg-white border border-[#e5e2da] rounded-xl flex items-start gap-2.5">
-                <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i>
+                <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" />
                 <p class="text-[11px] text-[#6b7280] leading-relaxed">
                   <strong class="text-[#1a1d24]">Direct UK Warehouse Logistics:</strong> All custom orders are imported under bonded transit to our UK central warehouse, where they undergo rigorous 50-point PDI (Pre-Delivery Inspection) before flatbed dispatch to your plot.
                 </p>
@@ -169,7 +169,7 @@
               <button onclick="goToConfigStep(3)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="submitConfiguratorEnquiry()" class="inline-flex items-center gap-2 bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-7 py-3.5 rounded-lg transition-all shadow-md">
                 <span>Submit Factory Custom Spec</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -234,7 +234,7 @@
           <!-- Production & Warehouse Schedule -->
           <div class="my-5 p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-2">
             <div class="flex items-center gap-2 text-xs text-[#9a7b4f] font-mono font-semibold">
-              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              <x-icon name="calendar" class="w-3.5 h-3.5" />
               <span>Production &amp; Warehouse Schedule:</span>
             </div>
             <div class="text-[11px] text-[#9ca3af] space-y-1 font-mono">
@@ -256,7 +256,7 @@
 
           <button onclick="submitConfiguratorEnquiry()" class="w-full bg-[#9a7b4f] hover:bg-[#866940] text-white font-semibold text-xs sm:text-sm uppercase tracking-wider py-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
             <span>Request Factory CAD &amp; Quote</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <x-icon name="arrow-right" class="w-4 h-4" />
           </button>
 
           <span class="text-[10px] text-[#6b7280] text-center block mt-3">

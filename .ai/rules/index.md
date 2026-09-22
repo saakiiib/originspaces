@@ -5,4 +5,5 @@ Before planning or editing, find the row whose globs match the file's path and r
 | Applies to | Rule file |
 | --- | --- |
 | app/Http/Controllers/*.php | .ai/rules/controllers.md |
-| resources/views/frontend/theme/** | .ai/rules/theme.md |
+| resources/views/frontend/** | .ai/rules/theme.md |
+| resources/views/**/*.blade.php | .ai/rules/views.md |

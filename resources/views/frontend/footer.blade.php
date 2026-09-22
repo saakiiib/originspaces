@@ -13,11 +13,11 @@
         <div class="text-[11px] font-mono text-[#9a7b4f]">Direct Warehouse Dispatch &bull; Nationwide UK Delivery</div>
         @if($company->facebook || $company->instagram || $company->linkedin || $company->youtube || $company->twitter)
         <div class="flex items-center gap-2.5 pt-1">
-          @if($company->facebook)<a href="{{ $company->facebook }}" target="_blank" rel="noopener" aria-label="Facebook" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i></a>@endif
-          @if($company->instagram)<a href="{{ $company->instagram }}" target="_blank" rel="noopener" aria-label="Instagram" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><i data-lucide="image" class="w-3.5 h-3.5"></i></a>@endif
-          @if($company->linkedin)<a href="{{ $company->linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><i data-lucide="briefcase" class="w-3.5 h-3.5"></i></a>@endif
-          @if($company->youtube)<a href="{{ $company->youtube }}" target="_blank" rel="noopener" aria-label="YouTube" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><i data-lucide="youtube" class="w-3.5 h-3.5"></i></a>@endif
-          @if($company->twitter)<a href="{{ $company->twitter }}" target="_blank" rel="noopener" aria-label="X" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><i data-lucide="zap" class="w-3.5 h-3.5"></i></a>@endif
+          @if($company->facebook)<a href="{{ $company->facebook }}" target="_blank" rel="noopener" aria-label="Facebook" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="arrow-up-right" class="w-3.5 h-3.5" /></a>@endif
+          @if($company->instagram)<a href="{{ $company->instagram }}" target="_blank" rel="noopener" aria-label="Instagram" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="image" class="w-3.5 h-3.5" /></a>@endif
+          @if($company->linkedin)<a href="{{ $company->linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="briefcase" class="w-3.5 h-3.5" /></a>@endif
+          @if($company->youtube)<a href="{{ $company->youtube }}" target="_blank" rel="noopener" aria-label="YouTube" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="youtube" class="w-3.5 h-3.5" /></a>@endif
+          @if($company->twitter)<a href="{{ $company->twitter }}" target="_blank" rel="noopener" aria-label="X" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="zap" class="w-3.5 h-3.5" /></a>@endif
         </div>
         @endif
       </div>
@@ -71,7 +71,7 @@
           <li class="pt-2">
             <button onclick="openEnquiryModal('Direct Callback')" class="text-xs text-[#9a7b4f] hover:underline font-semibold flex items-center gap-1">
               <span>Request Callback / CAD Pack</span>
-              <i data-lucide="arrow-right" class="w-3 h-3"></i>
+              <x-icon name="arrow-right" class="w-3 h-3" />
             </button>
           </li>
         </ul>
@@ -93,7 +93,7 @@
 <div id="enquiry-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181b20]/75 backdrop-blur-sm hidden">
   <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#e5e2da] relative max-h-[90vh] overflow-y-auto">
     <button onclick="closeEnquiryModal()" class="absolute top-4 right-4 text-[#6b7280] hover:text-[#1a1d24] p-1.5 rounded-lg hover:bg-[#f4f2ef]">
-      <i data-lucide="x" class="w-5 h-5"></i>
+      <x-icon name="x" class="w-5 h-5" />
     </button>
     <div class="mb-6">
       <span class="text-[10px] uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block">OriginSpaces UK Direct</span>
@@ -148,11 +148,11 @@
 <div id="sample-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181b20]/75 backdrop-blur-sm hidden">
   <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#e5e2da] relative">
     <button onclick="closeSampleModal()" class="absolute top-4 right-4 text-[#6b7280] hover:text-[#1a1d24] p-1.5 rounded-lg hover:bg-[#f4f2ef]">
-      <i data-lucide="x" class="w-5 h-5"></i>
+      <x-icon name="x" class="w-5 h-5" />
     </button>
     <div class="text-center mb-6">
       <div class="w-12 h-12 rounded-xl bg-[#FAF9F5] border border-[#9a7b4f]/30 text-[#9a7b4f] flex items-center justify-center mx-auto mb-3">
-        <i data-lucide="package" class="w-6 h-6"></i>
+        <x-icon name="package" class="w-6 h-6" />
       </div>
       <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold">Order Material Sample Box</h3>
       <p class="text-xs text-[#6b7280] mt-1">Receive genuine timber composite swatches, 100mm PIR core cutaway, and double-glazing seal profiles at your UK address.</p>
@@ -179,14 +179,14 @@
 <div id="lightbox-modal" class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden" onclick="if(window.closeLightbox)closeLightbox()">
   <div class="relative max-w-5xl w-full" onclick="event.stopPropagation()">
     <button onclick="if(window.closeLightbox)closeLightbox()" class="absolute -top-12 right-0 text-white/80 hover:text-white p-2">
-      <i data-lucide="x" class="w-6 h-6"></i>
+      <x-icon name="x" class="w-6 h-6" />
     </button>
     <img id="lightbox-img" src="" alt="Enlarged Architectural Detail" class="w-full max-h-[76vh] object-contain rounded-xl shadow-2xl bg-black" />
     <button onclick="if(window.lightboxNav)lightboxNav(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-[#9a7b4f] text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all">
-      <i data-lucide="chevron-left" class="w-5 h-5"></i>
+      <x-icon name="chevron-left" class="w-5 h-5" />
     </button>
     <button onclick="if(window.lightboxNav)lightboxNav(1)" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-[#9a7b4f] text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all">
-      <i data-lucide="chevron-right" class="w-5 h-5"></i>
+      <x-icon name="chevron-right" class="w-5 h-5" />
     </button>
     <div class="mt-3 flex items-center justify-between text-xs">
       <span id="lightbox-caption" class="text-white/85 font-medium"></span>
@@ -198,7 +198,7 @@
 <!-- Global Toast -->
 <div id="toast-notification" class="fixed bottom-6 right-6 z-[60] bg-[#181b20] text-white px-5 py-3.5 rounded-xl shadow-2xl border border-[#9a7b4f]/40 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300">
   <div class="w-7 h-7 rounded-full bg-[#9a7b4f] flex items-center justify-center text-white shrink-0">
-    <i data-lucide="check" class="w-4 h-4"></i>
+    <x-icon name="check" class="w-4 h-4" />
   </div>
   <div class="text-xs">
     <span id="toast-title" class="font-semibold block text-white">Submitted Successfully</span>

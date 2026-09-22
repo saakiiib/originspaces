@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="{{ $company->company_name ?? '' }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    <title>@yield('title', config('app.name'))</title>
     {!! SEOMeta::generate() !!}
     {!! OpenGraph::generate() !!}
     {!! Twitter::generate() !!}
@@ -44,23 +45,23 @@
   <div class="share-panel" id="sharePanel">
     <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(request()->url()) }}" target="_blank" rel="noopener" title="Messenger">
       <span class="share-label">Messenger</span>
-      <i data-lucide="message-circle"></i>
+      <x-icon name="message-circle" />
     </a>
     <a class="share-btn" href="https://wa.me/{{ $company->whatsapp ?? '' }}?text={{ urlencode(request()->url()) }}" target="_blank" rel="noopener" title="WhatsApp">
       <span class="share-label">WhatsApp</span>
-      <i data-lucide="phone"></i>
+      <x-icon name="phone" />
     </a>
     <a class="share-btn" href="mailto:{{ $company->email1 ?? '' }}?subject={{ urlencode(request()->url()) }}" title="Email">
       <span class="share-label">Email</span>
-      <i data-lucide="mail"></i>
+      <x-icon name="mail" />
     </a>
     <a class="share-btn" href="tel:{{ $company->phone1 ?? '' }}" title="Call">
       <span class="share-label">Call</span>
-      <i data-lucide="phone"></i>
+      <x-icon name="phone" />
     </a>
   </div>
   <button class="share-toggle" id="shareToggle" title="Contact Us" aria-label="Contact Us">
-    <i data-lucide="phone"></i>
+    <x-icon name="phone" />
   </button>
 </div>
 <style>
@@ -79,7 +80,7 @@
 </style>
 
 <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-  <i data-lucide="arrow-up"></i>
+  <x-icon name="arrow-up" />
 </div>
 <script>
 (function(){

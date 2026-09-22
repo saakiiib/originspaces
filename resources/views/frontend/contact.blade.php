@@ -19,7 +19,7 @@
       <div class="lg:col-span-5 space-y-5">
         <div class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-7 shadow-xs">
           <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
-            <i data-lucide="phone" class="w-4 h-4"></i>
+            <x-icon name="phone" class="w-4 h-4" />
             <span>Studio Line</span>
           </div>
           <p class="font-serif text-2xl text-[#1a1d24] font-semibold">{{ $company->phone1 ?: '+44 (0)20 7946 0880' }}</p>
@@ -28,7 +28,7 @@
         </div>
         <div class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-7 shadow-xs">
           <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
-            <i data-lucide="map-pin" class="w-4 h-4"></i>
+            <x-icon name="map-pin" class="w-4 h-4" />
             <span>Showrooms</span>
           </div>
           <ul class="space-y-3 text-sm text-[#374151]">
@@ -86,7 +86,7 @@
           </div>
           <div id="contact-form-success" class="hidden text-center py-10">
             <span class="w-14 h-14 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center mx-auto mb-4">
-              <i data-lucide="check" class="w-6 h-6 text-[#9a7b4f]"></i>
+              <x-icon name="check" class="w-6 h-6 text-[#9a7b4f]" />
             </span>
             <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold">Enquiry received.</h3>
             <p class="text-sm text-[#374151] mt-2">Thank you — the studio will reply within one working day.</p>
@@ -101,7 +101,7 @@
   <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold mb-4">
-        <i data-lucide="map-pin" class="w-4 h-4"></i>
+        <x-icon name="map-pin" class="w-4 h-4" />
         <span>Find the Studio</span>
       </div>
       <div class="contact-map rounded-2xl border border-[#e5e2da] overflow-hidden shadow-xs bg-white">

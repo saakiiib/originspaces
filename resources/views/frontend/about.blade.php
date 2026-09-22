@@ -32,7 +32,7 @@
         <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85" alt="Modern residence at dusk" class="w-full rounded-2xl border border-[#e5e2da] shadow-lg object-cover aspect-[4/3]" />
         <div class="absolute -bottom-5 left-5 bg-white rounded-xl border border-[#e5e2da] shadow-xl px-4 py-3 flex items-center gap-3">
           <span class="w-9 h-9 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-            <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f]" />
           </span>
           <span>
             <span class="block text-[10px] font-mono uppercase tracking-widest text-[#1a1d24] font-bold">UK 25-Year Guarantee</span>
@@ -77,10 +77,10 @@
         <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Compliance at a Glance</span>
         <h2 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold tracking-tight mb-4">Built for British Standards</h2>
         <ul class="space-y-2.5 text-sm text-[#374151]">
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> BS 7671 electrics, 230V plug-and-play</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> UK Building Regulations / Part L (U &le; 0.18)</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> Permitted Development / Caravan Sites Act 1968</li>
-          <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i> 50-point PDI, 25-year structural guarantee</li>
+          <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" /> BS 7671 electrics, 230V plug-and-play</li>
+          <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" /> UK Building Regulations / Part L (U &le; 0.18)</li>
+          <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" /> Permitted Development / Caravan Sites Act 1968</li>
+          <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" /> 50-point PDI, 25-year structural guarantee</li>
         </ul>
       </div>
       <div class="lg:col-span-5">

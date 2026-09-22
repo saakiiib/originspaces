@@ -32,7 +32,7 @@
         <div class="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-[#FAF9F5] border-b border-[#eae7df] text-xs">
           <div class="flex items-center gap-2.5">
             <span class="flex items-center gap-1.5 font-mono text-[11px] uppercase text-[#9a7b4f] font-semibold tracking-wider">
-              <i data-lucide="video" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+              <x-icon name="video" class="w-3.5 h-3.5 text-[#9a7b4f]" />
               <span id="hero-stream-badge">PRIMARY CAMERA &bull; UNFOLDING SEQUENCE</span>
             </span>
             <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[#c8c3b7]"></span>
@@ -42,7 +42,7 @@
             <button id="hero-angle-btn-0" onclick="switchHeroAngle(0)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-[#9a7b4f] text-white border-[#9a7b4f] font-semibold shadow-xs">Angle 01: Unfolding Demo</button>
             <button id="hero-angle-btn-1" onclick="switchHeroAngle(1)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-white text-[#374151] border-[#e5e2da] hover:text-[#1a1d24] hover:bg-[#faf9f5]">Angle 02: Interior Tour</button>
             <button id="hero-theater-mode-btn" onclick="toggleHeroTheater()" title="Toggle Wide Theater View" class="p-1.5 bg-white hover:bg-[#faf9f5] text-[#374151] hover:text-[#9a7b4f] border border-[#e5e2da] rounded transition-colors ml-1 hidden sm:flex items-center gap-1 text-[11px] font-mono uppercase">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+              <x-icon name="maximize-2" class="w-3.5 h-3.5" />
               <span id="hero-theater-text">Wide Theater</span>
             </button>
           </div>
@@ -53,12 +53,12 @@
           <iframe id="hero-yt-frame" class="w-full h-full" src="https://www.youtube.com/embed/U7lB7lf-hAk?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1" title="OriginSpaces unfolding demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           <video id="hero-video-player" class="w-full h-full object-cover hidden" muted loop playsinline preload="metadata" poster="https://i.ytimg.com/vi/U7lB7lf-hAk/hqdefault.jpg" src="https://assets.mixkit.co/videos/preview/mixkit-modern-kitchen-island-and-living-room-41584-large.mp4"></video>
           <button id="hero-quick-unmute-btn" onclick="toggleHeroAudio()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all duration-300 shadow-md backdrop-blur-md rounded">
-            <i data-lucide="volume-2" class="w-4 h-4 animate-bounce"></i>
+            <x-icon name="volume-2" class="w-4 h-4 animate-bounce" />
             <span>Click to listen with audio</span>
           </button>
           <div class="absolute bottom-4 right-4 z-20 flex items-center gap-2">
             <button id="hero-audio-corner-btn" onclick="toggleHeroAudio()" class="flex items-center gap-2 bg-white/95 hover:bg-[#faf9f5] text-[#1a1d24] border border-[#e5e2da] px-3 py-1.5 text-xs font-mono backdrop-blur-md transition-colors rounded shadow-sm">
-              <i data-lucide="volume-x" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+              <x-icon name="volume-x" class="w-3.5 h-3.5 text-[#9a7b4f]" />
               <span id="hero-corner-audio-text" class="text-[10px] uppercase font-semibold text-[#9a7b4f]">Muted (Click for Sound)</span>
             </button>
           </div>
@@ -112,19 +112,19 @@
         <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
           <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-6 py-3.5 transition-all duration-300 rounded-md shadow-xs">
             <span>Explore Collections</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <x-icon name="arrow-right" class="w-4 h-4" />
           </a>
           <button onclick="openEnquiryModal('General Consultation')" id="hero-request-quote-btn" class="inline-flex items-center justify-center gap-2 border border-[#e5e2da] hover:border-[#9a7b4f] bg-white hover:bg-[#faf9f5] text-[#1a1d24] text-xs uppercase tracking-[0.16em] px-5 py-3.5 rounded-md transition-all font-semibold shadow-2xs">
-            <i data-lucide="layout" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="layout" class="w-4 h-4 text-[#9a7b4f]" />
             <span>Request Quote</span>
           </button>
         </div>
         <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" class="inline-flex items-center gap-2 text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-4 py-3 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
-          <i data-lucide="file-text" class="w-4 h-4 text-[#9a7b4f]"></i>
+          <x-icon name="file-text" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Download Spec Pack (PDF)</span>
         </button>
         <a href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-3">
-          <i data-lucide="youtube" class="w-4 h-4"></i>
+          <x-icon name="youtube" class="w-4 h-4" />
           <span>Watch on YouTube</span>
         </a>
       </div>
@@ -162,7 +162,7 @@
       <div class="mt-10 text-center">
         <button onclick="window.location.href='/collections'" class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.3em] text-[#6b7280] hover:text-[#9a7b4f] transition-colors font-semibold">
           <span>Continue to collections &amp; interior fittings</span>
-          <i data-lucide="arrow-down" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+          <x-icon name="arrow-down" class="w-3.5 h-3.5 text-[#9a7b4f]" />
         </button>
       </div>
     </div>
@@ -173,7 +173,7 @@
     <div class="max-w-6xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4 shadow-xs">
-          <i data-lucide="target" class="w-3.5 h-3.5"></i>
+          <x-icon name="target" class="w-3.5 h-3.5" />
           <span>Targeted UK Market Applications</span>
         </div>
         <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
@@ -187,23 +187,23 @@
       <!-- App Category Tabs -->
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
         <button onclick="selectApplication('annex')" id="app-tab-annex" class="app-tab-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold bg-[#181b20] text-white border border-[#181b20] transition-all whitespace-nowrap">
-          <i data-lucide="home" class="w-3.5 h-3.5"></i>
+          <x-icon name="home" class="w-3.5 h-3.5" />
           <span>House Extension</span>
         </button>
         <button onclick="selectApplication('cafe')" id="app-tab-cafe" class="app-tab-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold bg-white text-[#374151] border border-[#e5e2da] hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all whitespace-nowrap">
-          <i data-lucide="coffee" class="w-3.5 h-3.5"></i>
+          <x-icon name="coffee" class="w-3.5 h-3.5" />
           <span>Coffee Shop / Bakery</span>
         </button>
         <button onclick="selectApplication('office')" id="app-tab-office" class="app-tab-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold bg-white text-[#374151] border border-[#e5e2da] hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all whitespace-nowrap">
-          <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+          <x-icon name="briefcase" class="w-3.5 h-3.5" />
           <span>Garden Office</span>
         </button>
         <button onclick="selectApplication('glamping')" id="app-tab-glamping" class="app-tab-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold bg-white text-[#374151] border border-[#e5e2da] hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all whitespace-nowrap">
-          <i data-lucide="tent" class="w-3.5 h-3.5"></i>
+          <x-icon name="tent" class="w-3.5 h-3.5" />
           <span>Holiday Home</span>
         </button>
         <button onclick="selectApplication('retail')" id="app-tab-retail" class="app-tab-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold bg-white text-[#374151] border border-[#e5e2da] hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all whitespace-nowrap">
-          <i data-lucide="store" class="w-3.5 h-3.5"></i>
+          <x-icon name="store" class="w-3.5 h-3.5" />
           <span>Pop-Up Retail / Salon</span>
         </button>
       </div>
@@ -220,7 +220,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-14">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#9a7b4f]/30 text-[#9a7b4f] text-xs font-mono font-semibold uppercase tracking-[0.2em] mb-4">
-          <i data-lucide="wrench" class="w-4 h-4"></i>
+          <x-icon name="wrench" class="w-4 h-4" />
           <span>Direct Chinese Factory Production</span>
         </div>
 
@@ -266,7 +266,7 @@
             <div class="pt-4 flex justify-end">
               <button onclick="goToConfigStep(2)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Footprint &amp; Chassis</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -284,7 +284,7 @@
               <button onclick="goToConfigStep(1)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="goToConfigStep(3)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Insulation &amp; Facade</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -309,7 +309,7 @@
               <button onclick="goToConfigStep(2)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="goToConfigStep(4)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
                 <span>Next: Equipment &amp; UK Delivery</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -335,7 +335,7 @@
               <div class="flex items-center justify-between mb-2.5">
                 <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold">UK Warehouse Dispatch &amp; On-Site Delivery Method</label>
                 <span class="text-[11px] font-mono text-[#9a7b4f] font-semibold flex items-center gap-1">
-                  <i data-lucide="truck" class="w-3.5 h-3.5"></i>
+                  <x-icon name="truck" class="w-3.5 h-3.5" />
                   Central UK Warehouse Dispatch
                 </span>
               </div>
@@ -344,7 +344,7 @@
               <!-- Postcode Input -->
               <div class="mt-4 p-4 bg-[#FAF9F5] border border-[#E5E2DA] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div class="flex items-center gap-2.5">
-                  <i data-lucide="truck" class="w-5 h-5 text-[#9a7b4f] shrink-0"></i>
+                  <x-icon name="truck" class="w-5 h-5 text-[#9a7b4f] shrink-0" />
                   <div>
                     <span class="text-xs font-semibold text-[#1a1d24] block">UK Delivery Postcode or County (Optional)</span>
                     <span class="text-[11px] text-[#6b7280] block">Allows our logistics dispatch team to pre-calculate haulage route and crane access</span>
@@ -361,7 +361,7 @@
 
               <!-- Warehouse PDI Guarantee Banner -->
               <div class="mt-3 p-3 bg-white border border-[#e5e2da] rounded-xl flex items-start gap-2.5">
-                <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i>
+                <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" />
                 <p class="text-[11px] text-[#6b7280] leading-relaxed">
                   <strong class="text-[#1a1d24]">Direct UK Warehouse Logistics:</strong> All custom orders are imported under bonded transit to our UK central warehouse, where they undergo rigorous 50-point PDI (Pre-Delivery Inspection) before flatbed dispatch to your plot.
                 </p>
@@ -372,7 +372,7 @@
               <button onclick="goToConfigStep(3)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
               <button onclick="submitConfiguratorEnquiry()" class="inline-flex items-center gap-2 bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-7 py-3.5 rounded-lg transition-all shadow-md">
                 <span>Submit Factory Custom Spec</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
           </div>
@@ -437,7 +437,7 @@
           <!-- Production & Warehouse Schedule -->
           <div class="my-5 p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-2">
             <div class="flex items-center gap-2 text-xs text-[#9a7b4f] font-mono font-semibold">
-              <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
+              <x-icon name="calendar" class="w-3.5 h-3.5" />
               <span>Production &amp; Warehouse Schedule:</span>
             </div>
             <div class="text-[11px] text-[#9ca3af] space-y-1 font-mono">
@@ -459,7 +459,7 @@
 
           <button onclick="submitConfiguratorEnquiry()" class="w-full bg-[#9a7b4f] hover:bg-[#866940] text-white font-semibold text-xs sm:text-sm uppercase tracking-wider py-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
             <span>Request Factory CAD &amp; Quote</span>
-            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <x-icon name="arrow-right" class="w-4 h-4" />
           </button>
 
           <span class="text-[10px] text-[#6b7280] text-center block mt-3">
@@ -489,14 +489,14 @@
         <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
             <div class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-1.5">
-              <i data-lucide="fingerprint" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+              <x-icon name="fingerprint" class="w-3.5 h-3.5 text-[#9a7b4f]" />
               <span>Sensory Tactility</span>
             </div>
             <p class="text-xs text-[#374151] leading-relaxed">Unlacquered living patinas, 400-grit matte honed stones, and calibrated mechanical return strokes.</p>
           </div>
           <div>
             <div class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-1.5">
-              <i data-lucide="ruler" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+              <x-icon name="ruler" class="w-3.5 h-3.5 text-[#9a7b4f]" />
               <span>Millimetre Datum Alignment</span>
             </div>
             <p class="text-xs text-[#374151] leading-relaxed">Joinery and fixtures fabricated strictly to architectural datum lines without unsightly fillers.</p>
@@ -515,7 +515,7 @@
         <div class="absolute bottom-16 left-4 right-4 text-right text-[11px] text-white/85 font-light">…its final hand-applied organic wax</div>
         <div class="absolute -bottom-5 left-5 bg-white rounded-xl border border-[#e5e2da] shadow-xl px-4 py-3 flex items-center gap-3">
           <span class="w-9 h-9 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-            <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f]" />
           </span>
           <span>
             <span class="block text-[10px] font-mono uppercase tracking-widest text-[#1a1d24] font-bold">UK 25-Year Guarantee</span>
@@ -543,7 +543,7 @@
         <div class="mt-4 md:mt-0 flex md:justify-end">
           <button onclick="openCollectionsModal('All')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
             <span>Browse Full Catalog</span>
-            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            <x-icon name="arrow-up-right" class="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -578,7 +578,7 @@
                 Bespoke Culinary Engineering
               </span>
               <span class="w-8 h-8 rounded-full bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
-                <i data-lucide="arrow-up-right" class="w-4 h-4 text-white"></i>
+                <x-icon name="arrow-up-right" class="w-4 h-4 text-white" />
               </span>
             </div>
             <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
@@ -616,7 +616,7 @@
                   Sensory Monoliths
                 </span>
                 <span class="w-8 h-8 rounded-full border border-[#e5e2da] group-hover:border-[#9a7b4f] group-hover:bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
-                  <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors"></i>
+                  <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors" />
                 </span>
               </div>
               <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
@@ -653,7 +653,7 @@
               <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
                 Atmospheric Serenity
               </span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]"></i>
+              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
             </div>
             <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
               Sculptural Illumination
@@ -688,7 +688,7 @@
               <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
                 Datum Alignment
               </span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]"></i>
+              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
             </div>
             <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
               Architectural Joinery
@@ -723,7 +723,7 @@
               <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
                 Single-Billet Brass
               </span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]"></i>
+              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
             </div>
             <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
               Hardware &amp; Details
@@ -742,7 +742,7 @@
   <div id="product-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181b20]/80 backdrop-blur-sm hidden" onclick="closeProductDetailModal()">
     <div class="bg-white rounded-2xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-[#e5e2da] relative max-h-[92vh] overflow-y-auto" onclick="event.stopPropagation()">
       <button onclick="closeProductDetailModal()" class="absolute top-5 right-5 text-[#6b7280] hover:text-[#1a1d24] p-1.5 rounded-lg hover:bg-[#f4f2ef] transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
+        <x-icon name="x" class="w-5 h-5" />
       </button>
 
       <div id="product-detail-content">
@@ -765,7 +765,7 @@
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
             <button onclick="openEnquiryModal('The Aster Expandable Modular Villa')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
-              <i data-lucide="bookmark" class="w-4 h-4"></i>
+              <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Dual-Wing Architecture</span>
             <h3 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold leading-tight">The Aster Expandable Modular Villa</h3>
@@ -784,7 +784,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Aster Expandable Modular Villa')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+              <button onclick="openEnquiryModal('The Aster Expandable Modular Villa')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-01" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 8 to 10 weeks<br />from sign-off of survey</span>
             </div>
@@ -798,7 +798,7 @@
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
             <button onclick="openEnquiryModal('The Nova Grand Expandable Estate')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
-              <i data-lucide="bookmark" class="w-4 h-4"></i>
+              <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Flagship Residence</span>
             <h3 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold leading-tight">The Nova Grand Expandable Estate</h3>
@@ -818,7 +818,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Nova Grand Expandable Estate')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+              <button onclick="openEnquiryModal('The Nova Grand Expandable Estate')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-03" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 8 to 12 weeks<br />from sign-off of survey</span>
             </div>
@@ -832,7 +832,7 @@
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-2">
             <button onclick="openEnquiryModal('The Koto Studio Expandable Pod')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
-              <i data-lucide="bookmark" class="w-4 h-4"></i>
+              <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Compact Studio</span>
             <h3 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold leading-tight">The Koto Studio Expandable Pod</h3>
@@ -852,7 +852,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Koto Studio Expandable Pod')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+              <button onclick="openEnquiryModal('The Koto Studio Expandable Pod')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-02" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 6 to 8 weeks<br />from sign-off of survey</span>
             </div>
@@ -866,7 +866,7 @@
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="interiors">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
             <button onclick="openEnquiryModal('The Sloane Kitchen Suite')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
-              <i data-lucide="bookmark" class="w-4 h-4"></i>
+              <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Kitchen &middot; Minimalist Architectural</span>
             <h3 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold leading-tight">The Sloane Kitchen Suite</h3>
@@ -886,7 +886,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Sloane Kitchen Suite')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <i data-lucide="arrow-right" class="w-4 h-4"></i></button>
+              <button onclick="openEnquiryModal('The Sloane Kitchen Suite')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-ktc-01" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 10 to 14 weeks<br />from sign-off of architectural survey</span>
             </div>
@@ -928,7 +928,7 @@
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F5] border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <x-icon name="shield-check" class="w-3.5 h-3.5" />
           <span>UK Standards &amp; Certification Guarantee</span>
         </div>
         <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
@@ -955,12 +955,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-STR-01</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="box" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="box" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Structural Steel Chassis &amp; Frame</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Hot-dip galvanised Q355B primary structure with a 50-year design life. Full structural calculation pack available.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Structural Chassis Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -971,12 +971,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-THM-02</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="thermometer" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="thermometer" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Thermal Envelope &amp; Energy Efficiency</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">U-value &le; 0.18 W/m&sup2;K with a 100mm PIR core. Full Part L compliance documentation supplied with every unit.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Thermal Envelope Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -987,12 +987,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-FIR-03</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="flame" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="flame" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Fire Safety &amp; Reaction to Fire</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">A1 / A2-s1,d0 rated materials where required, with compartmentation and escape route guidance included.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Fire Safety Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1003,12 +1003,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-ELE-04</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="zap" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="zap" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">BS 7671 18th Edition Electrics</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Pre-wired consumer unit with RCBO protection and standard UK 3-pin sockets. Full certificate of compliance.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Electrical Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1019,12 +1019,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-PLN-05</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="file-check" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="file-check" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Permitted Development Friendly</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Dimensions conform to Caravan Sites Act 1968 Section 13(2) for a streamlined planning pathway on many sites.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Planning Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1035,12 +1035,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-WAR-06</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="shield-check" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Structural Integrity Warranty</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">25-year structural frame warranty with 10-year joinery and envelope cover. Full manufacturer backing.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Warranty Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1051,12 +1051,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-QA-07</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="video" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="video" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Live Factory Video Inspection</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Optional live video walkthrough of your unit on the production line before container loading.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Factory Inspection Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1067,12 +1067,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-LOG-08</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="truck" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="truck" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Direct Warehouse to Site Delivery</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">UK Central Distribution Warehouse with Hiab crane unload and nationwide scheduled coverage.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Delivery & Logistics Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1083,12 +1083,12 @@
             <span class="text-[9px] font-mono text-[#9ca3af]">HS-ISO-09</span>
           </div>
           <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <i data-lucide="factory" class="w-4 h-4 text-[#9a7b4f]"></i>
+            <x-icon name="factory" class="w-4 h-4 text-[#9a7b4f]" />
           </div>
           <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Certified Manufacturing Facility</h4>
           <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">ISO-aligned production with CE / UKCA marking where applicable. Full material certificates on request.</p>
           <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><i data-lucide="badge-check" class="w-3.5 h-3.5"></i> Verified UK Import</span>
+            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
             <button onclick="openEnquiryModal('Factory Certification Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
           </div>
         </div>
@@ -1100,7 +1100,7 @@
           <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a880] font-semibold block mb-2.5">Guaranteed Buyer Peace of Mind</span>
           <h3 class="font-serif text-2xl sm:text-[28px] font-semibold leading-snug">How We Protect Your UK Import Order</h3>
           <p class="text-[13px] text-[#c9c4b7] mt-2.5 leading-relaxed">From Chinese factory floor to your UK site, your order is secured by milestone-based payments, independent video inspection, and complete customs management.</p>
-          <button onclick="openEnquiryModal('Full UK Compliance Pack')" class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[11px] font-semibold uppercase tracking-[0.14em] transition-all">Request Full UK Compliance Pack (PDF) <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></button>
+          <button onclick="openEnquiryModal('Full UK Compliance Pack')" class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[11px] font-semibold uppercase tracking-[0.14em] transition-all">Request Full UK Compliance Pack (PDF) <x-icon name="arrow-right" class="w-3.5 h-3.5" /></button>
         </div>
         <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="bg-white/5 border border-white/10 rounded-xl p-5">
@@ -1184,7 +1184,7 @@
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-10">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4 shadow-xs">
-          <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+          <x-icon name="help-circle" class="w-3.5 h-3.5" />
           <span>UK Import &amp; Factory Build Knowledge Base</span>
         </div>
         <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
@@ -1214,7 +1214,7 @@
                 <span class="font-serif text-lg sm:text-xl text-[#1a1d24] font-semibold leading-snug block">{{ $faq['q'] }}</span>
               </div>
               <span class="faq-chevron w-8 h-8 shrink-0 rounded-full border {{ $fi === 0 ? 'border-[#9a7b4f] text-[#9a7b4f]' : 'border-[#e5e2da] text-[#6b7280]' }} flex items-center justify-center transition-all">
-                <i data-lucide="chevron-down" class="w-4 h-4 {{ $fi === 0 ? 'rotate-180' : '' }}"></i>
+                <x-icon name="chevron-down" class="w-4 h-4 {{ $fi === 0 ? 'rotate-180' : '' }}" />
               </span>
             </button>
             <div class="faq-answer {{ $fi === 0 ? '' : 'hidden' }} mx-5 sm:mx-6 mb-5 sm:mb-6 pt-4 border-t border-[#f0ede6] text-sm text-[#374151] leading-relaxed">{{ $faq['a'] }}</div>
@@ -1261,7 +1261,7 @@
             <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
             <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $hg['catLabel'] }}</span>
             <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#1a1d24] items-center justify-center hidden group-hover:flex">
-              <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+              <x-icon name="maximize-2" class="w-3.5 h-3.5" />
             </span>
           </button>
         @empty
@@ -1285,7 +1285,7 @@
       <div class="bg-white rounded-xl border border-[#e5e2da] p-4 sm:p-5 shadow-xs mb-6 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="relative w-full sm:max-w-xs">
-            <i data-lucide="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <x-icon name="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               id="file-search-input"
@@ -1312,7 +1312,7 @@
         @forelse($filesJson as $hf)
           <div class="file-row p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-format="{{ $hf['format'] }}" data-search="{{ strtolower($hf['title'] . ' ' . ($hf['ref'] ?? '') . ' ' . $hf['suite']) }}">
             <span class="w-11 h-11 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-              <i data-lucide="file-text" class="w-5 h-5 text-[#9a7b4f]"></i>
+              <x-icon name="file-text" class="w-5 h-5 text-[#9a7b4f]" />
             </span>
             <div class="flex-1 min-w-0">
               <div class="text-[10px] font-mono uppercase tracking-[0.14em] text-[#9a7b4f] font-semibold">{{ $hf['ref'] }} &middot; {{ $hf['suite'] }}</div>
@@ -1321,11 +1321,11 @@
             </div>
             @if($hf['url'])
               <a href="{{ $hf['url'] }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> Download File
+                <x-icon name="download" class="w-3.5 h-3.5" /> Download File
               </a>
             @else
               <a @spa href="{{ route('contact') }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> Request File
+                <x-icon name="download" class="w-3.5 h-3.5" /> Request File
               </a>
             @endif
           </div>
@@ -1354,10 +1354,10 @@
         <div class="bg-[#181b20] text-white rounded-2xl p-7 space-y-4">
           <span class="text-[11px] font-mono uppercase tracking-widest text-[#c5a880] font-semibold">Compliance at a glance</span>
           <ul class="space-y-2.5 text-sm text-white/85">
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f]"></i> BS 7671 electrics, 230V plug-and-play</li>
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f]"></i> UK Building Regulations / Part L</li>
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f]"></i> Permitted Development / Caravan Act</li>
-            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-[#9a7b4f]"></i> 50-point PDI, 25-year guarantee</li>
+            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> BS 7671 electrics, 230V plug-and-play</li>
+            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> UK Building Regulations / Part L</li>
+            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> Permitted Development / Caravan Act</li>
+            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> 50-point PDI, 25-year guarantee</li>
           </ul>
           <button onclick="openEnquiryModal('Compliance Pack')" class="w-full py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider">Request Compliance Pack</button>
         </div>
@@ -1612,7 +1612,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5 pt-1">
               ${data.features.map(f => `
                 <div class="flex items-start gap-2 text-[13px] text-[#374151]">
-                  <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"></i>
+                  <x-icon name="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>${f}</span>
                 </div>
               `).join('')}
@@ -1803,11 +1803,11 @@
           <p class="text-sm text-[#374151] mt-2 leading-relaxed">${d.desc}</p>
           <div class="mt-5 pt-5 border-t border-[#f0ede6] grid grid-cols-2 gap-4 text-xs">
             <div>
-              <div class="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#9a7b4f] font-semibold mb-1"><i data-lucide="fingerprint" class="w-3.5 h-3.5"></i> Tactile Characteristics</div>
+              <div class="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#9a7b4f] font-semibold mb-1"><x-icon name="fingerprint" class="w-3.5 h-3.5" /> Tactile Characteristics</div>
               <p class="text-[#374151] leading-relaxed">${d.tactile}</p>
             </div>
             <div>
-              <div class="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#9a7b4f] font-semibold mb-1"><i data-lucide="leaf" class="w-3.5 h-3.5"></i> Environmental Integrity</div>
+              <div class="flex items-center gap-1.5 font-mono text-[10px] uppercase text-[#9a7b4f] font-semibold mb-1"><x-icon name="leaf" class="w-3.5 h-3.5" /> Environmental Integrity</div>
               <p class="text-[#374151] leading-relaxed">${d.env}</p>
             </div>
           </div>
@@ -2456,11 +2456,11 @@
             <!-- CAD / Sample Triggers -->
             <div class="grid grid-cols-2 gap-3 pt-2">
               <button onclick="closeProductDetailModal(); openSampleModal()" class="py-2.5 px-3 rounded-lg border border-[#d8d4c7] hover:border-[#9a7b4f] text-xs font-semibold text-[#1a1d24] flex items-center justify-center gap-1.5 bg-white">
-                <i data-lucide="package" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+                <x-icon name="package" class="w-3.5 h-3.5 text-[#9a7b4f]" />
                 <span>Order Sample</span>
               </button>
               <button onclick="downloadCadSimulation('${product.modelCode}')" class="py-2.5 px-3 rounded-lg border border-[#d8d4c7] hover:border-[#9a7b4f] text-xs font-semibold text-[#1a1d24] flex items-center justify-center gap-1.5 bg-white">
-                <i data-lucide="file-code" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+                <x-icon name="file-code" class="w-3.5 h-3.5 text-[#9a7b4f]" />
                 <span>Request DWG/BIM</span>
               </button>
             </div>
@@ -2504,7 +2504,7 @@
               <ul class="space-y-2 text-xs text-[#374151]">
                 ${product.specs.map(s => `
                   <li class="flex items-start gap-2">
-                    <i data-lucide="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5"></i>
+                    <x-icon name="check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" />
                     <span>${s}</span>
                   </li>
                 `).join('')}
@@ -2515,7 +2515,7 @@
             <div class="pt-4 border-t border-[#e5e2da]">
               <button onclick="closeProductDetailModal(); openEnquiryModal('${product.name}')" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
                 <span>Request Quotation &amp; Specification Pack</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <x-icon name="arrow-right" class="w-4 h-4" />
               </button>
             </div>
 

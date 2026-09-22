@@ -14,7 +14,7 @@
           <p class="mt-3 text-[#374151] max-w-2xl text-sm md:text-[15px] font-semibold leading-relaxed">Explore our comprehensive edit of monolithic stone suites, crafted sanitaryware, tactile hardware, and atmospheric lighting.</p>
         </div>
         <div class="relative w-full lg:w-72 shrink-0">
-          <i data-lucide="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <x-icon name="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             id="collection-search-input"
@@ -55,7 +55,7 @@
               </div>
               <div class="pt-1 flex flex-wrap items-center gap-4">
                 <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $p['price'] }}</span>
-                <a @spa href="/product/{{ $p['id'] }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Full Details <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i></a>
+                <a @spa href="/product/{{ $p['id'] }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Full Details <x-icon name="arrow-right" class="w-3.5 h-3.5" /></a>
                 <a @spa href="{{ route('contact') }}" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Request This Spec &rarr;</a>
               </div>
               <div class="collection-specs hidden pt-4 border-t border-[#f0ede6] space-y-3">
@@ -63,7 +63,7 @@
                   <span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280] font-semibold mb-1.5">Primary Materials</span>
                   <div class="flex flex-wrap gap-1.5">@foreach($p['materials'] ?? [] as $m)<span class="text-[11px] px-2.5 py-1 rounded-full bg-[#FAF9F5] border border-[#e5e2da] text-[#374151] font-medium">{{ $m }}</span>@endforeach</div>
                 </div>
-                <ul class="space-y-1.5">@foreach($p['specs'] ?? [] as $s)<li class="flex gap-2 text-xs text-[#374151]"><i data-lucide="check" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0 mt-0.5"></i><span>{{ $s }}</span></li>@endforeach</ul>
+                <ul class="space-y-1.5">@foreach($p['specs'] ?? [] as $s)<li class="flex gap-2 text-xs text-[#374151]"><x-icon name="check" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0 mt-0.5" /><span>{{ $s }}</span></li>@endforeach</ul>
                 <p class="text-[11px] text-[#6b7280]">{{ $p['warranty'] ?? '' }}</p>
               </div>
             </div>
@@ -71,7 +71,7 @@
               <img src="{{ $p['heroImage'] }}" alt="{{ $p['name'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
               <span class="absolute top-4 left-4 px-2.5 py-1 bg-white/90 backdrop-blur text-[10px] font-mono rounded shadow">{{ $p['modelCode'] }}</span>
               <button onclick="toggleSaved(this)" title="Save piece" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white border border-[#e5e2da] flex items-center justify-center transition-all shadow">
-                <i data-lucide="bookmark" class="w-4 h-4 text-[#1a1d24]"></i>
+                <x-icon name="bookmark" class="w-4 h-4 text-[#1a1d24]" />
               </button>
             </div>
           </div>

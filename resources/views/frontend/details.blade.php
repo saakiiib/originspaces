@@ -8,7 +8,7 @@
     <div class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 py-3.5 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-2 text-xs text-[#6b7280]">
         <a @spa href="{{ route('collections') }}" class="font-mono uppercase text-[#9a7b4f] font-semibold tracking-wider hover:underline flex items-center gap-1">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <x-icon name="arrow-left" class="w-3.5 h-3.5" />
           <span>Catalogue View</span>
         </a>
         <span>&bull;</span>
@@ -19,7 +19,7 @@
       <div class="flex items-center gap-4">
         <span class="text-xs text-[#6b7280] font-mono">Model Ref: <strong id="crumb-model" class="text-[#1a1d24]">—</strong></span>
         <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#F0EBE1] text-[#786348] text-xs font-mono font-medium border border-[#DDD5C5]">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+          <x-icon name="shield-check" class="w-3.5 h-3.5 text-[#9a7b4f]" />
           CE &amp; UK Part L Certified
         </span>
       </div>
@@ -81,10 +81,10 @@
           <div class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-tech')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
-                <i data-lucide="paperclip" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+                <x-icon name="paperclip" class="w-3.5 h-3.5 text-[#9a7b4f]" />
                 <span>6. Technical Specifications</span>
               </span>
-              <i data-lucide="chevron-down" id="spec-tech-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform"></i>
+              <x-icon name="chevron-down" id="spec-tech-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform" />
             </button>
             <div id="spec-tech" class="hidden mt-2.5 bg-[#FAF8F5] rounded-xl border border-[#e5e2da] px-4 py-2 text-xs text-[#374151]"></div>
           </div>
@@ -93,10 +93,10 @@
           <div class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-docs')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
-                <i data-lucide="book-open" class="w-3.5 h-3.5 text-[#9a7b4f]"></i>
+                <x-icon name="book-open" class="w-3.5 h-3.5 text-[#9a7b4f]" />
                 <span>7. Downloads &amp; Manuals</span>
               </span>
-              <i data-lucide="chevron-down" id="spec-docs-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform"></i>
+              <x-icon name="chevron-down" id="spec-docs-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform" />
             </button>
             <div id="spec-docs" class="hidden mt-2.5 space-y-2"></div>
           </div>
@@ -115,7 +115,7 @@
             </div>
             <a id="spec-cta" href="#" onclick="openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, '');return false;" class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
               <span>Request Information &amp; Spec Pack</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              <x-icon name="arrow-right" class="w-4 h-4" />
             </a>
             <p class="text-[11px] text-center text-[#6b7280]">Includes personalised drawing set &amp; site feasibility review.</p>
           </div>
@@ -128,19 +128,19 @@
         <div class="bg-white border border-[#e5e2da] rounded-xl p-2 shadow-xs flex items-center justify-between gap-2 overflow-x-auto">
           <div class="flex items-center gap-1 sm:gap-2">
             <button id="tab-btn-3d" onclick="switchMediaTab('3d')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
-              <i data-lucide="box" class="w-4 h-4 text-gray-400"></i>
+              <x-icon name="box" class="w-4 h-4 text-gray-400" />
               <span>3D Interactive</span>
             </button>
             <button id="tab-btn-video" onclick="switchMediaTab('video')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-[#181B20] text-white shadow">
-              <i data-lucide="video" class="w-4 h-4 text-[#c5a880]"></i>
+              <x-icon name="video" class="w-4 h-4 text-[#c5a880]" />
               <span>Video</span>
             </button>
             <button id="tab-btn-gallery" onclick="switchMediaTab('gallery')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
-              <i data-lucide="image" class="w-4 h-4 text-gray-400"></i>
+              <x-icon name="image" class="w-4 h-4 text-gray-400" />
               <span id="gallery-tab-label">Gallery</span>
             </button>
             <button id="tab-btn-floor" onclick="switchMediaTab('floor')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
-              <i data-lucide="layout" class="w-4 h-4 text-gray-400"></i>
+              <x-icon name="layout" class="w-4 h-4 text-gray-400" />
               <span>Floor Plan</span>
             </button>
           </div>
@@ -155,7 +155,7 @@
             @else
             <video id="spec-video" class="w-full h-full object-cover" playsinline preload="metadata" controls muted loop autoplay></video>
             <button id="spec-unmute-overlay" onclick="unmuteSpecVideo()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all shadow-md rounded">
-              <i data-lucide="volume-2" class="w-4 h-4"></i>
+              <x-icon name="volume-2" class="w-4 h-4" />
               <span>Click for sound</span>
             </button>
             @endif
@@ -180,7 +180,7 @@
             <div class="absolute top-3 right-3 flex items-center gap-2">
               <span id="gallery-counter" class="px-2.5 py-1 rounded bg-[#181b20]/80 backdrop-blur text-white text-[10px] font-mono">1 / 1</span>
               <button onclick="expandGallery()" title="Fullscreen" class="w-8 h-8 rounded-lg bg-white/95 hover:bg-[#9a7b4f] hover:text-white text-[#1a1d24] flex items-center justify-center transition-all shadow">
-                <i data-lucide="maximize-2" class="w-4 h-4"></i>
+                <x-icon name="maximize-2" class="w-4 h-4" />
               </button>
             </div>
             <button onclick="toggleHotspots()" id="hotspot-toggle" class="absolute bottom-3 right-3 px-3 py-1.5 rounded-lg bg-[#181b20]/80 backdrop-blur text-white text-[11px] font-mono uppercase tracking-wider">Hotspots: On</button>
@@ -518,7 +518,7 @@
       document.getElementById('spec-docs').innerHTML = docs.map(d => `
         <div class="p-3 bg-[#FAF8F5] border border-[#e5e2da] rounded-lg flex items-center justify-between gap-3">
           <div class="flex items-center gap-2.5 min-w-0">
-            <i data-lucide="book-open" class="w-4 h-4 text-[#9a7b4f] shrink-0"></i>
+            <x-icon name="book-open" class="w-4 h-4 text-[#9a7b4f] shrink-0" />
             <div class="min-w-0">
               <div class="font-serif text-[15px] font-semibold text-[#1a1d24] truncate">${d.t}</div>
               <div class="text-[11px] text-[#6b7280]">${d.s}</div>
@@ -527,7 +527,7 @@
           <div class="flex items-center gap-3 shrink-0">
             <a @spa href="{{ route('downloads') }}" class="text-xs text-[#374151] hover:text-[#9a7b4f] font-medium transition-colors">Read</a>
             <a href="${d.url}" target="_blank" class="text-[#9a7b4f] hover:text-[#866940] transition-colors">
-              <i data-lucide="download" class="w-4 h-4"></i>
+              <x-icon name="download" class="w-4 h-4" />
             </a>
           </div>
         </div>`).join('');

@@ -18,7 +18,7 @@
       <div class="bg-white rounded-xl border border-[#e5e2da] p-4 sm:p-5 shadow-xs mb-6 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div class="relative w-full sm:max-w-xs">
-            <i data-lucide="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <x-icon name="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               id="file-search-input"
@@ -43,7 +43,7 @@
         @forelse($filesJson as $f)
           <div class="file-row p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-format="{{ $f['format'] }}" data-search="{{ strtolower($f['title'] . ' ' . ($f['ref'] ?? '') . ' ' . $f['suite']) }}">
             <span class="w-11 h-11 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-              <i data-lucide="file-text" class="w-5 h-5 text-[#9a7b4f]"></i>
+              <x-icon name="file-text" class="w-5 h-5 text-[#9a7b4f]" />
             </span>
             <div class="flex-1 min-w-0">
               <div class="text-[10px] font-mono uppercase tracking-[0.14em] text-[#9a7b4f] font-semibold">{{ $f['ref'] }} &middot; {{ $f['suite'] }}</div>
@@ -52,11 +52,11 @@
             </div>
             @if($f['url'])
               <a href="{{ $f['url'] }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> Download File
+                <x-icon name="download" class="w-3.5 h-3.5" /> Download File
               </a>
             @else
               <a @spa href="{{ route('contact') }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <i data-lucide="download" class="w-3.5 h-3.5"></i> Request File
+                <x-icon name="download" class="w-3.5 h-3.5" /> Request File
               </a>
             @endif
           </div>

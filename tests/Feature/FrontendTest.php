@@ -46,6 +46,16 @@ test('all public pages render with layout shell', function () {
     }
 });
 
+test('icons render server-side as svg on every page', function () {
+    seedShowcase();
+
+    foreach (['/', '/collections', '/product/hs-exp-01', '/contact', '/login'] as $uri) {
+        $this->get($uri)->assertOk()
+            ->assertSee('lucide lucide-phone', false)
+            ->assertDontSee('<i data-lucide="phone">', false);
+    }
+});
+
 test('home injects dynamic JSON hooks', function () {
     seedShowcase();
     $fc = FaqCategory::create(['name' => 'Lead Times', 'slug' => 'times']);
