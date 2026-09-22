@@ -103,10 +103,15 @@ class FrontendController extends Controller
             ->orderBy('sort_order')
             ->take(4)
             ->get();
-        if ($related->isEmpty()) {
-            $related = Product::with('category')
-                ->where('status', true)->where('id', '!=', $product->id)
-                ->inRandomOrder()->take(4)->get();
+        if ($related->count() < 4) {
+            $excludeIds = $related->pluck('id')->push($product->id)->values();
+            $filler = Product::with('category')
+                ->where('status', true)
+                ->whereNotIn('id', $excludeIds)
+                ->inRandomOrder()
+                ->take(4 - $related->count())
+                ->get();
+            $related = $related->concat($filler)->values();
         }
 
         $options = $product->options->where('status', true)->groupBy('group');

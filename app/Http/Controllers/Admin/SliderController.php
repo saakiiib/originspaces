@@ -142,6 +142,12 @@ class SliderController extends Controller
                 ->save($destPath.$filename);
 
             $slider->image = '/uploads/sliders/'.$filename;
+        } elseif ($request->boolean('remove_image')) {
+            // Only delete old image if it's not the placeholder
+            if ($slider->image && $slider->image !== 'placeholder.webp' && file_exists(public_path($slider->image))) {
+                @unlink(public_path($slider->image));
+            }
+            $slider->image = null;
         }
 
         $slider->title = $request->title;

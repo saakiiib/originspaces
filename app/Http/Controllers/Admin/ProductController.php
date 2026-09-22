@@ -136,14 +136,23 @@ class ProductController extends Controller
         if ($request->hasFile('hero_image')) {
             $this->deleteFile($product->hero_image);
             $product->hero_image = $this->storeWebp($request->file('hero_image'), 'uploads/products/', 1600, 75);
+        } elseif ($request->boolean('remove_hero_image')) {
+            $this->deleteFile($product->hero_image);
+            $product->hero_image = null;
         }
         if ($request->hasFile('meta_image')) {
             $this->deleteFile($product->meta_image);
             $product->meta_image = $this->storeWebp($request->file('meta_image'), 'uploads/products/', 1200, 80);
+        } elseif ($request->boolean('remove_meta_image')) {
+            $this->deleteFile($product->meta_image);
+            $product->meta_image = null;
         }
         if ($request->hasFile('model_3d')) {
             $this->deleteFile($product->model_3d);
             $product->model_3d = $this->storeModel3d($request->file('model_3d'));
+        } elseif ($request->boolean('remove_model_3d')) {
+            $this->deleteFile($product->model_3d);
+            $product->model_3d = null;
         }
 
         $product->save();

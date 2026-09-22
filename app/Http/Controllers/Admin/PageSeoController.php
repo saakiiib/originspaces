@@ -100,6 +100,11 @@ class PageSeoController extends Controller
                 ->save($path.$name);
 
             $data['meta_image'] = 'uploads/page-seo/'.$name;
+        } elseif ($request->boolean('remove_meta_image')) {
+            if ($pageSeo->meta_image && file_exists(public_path($pageSeo->meta_image))) {
+                unlink(public_path($pageSeo->meta_image));
+            }
+            $data['meta_image'] = null;
         }
 
         $pageSeo->update($data);

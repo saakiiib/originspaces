@@ -201,6 +201,12 @@ class CategoryController extends Controller
                 ->destroy();
 
             $data->image = '/uploads/category/'.$randomName;
+        } elseif ($request->boolean('remove_image')) {
+            // Only delete old image if it's not the placeholder
+            if ($data->image && $data->image !== 'placeholder.webp' && file_exists(public_path($data->image))) {
+                @unlink(public_path($data->image));
+            }
+            $data->image = null;
         }
 
         if ($request->hasFile('meta_image')) {
@@ -218,6 +224,11 @@ class CategoryController extends Controller
                 ->save($destinationPath.$randomName)
                 ->destroy();
             $data->meta_image = '/uploads/category/'.$randomName;
+        } elseif ($request->boolean('remove_meta_image')) {
+            if ($data->meta_image && file_exists(public_path($data->meta_image))) {
+                @unlink(public_path($data->meta_image));
+            }
+            $data->meta_image = null;
         }
 
         if ($data->save()) {

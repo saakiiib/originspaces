@@ -30,6 +30,7 @@
                                 <small class="text-muted">(Recommended: 1200 × 500 px)</small>
                                 </label>
                                 <input type="file" class="form-control" id="image" accept="image/*" onchange="previewImage(event, '#imagePreview')">
+                                <div id="current_image_box" style="display:none" class="mt-1 small"><span id="current_image_name"></span> <label class="ms-2"><input type="checkbox" name="remove_image" id="remove_image" value="1"> Remove current file</label></div>
                                 <img id="imagePreview" src="{{ asset('placeholder.webp') }}" class="img-thumbnail mt-2" style="max-width:300px; display:block;">
                             </div>
 
@@ -110,6 +111,7 @@
 
                 var imageFile = document.getElementById('image').files[0];
                 if (imageFile) formData.append('image', imageFile);
+                formData.append('remove_image', $('#remove_image').is(':checked') ? 1 : 0);
 
                 showLoader();
 
@@ -151,6 +153,13 @@
                         $('#btn_url').val(d.btn_url);
 
                         $('#imagePreview').attr('src', d.image ? d.image : '/placeholder.webp');
+                        if (d.image && d.image !== 'placeholder.webp') {
+                            $('#current_image_name').html('Current: <a href="' + d.image + '" target="_blank">' + String(d.image).split('/').pop() + '</a>');
+                            $('#current_image_box').show();
+                            $('#remove_image').prop('checked', false);
+                        } else {
+                            $('#current_image_box').hide();
+                        }
                         $('#cardTitle').text('Edit Slider');
                         $('#addThisFormContainer').slideDown(300);
                         $('#newBtn').hide();
@@ -172,6 +181,8 @@
                 $('#btn_url').val('');
                 $('#image').val('');
                 $('#imagePreview').attr('src', '/placeholder.webp');
+                $('#current_image_box').hide();
+                $('#remove_image').prop('checked', false);
             }
         });
 

@@ -83,6 +83,11 @@ class CompanyDetailsController extends Controller
             $favIconName = rand(100000, 999999).'_fav_icon.'.$request->fav_icon->extension();
             $request->fav_icon->move(public_path('uploads/company'), $favIconName);
             $data->fav_icon = $favIconName;
+        } elseif ($request->boolean('remove_fav_icon')) {
+            if ($data->fav_icon && file_exists(public_path('uploads/company/'.$data->fav_icon))) {
+                unlink(public_path('uploads/company/'.$data->fav_icon));
+            }
+            $data->fav_icon = null;
         }
 
         if ($request->hasFile('company_logo')) {
@@ -92,6 +97,11 @@ class CompanyDetailsController extends Controller
             $companyLogoName = rand(100000, 999999).'_company_logo.'.$request->company_logo->extension();
             $request->company_logo->move(public_path('uploads/company'), $companyLogoName);
             $data->company_logo = $companyLogoName;
+        } elseif ($request->boolean('remove_company_logo')) {
+            if ($data->company_logo && file_exists(public_path('uploads/company/'.$data->company_logo))) {
+                unlink(public_path('uploads/company/'.$data->company_logo));
+            }
+            $data->company_logo = null;
         }
 
         if ($request->hasFile('footer_logo')) {
@@ -101,6 +111,11 @@ class CompanyDetailsController extends Controller
             $footerLogoName = rand(100000, 999999).'_footer_logo.'.$request->footer_logo->extension();
             $request->footer_logo->move(public_path('uploads/company'), $footerLogoName);
             $data->footer_logo = $footerLogoName;
+        } elseif ($request->boolean('remove_footer_logo')) {
+            if ($data->footer_logo && file_exists(public_path('uploads/company/'.$data->footer_logo))) {
+                unlink(public_path('uploads/company/'.$data->footer_logo));
+            }
+            $data->footer_logo = null;
         }
 
         $data->company_name = $request->company_name;
@@ -168,6 +183,12 @@ class CompanyDetailsController extends Controller
                 ->save($path.$metaImageName);
 
             $data->meta_image = $metaImageName;
+        } elseif ($request->boolean('remove_meta_image')) {
+            $path = public_path('uploads/company/');
+            if ($data->meta_image && file_exists($path.$data->meta_image)) {
+                unlink($path.$data->meta_image);
+            }
+            $data->meta_image = null;
         }
 
         $data->save();

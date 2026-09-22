@@ -51,7 +51,6 @@
         <!-- Video Player -->
         <div id="hero-video-display-box" class="relative w-full bg-black overflow-hidden transition-all duration-500 aspect-video min-h-[340px] sm:min-h-[480px] md:min-h-[560px]">
           <iframe id="hero-yt-frame" class="w-full h-full" src="https://www.youtube.com/embed/U7lB7lf-hAk?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1" title="OriginSpaces unfolding demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <video id="hero-video-player" class="w-full h-full object-cover hidden" muted loop playsinline preload="metadata" poster="https://i.ytimg.com/vi/U7lB7lf-hAk/hqdefault.jpg" src="https://assets.mixkit.co/videos/preview/mixkit-modern-kitchen-island-and-living-room-41584-large.mp4"></video>
           <button id="hero-quick-unmute-btn" onclick="toggleHeroAudio()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all duration-300 shadow-md backdrop-blur-md rounded">
             <x-icon name="volume-2" class="w-4 h-4 animate-bounce" />
             <span>Click to listen with audio</span>
@@ -123,7 +122,7 @@
           <x-icon name="file-text" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Download Spec Pack (PDF)</span>
         </button>
-        <a href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-3">
+        <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-3">
           <x-icon name="youtube" class="w-4 h-4" />
           <span>Watch on YouTube</span>
         </a>
@@ -2289,8 +2288,11 @@
       if (e.key === 'ArrowLeft') lightboxNav(-1);
     });
 
-    // Hero video theater - Angle 01 is the studio YouTube film, Angle 02 is the mp4 interior tour
-    var HERO_MP4_INTERIOR = 'https://assets.mixkit.co/videos/preview/mixkit-modern-kitchen-island-and-living-room-41584-large.mp4';
+    // Hero video theater - Angle 01 and Angle 02 are both YouTube films, same player behaviour
+    var HERO_YT_ANGLE_0 = 'https://www.youtube.com/embed/U7lB7lf-hAk?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1';
+    var HERO_YT_ANGLE_1 = 'https://www.youtube.com/embed/Py_sfn9BTJ8?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1';
+    var HERO_YT_WATCH_0 = 'https://www.youtube.com/watch?v=U7lB7lf-hAk';
+    var HERO_YT_WATCH_1 = 'https://www.youtube.com/watch?v=Py_sfn9BTJ8';
     var heroMode = 'yt';
     var heroYtMuted = true;
     function heroYt(cmd) {
@@ -2301,28 +2303,26 @@
       const badge = document.getElementById('hero-stream-badge');
       const b0 = document.getElementById('hero-angle-btn-0');
       const b1 = document.getElementById('hero-angle-btn-1');
-      const video = document.getElementById('hero-video-player');
       const frame = document.getElementById('hero-yt-frame');
       const label = document.getElementById('hero-corner-audio-text');
+      const watchLink = document.getElementById('hero-yt-watch-link');
       const active = ['bg-[#9a7b4f]', 'text-white', 'border-[#9a7b4f]'];
       const idle = ['bg-white', 'text-[#374151]', 'border-[#e5e2da]'];
-      heroMode = idx === 0 ? 'yt' : 'mp4';
+      heroMode = 'yt';
+      heroYtMuted = true;
       if (idx === 0) {
         if (badge) badge.textContent = 'PRIMARY CAMERA • UNFOLDING SEQUENCE';
-        if (video) video.pause();
-        if (video) video.classList.add('hidden');
-        if (frame) { frame.classList.remove('hidden'); heroYt('playVideo'); }
-        if (label) label.textContent = heroYtMuted ? 'Muted (Click for Sound)' : 'Sound on';
+        if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_0) frame.src = HERO_YT_ANGLE_0;
+        else heroYt('playVideo');
+        heroYt('mute');
+        if (watchLink) watchLink.href = HERO_YT_WATCH_0;
+        if (label) label.textContent = 'Muted (Click for Sound)';
       } else {
         if (badge) badge.textContent = 'CAMERA 02 • INTERIOR FIT-OUT';
-        heroYt('pauseVideo');
-        if (frame) frame.classList.add('hidden');
-        if (video) {
-          video.classList.remove('hidden');
-          if (!video.currentSrc.includes(HERO_MP4_INTERIOR.split('/').pop())) video.src = HERO_MP4_INTERIOR;
-          video.muted = true;
-          video.play().catch(function () {});
-        }
+        if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_1) frame.src = HERO_YT_ANGLE_1;
+        else heroYt('playVideo');
+        heroYt('mute');
+        if (watchLink) watchLink.href = HERO_YT_WATCH_1;
         if (label) label.textContent = 'Muted (Click for Sound)';
       }
       [b0, b1].forEach((b, i) => {
@@ -2334,19 +2334,11 @@
     }
 
     function toggleHeroAudio() {
-      const video = document.getElementById('hero-video-player');
       const label = document.getElementById('hero-corner-audio-text');
-      if (heroMode === 'yt') {
-        heroYtMuted = !heroYtMuted;
-        heroYt(heroYtMuted ? 'mute' : 'unMute');
-        if (!heroYtMuted) heroYt('playVideo');
-        if (label) label.textContent = heroYtMuted ? 'Muted (Click for Sound)' : 'Sound on';
-        return;
-      }
-      if (!video) return;
-      video.muted = !video.muted;
-      if (!video.muted) video.play().catch(function () {});
-      if (label) label.textContent = video.muted ? 'Muted (Click for Sound)' : 'Sound on';
+      heroYtMuted = !heroYtMuted;
+      heroYt(heroYtMuted ? 'mute' : 'unMute');
+      if (!heroYtMuted) heroYt('playVideo');
+      if (label) label.textContent = heroYtMuted ? 'Muted (Click for Sound)' : 'Sound on';
     }
 
     function setHeroStage(n) {

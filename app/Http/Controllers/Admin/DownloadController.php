@@ -86,6 +86,12 @@ class DownloadController extends Controller
             $request->file('file')->move($path, $name);
             $data['file'] = '/uploads/downloads/'.$name;
             $data['size'] = $this->humanSize($path.$name);
+        } elseif ($request->boolean('remove_file')) {
+            if ($d->file) {
+                @unlink(public_path($d->file));
+            }
+            $data['file'] = null;
+            $data['size'] = null;
         }
         $d->update($data);
 

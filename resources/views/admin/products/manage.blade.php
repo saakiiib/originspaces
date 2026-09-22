@@ -42,7 +42,8 @@
                         <div class="col-md-3"><label class="form-label">Dimensions</label><input type="text" class="form-control" name="dimensions" value="{{ $product->dimensions }}"></div>
                         <div class="col-md-3"><label class="form-label">Warranty</label><input type="text" class="form-control" name="warranty" value="{{ $product->warranty }}"></div>
                         <div class="col-md-6"><label class="form-label">Hero Image</label><input type="file" class="form-control" name="hero_image" accept="image/*">
-                            @if ($product->hero_image)<img src="{{ $product->hero_image }}" class="img-thumbnail mt-2" style="max-width:200px;">@endif</div>
+                            @if ($product->hero_image)<img src="{{ $product->hero_image }}" class="img-thumbnail mt-2" style="max-width:200px;">
+                            <div id="current_hero_image_box" class="mt-1 small"><span id="current_hero_image_name">Current: <a href="{{ $product->hero_image }}" target="_blank">{{ basename($product->hero_image) }}</a></span> <label class="ms-2"><input type="checkbox" name="remove_hero_image" id="remove_hero_image" value="1"> Remove current file</label></div>@endif</div>
                         <div class="col-md-6"><label class="form-label">Video URL <small class="text-muted">empty = category video</small></label><input type="url" class="form-control" name="video_url" value="{{ $product->video_url }}">
                             <div class="form-check mt-2"><input type="checkbox" class="form-check-input" name="show_3d" value="1" @checked($product->show_3d)><label class="form-check-label">Show 3D viewer tab</label></div></div>
                         <div class="col-12"><hr><h6>SEO (frontend meta tags)</h6></div>
@@ -50,7 +51,8 @@
                         <div class="col-md-6"><label class="form-label">Meta Keywords</label><input type="text" class="form-control" name="meta_keywords" value="{{ $product->meta_keywords }}"></div>
                         <div class="col-md-8"><label class="form-label">Meta Description</label><textarea class="form-control" name="meta_description" rows="2">{{ $product->meta_description }}</textarea></div>
                         <div class="col-md-4"><label class="form-label">Meta Image</label><input type="file" class="form-control" name="meta_image" accept="image/*">
-                            @if ($product->meta_image)<img src="{{ $product->meta_image }}" class="img-thumbnail mt-2" style="max-width:150px;">@endif</div>
+                            @if ($product->meta_image)<img src="{{ $product->meta_image }}" class="img-thumbnail mt-2" style="max-width:150px;">
+                            <div id="current_meta_image_box" class="mt-1 small"><span id="current_meta_image_name">Current: <a href="{{ $product->meta_image }}" target="_blank">{{ basename($product->meta_image) }}</a></span> <label class="ms-2"><input type="checkbox" name="remove_meta_image" id="remove_meta_image" value="1"> Remove current file</label></div>@endif</div>
                     </div>
                     <div class="text-end mt-3"><button type="button" id="saveBasic" class="btn btn-primary">Save Basic + SEO</button></div>
                 </form>

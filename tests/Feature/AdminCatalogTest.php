@@ -326,9 +326,17 @@ test('page seo update persists', function () {
 });
 
 test('downloads table renders rows without files', function () {
-    Download::create(['title' => 'No file yet', 'file' => null, 'format' => 'PDF', 'status' => true]);
+    Download::create(['title' => 'No file yet', 'file' => null, 'format' => 'PDF Spec', 'status' => true]);
 
     $response = $this->actingAs(adminUser())->get(route('downloads.index'), ['X-Requested-With' => 'XMLHttpRequest']);
 
     $response->assertOk();
+});
+
+test('downloads update can remove existing file', function () {
+    $dl = Download::create(['title' => 'With file', 'file' => '/uploads/downloads/x.pdf', 'format' => 'PDF Spec', 'status' => true]);
+
+    $this->actingAs(adminUser())->post(route('downloads.update'), ['id' => $dl->id, 'title' => 'With file', 'format' => 'PDF Spec', 'remove_file' => '1'])->assertOk();
+
+    expect($dl->fresh()->file)->toBeNull();
 });

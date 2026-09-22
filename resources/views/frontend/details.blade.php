@@ -277,18 +277,6 @@
           </div>
         </div>
         @endif
-
-        <!-- CTA banner -->
-        <div class="bg-[#181b20] text-white rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
-          <div>
-            <h3 class="font-serif text-2xl font-semibold">Specify This Piece on Your Project</h3>
-            <p class="text-sm text-[#c9c4b7] mt-1">Drawings, samples and feasibility review included.</p>
-          </div>
-          <div class="flex flex-wrap gap-2.5 shrink-0">
-            <a @spa href="{{ route('contact') }}" class="px-6 py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all">Request Spec Pack</a>
-            <a @spa href="{{ route('custom-build') }}" class="px-6 py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Custom Build</a>
-          </div>
-        </div>
       </section>
     </div>
   </main>

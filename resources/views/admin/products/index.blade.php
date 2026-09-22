@@ -75,6 +75,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Hero Image</label>
                                 <input type="file" class="form-control" id="hero_image" name="hero_image" accept="image/*" onchange="previewImage(event, '#preview-hero')">
+                                <div id="current_hero_image_box" style="display:none" class="mt-1 small"><span id="current_hero_image_name"></span> <label class="ms-2"><input type="checkbox" name="remove_hero_image" id="remove_hero_image" value="1"> Remove current file</label></div>
                                 <img id="preview-hero" src="#" class="img-thumbnail mt-2" style="display:none;max-width:250px;">
                             </div>
                             <div class="col-md-6">
@@ -92,7 +93,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">3D Model File <small class="text-muted">.glb / .gltf · shown in the 3D tab</small></label>
                                 <input type="file" class="form-control" id="model_3d" name="model_3d" accept=".glb,.gltf">
-                                <small id="model3d-current" class="text-muted"></small>
+                                <div id="current_model_3d_box" style="display:none" class="mt-1 small"><span id="current_model_3d_name"></span> <label class="ms-2"><input type="checkbox" name="remove_model_3d" id="remove_model_3d" value="1"> Remove current file</label></div>
                             </div>
                             <div class="col-12"><hr><h6>SEO (frontend meta tags)</h6></div>
                             <div class="col-md-6">
@@ -110,6 +111,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Meta Image <small class="text-muted">1200x630</small></label>
                                 <input type="file" class="form-control" id="meta_image" name="meta_image" accept="image/*" onchange="previewImage(event, '#preview-meta')">
+                                <div id="current_meta_image_box" style="display:none" class="mt-1 small"><span id="current_meta_image_name"></span> <label class="ms-2"><input type="checkbox" name="remove_meta_image" id="remove_meta_image" value="1"> Remove current file</label></div>
                                 <img id="preview-meta" src="#" class="img-thumbnail mt-2" style="display:none;max-width:200px;">
                             </div>
                         </div>
@@ -193,7 +195,9 @@ $(function () {
         $('#addBtn').val('Create').html('Create');
         $('#cardTitle').text('Add New Product');
         $('#preview-hero,#preview-meta').hide();
-        $('#model_3d').val(''); $('#model3d-current').html('');
+        $('#model_3d').val('');
+        $('#current_hero_image_box,#current_meta_image_box,#current_model_3d_box').hide();
+        $('#remove_hero_image,#remove_meta_image,#remove_model_3d').prop('checked', false);
         $('.summernote').summernote('code', '');
         $('#show_3d').prop('checked', true);
     }
@@ -224,11 +228,11 @@ $(function () {
             $('#base_price').val(d.base_price); $('#lead_time').val(d.lead_time);
             $('#dimensions').val(d.dimensions); $('#warranty').val(d.warranty);
             $('#video_url').val(d.video_url);
-            $('#model3d-current').html(d.model_3d ? 'Current: <a href="' + d.model_3d + '" target="_blank">view 3D file</a>' : '');
+            if (d.model_3d) { $('#current_model_3d_name').html('Current: <a href="' + d.model_3d + '" target="_blank">' + d.model_3d.split('/').pop() + '</a>'); $('#current_model_3d_box').show(); $('#remove_model_3d').prop('checked', false); }
             $('#show_3d').prop('checked', !!d.show_3d); $('#is_featured').prop('checked', !!d.is_featured);
             $('#meta_title').val(d.meta_title); $('#meta_keywords').val(d.meta_keywords); $('#meta_description').val(d.meta_description);
-            if (d.hero_image) $('#preview-hero').attr('src', d.hero_image).show();
-            if (d.meta_image) $('#preview-meta').attr('src', d.meta_image).show();
+            if (d.hero_image) { $('#preview-hero').attr('src', d.hero_image).show(); $('#current_hero_image_name').html('Current: <a href="' + d.hero_image + '" target="_blank">' + d.hero_image.split('/').pop() + '</a>'); $('#current_hero_image_box').show(); $('#remove_hero_image').prop('checked', false); }
+            if (d.meta_image) { $('#preview-meta').attr('src', d.meta_image).show(); $('#current_meta_image_name').html('Current: <a href="' + d.meta_image + '" target="_blank">' + d.meta_image.split('/').pop() + '</a>'); $('#current_meta_image_box').show(); $('#remove_meta_image').prop('checked', false); }
             $('#addBtn').val('Update').html('Update');
             $('#cardTitle').text('Quick Edit Product');
             $('#addThisFormContainer').show(300); $('#newBtn').hide();

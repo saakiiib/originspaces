@@ -83,6 +83,11 @@ class GalleryController extends Controller
             $name = mt_rand(10000000, 99999999).'.webp';
             Image::make($request->file('image'))->resize(1600, null, fn ($c) => $c->aspectRatio())->encode('webp', 75)->save($path.$name);
             $data['image'] = '/uploads/gallery/'.$name;
+        } elseif ($request->boolean('remove_image')) {
+            if ($g->image && file_exists(public_path($g->image))) {
+                @unlink(public_path($g->image));
+            }
+            $data['image'] = null;
         }
         $g->update($data);
 

@@ -72,6 +72,13 @@ class AdminProfileController extends Controller
                 ->destroy();
 
             $data['image'] = '/uploads/admins/'.$randomName;
+        } elseif ($request->boolean('remove_image')) {
+            // Only delete old image if it's not the placeholder
+            if ($admin->image && $admin->image !== 'placeholder.webp' && file_exists(public_path($admin->image))) {
+                @unlink(public_path($admin->image));
+            }
+
+            $data['image'] = null;
         }
 
         $admin->update($data);

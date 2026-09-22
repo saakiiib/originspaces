@@ -24,6 +24,13 @@
                                     <input type="file" name="image" id="image" class="d-none" accept=".jpg,.jpeg,.png,.gif">
                                 </label>
                                 <div class="text-muted small mt-1">{{ 'Max 2MB, JPG, PNG, GIF' }}</div>
+                                @if ($admin->image)
+                                    <div class="form-check d-inline-block mt-2" id="removeImageWrap">
+                                        <input type="checkbox" class="form-check-input" id="remove_image"
+                                            name="remove_image" value="1">
+                                        <label class="form-check-label small" for="remove_image">{{ 'Remove current photo' }}</label>
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
@@ -73,6 +80,8 @@ $(function () {
             var reader = new FileReader();
             reader.onload = function (e) { $('#imagePreview').attr('src', e.target.result); };
             reader.readAsDataURL(this.files[0]);
+            $('#remove_image').prop('checked', false);
+            $('#removeImageWrap').hide();
         }
     });
 
@@ -88,6 +97,12 @@ $(function () {
             processData: false,
             success: function (res) {
                 showSuccess(res.message);
+                if ($('#remove_image').is(':checked')) {
+                    $('#imagePreview').attr('src', "{{ asset('frontend/images/default-avatar.png') }}");
+                    $('#remove_image').prop('checked', false);
+                    $('#removeImageWrap').hide();
+                }
+                $('#image').val('');
                 btn.prop('disabled', false).text('{{ 'Update Profile' }}');
             },
             error: function (xhr) {

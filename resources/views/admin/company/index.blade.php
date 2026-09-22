@@ -245,7 +245,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>{{ 'Currency' }}</label>
-                                        <select class="form-control" id="currency" name="currency">
+                                        <select class="form-control select2" id="currency" name="currency">
                                             <option value="" selected>{{ 'Please choose currency' }}</option>
                                             <option value="$" @if (!empty($data->currency) && $data->currency == '$') selected @endif>$
                                             </option>
@@ -343,6 +343,22 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+
+                                        @if (!empty($data->fav_icon))
+                                            <div class="mt-2 d-flex align-items-center gap-2">
+                                                <img src="{{ asset('uploads/company/' . $data->fav_icon) }}"
+                                                    alt="Current favicon" width="32" height="32"
+                                                    class="img-thumbnail">
+                                                <a href="{{ asset('uploads/company/' . $data->fav_icon) }}"
+                                                    target="_blank" class="small">View current file</a>
+                                                <div class="form-check ms-2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="remove_fav_icon" name="remove_fav_icon" value="1">
+                                                    <label class="form-check-label small" for="remove_fav_icon">Remove
+                                                        current file</label>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <img class="img-thumbnail mt-2" id="fav_icon_preview"
@@ -363,6 +379,22 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+
+                                        @if (!empty($data->company_logo))
+                                            <div class="mt-2 d-flex align-items-center gap-2">
+                                                <img src="{{ asset('uploads/company/' . $data->company_logo) }}"
+                                                    alt="Current company logo" width="100" class="img-thumbnail">
+                                                <a href="{{ asset('uploads/company/' . $data->company_logo) }}"
+                                                    target="_blank" class="small">View current file</a>
+                                                <div class="form-check ms-2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="remove_company_logo" name="remove_company_logo"
+                                                        value="1">
+                                                    <label class="form-check-label small"
+                                                        for="remove_company_logo">Remove current file</label>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                     <img class="img-thumbnail mt-2" id="company_logo_preview"
                                         src="{{ isset($data->company_logo) ? asset('uploads/company/' . $data->company_logo) : '' }}"
@@ -382,6 +414,22 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+
+                                        @if (!empty($data->footer_logo))
+                                            <div class="mt-2 d-flex align-items-center gap-2">
+                                                <img src="{{ asset('uploads/company/' . $data->footer_logo) }}"
+                                                    alt="Current footer logo" width="100" class="img-thumbnail">
+                                                <a href="{{ asset('uploads/company/' . $data->footer_logo) }}"
+                                                    target="_blank" class="small">View current file</a>
+                                                <div class="form-check ms-2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="remove_footer_logo" name="remove_footer_logo"
+                                                        value="1">
+                                                    <label class="form-check-label small"
+                                                        for="remove_footer_logo">Remove current file</label>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                     <img class="img-thumbnail mt-2" id="footer_logo_preview"
                                         src="{{ isset($data->footer_logo) ? asset('uploads/company/' . $data->footer_logo) : '' }}"
@@ -419,6 +467,19 @@
                                         <label>Meta Image</label>
                                         <input type="file" class="form-control" name="meta_image" accept="image/*"
                                             onchange="previewImage(event, '#meta_image_preview')">
+                                        @if (!empty($data->meta_image))
+                                            <div class="mt-2 d-flex align-items-center gap-2">
+                                                <a href="{{ asset('uploads/company/' . $data->meta_image) }}"
+                                                    target="_blank" class="small">View current file</a>
+                                                <div class="form-check ms-2">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        id="remove_meta_image" name="remove_meta_image"
+                                                        value="1">
+                                                    <label class="form-check-label small"
+                                                        for="remove_meta_image">Remove current file</label>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <img width="100" class="img-thumbnail mt-2" id="meta_image_preview"
                                             src="{{ $data->meta_image ? asset('uploads/company/' . $data->meta_image) : '' }}" alt="">
                                     </div>
@@ -465,4 +526,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $(function() {
+            $('.select2').select2({
+                width: '100%'
+            });
+        });
+    </script>
 @endsection

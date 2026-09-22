@@ -113,6 +113,12 @@ class TestimonialController extends Controller
                 @unlink(public_path(ltrim($testimonial->image, '/')));
             }
             $data['image'] = $this->uploadImage($request);
+        } elseif ($request->boolean('remove_image')) {
+            // Only delete old image if it's not the placeholder
+            if ($testimonial->image && $testimonial->image !== 'placeholder.webp' && file_exists(public_path(ltrim($testimonial->image, '/')))) {
+                @unlink(public_path(ltrim($testimonial->image, '/')));
+            }
+            $data['image'] = null;
         }
 
         $testimonial->update($data);

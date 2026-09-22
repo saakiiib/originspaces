@@ -49,6 +49,7 @@
                                     <label class="form-label">{{ 'Image' }}</label>
                                     <input type="file" class="form-control" id="image" accept="image/*"
                                         onchange="previewImage(event, '#preview-image')">
+                                    <div id="current_image_box" style="display:none" class="mt-1 small"><span id="current_image_name"></span> <label class="ms-2"><input type="checkbox" name="remove_image" id="remove_image" value="1"> Remove current file</label></div>
                                     <img id="preview-image" src="#" alt="" class="img-thumbnail rounded mt-3"
                                         style="max-width: 300px; display: none;">
                                 </div>
@@ -79,6 +80,7 @@
                                     <label class="form-label">{{ 'Meta Image' }} <small class="text-muted">1200x630</small></label>
                                     <input type="file" class="form-control" id="meta_image" accept="image/*"
                                         onchange="previewImage(event, '#preview-meta-image')">
+                                    <div id="current_meta_image_box" style="display:none" class="mt-1 small"><span id="current_meta_image_name"></span> <label class="ms-2"><input type="checkbox" name="remove_meta_image" id="remove_meta_image" value="1"> Remove current file</label></div>
                                     <img id="preview-meta-image" src="#" alt="" class="img-thumbnail rounded mt-3"
                                         style="max-width: 300px; display: none;">
                                 </div>
@@ -408,6 +410,8 @@
                     if (metaImgInput.files && metaImgInput.files[0]) {
                         form_data.append("meta_image", metaImgInput.files[0]);
                     }
+                    form_data.append("remove_image", $("#remove_image").is(":checked") ? 1 : 0);
+                    form_data.append("remove_meta_image", $("#remove_meta_image").is(":checked") ? 1 : 0);
 
                     form_data.append("codeid", $("#codeid").val());
 
@@ -481,6 +485,9 @@
                 if (data.image) {
                     featureImagePreview.src = data.image;
                     featureImagePreview.style.display = 'block';
+                    $('#current_image_name').html('Current: <a href="' + data.image + '" target="_blank">' + data.image.split('/').pop() + '</a>');
+                    $('#current_image_box').show();
+                    $('#remove_image').prop('checked', false);
                 } else {
                     featureImagePreview.src = "#";
                     featureImagePreview.style.display = 'none';
@@ -490,6 +497,9 @@
                 if (data.meta_image) {
                     metaImagePreview.src = data.meta_image;
                     metaImagePreview.style.display = 'block';
+                    $('#current_meta_image_name').html('Current: <a href="' + data.meta_image + '" target="_blank">' + data.meta_image.split('/').pop() + '</a>');
+                    $('#current_meta_image_box').show();
+                    $('#remove_meta_image').prop('checked', false);
                 } else {
                     metaImagePreview.src = "#";
                     metaImagePreview.style.display = 'none';
@@ -504,6 +514,8 @@
                 $('#preview-image').hide();
                 $('#preview-meta-image').attr('src', '#');
                 $('#preview-meta-image').hide();
+                $('#current_image_box,#current_meta_image_box').hide();
+                $('#remove_image,#remove_meta_image').prop('checked', false);
                 $("#cardTitle").text("{{ 'Add New Category' }}");
 
                 $('#parent_id').val(null).trigger('change');
