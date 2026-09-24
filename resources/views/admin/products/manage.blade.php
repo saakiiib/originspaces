@@ -19,6 +19,7 @@
                 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-options" type="button">4. Options</button></li>
                 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-tech" type="button">5. Tech Specs</button></li>
                 <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-docs" type="button">6. Documents</button></li>
+                <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-zones" type="button">7. Floor Zones</button></li>
             </ul>
         </div>
         <div class="card-body tab-content">
@@ -120,6 +121,17 @@
                 </form>
                 <div id="docList" class="list-group"></div>
             </div>
+
+            <div class="tab-pane fade" id="tab-zones">
+                <p class="text-muted small">Zones for this product's Floor Plan tab. Empty = the global Floor Zones set is shown instead.</p>
+                <form id="zoneForm" class="row g-2 mb-3">
+                    <div class="col-md-3"><input type="text" class="form-control" id="zoneName" placeholder="Zone name * e.g. Cinema Room" required></div>
+                    <div class="col-md-3"><input type="text" class="form-control" id="zoneDims" placeholder="Dims e.g. 4.2 m × 3.6 m"></div>
+                    <div class="col-md-4"><input type="text" class="form-control" id="zoneDesc" placeholder="Short description"></div>
+                    <div class="col-md-2"><button class="btn btn-primary w-100">Add Zone</button></div>
+                </form>
+                <div id="zoneList" class="list-group"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -144,8 +156,9 @@ $(function () {
             error: xhr => { hideLoader(); showError(xhr.status === 422 ? Object.values(xhr.responseJSON.errors)[0][0] : 'Error'); } });
     });
 
-    const reload = { img: loadImg, mat: loadMat, spec: loadSpec, opt: loadOpt, tech: loadTech, doc: loadDoc };
+    const reload = { img: loadImg, mat: loadMat, spec: loadSpec, opt: loadOpt, tech: loadTech, doc: loadDoc, zone: loadZone };
     let optGroup = '';
+    let zoneCache = {};
     $('.optFilter').click(function () { optGroup = $(this).data('g'); loadOpt(); });
 
     function loadImg() { $.get(`/admin/products/${PID}/images`, list => { $('#imgList').html(list.map(i => `<div class="col-md-3"><div class="card"><img src="${i.preview}" class="card-img-top"><div class="card-body p-2"><input class="form-control form-control-sm mb-1" value="${i.caption ?? ''}" onchange="updImg(${i.id},this.value)"><button class="btn btn-sm btn-danger" onclick="delImg(${i.id})">Delete</button></div></div></div>`).join('') || '<p class="text-muted">No images yet. First image acts as gallery backup to hero.</p>'); }); }
@@ -154,6 +167,8 @@ $(function () {
     function loadOpt() { $.get(`/admin/products/${PID}/options`, { group: optGroup }, list => { $('#optList').html(list.map(o => `<div class="list-group-item d-flex justify-content-between align-items-center"><div><strong>[${o.group}]</strong> ${o.name} <small class="text-muted">${o.subtitle ?? ''}</small> <span class="badge bg-light text-dark">${o.price_delta ? '+£' + Number(o.price_delta).toLocaleString() : 'Included'}</span> ${o.is_default ? '<span class="badge bg-success">Default</span>' : ''} ${o.swatch_color ? `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${o.swatch_color};border:1px solid #ccc;"></span>` : ''}</div><span><button class="btn btn-sm btn-link" onclick="editOpt(${o.id},'${o.name.replace(/'/g, "\\'")}')">Edit</button><button class="btn btn-sm btn-link text-danger" onclick="delOpt(${o.id})">Delete</button></span></div>`).join('') || '<p class="text-muted">No options in this group yet.</p>'); }); }
     function loadTech() { $.get(`/admin/products/${PID}/tech-specs`, list => { $('#techList').html(list.map(t => `<div class="list-group-item d-flex justify-content-between"><div><strong>${t.label}:</strong> ${t.value} ${t.highlight ? '<span class="badge bg-warning">★</span>' : ''}</div><span><button class="btn btn-sm btn-link" onclick="editTech(${t.id},'${t.label.replace(/'/g, "\\'")}',\`${(t.value || '').replace(/`/g, '')}\`)">Edit</button><button class="btn btn-sm btn-link text-danger" onclick="delTech(${t.id})">Delete</button></span></div>`).join('')); }); }
     function loadDoc() { $.get(`/admin/products/${PID}/documents`, list => { $('#docList').html(list.map(d => `<div class="list-group-item d-flex justify-content-between"><div><strong>${d.title}</strong> <a href="${d.url}" target="_blank" class="ms-2">Open</a></div><button class="btn btn-sm btn-link text-danger" onclick="delDoc(${d.id})">Delete</button></div>`).join('') || '<p class="text-muted">Max 3 recommended: Lookbook / Manual / Spec Sheet.</p>'); }); }
+    function loadZone() { $.get(`/admin/products/${PID}/floor-zones`, list => { list.forEach(z => { zoneCache[z.id] = { name: z.name, dims: z.dims, desc: z.desc }; }); $('#zoneList').html(list.map(z => `<div class="list-group-item"><div class="row g-2 align-items-center"><div class="col-md-3"><input class="form-control form-control-sm" value="${escAttr(z.name)}" onchange="updZone(${z.id},'name',this.value)"></div><div class="col-md-2"><input class="form-control form-control-sm" value="${escAttr(z.dims)}" placeholder="Dims" onchange="updZone(${z.id},'dims',this.value)"></div><div class="col-md-5"><input class="form-control form-control-sm" value="${escAttr(z.desc)}" placeholder="Description" onchange="updZone(${z.id},'desc',this.value)"></div><div class="col-md-2 text-end"><div class="form-check form-switch d-inline-block me-2"><input type="checkbox" class="form-check-input" ${z.status ? 'checked' : ''} onchange="toggleZone(${z.id})"></div><button class="btn btn-sm btn-link text-danger" onclick="delZone(${z.id})">Delete</button></div></div></div>`).join('') || '<p class="text-muted">No zones for this product yet — the global Floor Zones set is shown on its details page.</p>'); }); }
+    function escAttr(v) { return String(v ?? '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 
     Object.values(reload).forEach(fn => fn());
 
@@ -163,6 +178,7 @@ $(function () {
     $('#optForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/options`, { group: $('#optGroup').val(), name: $('#optName').val(), subtitle: $('#optSub').val(), price_delta: $('#optPrice').val(), swatch_color: $('#optSwatch').val(), is_default: $('#optDefault').is(':checked') ? 1 : 0 }, d => { showSuccess(d.message); $('#optForm')[0].reset(); loadOpt(); }).fail(xhr => showError(xhr.status === 422 ? Object.values(xhr.responseJSON.errors)[0][0] : 'Error')); });
     $('#techForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/tech-specs`, { label: $('#techLabel').val(), value: $('#techValue').val(), highlight: $('#techHi').is(':checked') ? 1 : 0 }, d => { showSuccess(d.message); $('#techForm')[0].reset(); loadTech(); }).fail(() => showError('Error')); });
     $('#docForm').submit(e => { e.preventDefault(); const fd = new FormData(); fd.append('title', $('#docTitle').val()); fd.append('file', $('#docFile')[0].files[0]); $.ajax({ url: `/admin/products/${PID}/documents`, type: 'POST', data: fd, contentType: false, processData: false, success: d => { showSuccess(d.message); $('#docForm')[0].reset(); loadDoc(); }, error: () => showError('Error') }); });
+    $('#zoneForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/floor-zones`, { name: $('#zoneName').val(), dims: $('#zoneDims').val(), desc: $('#zoneDesc').val() }, d => { showSuccess(d.message); $('#zoneForm')[0].reset(); loadZone(); }).fail(xhr => showError(xhr.status === 422 ? Object.values(xhr.responseJSON.errors)[0][0] : 'Error')); });
 
     window.delImg = id => $.ajax({ url: `/admin/product-images/${id}`, type: 'DELETE', success: d => { showSuccess(d.message); loadImg(); } });
     window.updImg = (id, caption) => $.post(`/admin/product-images/${id}`, { caption }, () => loadImg());
@@ -175,6 +191,9 @@ $(function () {
     window.delTech = id => $.ajax({ url: `/admin/product-tech-specs/${id}`, type: 'DELETE', success: () => loadTech() });
     window.editTech = (id, l, v) => { const nl = prompt('Label:', l); if (!nl) return; const nv = prompt('Value:', v); if (nv !== null) $.post(`/admin/product-tech-specs/${id}`, { label: nl, value: nv }, () => loadTech()); };
     window.delDoc = id => $.ajax({ url: `/admin/product-documents/${id}`, type: 'DELETE', success: () => loadDoc() });
+    window.delZone = id => $.ajax({ url: `/admin/product-floor-zones/${id}`, type: 'DELETE', success: d => { showSuccess(d.message); loadZone(); } });
+    window.updZone = (id, field, value) => { const z = Object.assign({}, zoneCache[id], { [field]: value }); $.post(`/admin/product-floor-zones/${id}`, { name: z.name, dims: z.dims, desc: z.desc }, () => loadZone()).fail(() => { showError('Error'); loadZone(); }); };
+    window.toggleZone = id => $.post(`/admin/product-floor-zones/${id}/toggle-status`, {}, () => loadZone());
 });
 </script>
 @endsection

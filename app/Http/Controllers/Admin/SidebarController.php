@@ -24,7 +24,6 @@ class SidebarController
                 'children' => [
                     ['label' => 'Category', 'route' => 'allcategory', 'href' => route('allcategory')],
                     ['label' => 'Products', 'route' => 'products.*', 'href' => route('products.index')],
-                    ['label' => 'Floor Zones', 'route' => 'floor-zones.*', 'href' => route('floor-zones.index')],
                 ],
             ],
             [

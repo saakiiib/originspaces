@@ -181,7 +181,7 @@
     <button onclick="if(window.closeLightbox)closeLightbox()" class="absolute -top-12 right-0 text-white/80 hover:text-white p-2">
       <x-icon name="x" class="w-6 h-6" />
     </button>
-    <img id="lightbox-img" src="" alt="Enlarged Architectural Detail" class="w-full max-h-[76vh] object-contain rounded-xl shadow-2xl bg-black" />
+    <img id="lightbox-img" src="" alt="Enlarged Architectural Detail" class="w-full max-h-[76vh] object-contain rounded-xl shadow-2xl" style="width:100%;max-height:76vh;object-fit:contain;display:block;background:transparent" />
     <button onclick="if(window.lightboxNav)lightboxNav(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-[#9a7b4f] text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all">
       <x-icon name="chevron-left" class="w-5 h-5" />
     </button>
@@ -222,18 +222,24 @@
   };
 
   window.openEnquiryModal = function (title, productId, configSummary) {
-    if (title) document.getElementById('modal-enquiry-title').textContent = title;
-    document.getElementById('enquiry-product-id').value = productId || '';
-    document.getElementById('enquiry-config').value = configSummary || '';
-    document.getElementById('enquiry-source').value = productId ? 'details' : 'modal';
+    function setVal(id, v) { var el = document.getElementById(id); if (el) el.value = v; }
+    function setText(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
+    if (title) setText('modal-enquiry-title', title);
+    setVal('enquiry-product-id', productId || '');
+    setVal('enquiry-config', configSummary || '');
+    setVal('enquiry-source', productId ? 'details' : 'modal');
     var box = document.getElementById('modal-spec-summary');
-    if (configSummary) {
-      box.classList.remove('hidden');
-      document.getElementById('modal-spec-details').textContent = configSummary;
-    } else {
-      box.classList.add('hidden');
+    if (box) {
+      if (configSummary) {
+        box.classList.remove('hidden');
+        setText('modal-spec-details', configSummary);
+      } else {
+        box.classList.add('hidden');
+      }
     }
-    document.getElementById('enquiry-modal').classList.remove('hidden');
+    var modal = document.getElementById('enquiry-modal');
+    if (!modal) return;
+    modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
     if (window.lucide) lucide.createIcons();
   };

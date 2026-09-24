@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\FaqCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class FaqCategoryController extends Controller
@@ -27,9 +26,12 @@ class FaqCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required|string|max:255|unique:faq_categories,name']);
+        $request->validate([
+            'name' => 'required|string|max:255|unique:faq_categories,name',
+        ]);
+        $slug = $this->uniqueSlug($request->name, FaqCategory::class);
         FaqCategory::create([
-            'name' => $request->name, 'slug' => Str::slug($request->name),
+            'name' => $request->name, 'slug' => $slug,
             'sort_order' => (int) (FaqCategory::max('sort_order') ?? 0) + 1,
         ]);
 
@@ -44,8 +46,13 @@ class FaqCategoryController extends Controller
     public function update(Request $request)
     {
         $cat = FaqCategory::findOrFail($request->id);
-        $request->validate(['name' => 'required|string|max:255|unique:faq_categories,name,'.$cat->id]);
-        $cat->update(['name' => $request->name, 'slug' => Str::slug($request->name)]);
+        $request->validate([
+            'name' => 'required|string|max:255|unique:faq_categories,name,'.$cat->id,
+        ]);
+        // Slug always follows the latest name.
+        $cat->slug = $this->uniqueSlug($request->name, FaqCategory::class, $cat->id);
+        $cat->name = $request->name;
+        $cat->save();
 
         return response()->json(['message' => 'FAQ category updated']);
     }

@@ -8,12 +8,12 @@ use App\Http\Controllers\Admin\DownloadController;
 use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController;
-use App\Http\Controllers\Admin\FloorZoneController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PageSeoController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductDocumentController;
+use App\Http\Controllers\Admin\ProductFloorZoneController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductMaterialController;
 use App\Http\Controllers\Admin\ProductOptionController;
@@ -115,13 +115,14 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'is_admin']], funct
     Route::post('/products/{product}/documents', [ProductDocumentController::class, 'store'])->name('product-documents.store');
     Route::delete('/product-documents/{id}', [ProductDocumentController::class, 'destroy'])->name('product-documents.delete');
 
-    // Floor zones (global, reused on details page)
-    Route::get('/floor-zones', [FloorZoneController::class, 'index'])->name('floor-zones.index');
-    Route::post('/floor-zones', [FloorZoneController::class, 'store'])->name('floor-zones.store');
-    Route::get('/floor-zones/{id}/edit', [FloorZoneController::class, 'edit'])->name('floor-zones.edit');
-    Route::post('/floor-zones/update', [FloorZoneController::class, 'update'])->name('floor-zones.update');
-    Route::delete('/floor-zones/{id}', [FloorZoneController::class, 'destroy'])->name('floor-zones.delete');
-    Route::post('/floor-zones/toggle-status', [FloorZoneController::class, 'toggleStatus'])->name('floor-zones.toggleStatus');
+    Route::get('/products/{product}/floor-zones', [ProductFloorZoneController::class, 'list'])->name('product-floor-zones.list');
+    Route::post('/products/{product}/floor-zones', [ProductFloorZoneController::class, 'store'])->name('product-floor-zones.store');
+    Route::post('/product-floor-zones/{id}', [ProductFloorZoneController::class, 'update'])->name('product-floor-zones.update');
+    Route::post('/product-floor-zones/{id}/toggle-status', [ProductFloorZoneController::class, 'toggleStatus'])->name('product-floor-zones.toggleStatus');
+    Route::delete('/product-floor-zones/{id}', [ProductFloorZoneController::class, 'destroy'])->name('product-floor-zones.delete');
+
+    // Floor zones are managed per-product (product-floor-zones.*); the model
+    // also serves the legacy global fallback rows on the details page.
 
     // FAQ
     Route::get('/faq-categories', [FaqCategoryController::class, 'index'])->name('faq-categories.index');

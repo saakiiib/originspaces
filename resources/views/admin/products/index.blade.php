@@ -171,7 +171,7 @@ $(function () {
 
     const table = $('#productTable').DataTable({
         processing: true, serverSide: true,
-        ajax: { url: "{{ route('products.index') }}", data: d => d.category_id = $('#filterCategory').val() },
+        ajax: { url: "{{ route('products.index') }}", data: d => { d.category_id = $('#filterCategory').val(); } },
         columns: [
             { data: 'DT_RowIndex', orderable: false, searchable: false },
             { data: 'image', orderable: false, searchable: false },

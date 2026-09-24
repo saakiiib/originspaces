@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use DataTables;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller
@@ -15,7 +14,7 @@ class CategoryController extends Controller
     {
         if ($request->ajax()) {
             $query = Category::with('parent')
-                ->select(['id', 'name', 'image', 'parent_id', 'status', 'sort_order'])
+                ->select(['id', 'name', 'slug', 'image', 'parent_id', 'status', 'sort_order'])
                 ->orderBy('sort_order', 'asc')
                 ->orderBy('id', 'desc');
 
@@ -93,7 +92,7 @@ class CategoryController extends Controller
         $data = new Category;
         $data->name = $request->name;
         $data->description = $request->description;
-        $data->slug = Str::slug($request->name);
+        $data->slug = $this->uniqueSlug($request->name, Category::class);
         $data->parent_id = $request->parent_id;
         $data->meta_title = $request->meta_title;
         $data->meta_description = $request->meta_description;
@@ -173,7 +172,8 @@ class CategoryController extends Controller
         $data = Category::findOrFail($request->codeid);
         $data->name = $request->name;
         $data->description = $request->description;
-        $data->slug = Str::slug($request->name);
+        // Slug always follows the latest name.
+        $data->slug = $this->uniqueSlug($request->name, Category::class, $data->id);
         $data->parent_id = $request->parent_id;
         $data->meta_title = $request->meta_title;
         $data->meta_description = $request->meta_description;

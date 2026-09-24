@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -16,7 +15,7 @@ class ProductController extends Controller
     {
         if ($request->ajax()) {
             $query = Product::with('category:id,name')
-                ->select(['id', 'category_id', 'name', 'model_code', 'hero_image', 'base_price', 'is_featured', 'status', 'sort_order'])
+                ->select(['id', 'category_id', 'name', 'slug', 'model_code', 'hero_image', 'base_price', 'is_featured', 'status', 'sort_order'])
                 ->orderBy('sort_order')
                 ->orderByDesc('id');
 
@@ -79,7 +78,7 @@ class ProductController extends Controller
             'lead_time', 'warranty', 'base_price', 'video_url',
             'meta_title', 'meta_description', 'meta_keywords',
         ]));
-        $product->slug = Str::slug($request->name.'-'.$request->model_code);
+        $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class);
         $product->model_code = $request->model_code;
         $product->show_3d = $request->boolean('show_3d', true);
         $product->is_featured = $request->boolean('is_featured');
@@ -126,6 +125,8 @@ class ProductController extends Controller
             'meta_title', 'meta_description', 'meta_keywords',
         ]));
         $product->model_code = $request->model_code;
+        // Slug follows the latest name + code.
+        $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class, $product->id);
         if ($request->has('show_3d')) {
             $product->show_3d = $request->boolean('show_3d');
         }

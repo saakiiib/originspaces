@@ -9,14 +9,14 @@
 <div class="card-footer text-end"><button id="saveBtn" class="btn btn-primary" value="Create">Create</button> <button id="cancelBtn" class="btn btn-light">Cancel</button></div>
 </div></div></div></div>
 <div class="container-fluid"><div class="card"><div class="card-header"><h4>FAQ Categories</h4></div>
-<div class="card-body"><div class="table-responsive"><table id="catTable" class="table table-bordered table-striped w-100"><thead><tr><th>Sl</th><th>Name</th><th>FAQs</th><th>Status</th><th>Action</th></tr></thead></table></div></div></div></div>
+<div class="card-body"><div class="table-responsive"><table id="catTable" class="table table-bordered table-striped w-100"><thead><tr><th>Sl</th><th>Name</th><th>Slug</th><th>FAQs</th><th>Status</th><th>Action</th></tr></thead></table></div></div></div></div>
 @endsection
 @section('script')
 <script>
 $(function () {
     $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
     const t = $('#catTable').DataTable({ processing: true, serverSide: true, ajax: "{{ route('faq-categories.index') }}",
-        columns: [{ data: 'DT_RowIndex', orderable: false, searchable: false }, { data: 'name' }, { data: 'count' }, { data: 'status', orderable: false, searchable: false }, { data: 'action', orderable: false, searchable: false }] });
+        columns: [{ data: 'DT_RowIndex', orderable: false, searchable: false }, { data: 'name' }, { data: 'slug' }, { data: 'count' }, { data: 'status', orderable: false, searchable: false }, { data: 'action', orderable: false, searchable: false }] });
     $('#newBtn').click(() => { $('#mainForm')[0].reset(); $('#codeid').val(''); $('#saveBtn').val('Create').html('Create'); $('#formBox').show(300); $('#newBtn').hide(); });
     $('#cancelBtn').click(() => { $('#formBox').hide(); $('#newBtn').show(); });
     $('#saveBtn').click(function () {

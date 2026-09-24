@@ -183,7 +183,7 @@ test('every admin page renders', function () {
     foreach ([
         'admin.dashboard', 'admin.companyDetails', 'allcategory',
         'slider.index', 'testimonial.index', 'page-seo.index',
-        'admin.contacts.index', 'floor-zones.index', 'faq-categories.index',
+        'admin.contacts.index', 'faq-categories.index',
         'gallery-categories.index', 'admin.profile',
     ] as $route) {
         $this->actingAs($admin)->get(route($route))->assertOk($route);
@@ -292,7 +292,8 @@ test('product child CRUD roundtrip', function () {
 
 test('supporting module toggles flip status', function () {
     $admin = adminUser();
-    $zone = FloorZone::create(['name' => 'Z', 'status' => true]);
+    $zoneProduct = Product::create(['name' => 'Zone Villa', 'slug' => 'zone-villa', 'model_code' => 'ZV-1']);
+    $zone = FloorZone::create(['name' => 'Z', 'status' => true, 'product_id' => $zoneProduct->id]);
     $faqCat = FaqCategory::create(['name' => 'FC', 'slug' => 'fc', 'status' => true]);
     $faq = Faq::create(['faq_category_id' => $faqCat->id, 'question' => 'Q', 'answer' => 'A', 'status' => true]);
     $galCat = GalleryCategory::create(['name' => 'GC', 'slug' => 'gc', 'status' => true]);
@@ -300,7 +301,7 @@ test('supporting module toggles flip status', function () {
     $enq = Enquiry::create(['name' => 'N', 'email' => 'n@example.com', 'status' => true]);
 
     foreach ([
-        [route('floor-zones.toggleStatus'), $zone],
+        [route('product-floor-zones.toggleStatus', $zone->id), $zone],
         [route('faq-categories.toggleStatus'), $faqCat],
         [route('faqs.toggleStatus'), $faq],
         [route('gallery-categories.toggleStatus'), $galCat],
@@ -339,4 +340,73 @@ test('downloads update can remove existing file', function () {
     $this->actingAs(adminUser())->post(route('downloads.update'), ['id' => $dl->id, 'title' => 'With file', 'format' => 'PDF Spec', 'remove_file' => '1'])->assertOk();
 
     expect($dl->fresh()->file)->toBeNull();
+});
+
+test('products table filters by category', function () {
+    $admin = adminUser();
+    $a = Category::create(['name' => 'Filter A', 'slug' => 'filter-a']);
+    $b = Category::create(['name' => 'Filter B', 'slug' => 'filter-b']);
+    Product::create(['name' => 'PA', 'slug' => 'pa', 'model_code' => 'PA-1', 'category_id' => $a->id]);
+    Product::create(['name' => 'PB', 'slug' => 'pb', 'model_code' => 'PB-1', 'category_id' => $b->id]);
+
+    $ajax = ['draw' => 1, 'start' => 0, 'length' => 10, 'X-Requested-With' => 'XMLHttpRequest'];
+
+    $all = $this->actingAs($admin)->get(route('products.index'), $ajax)->assertOk()->json();
+    expect($all['recordsTotal'])->toBe(2);
+
+    $filtered = $this->actingAs($admin)
+        ->get(route('products.index', ['category_id' => $a->id]), $ajax)->assertOk()->json();
+    expect($filtered['recordsFiltered'])->toBe(1)
+        ->and($filtered['data'][0]['name'])->toBe('PA');
+});
+
+test('product slugs are auto-generated and deduped', function () {
+    $admin = adminUser();
+
+    $this->actingAs($admin)->post(route('products.store'), [
+        'name' => 'Café Pod', 'model_code' => 'MD-1',
+    ])->assertOk();
+    $this->actingAs($admin)->post(route('products.store'), [
+        'name' => 'Cafe Pod', 'model_code' => 'MD-1X',
+    ])->assertOk();
+
+    // 'Café Pod MD-1' and 'Cafe Pod MD-1X' must not collide; second gets a suffix
+    $slugs = Product::orderBy('id')->pluck('slug')->all();
+    expect($slugs[0])->toBe('cafe-pod-md-1')->and($slugs[1])->toBe('cafe-pod-md-1x');
+
+    // Slug is backend-only: a posted slug is ignored, rename regenerates it
+    $first = Product::where('slug', 'cafe-pod-md-1')->firstOrFail();
+    $this->actingAs($admin)->post(route('products.update'), [
+        'codeid' => $first->id, 'name' => 'Renamed Pod', 'model_code' => 'MD-1',
+        'slug' => 'my-custom-slug',
+    ])->assertOk();
+    expect($first->fresh()->slug)->toBe('renamed-pod-md-1');
+});
+
+test('category and taxonomy slugs are auto-generated and deduped', function () {
+    $admin = adminUser();
+
+    // Accent-variant names slugify identically: second gets an auto suffix, no 500
+    $this->actingAs($admin)->post(route('category.store'), ['name' => 'Café'])->assertOk();
+    $this->actingAs($admin)->post(route('category.store'), ['name' => 'Cafe'])->assertOk();
+    expect(Category::where('name', 'Café')->firstOrFail()->slug)->toBe('cafe')
+        ->and(Category::where('name', 'Cafe')->firstOrFail()->slug)->toBe('cafe-2');
+
+    // Rename regenerates the slug from the new name
+    $first = Category::where('slug', 'cafe')->firstOrFail();
+    $this->actingAs($admin)->post(route('category.update'), [
+        'codeid' => $first->id, 'name' => 'Coffee Houses',
+    ])->assertOk();
+    expect($first->fresh()->slug)->toBe('coffee-houses');
+
+    // FAQ + gallery categories dedupe on store the same way
+    $this->actingAs($admin)->post(route('faq-categories.store'), ['name' => 'Lead Times'])->assertOk();
+    $this->actingAs($admin)->post(route('faq-categories.store'), ['name' => 'Lead Times!!'])->assertOk();
+    expect(FaqCategory::where('name', 'Lead Times!!')->firstOrFail()->slug)->toBe('lead-times-2');
+
+    $this->actingAs($admin)->post(route('gallery-categories.store'), ['name' => 'Exterior'])->assertOk();
+    $this->actingAs($admin)->post(route('gallery-categories.store'), ['name' => 'Exterior'])->assertStatus(302)->assertInvalid('name');
+
+    expect(FaqCategory::where('name', 'Lead Times')->firstOrFail()->slug)->toBe('lead-times')
+        ->and(GalleryCategory::where('name', 'Exterior')->firstOrFail()->slug)->toBe('exterior');
 });

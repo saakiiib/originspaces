@@ -74,9 +74,13 @@
 .share-btn .share-label{color:#fff}
 .share-toggle{width:56px;height:56px;border-radius:50%;background:#9a7b4f;border:none;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(154,123,79,.4);transition:all .25s;display:flex;align-items:center;justify-content:center}
 .share-toggle:hover{transform:scale(1.1)}
-.back-to-top{position:fixed;bottom:24px;right:24px;z-index:10000;width:56px;height:56px;border-radius:50%;background:#181b20;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;visibility:hidden;transform:translateY(-20px);transition:all .25s}
+.back-to-top{position:fixed;bottom:24px;right:24px;z-index:10000;width:56px;height:56px;border-radius:50%;background:#9a7b4f;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 16px rgba(154,123,79,.4);opacity:0;visibility:hidden;transform:translateY(-20px);transition:all .25s}
 .back-to-top.show{opacity:1;visibility:visible;transform:translateY(0)}
-.back-to-top:hover{background:#9a7b4f}
+.back-to-top:hover{background:#86683f;transform:scale(1.1)}
+/* Popup layering (plain CSS so it never depends on generated utilities) */
+#lightbox-modal{z-index:70}
+#enquiry-modal{z-index:60}
+#sample-modal{z-index:60}
 </style>
 
 <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0, behavior:'smooth'})">

@@ -25,12 +25,12 @@
                             <input type="hidden" id="codeid" name="codeid">
 
                             <div class="row g-3">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <label class="form-label">{{ 'Category Name' }} <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="name" name="name" placeholder="">
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <label class="form-label">{{ 'Parent Category' }}</label>
                                     <select class="form-control select2" id="parent_id" name="parent_id">
                                         <option value="">{{ 'Select Category' }}</option>
@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 d-none">
                                     <label class="form-label">{{ 'Description' }}</label>
                                     <textarea class="form-control" id="description" name="description" rows="3" placeholder=""></textarea>
                                 </div>
@@ -54,29 +54,29 @@
                                         style="max-width: 300px; display: none;">
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 d-none">
                                     <label class="form-label">{{ 'Category Video URL' }} <small class="text-muted">(used on product details page, optional)</small></label>
                                     <input type="url" class="form-control" id="video_url" name="video_url" placeholder="https://...mp4">
                                 </div>
 
-                                <div class="col-12"><hr><h6 class="mb-0">SEO (for frontend meta tags)</h6></div>
+                                <div class="col-12 d-none"><hr><h6 class="mb-0">SEO (for frontend meta tags)</h6></div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 d-none">
                                     <label class="form-label">{{ 'Meta Title' }}</label>
                                     <input type="text" class="form-control" id="meta_title" name="meta_title" maxlength="255">
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 d-none">
                                     <label class="form-label">{{ 'Meta Description' }}</label>
                                     <textarea class="form-control" id="meta_description" name="meta_description" rows="2"></textarea>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <label class="form-label">{{ 'Meta Keywords' }}</label>
                                     <input type="text" class="form-control" id="meta_keywords" name="meta_keywords" placeholder="comma, separated">
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-6 d-none">
                                     <label class="form-label">{{ 'Meta Image' }} <small class="text-muted">1200x630</small></label>
                                     <input type="file" class="form-control" id="meta_image" accept="image/*"
                                         onchange="previewImage(event, '#preview-meta-image')">
@@ -110,7 +110,7 @@
                             {{ 'All Categories' }}
                         </button>
                     </li>
-                    <li class="nav-item" role="presentation">
+                    <li class="nav-item d-none" role="presentation">
                         <button class="nav-link" id="child-tab" data-bs-toggle="tab" data-bs-target="#child-categories"
                             type="button" role="tab">
                             {{ 'Sub-Categories' }}
@@ -376,6 +376,12 @@
                             }, 300);
                             reloadTable('#parentCategoryTable');
                             reloadTable('#childCategoryTable');
+                            // New rows go to the end (sort_order = max + 1): jump the
+                            // relevant table to its last page so the new row is visible.
+                            var targetTable = form_data.get('parent_id')
+                                ? $('#childCategoryTable').DataTable()
+                                : $('#parentCategoryTable').DataTable();
+                            targetTable.page('last').draw(false);
                             clearform();
                             loadParentCategories();
                         },
@@ -577,6 +583,8 @@
                         },
                         success: function(d) {
                             showSuccess(d.message);
+                            reloadTable('#parentCategoryTable');
+                            reloadTable('#childCategoryTable');
                         },
                         error: function() {
                             showError('Failed to update sort order');

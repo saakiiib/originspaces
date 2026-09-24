@@ -83,6 +83,25 @@ test('home injects dynamic JSON hooks', function () {
         ->assertSee('hs-exp-01', false);
 });
 
+test('home featured section needs more than one featured product', function () {
+    $a = seedShowcase();
+
+    // One featured product: section hidden
+    $a->update(['is_featured' => true]);
+    $this->get('/')->assertOk()->assertDontSee('id="featured-products"', false);
+
+    // Two featured products: section shows both, DB-driven
+    $b = Product::create([
+        'category_id' => $a->category_id, 'name' => 'The Willow', 'slug' => 'hs-exp-02',
+        'model_code' => 'HS-EXP-38/WIL', 'tagline' => 'Willow tagline', 'is_featured' => true,
+    ]);
+    $html = $this->get('/')->assertOk()->getContent();
+    expect($html)->toContain('id="featured-products"')
+        ->toContain('The Aster')
+        ->toContain('The Willow')
+        ->not->toContain('The Nova Grand Expandable Estate');
+});
+
 test('collections preselects category and lists products', function () {
     seedShowcase();
 
@@ -98,6 +117,15 @@ test('collections preselects category and lists products', function () {
         ->assertSee('Expandable Homes', false);
 });
 
+test('collections enquiry buttons carry the product id', function () {
+    $product = seedShowcase();
+
+    $html = $this->get('/collections')->assertOk()->getContent();
+    // Full Details links by slug; Request This Spec opens the modal with the numeric id
+    expect($html)->toContain('/product/hs-exp-01')
+        ->toContain('onclick=\'openEnquiryModal("The Aster \u2014 Spec Pack", '.$product->id.', "")\'');
+});
+
 test('details page carries product JSON, options and zones', function () {
     seedShowcase();
     FloorZone::create(['name' => 'Master Suite', 'dims' => '3x3', 'status' => true]);
@@ -108,6 +136,17 @@ test('details page carries product JSON, options and zones', function () {
         ->assertSee('CONFIG_OPTIONS =', false)
         ->assertSee('Master Suite', false)
         ->assertSee('HS-EXP-38', false);
+});
+
+test('details page shows the editor description', function () {
+    seedShowcase(['description' => '<p>Hand-finished <strong>cedar</strong> pods.</p>']);
+
+    $this->get('/product/hs-exp-01')->assertOk()
+        ->assertSee('id="narrative-body"', false)
+        ->assertSee('id="narrative-specs"', false)
+        ->assertSee('Hand-finished', false)
+        ->assertSee('cedar', false)
+        ->assertSee('Fast build', false);
 });
 
 test('details falls back to category video and hides nothing when video present', function () {
@@ -216,4 +255,50 @@ test('gallery and downloads pages carry server JSON', function () {
 
     $this->get('/gallery')->assertOk()->assertSee('var GALLERY =', false)->assertSee('gallery-item', false);
     $this->get('/downloads')->assertOk()->assertSee('file-row', false)->assertSee('Lookbook', false);
+});
+
+test('floor zones are per-product with global fallback', function () {
+    $aster = seedShowcase();
+    $willow = Product::create([
+        'category_id' => $aster->category_id, 'name' => 'The Willow', 'slug' => 'hs-exp-02',
+        'model_code' => 'HS-EXP-38/WIL',
+    ]);
+    FloorZone::create(['name' => 'Global Lounge', 'dims' => '3x3', 'status' => true]);
+    FloorZone::create(['name' => 'Aster Cinema', 'dims' => '4x4', 'status' => true, 'product_id' => $aster->id]);
+
+    // Product with its own zones sees only those
+    $this->get('/product/hs-exp-01')->assertOk()
+        ->assertSee('Aster Cinema', false)
+        ->assertDontSee('Global Lounge', false);
+
+    // Product without its own zones falls back to globals
+    $this->get('/product/hs-exp-02')->assertOk()
+        ->assertSee('Global Lounge', false)
+        ->assertDontSee('Aster Cinema', false);
+});
+
+test('product floor zones are managed inside the product', function () {
+    $product = seedShowcase();
+    $admin = adminUser();
+
+    $this->actingAs($admin)->post(route('product-floor-zones.store', $product->id), [
+        'name' => 'Aster Cinema', 'dims' => '4x4', 'desc' => 'Movie nights',
+    ])->assertOk()->assertJsonPath('data.product_id', (string) $product->id);
+    $zone = FloorZone::where('name', 'Aster Cinema')->firstOrFail();
+    expect($zone->product_id)->toBe($product->id);
+
+    $this->actingAs($admin)->get(route('product-floor-zones.list', $product->id))
+        ->assertOk()->assertJsonCount(1)->assertJsonPath('0.name', 'Aster Cinema');
+
+    $this->actingAs($admin)->post(route('product-floor-zones.update', $zone->id), [
+        'name' => 'Aster Cinema XL', 'dims' => '5x5', 'desc' => 'Bigger screen',
+    ])->assertOk();
+    expect($zone->fresh()->name)->toBe('Aster Cinema XL');
+
+    $this->actingAs($admin)->post(route('product-floor-zones.store', $product->id), [
+        'name' => '', 'dims' => '1x1',
+    ])->assertStatus(302)->assertInvalid('name');
+
+    $this->actingAs($admin)->delete(route('product-floor-zones.delete', $zone->id))->assertOk();
+    expect(FloorZone::where('id', $zone->id)->exists())->toBeFalse();
 });

@@ -55,8 +55,8 @@
               </div>
               <div class="pt-1 flex flex-wrap items-center gap-4">
                 <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $p['price'] }}</span>
-                <a @spa href="/product/{{ $p['id'] }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Full Details <x-icon name="arrow-right" class="w-3.5 h-3.5" /></a>
-                <a @spa href="{{ route('contact') }}" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Request This Spec &rarr;</a>
+                <a @spa href="/product/{{ $p['slug'] }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Full Details <x-icon name="arrow-right" class="w-3.5 h-3.5" /></a>
+                <button type="button" onclick='openEnquiryModal(@json($p['name'] . ' — Spec Pack'), {{ $p['id'] }}, "")' class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Request This Spec &rarr;</button>
               </div>
               <div class="collection-specs hidden pt-4 border-t border-[#f0ede6] space-y-3">
                 <div>

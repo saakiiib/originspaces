@@ -113,35 +113,35 @@
               </div>
               <div id="spec-breakdown" class="mt-3 pt-3 border-t border-[#EAE7DF] space-y-1 text-[11px] font-mono text-[#6b7280]"></div>
             </div>
-            <a id="spec-cta" href="#" onclick="openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, '');return false;" class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
+            <button type="button" id="spec-cta" onclick='openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, "")' class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
               <span>Request Information &amp; Spec Pack</span>
               <x-icon name="arrow-right" class="w-4 h-4" />
-            </a>
+            </button>
             <p class="text-[11px] text-center text-[#6b7280]">Includes personalised drawing set &amp; site feasibility review.</p>
           </div>
         </div>
       </aside>
 
       <!-- RIGHT: Viewer -->
-      <section class="w-full lg:w-[64%] xl:w-[66%] flex flex-col gap-5 min-w-0">
+      <section class="w-full lg:w-[64%] xl:w-[66%] flex flex-col gap-5 min-w-0 mt-8 scroll-mt-28">
         <!-- Media tabs -->
         <div class="bg-white border border-[#e5e2da] rounded-xl p-2 shadow-xs flex items-center justify-between gap-2 overflow-x-auto">
           <div class="flex items-center gap-1 sm:gap-2">
-            <button id="tab-btn-3d" onclick="switchMediaTab('3d')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
+            <button id="tab-btn-3d" onclick="switchMediaTab('3d')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
               <x-icon name="box" class="w-4 h-4 text-gray-400" />
-              <span>3D Interactive</span>
+              <span class="hidden min-[420px]:inline">3D Interactive</span>
             </button>
-            <button id="tab-btn-video" onclick="switchMediaTab('video')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-[#181B20] text-white shadow">
+            <button id="tab-btn-video" onclick="switchMediaTab('video')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-[#181B20] text-white shadow">
               <x-icon name="video" class="w-4 h-4 text-[#c5a880]" />
-              <span>Video</span>
+              <span class="hidden min-[420px]:inline">Video</span>
             </button>
-            <button id="tab-btn-gallery" onclick="switchMediaTab('gallery')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
+            <button id="tab-btn-gallery" onclick="switchMediaTab('gallery')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
               <x-icon name="image" class="w-4 h-4 text-gray-400" />
-              <span id="gallery-tab-label">Gallery</span>
+              <span id="gallery-tab-label" class="hidden min-[420px]:inline">Gallery</span>
             </button>
-            <button id="tab-btn-floor" onclick="switchMediaTab('floor')" class="px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
+            <button id="tab-btn-floor" onclick="switchMediaTab('floor')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
               <x-icon name="layout" class="w-4 h-4 text-gray-400" />
-              <span>Floor Plan</span>
+              <span class="hidden min-[420px]:inline">Floor Plan</span>
             </button>
           </div>
           <div class="hidden md:block text-xs text-[#786348] font-mono pr-2 shrink-0">Selected: <strong id="viewer-finish-name" class="text-[#1a1d24]">—</strong></div>
@@ -175,7 +175,7 @@
         <!-- Gallery stage -->
         <div id="media-gallery" class="hidden bg-white border border-[#e5e2da] rounded-2xl overflow-hidden shadow-xs p-4 sm:p-6">
           <div class="relative rounded-xl overflow-hidden border border-[#e5e2da]" id="gallery-fullscreen-wrap">
-            <img id="gallery-main" src="" alt="Product gallery view" class="w-full aspect-[16/10] object-cover" />
+            <img id="gallery-main" src="" alt="Product gallery view" class="w-full h-auto block" style="width:100%;height:auto;display:block" />
             <span id="gallery-cat-chip" class="absolute top-3 left-3 px-2.5 py-1 rounded bg-[#181b20]/80 backdrop-blur text-white text-[10px] font-mono uppercase tracking-widest">—</span>
             <div class="absolute top-3 right-3 flex items-center gap-2">
               <span id="gallery-counter" class="px-2.5 py-1 rounded bg-[#181b20]/80 backdrop-blur text-white text-[10px] font-mono">1 / 1</span>
@@ -188,7 +188,7 @@
             <div id="gallery-caption" class="absolute bottom-0 left-0 right-0 px-4 pt-8 pb-3 bg-gradient-to-t from-black/70 to-transparent text-white text-xs"></div>
           </div>
           <div class="mt-3 flex flex-wrap items-center gap-2" id="gallery-plates"></div>
-          <div class="mt-3 grid grid-cols-4 gap-2" id="gallery-thumbs"></div>
+          <div class="mt-3 grid grid-cols-3 sm:grid-cols-4 gap-2" id="gallery-thumbs"></div>
         </div>
 
         <!-- Floor plan stage -->
@@ -235,7 +235,8 @@
         <div class="bg-white border border-[#e5e2da] rounded-2xl p-6 sm:p-8 shadow-xs">
           <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Architectural Heritage &amp; Monocoque Engineering</span>
           <h2 id="narrative-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold mb-3">—</h2>
-          <p id="narrative-body" class="text-sm text-[#374151] leading-relaxed">—</p>
+          <div id="narrative-body" class="text-sm text-[#374151] leading-relaxed">—</div>
+          <ul id="narrative-specs" class="mt-4 space-y-2"></ul>
         </div>
 
         <!-- Spec tables -->
@@ -286,6 +287,15 @@
 <script defer src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
 <script defer src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
 <script defer src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<style>
+/* Gallery stage stays above the sticky site header (z-40) but below popups
+   (enquiry modal z-50, lightbox z-70) so they can cover it */
+#media-gallery{position:relative;z-index:45}
+/* Fullscreen gallery: fixed stage, whole photo fitted */
+#media-gallery:fullscreen{background:#0b0d10;border:none;border-radius:0;padding:1rem;overflow-y:auto}
+#media-gallery:fullscreen #gallery-fullscreen-wrap{height:calc(100vh - 230px);min-height:320px}
+#media-gallery:fullscreen #gallery-main{height:100% !important;width:auto !important;max-width:100%;margin:0 auto;object-fit:contain;background:#000}
+</style>
 @endsection
 @section('script')
 <script>
@@ -541,7 +551,7 @@
       ['video', 'gallery', 'floor', '3d'].forEach(k => {
         document.getElementById('media-' + k).classList.toggle('hidden', k !== tab);
         const b = document.getElementById('tab-btn-' + k);
-        b.className = 'px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ' +
+        b.className = 'px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ' +
           (k === tab ? 'bg-[#181B20] text-white shadow' : 'bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]');
       });
       const v = document.getElementById('spec-video');
@@ -653,11 +663,42 @@
     }
 
     function expandGallery() {
-      const el = document.getElementById('media-gallery');
-      if (!el) return;
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-      else if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+      // Centered popup viewer (shared lightbox): whole photo, arrows, caption, counter.
+      const g = detailGallery();
+      detailLbIdx = Math.min(Math.max(0, gallerySel), Math.max(0, g.length - 1));
+      showDetailLb();
+      document.getElementById('lightbox-modal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     }
+
+    var detailLbIdx = 0;
+    function showDetailLb() {
+      const g = detailGallery();
+      const item = g[detailLbIdx] || g[0];
+      if (!item) return;
+      document.getElementById('lightbox-img').src = item.img;
+      document.getElementById('lightbox-caption').textContent = item.cap;
+      document.getElementById('lightbox-counter').textContent = (detailLbIdx + 1) + ' / ' + g.length;
+    }
+    window.lightboxNav = function (dir) {
+      const modal = document.getElementById('lightbox-modal');
+      if (!modal || modal.classList.contains('hidden')) return;
+      const g = detailGallery();
+      if (!g.length) return;
+      detailLbIdx = (detailLbIdx + dir + g.length) % g.length;
+      showDetailLb();
+    };
+    window.closeLightbox = function () {
+      document.getElementById('lightbox-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+    document.addEventListener('keydown', function (e) {
+      const modal = document.getElementById('lightbox-modal');
+      if (!modal || modal.classList.contains('hidden')) return;
+      if (e.key === 'Escape') window.closeLightbox();
+      if (e.key === 'ArrowRight') window.lightboxNav(1);
+      if (e.key === 'ArrowLeft') window.lightboxNav(-1);
+    });
 
     function setGalleryIdx(i) {
       gallerySel = i;
@@ -677,7 +718,20 @@
     function renderNarrative() {
       const p = currentProduct;
       document.getElementById('narrative-title').textContent = p.name + ', Specified End to End';
-      document.getElementById('narrative-body').textContent = p.tagline + ' Supplied with ' + (p.materials || []).join(', ').toLowerCase() + '. ' + (p.specs && p.specs[0] ? p.specs[0] : '');
+      const body = document.getElementById('narrative-body');
+      if (p.description) {
+        body.innerHTML = p.description;
+      } else {
+        body.textContent = p.tagline + ' Supplied with ' + (p.materials || []).join(', ').toLowerCase() + '. ' + (p.specs && p.specs[0] ? p.specs[0] : '');
+      }
+      const specsEl = document.getElementById('narrative-specs');
+      const bullets = p.specs || [];
+      if (specsEl) {
+        specsEl.innerHTML = bullets.map(s =>
+          `<li class="flex items-start gap-2.5 text-sm text-[#374151] leading-relaxed"><span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#9a7b4f] shrink-0"></span><span>${s}</span></li>`
+        ).join('');
+        specsEl.style.display = bullets.length ? '' : 'none';
+      }
     }
 
     function specRow(k, v) {
@@ -740,15 +794,15 @@
         const on = z.id === activeZone;
         s += `<g onclick="selectZone('${z.id}')" style="cursor:pointer">`;
         s += `<rect x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" fill="${on ? '#2a2f3a' : '#1d2129'}" stroke="${on ? '#c5a880' : '#3a4150'}" stroke-width="${on ? 2 : 1}"/>`;
-        s += `<text x="${z.x + 10}" y="${z.y + 22}" fill="#e5e7eb" font-size="10" font-weight="bold" font-family="monospace">${z.name.toUpperCase()}</text>`;
-        s += `<text x="${z.x + 10}" y="${z.y + 38}" fill="#8b93a1" font-size="9" font-family="monospace">${z.dims}</text>`;
+        s += `<text x="${z.x + 10}" y="${z.y + 22}" fill="#e5e7eb" font-size="10" font-weight="bold" font-family="monospace">${(z.name || '').toUpperCase()}</text>`;
+        s += `<text x="${z.x + 10}" y="${z.y + 38}" fill="#8b93a1" font-size="9" font-family="monospace">${z.dims || ''}</text>`;
         s += '</g>';
       });
       svg.innerHTML = s;
       const z = FLOOR_ZONES.find(x => x.id === activeZone) || FLOOR_ZONES[0];
       if (!z) return;
-      document.getElementById('floor-zone-name').textContent = z.name;
-      document.getElementById('floor-zone-desc').textContent = z.desc;
+      document.getElementById('floor-zone-name').textContent = z.name || '—';
+      document.getElementById('floor-zone-desc').textContent = z.desc || '';
       const stats = [
         ['Expanded', p.dimensions || '—'],
         ['Lead Time', p.leadTime || '—'],

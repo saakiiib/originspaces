@@ -750,7 +750,8 @@
     </div>
   </div>
 
-  <!-- Featured Products - from index.html, placed after collections -->
+  <!-- Featured Products - real products flagged Featured in admin; hidden unless 2+ -->
+  @if($featuredCards->count() > 1)
   <section id="featured-products" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="mb-12">
@@ -760,10 +761,40 @@
         </div>
       </div>
       <div class="space-y-8">
+        @foreach($featuredCards as $fp)
+        <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="{{ $fp['categorySlug'] }}">
+          <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 {{ $loop->odd ? 'lg:order-1' : 'lg:order-2' }}">
+            <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">{{ $fp['category'] }}</span>
+            <h3 class="font-serif text-3xl sm:text-4xl text-[#1a1d24] font-semibold leading-tight">{{ $fp['name'] }}</h3>
+            <p class="text-sm text-[#374151] leading-relaxed">{{ $fp['tagline'] }}</p>
+            <div class="grid grid-cols-2 gap-4 pt-4 border-t border-[#f0ede6]">
+              <div><span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280]">Dimensions</span><span class="block text-sm font-semibold text-[#1a1d24] mt-0.5">{{ $fp['dimensions'] ?: '—' }}</span></div>
+              <div><span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280]">Lead Time</span><span class="block text-sm font-semibold text-[#1a1d24] mt-0.5">{{ $fp['leadTime'] ?: '—' }}</span></div>
+            </div>
+            @if(count($fp['materials'] ?? []))
+            <div>
+              <span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280] mb-2">Materials</span>
+              <div class="flex flex-wrap gap-1.5">@foreach(array_slice($fp['materials'], 0, 4) as $m)<span class="text-[11px] px-2.5 py-1 rounded-full bg-[#FAF9F5] border border-[#e5e2da] text-[#374151] font-medium">{{ $m }}</span>@endforeach</div>
+            </div>
+            @endif
+            <div class="pt-2 flex flex-wrap items-center gap-5">
+              <button onclick="enquireProduct('{{ $fp['slug'] }}')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
+              <a @spa href="/product/{{ $fp['slug'] }}" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
+              <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>
+            </div>
+          </div>
+          <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-[460px] order-1 {{ $loop->odd ? 'lg:order-2' : 'lg:order-1' }}">
+            <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <span class="absolute top-4 left-4 px-2.5 py-1 bg-white/90 backdrop-blur text-[10px] font-mono rounded shadow">{{ $fp['modelCode'] }}</span>
+          </div>
+        </div>
+        @endforeach
+        {{-- Legacy hardcoded showcase (Aster/Nova/Koto/Sloane) disabled — featured loop above is DB-driven. Safe to delete this @if(false) block. --}}
+        @if(false)
         <!-- Aster -->
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
-            <button onclick="openEnquiryModal('The Aster Expandable Modular Villa')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
+            <button onclick="enquireProduct('hs-exp-01')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
               <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Dual-Wing Architecture</span>
@@ -783,7 +814,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Aster Expandable Modular Villa')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
+              <button onclick="enquireProduct('hs-exp-01')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-01" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 8 to 10 weeks<br />from sign-off of survey</span>
             </div>
@@ -796,7 +827,7 @@
         <!-- Nova -->
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
-            <button onclick="openEnquiryModal('The Nova Grand Expandable Estate')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
+            <button onclick="enquireProduct('hs-exp-03')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
               <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Flagship Residence</span>
@@ -817,7 +848,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Nova Grand Expandable Estate')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
+              <button onclick="enquireProduct('hs-exp-03')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-03" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 8 to 12 weeks<br />from sign-off of survey</span>
             </div>
@@ -830,7 +861,7 @@
         <!-- Koto -->
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="homes">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-2">
-            <button onclick="openEnquiryModal('The Koto Studio Expandable Pod')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
+            <button onclick="enquireProduct('hs-exp-02')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
               <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Expandable Homes &middot; Compact Studio</span>
@@ -851,7 +882,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Koto Studio Expandable Pod')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
+              <button onclick="enquireProduct('hs-exp-02')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-exp-02" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 6 to 8 weeks<br />from sign-off of survey</span>
             </div>
@@ -864,7 +895,7 @@
         <!-- Sloane -->
         <div class="featured-card group grid grid-cols-1 lg:grid-cols-12 items-stretch bg-white rounded-2xl border border-[#e5e2da] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300" data-cat="interiors">
           <div class="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-center space-y-4 relative order-2 lg:order-1">
-            <button onclick="openEnquiryModal('The Sloane Kitchen Suite')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
+            <button onclick="enquireProduct('hs-ktc-01')" title="Save to portfolio" class="absolute top-5 right-5 w-9 h-9 rounded-lg border border-[#e5e2da] bg-white text-[#6b7280] hover:text-[#9a7b4f] hover:border-[#9a7b4f] flex items-center justify-center transition-all">
               <x-icon name="bookmark" class="w-4 h-4" />
             </button>
             <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">Kitchen &middot; Minimalist Architectural</span>
@@ -885,7 +916,7 @@
               </div>
             </div>
             <div class="pt-2 flex flex-wrap items-center gap-5">
-              <button onclick="openEnquiryModal('The Sloane Kitchen Suite')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
+              <button onclick="enquireProduct('hs-ktc-01')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/hs-ktc-01" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
               <span class="text-[11px] font-mono text-[#6b7280] leading-relaxed">Lead time: 10 to 14 weeks<br />from sign-off of architectural survey</span>
             </div>
@@ -895,9 +926,11 @@
             <span class="absolute top-4 left-4 px-2.5 py-1 bg-white/90 backdrop-blur text-[10px] font-mono rounded shadow">HS-KTC-01/SLN</span>
           </div>
         </div>
+        @endif
       </div>
     </div>
   </section>
+  @endif
 
   <section id="spaces-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
@@ -1698,7 +1731,7 @@
                 <div class="font-semibold text-[#1a1d24]">Featured in Space</div>
                 <div class="text-[#6b7280]">${d.product}</div>
                 <div class="text-[#9a7b4f] font-mono text-[10px] mt-1">${d.material.slice(0, 34)}...</div>
-                <button onclick="openEnquiryModal('${d.product}')" class="mt-2 text-[#9a7b4f] font-semibold hover:underline">Explore Product &rarr;</button>
+                <button onclick="enquireProduct('${d.product.replace(/'/g, "\\'")}')" class="mt-2 text-[#9a7b4f] font-semibold hover:underline">Explore Product &rarr;</button>
               </div>
             </div>
           </div>
@@ -2400,8 +2433,18 @@
 
 
     // Open detailed specification modal
+    // Resolve a product by numeric id, slug, or name (static cards use slugs).
+    function findProduct(key) {
+      return PRODUCTS.find(p => p.id === key || p.slug === key || p.name === key) || null;
+    }
+    // Single consistent entry point: every product-specific enquiry carries its id.
+    function enquireProduct(key) {
+      var p = findProduct(key);
+      if (p) openEnquiryModal(p.name + ' — Spec Pack', p.id, '');
+      else openEnquiryModal(key);
+    }
     function openProductDetailModal(productId) {
-      const product = PRODUCTS.find(p => p.id === productId);
+      const product = findProduct(productId);
       if (!product) return;
 
       const container = document.getElementById('product-detail-content');
@@ -2495,7 +2538,7 @@
 
             <!-- Main CTA -->
             <div class="pt-4 border-t border-[#e5e2da]">
-              <button onclick="closeProductDetailModal(); openEnquiryModal('${product.name}')" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
+              <button onclick="closeProductDetailModal(); openEnquiryModal(product.name + ' — Spec Pack', product.id, '')" class="w-full py-3.5 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
                 <span>Request Quotation &amp; Specification Pack</span>
                 <x-icon name="arrow-right" class="w-4 h-4" />
               </button>

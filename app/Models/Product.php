@@ -61,6 +61,11 @@ class Product extends Model
         return $this->hasMany(ProductDocument::class)->orderBy('sort_order');
     }
 
+    public function floorZones(): HasMany
+    {
+        return $this->hasMany(FloorZone::class)->orderBy('sort_order');
+    }
+
     /** Effective video: product override else category video. */
     public function effectiveVideoUrl(): ?string
     {

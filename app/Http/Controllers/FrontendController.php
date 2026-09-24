@@ -50,6 +50,7 @@ class FrontendController extends Controller
 
         $productsJson = $products->map(fn ($p) => $this->productCard($p))->values();
         $featuredJson = $featured->map(fn ($p) => $this->productCard($p))->values();
+        $featuredCards = $products->where('is_featured', true)->values()->map(fn ($p) => $this->productCard($p))->values();
         $categoriesJson = $categories->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])->values();
         $faqsJson = $this->faqsJson();
         $faqCatsJson = $this->faqCatsJson();
@@ -58,7 +59,7 @@ class FrontendController extends Controller
         $filesJson = $this->filesJson(6);
         $zonesJson = $this->zonesJson();
 
-        return spa('frontend.index', compact('productsJson', 'featuredJson', 'categoriesJson', 'faqsJson', 'faqCatsJson', 'galleryJson', 'galleryCatsJson', 'filesJson', 'zonesJson'));
+        return spa('frontend.index', compact('productsJson', 'featuredJson', 'featuredCards', 'categoriesJson', 'faqsJson', 'faqCatsJson', 'galleryJson', 'galleryCatsJson', 'filesJson', 'zonesJson'));
     }
 
     public function collections(Request $request)
@@ -123,7 +124,7 @@ class FrontendController extends Controller
             'glazing' => $this->optsJson($options->get('glazing', collect())),
             'upgrade' => $this->optsJson($options->get('upgrade', collect())),
         ];
-        $zonesJson = $this->zonesJson();
+        $zonesJson = $this->zonesJson($product->id);
         $relatedJson = $related->map(fn ($p) => $this->productCard($p))->values();
         $faqsJson = $this->faqsJson(4);
         $docsJson = $product->documents->map(fn ($d) => ['title' => $d->title, 'url' => url($d->file)])->values();
@@ -264,7 +265,7 @@ class FrontendController extends Controller
     private function productCard(Product $p): array
     {
         return [
-            'id' => $p->slug,
+            'id' => $p->id,
             'slug' => $p->slug,
             'modelCode' => $p->model_code,
             'name' => $p->name,
@@ -400,16 +401,22 @@ class FrontendController extends Controller
         ])->values();
     }
 
-    private function zonesJson()
+    private function zonesJson(?int $productId = null)
     {
-        return FloorZone::where('status', true)->orderBy('sort_order')
-            ->get()->map(fn ($z, $i) => [
-                'id' => 'zone-'.$z->id,
-                'name' => $z->name,
-                'desc' => $z->desc,
-                'dims' => $z->dims,
-                'sort' => $i,
-            ])->values();
+        // Product-specific zones replace the global set when they exist;
+        // products without their own zones keep showing the global set.
+        $specific = FloorZone::where('status', true)->where('product_id', $productId)
+            ->orderBy('sort_order')->get();
+        $zones = $specific->isNotEmpty() ? $specific : FloorZone::where('status', true)->whereNull('product_id')
+            ->orderBy('sort_order')->get();
+
+        return $zones->map(fn ($z, $i) => [
+            'id' => 'zone-'.$z->id,
+            'name' => $z->name,
+            'desc' => $z->desc,
+            'dims' => $z->dims,
+            'sort' => $i,
+        ])->values();
     }
 
     private function seo($pageKey = null, $title = null, $description = null, $keywords = null, $image = null)
