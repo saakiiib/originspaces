@@ -535,6 +535,9 @@
 
     function switchMediaTab(tab) {
       activeMediaTab = tab;
+      /* The 3D stage is hidden at init so the canvas boots at fallback width —
+         re-fit once the tab is visible. */
+      if (tab === '3d') setTimeout(fitStage, 30);
       ['video', 'gallery', 'floor', '3d'].forEach(k => {
         document.getElementById('media-' + k).classList.toggle('hidden', k !== tab);
         const b = document.getElementById('tab-btn-' + k);
@@ -760,20 +763,68 @@
     /* 3D massing viewer (Three.js) */
     var renderer3d = null, scene3d = null, camera3d = null, controls3d = null, villa3d = null;
     var unfoldT = 1, explodeT = 0, spinOn = true, raf3d = false;
+    /* Three.js CDN scripts in the style section only run on full page loads — the
+       SPA engine never executes script-src tags on navigation. Load on demand so the
+       viewer also boots when arriving via SPA, reusing one cached promise. */
+    var THREE_URLS = [
+      'https://unpkg.com/three@0.147.0/build/three.min.js',
+      'https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js',
+      'https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js'
+    ];
+    function threeReady() {
+      return (typeof THREE !== 'undefined') && THREE.OrbitControls && THREE.GLTFLoader;
+    }
+    function loadScriptOnce(src) {
+      var done = document.querySelector('script[data-dyn3d="' + src + '"]');
+      if (done) return;
+      var el = document.createElement('script');
+      el.src = src;
+      el.async = false;
+      el.setAttribute('data-dyn3d', src);
+      el.onerror = function () { if (el.parentNode) el.parentNode.removeChild(el); };
+      document.head.appendChild(el);
+    }
+    function ensureThree() {
+      if (window.__threePromise) return window.__threePromise;
+      window.__threePromise = new Promise(function (resolve) {
+        var tries = 0;
+        THREE_URLS.forEach(function (u) { loadScriptOnce(u); });
+        (function wait() {
+          if (threeReady()) { resolve(true); return; }
+          tries++;
+          if (tries < 80) { setTimeout(wait, 250); return; }
+          window.__threePromise = null;
+          resolve(false);
+        })();
+      });
+      return window.__threePromise;
+    }
     function buildCube() {
       const stage = document.getElementById('model3d-stage');
       const label = document.getElementById('model3d-label');
       if (!stage) return;
-      if (typeof THREE === 'undefined') {
-        window.__cubeTries = (window.__cubeTries || 0) + 1;
-        if (window.__cubeTries < 40) {
-          setTimeout(buildCube, 250);
-          return;
+      window.__cubeTries = 0;
+      /* SPA re-navigation re-executes this script with fresh vars — stop the
+         previous page's RAF loop and free its GL context first. */
+      window.__loop3d = (window.__loop3d || 0) + 1;
+      try {
+        if (window.__controls3d && window.__controls3d.dispose) window.__controls3d.dispose();
+        if (window.__renderer3d) {
+          if (window.__renderer3d.dispose) window.__renderer3d.dispose();
+          if (window.__renderer3d.domElement && window.__renderer3d.domElement.parentNode) window.__renderer3d.domElement.parentNode.removeChild(window.__renderer3d.domElement);
         }
-        if (label) label.textContent = '3D unavailable offline';
+      } catch (e) {}
+      window.__controls3d = null;
+      window.__renderer3d = null;
+      if (!threeReady()) {
+        if (label) label.textContent = 'Loading 3D…';
+        ensureThree().then(function (ok) {
+          if (ok) { buildCube(); return; }
+          var late = document.getElementById('model3d-label');
+          if (late) late.textContent = '3D unavailable offline';
+        });
         return;
       }
-      window.__cubeTries = 0;
       stage.querySelectorAll('canvas').forEach(function (c) { c.remove(); });
       const W = stage.clientWidth || 800, H = stage.clientHeight || 440;
       renderer3d = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -791,6 +842,8 @@
       controls3d.maxDistance = 32;
       controls3d.autoRotate = spinOn;
       controls3d.autoRotateSpeed = 0.9;
+      window.__renderer3d = renderer3d;
+      window.__controls3d = controls3d;
       scene3d.add(new THREE.HemisphereLight(0xfff6e8, 0x8a8474, 0.95));
       const sun = new THREE.DirectionalLight(0xffffff, 0.75);
       sun.position.set(8, 14, 6);
@@ -867,7 +920,9 @@
     function startLoop3d() {
       if (!raf3d) {
         raf3d = true;
+        var gen = window.__loop3d || 0;
         (function loop() {
+          if (gen !== window.__loop3d) return;
           requestAnimationFrame(loop);
           if (controls3d && activeMediaTab === '3d') controls3d.update();
           if (renderer3d && scene3d && camera3d && activeMediaTab === '3d') renderer3d.render(scene3d, camera3d);
