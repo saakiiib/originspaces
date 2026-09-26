@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Contact;
+use App\Models\Enquiry;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -23,7 +27,13 @@ class HomeController extends Controller
 
     public function adminHome()
     {
-        return view('admin.pages.dashboard');
+        $productCount = Product::count();
+        $categoryCount = Category::count();
+        $enquiryCount = Enquiry::count();
+        $contactCount = Contact::count();
+        $recentEnquiries = Enquiry::latest()->limit(5)->get();
+
+        return view('admin.pages.dashboard', compact('productCount', 'categoryCount', 'enquiryCount', 'contactCount', 'recentEnquiries'));
     }
 
     public function managerHome()
