@@ -69,7 +69,62 @@
         </div>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar-sm bg-danger-subtle text-danger rounded d-inline-flex align-items-center justify-content-center">
+                            <x-icon name="download" class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold fs-12 mb-1">Downloads</p>
+                            <h4 class="mb-0">{{ $downloadCount ?? 0 }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar-sm bg-secondary-subtle text-secondary rounded d-inline-flex align-items-center justify-content-center">
+                            <x-icon name="image" class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold fs-12 mb-1">Gallery Items</p>
+                            <h4 class="mb-0">{{ $galleryCount ?? 0 }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar-sm bg-success-subtle text-success rounded d-inline-flex align-items-center justify-content-center">
+                            <x-icon name="calendar" class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold fs-12 mb-1">Enquiries (7 days)</p>
+                            <h4 class="mb-0">{{ $enquiriesThisWeek ?? 0 }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card">
+                    <div class="card-body d-flex align-items-center gap-3">
+                        <span class="avatar-sm bg-warning-subtle text-warning rounded d-inline-flex align-items-center justify-content-center">
+                            <x-icon name="message-circle" class="w-5 h-5" />
+                        </span>
+                        <div>
+                            <p class="text-muted text-uppercase fw-semibold fs-12 mb-1">Contacts (7 days)</p>
+                            <h4 class="mb-0">{{ $contactsThisWeek ?? 0 }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <h5 class="card-title mb-0 flex-grow-1">Recent Enquiries</h5>
@@ -100,6 +155,102 @@
                                     </tbody>
                                 </table>
                             </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h5 class="card-title mb-0 flex-grow-1">Recent Contacts</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (($recentContacts ?? collect())->isEmpty())
+                            <p class="text-muted mb-0">No contacts yet.</p>
+                        @else
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($recentContacts as $contact)
+                                            <tr>
+                                                <td>{{ $contact->name }}</td>
+                                                <td>{{ $contact->email }}</td>
+                                                <td>{{ $contact->subject ?? '—' }}</td>
+                                                <td>{{ $contact->created_at?->format('d M Y') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h5 class="card-title mb-0 flex-grow-1">Top Downloads</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (($topDownloads ?? collect())->isEmpty())
+                            <p class="text-muted mb-0">No downloads yet.</p>
+                        @else
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Format</th>
+                                            <th class="text-end">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($topDownloads as $download)
+                                            <tr>
+                                                <td>{{ $download->title }}</td>
+                                                <td>{{ $download->format ?? '—' }}</td>
+                                                <td class="text-end">{{ $download->downloads_count ?? 0 }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h5 class="card-title mb-0 flex-grow-1">Products by Category</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (($productsByCategory ?? collect())->isEmpty())
+                            <p class="text-muted mb-0">No categories yet.</p>
+                        @else
+                            @foreach ($productsByCategory as $category)
+                                @php($maxCount = max(1, $productsByCategory->max('products_count')))
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="fw-medium">{{ $category->name }}</span>
+                                        <span class="text-muted">{{ $category->products_count }}</span>
+                                    </div>
+                                    <div class="progress" style="height: 6px;">
+                                        <div class="progress-bar bg-primary" style="width: {{ round($category->products_count / $maxCount * 100) }}%"></div>
+                                    </div>
+                                </div>
+                            @endforeach
                         @endif
                     </div>
                 </div>
