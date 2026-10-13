@@ -540,199 +540,46 @@
           </h2>
         </div>
         <div class="mt-4 md:mt-0 flex md:justify-end">
-          <button onclick="openCollectionsModal('All')" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
+          <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
             <span>Browse Full Catalog</span>
             <x-icon name="arrow-up-right" class="w-4 h-4" />
-          </button>
+          </a>
         </div>
       </div>
 
-      <!-- Large Editorial Category Blocks -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <!-- 1. The Architectural Kitchen (Wide 7 cols, highlighted) -->
-        <div
-          id="collection-card-col-kitchen"
-          onclick="openCollectionsModal('Kitchen')"
-          class="lg:col-span-7 group cursor-pointer relative overflow-hidden bg-white border-2 border-[#9a7b4f] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
-        >
-          <div class="aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden relative">
-            <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=85"
-              alt="The Architectural Kitchen"
-              class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
+      <!-- Dynamic Collection Cards: featured products -->
+      @if($featuredCards->count())
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @foreach($featuredCards as $fp)
+        <a @spa href="/product/{{ $fp['slug'] }}" class="group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] hover:border-[#9a7b4f] rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col">
+          <div class="aspect-[16/10] w-full overflow-hidden relative">
+            <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
             <div class="absolute top-4 left-4 flex items-center gap-2">
-              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">
-                Featured &middot; Kitchen
-              </span>
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">
-                14 Suites
-              </span>
+              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">Featured &middot; {{ $fp['category'] }}</span>
+              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">{{ $fp['modelCode'] }}</span>
             </div>
           </div>
-          <div class="p-7 sm:p-9 relative bg-white">
+          <div class="p-7 sm:p-9 relative bg-white flex-1 flex flex-col">
             <div class="flex items-center justify-between mb-2">
-              <span class="text-[11px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold">
-                Bespoke Culinary Engineering
-              </span>
-              <span class="w-8 h-8 rounded-full bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
-                <x-icon name="arrow-up-right" class="w-4 h-4 text-white" />
+              <span class="text-[11px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold">{{ $fp['category'] }}</span>
+              <span class="w-8 h-8 rounded-full border border-[#e5e2da] group-hover:border-[#9a7b4f] group-hover:bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
+                <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors" />
               </span>
             </div>
-            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
-              The Architectural Kitchen
-            </h3>
-            <p class="mt-2 text-sm text-[#374151] leading-relaxed">
-              Monumental stone surfaces, integrated concealed cabinetry, and culinary engineering.
-            </p>
-          </div>
-        </div>
-
-        <!-- 2. Sanctuary & Bath (5 cols) -->
-        <div
-          id="collection-card-col-bath"
-          onclick="openCollectionsModal('Bath & Wellness')"
-          class="lg:col-span-5 group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] rounded-2xl shadow-xs hover:shadow-md transition-all duration-300 flex flex-col"
-        >
-          <div class="aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[280px] w-full overflow-hidden relative">
-            <img
-              src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000&q=85"
-              alt="Sanctuary & Bath"
-              class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">
-                Bath &amp; Wellness &middot; 18 Pieces
-              </span>
+            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">{{ $fp['name'] }}</h3>
+            <p class="mt-2 text-sm text-[#374151] leading-relaxed line-clamp-2">{{ $fp['tagline'] }}</p>
+            <div class="mt-auto pt-4 flex items-center justify-between">
+              <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>
+              <span class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] group-hover:text-[#9a7b4f] font-semibold transition-colors">View Details &rarr;</span>
             </div>
           </div>
-          <div class="p-7 sm:p-9 relative bg-white flex-1 flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-2">
-                <span class="text-[11px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold">
-                  Sensory Monoliths
-                </span>
-                <span class="w-8 h-8 rounded-full border border-[#e5e2da] group-hover:border-[#9a7b4f] group-hover:bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
-                  <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors" />
-                </span>
-              </div>
-              <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
-                Sanctuary &amp; Bath
-              </h3>
-              <p class="mt-2 text-sm text-[#374151] leading-relaxed">
-                Sculptural stone monoliths, mineral soak tubs, and calibrated thermostatic water delivery.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Sculptural Illumination (4 cols) -->
-        <div
-          id="collection-card-col-lighting"
-          onclick="openCollectionsModal('Sculptural Lighting')"
-          class="lg:col-span-4 group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] rounded-2xl shadow-xs hover:shadow-md transition-all duration-300"
-        >
-          <div class="aspect-[16/11] w-full overflow-hidden relative">
-            <img
-              src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=2000&q=85"
-              alt="Sculptural Illumination"
-              class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">
-                Sculptural Lighting &middot; 12 Pieces
-              </span>
-            </div>
-          </div>
-          <div class="p-6 sm:p-7 bg-white">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
-                Atmospheric Serenity
-              </span>
-              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
-            </div>
-            <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
-              Sculptural Illumination
-            </h3>
-            <p class="mt-2 text-xs sm:text-sm text-[#374151] line-clamp-2">
-              Mouth-blown borosilicate fluted glass, hand-carved alabaster, and 2400K warm-dim optics.
-            </p>
-          </div>
-        </div>
-
-        <!-- 4. Architectural Joinery (4 cols) -->
-        <div
-          id="collection-card-col-joinery"
-          onclick="openCollectionsModal('Architectural Joinery')"
-          class="lg:col-span-4 group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] rounded-2xl shadow-xs hover:shadow-md transition-all duration-300"
-        >
-          <div class="aspect-[16/11] w-full overflow-hidden relative">
-            <img
-              src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2000&q=85"
-              alt="Architectural Joinery"
-              class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">
-                Joinery &middot; 9 Suites
-              </span>
-            </div>
-          </div>
-          <div class="p-6 sm:p-7 bg-white">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
-                Datum Alignment
-              </span>
-              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
-            </div>
-            <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
-              Architectural Joinery
-            </h3>
-            <p class="mt-2 text-xs sm:text-sm text-[#374151] line-clamp-2">
-              Floor-to-ceiling reeded timber, acoustic panelling, and bespoke leather dressing suites.
-            </p>
-          </div>
-        </div>
-
-        <!-- 5. Hardware & Tactile Details (4 cols) -->
-        <div
-          id="collection-card-col-hardware"
-          onclick="openCollectionsModal('Hardware & Surfaces')"
-          class="lg:col-span-4 group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] rounded-2xl shadow-xs hover:shadow-md transition-all duration-300"
-        >
-          <div class="aspect-[16/11] w-full overflow-hidden relative">
-            <img
-              src="https://images.unsplash.com/photo-1558211553-d9326f10c561?auto=format&fit=crop&w=2000&q=85"
-              alt="Hardware & Tactile Details"
-              class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-            <div class="absolute top-4 left-4">
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">
-                Hardware &middot; 26 Pieces
-              </span>
-            </div>
-          </div>
-          <div class="p-6 sm:p-7 bg-white">
-            <div class="flex items-center justify-between mb-1.5">
-              <span class="text-[10px] uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-semibold">
-                Single-Billet Brass
-              </span>
-              <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f]" />
-            </div>
-            <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">
-              Hardware &amp; Details
-            </h3>
-            <p class="mt-2 text-xs sm:text-sm text-[#374151] line-clamp-2">
-              Solid turned architectural brassware, guilloche knurling, and unlacquered living patinas.
-            </p>
-          </div>
-        </div>
+        </a>
+        @endforeach
       </div>
+      @else
+        <p class="text-center text-sm text-[#6b7280] py-10">Collections are being curated — check back soon.</p>
+      @endif
 
     </div>
   </section>
@@ -751,7 +598,7 @@
   </div>
 
   <!-- Featured Products - real products flagged Featured in admin; hidden unless 2+ -->
-  @if($featuredCards->count() > 1)
+  @if(false && $featuredCards->count() > 1)
   <section id="featured-products" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="mb-12">
