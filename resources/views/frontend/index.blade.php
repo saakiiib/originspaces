@@ -168,7 +168,7 @@
   </section>
 
   <!-- UK Applications Showcase Section - light beige, tabbed split card -->
-  <section id="applications-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+  <section id="applications-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-6xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4 shadow-xs">
@@ -215,7 +215,7 @@
   </section>
 
   <!-- Custom Factory Order Configurator Section - position 3 after applications -->
-  <section id="custom-build-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da] relative">
+  <section id="custom-build-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da] relative">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-14">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#9a7b4f]/30 text-[#9a7b4f] text-xs font-mono font-semibold uppercase tracking-[0.2em] mb-4">
@@ -932,7 +932,7 @@
   </section>
   @endif
 
-  <section id="spaces-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
+  <section id="spaces-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
         <div>
@@ -956,30 +956,30 @@
   </section>
 
   <!-- Trust & Compliance Section -->
-  <section id="trust-standards-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-[#e5e2da]">
+  <section id="trust-standards-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-3xl mx-auto mb-10">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F5] border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4">
           <x-icon name="shield-check" class="w-3.5 h-3.5" />
           <span>UK Standards &amp; Certification Guarantee</span>
         </div>
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
+        <h2 hidden class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
           Trust &amp; Compliance Guarantee
         </h2>
-        <p class="text-sm sm:text-[15px] text-[#374151] leading-relaxed">
+        <p hidden class="text-sm sm:text-[15px] text-[#374151] leading-relaxed">
           Importing directly from specialised modular facilities offers world-class precision engineering at unmatched value. We ensure every expandable unit meets stringent UK Building Regulations, electrical conformance, and full transport logistics.
         </p>
       </div>
 
       <!-- Category Pills -->
-      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
+      <div hidden class="flex flex-wrap items-center justify-center gap-2 mb-10">
         <button onclick="filterTrust('all', this)" class="trust-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Certifications &amp; Standards (9)</button>
         <button onclick="filterTrust('codes', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">UK Building Codes &amp; Safety</button>
         <button onclick="filterTrust('warranties', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Warranties &amp; Protection</button>
         <button onclick="filterTrust('import', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Import, Customs &amp; Inspection</button>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div hidden class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <!-- 1 -->
         <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
           <div class="flex items-center justify-between mb-3">
@@ -1155,8 +1155,39 @@
     </div>
   </section>
 
+  <!-- Taken out of hidden trust section -->
+  <section class="py-12 md:py-16 px-4 sm:px-6 lg:px-10 bg-[#181b20] border-b border-[#2d3139]">
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-[#181b20] text-white rounded-2xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        <div class="lg:col-span-4">
+          <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a880] font-semibold block mb-2.5">Guaranteed Buyer Peace of Mind</span>
+          <h3 class="font-serif text-2xl sm:text-[28px] font-semibold leading-snug">How We Protect Your UK Import Order</h3>
+          <p class="text-[13px] text-[#c9c4b7] mt-2.5 leading-relaxed">From Chinese factory floor to your UK site, your order is secured by milestone-based payments, independent video inspection, and complete customs management.</p>
+          <button onclick="openEnquiryModal('Full UK Compliance Pack')" class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[11px] font-semibold uppercase tracking-[0.14em] transition-all">Request Full UK Compliance Pack (PDF) <x-icon name="arrow-right" class="w-3.5 h-3.5" /></button>
+        </div>
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">01</span>
+            <h4 class="text-sm font-semibold mb-1.5">CAD Sign-off First</h4>
+            <p class="text-xs text-[#9ca3af] leading-relaxed">Every electrical outlet, window position, and room divider is agreed in detailed CAD drawings before manufacturing starts.</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">02</span>
+            <h4 class="text-sm font-semibold mb-1.5">Live Video PDI Test</h4>
+            <p class="text-xs text-[#9ca3af] leading-relaxed">You inspect the folded &amp; unfolded unit via live video with watertight monsoon spray tests before container loading.</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">03</span>
+            <h4 class="text-sm font-semibold mb-1.5">UK Port to Plot</h4>
+            <p class="text-xs text-[#9ca3af] leading-relaxed">Customs, VAT, UK port clearance, and crane flatbed delivery are coordinated door-to-door with complete insurance.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Craftsmanship Section - interactive material explorer from index.html -->
-  <section id="craftsmanship" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+  <section id="craftsmanship" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#e5e2da] mb-12">
         <div>
@@ -1270,7 +1301,7 @@
   </section>
 
   <!-- Gallery Section - matches live Gallery anchor -->
-  <section id="gallery-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+  <section id="gallery-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="text-center max-w-2xl mx-auto mb-10">
         <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Gallery</span>
@@ -1307,7 +1338,7 @@
 
 
   <!-- Downloads Section - matches live Downloads anchor -->
-  <section id="downloads-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
+  <section id="downloads-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">Downloads</span>
       <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-4">Spec Resources &amp; Monographs</h2>

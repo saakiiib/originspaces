@@ -52,10 +52,10 @@
       <div>
         <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">UK Applications</span>
         <ul class="space-y-2 text-xs text-[#c9c4b7]">
-          <li><a @spa href="{{ route('home') }}#applications-section" class="hover:text-white transition-colors">Garden Annexes (Caravan Act)</a></li>
-          <li><a @spa href="{{ route('home') }}#applications-section" class="hover:text-white transition-colors">Acoustic Garden Offices</a></li>
-          <li><a @spa href="{{ route('home') }}#applications-section" class="hover:text-white transition-colors">Commercial Coffee Pods</a></li>
-          <li><a @spa href="{{ route('home') }}#applications-section" class="hover:text-white transition-colors">Luxury Glamping Retreats</a></li>
+          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Garden Annexes (Caravan Act)</a></li>
+          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Acoustic Garden Offices</a></li>
+          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Commercial Coffee Pods</a></li>
+          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Luxury Glamping Retreats</a></li>
         </ul>
       </div>
 
