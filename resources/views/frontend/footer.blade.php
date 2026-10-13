@@ -4,7 +4,7 @@
 @endphp
 <footer id="showrooms" class="bg-[#181b20] text-white pt-12 pb-6 px-4 sm:px-6 lg:px-10 border-t border-[#2d3139]">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
       <div class="space-y-4 sm:col-span-2 lg:col-span-1">
         <img src="{{ $footLogo }}" alt="Origin Spaces" class="h-11 w-auto object-contain bg-white rounded-lg px-3 py-1.5" />
         <p class="text-xs text-[#9ca3af] leading-relaxed">

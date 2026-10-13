@@ -69,7 +69,7 @@
             <span class="text-sm sm:text-base uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-bold">Engineering Deployment Timeline</span>
             <span class="text-sm sm:text-[15px] text-[#374151] font-mono font-semibold">Total Deployment Window: 15 to 45 Minutes on Site</span>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <button id="hero-stage-card-1" onclick="setHeroStage(1)" class="p-4 sm:p-5 text-left border rounded-lg transition-all border-[#9a7b4f] bg-white text-[#1a1d24] shadow-md ring-1 ring-[#9a7b4f]">
               <div class="flex items-center justify-between font-mono mb-2">
                 <span id="hero-stage-label-1" class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-[#9a7b4f]">Phase 1</span>
@@ -107,29 +107,29 @@
       </div>
 
       <!-- Action Bar -->
-      <div class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-6xl mx-auto">
-        <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-          <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-6 py-3.5 transition-all duration-300 rounded-md shadow-xs">
+      <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-6xl mx-auto">
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-1.5 w-full sm:w-auto justify-center">
+          <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-5 py-2.5 transition-all duration-300 rounded-md shadow-xs w-full sm:w-auto">
             <span>Explore Collections</span>
             <x-icon name="arrow-right" class="w-4 h-4" />
           </a>
-          <button onclick="openEnquiryModal('General Consultation')" id="hero-request-quote-btn" class="inline-flex items-center justify-center gap-2 border border-[#e5e2da] hover:border-[#9a7b4f] bg-white hover:bg-[#faf9f5] text-[#1a1d24] text-xs uppercase tracking-[0.16em] px-5 py-3.5 rounded-md transition-all font-semibold shadow-2xs">
+          <button onclick="openEnquiryModal('General Consultation')" id="hero-request-quote-btn" class="inline-flex items-center justify-center gap-2 border border-[#e5e2da] hover:border-[#9a7b4f] bg-white hover:bg-[#faf9f5] text-[#1a1d24] text-xs uppercase tracking-[0.16em] px-4 py-2.5 rounded-md transition-all font-semibold shadow-2xs w-full sm:w-auto">
             <x-icon name="layout" class="w-4 h-4 text-[#9a7b4f]" />
             <span>Request Quote</span>
           </button>
         </div>
-        <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" class="inline-flex items-center gap-2 text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-4 py-3 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
+        <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-3 py-2 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
           <x-icon name="file-text" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Download Spec Pack (PDF)</span>
         </button>
-        <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-3">
+        <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-2.5">
           <x-icon name="youtube" class="w-4 h-4" />
           <span>Watch on YouTube</span>
         </a>
       </div>
 
       <!-- Hero 4-Column Specification Strip -->
-      <div class="mt-16 pt-10 border-t border-[#e5e2da]">
+      <div class="mt-8 pt-8 border-t border-[#e5e2da]">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
           <div class="bg-white/80 p-5 rounded-xl border border-[#e5e2da] space-y-1">
             <span class="text-[11px] uppercase font-mono tracking-wider text-[#6b7280] font-semibold block whitespace-nowrap">Chassis Frame</span>
