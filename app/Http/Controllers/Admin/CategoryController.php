@@ -27,7 +27,9 @@ class CategoryController extends Controller
             return DataTables::of($query)
                 ->addIndexColumn()
                 ->addColumn('image', function ($row) {
-                    return '<img src="'.url($row->image).'" class="img-thumbnail" style="max-width: 80px;">';
+                    return $row->image
+                        ? '<img src="'.url($row->image).'" class="img-thumbnail" style="max-width: 80px;">'
+                        : '<span class="text-muted">No image</span>';
                 })
                 ->addColumn('parent_category', function ($row) {
                     return $row->parent ? $row->parent->name : '<span class="text-muted">'.'None'.'</span>';
