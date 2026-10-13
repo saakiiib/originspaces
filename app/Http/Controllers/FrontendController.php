@@ -59,7 +59,7 @@ class FrontendController extends Controller
         $filesJson = $this->filesJson(6);
         $zonesJson = $this->zonesJson();
 
-        return spa('frontend.index', compact('productsJson', 'featuredJson', 'featuredCards', 'categoriesJson', 'faqsJson', 'faqCatsJson', 'galleryJson', 'galleryCatsJson', 'filesJsaon', 'zonesJson'));
+        return spa('frontend.index', compact('productsJson', 'featuredJson', 'featuredCards', 'categoriesJson', 'faqsJson', 'faqCatsJson', 'galleryJson', 'galleryCatsJson', 'filesJson', 'zonesJson'));
     }
 
     public function collections(Request $request)
