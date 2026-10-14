@@ -189,13 +189,13 @@ class ExpandableHouseSeeder extends Seeder
 
         foreach ($items as $it) {
             $product = Product::updateOrCreate(
-                ['slug' => $it['slug']],
+                ['model_code' => $it['model_code']],
                 [
+                    'slug' => $it['slug'],
                     'category_id' => $category->id,
                     'name' => $it['name'],
-                    'model_code' => $it['model_code'],
                     'tagline' => $it['tagline'] ?? $defTagline,
-                    'description' => $it['description'] ?? ('20 ft double-wing expandable modular house. Layout: 2 bedrooms, 1 living room, 1 kitchen and 1 bathroom. Expanded '.$it['dimensions'].'; internal 5,640 × 6,180 × 2,240 mm; stated net weight 3.0 tonnes. Specification describes a galvanized frame, 75 mm exterior EPS wall panels, 50 mm internal partitions, magnesium-based base floor with 2 mm PVC finish, 3 doors, 6 double-glazed sliding windows with screens, bathroom fittings, L-shaped kitchen cabinets, electrical wiring, and hot/cold water and drainage. Layout and appearance images are references.'),
+                    'description' => $it['description'] ?? ('20 ft double-wing expandable modular house. Layout: 2 bedrooms, 1 living room, 1 kitchen and 1 bathroom. '.$it['dimensions'].'; internal 5,640 × 6,180 × 2,240 mm; stated net weight 3.0 tonnes. Specification describes a galvanized frame, 75 mm exterior EPS wall panels, 50 mm internal partitions, magnesium-based base floor with 2 mm PVC finish, 3 doors, 6 double-glazed sliding windows with screens, bathroom fittings, L-shaped kitchen cabinets, electrical wiring, and hot/cold water and drainage. Layout and appearance images are references.'),
                     'dimensions' => $it['dimensions'],
                     'base_price' => $it['price'],
                     'lead_time' => $it['lead_time'] ?? null,
