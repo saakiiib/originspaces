@@ -1,5 +1,5 @@
 @php
-  $navProducts = App\Models\Product::where('status', 1)->orderByDesc('is_featured')->orderBy('sort_order')->take(5)->get(['id', 'name', 'slug', 'model_code', 'base_price', 'hero_image']);
+  $navProducts = App\Models\Product::where('status', 1)->orderByDesc('is_featured')->orderBy('sort_order')->take(4)->get(['id', 'name', 'slug', 'model_code', 'base_price', 'hero_image']);
   $logo = $company->company_logo ? asset('uploads/company/' . $company->company_logo) : asset('resources/frontend-raw/assets/logo.png');
 @endphp
 <header class="sticky top-0 z-40 bg-white border-b border-[#e5e2da] transition-all">
@@ -16,7 +16,7 @@
           <span>Collection</span>
           <x-icon name="chevron-down" class="w-3.5 h-3.5" />
         </a>
-        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full w-[860px] max-w-[90vw] bg-white rounded-2xl border border-[#e5e2da] shadow-2xl p-8 z-50">
+        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full bg-white rounded-2xl border border-[#e5e2da] shadow-2xl p-8 z-50" style="width:1020px;max-width:92vw">
           <div class="flex items-start justify-between pb-5 border-b border-[#e5e2da] mb-6">
             <div>
               <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-1">Featured Products</span>
@@ -27,16 +27,16 @@
               <x-icon name="arrow-up-right" class="w-3.5 h-3.5" />
             </a>
           </div>
-          <div class="grid grid-cols-5 gap-5">
+          <div class="grid grid-cols-4 gap-6">
             @forelse($navProducts as $navProduct)
               <a @spa href="{{ route('product.show', $navProduct->slug) }}" class="text-left group/card block">
-                <img src="{{ $navProduct->hero_image && str_starts_with($navProduct->hero_image, 'http') ? $navProduct->hero_image : ($navProduct->hero_image ? url($navProduct->hero_image) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80') }}" alt="{{ $navProduct->name }}" loading="lazy" class="w-full aspect-[4/5] object-cover rounded-lg mb-2.5" />
+                <img src="{{ $navProduct->hero_image && str_starts_with($navProduct->hero_image, 'http') ? $navProduct->hero_image : ($navProduct->hero_image ? url($navProduct->hero_image) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}" alt="{{ $navProduct->name }}" loading="lazy" class="w-full aspect-[4/3] object-cover rounded-xl mb-3" />
                 <span class="text-[13px] font-semibold text-[#1a1d24] block leading-snug">{{ $navProduct->name }}</span>
                 <span class="text-[11px] font-mono text-[#6b7280]">{{ $navProduct->base_price ? 'From £'.number_format($navProduct->base_price, 0) : $navProduct->model_code }}</span>
               </a>
             @empty
               <a @spa href="{{ route('collections') }}" class="text-left group/card block">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80" alt="Collections" class="w-full aspect-[4/5] object-cover rounded-lg mb-2.5" />
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Collections" class="w-full aspect-[4/3] object-cover rounded-xl mb-3" />
                 <span class="text-[13px] font-semibold text-[#1a1d24] block leading-snug">All Products</span>
                 <span class="text-[11px] font-mono text-[#6b7280]">Browse</span>
               </a>
