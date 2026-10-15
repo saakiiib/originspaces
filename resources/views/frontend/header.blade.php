@@ -50,7 +50,7 @@
     </nav>
 
     <div class="hidden sm:flex items-center gap-2.5">
-      <a @spa href="{{ route('custom-build') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
+      <a @spa href="{{ route('custom-build') }}" hidden style="display:none" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
         <span>Custom Build</span>
         <x-icon name="arrow-right" class="w-3.5 h-3.5" />
       </a>
@@ -74,7 +74,7 @@
     <a @spa href="{{ route('gallery') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Gallery</a>
     <a @spa href="{{ route('contact') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Contact</a>
     <div class="pt-4 border-t border-[#e5e2da] flex flex-col gap-2">
-      <a @spa href="{{ route('custom-build') }}" onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#181b20] text-white text-xs font-semibold uppercase tracking-wider text-center">Custom Build</a>
+      <a @spa href="{{ route('custom-build') }}" hidden onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#181b20] text-white text-xs font-semibold uppercase tracking-wider text-center">Custom Build</a>
       <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider text-center">Explore Products</a>
     </div>
   </div>
