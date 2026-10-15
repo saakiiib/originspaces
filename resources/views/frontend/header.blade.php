@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-      <a @spa href="{{ route('downloads') }}" class="{{ request()->routeIs('downloads') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Downloads</a>
+      <a @spa href="{{ route('downloads') }}" hidden class="{{ request()->routeIs('downloads') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Downloads</a>
       <a @spa href="{{ route('gallery') }}" class="{{ request()->routeIs('gallery') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Gallery</a>
       <a @spa href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Contact</a>
     </nav>
@@ -70,7 +70,7 @@
     <a @spa href="{{ route('home') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Home</a>
     <a @spa href="{{ route('about') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">About</a>
     <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#9a7b4f]">Collection</a>
-    <a @spa href="{{ route('downloads') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Downloads</a>
+    <a @spa href="{{ route('downloads') }}" hidden style="display:none" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Downloads</a>
     <a @spa href="{{ route('gallery') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Gallery</a>
     <a @spa href="{{ route('contact') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Contact</a>
     <div class="pt-4 border-t border-[#e5e2da] flex flex-col gap-2">

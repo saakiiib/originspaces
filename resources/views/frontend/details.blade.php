@@ -89,8 +89,8 @@
             <div id="spec-tech" class="hidden mt-2.5 bg-[#FAF8F5] rounded-xl border border-[#e5e2da] px-4 py-2 text-xs text-[#374151]"></div>
           </div>
 
-          <!-- 7. Downloads -->
-          <div class="pt-3 border-t border-[#EAE7DF]">
+          <!-- 7. Downloads (hidden, kept for later use) -->
+          <div hidden class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-docs')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
                 <x-icon name="book-open" class="w-3.5 h-3.5 text-[#9a7b4f]" />
@@ -271,7 +271,7 @@
                 <div class="p-4">
                   <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">{{ $rel['category'] }}</span>
                   <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug mt-1">{{ $rel['name'] }}</h4>
-                  <span class="font-mono text-[#9a7b4f] font-bold text-xs mt-2 block">{{ $rel['price'] }}</span>
+                  @if($rel['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-xs mt-2 block">{{ $rel['price'] }}</span>@endif
                 </div>
               </a>
             @endforeach
@@ -388,7 +388,7 @@
           <img src="${p.heroImage.replace('w=1200', 'w=200')}" alt="${p.name}" loading="lazy" class="w-14 h-11 object-cover rounded border border-[#e5e2da] shrink-0" />
           <div class="min-w-0">
             <div class="text-[13px] font-semibold text-[#1a1d24] leading-snug">${p.name}</div>
-            <div class="text-[11px] text-[#6b7280] font-mono">${p.modelCode} &middot; ${p.price || ''}</div>
+            <div class="text-[11px] text-[#6b7280] font-mono">${p.modelCode}${(p.price && p.price !== 'On request') ? ' &middot; ' + p.price : ''}</div>
           </div>
         </div>`;
     }

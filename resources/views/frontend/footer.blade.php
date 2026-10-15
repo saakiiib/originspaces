@@ -27,7 +27,7 @@
         <ul class="space-y-2 text-xs text-[#c9c4b7]">
           <li><a @spa href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
           <li><a @spa href="{{ route('about') }}" class="hover:text-white transition-colors">About</a></li>
-          <li><a @spa href="{{ route('downloads') }}" class="hover:text-white transition-colors">Downloads</a></li>
+          <li hidden><a @spa href="{{ route('downloads') }}" class="hover:text-white transition-colors">Downloads</a></li>
           <li><a @spa href="{{ route('home') }}#faq-section" class="hover:text-white transition-colors">FAQ</a></li>
           <li><a @spa href="{{ route('gallery') }}" class="hover:text-white transition-colors">Gallery</a></li>
           <li><a @spa href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact</a></li>

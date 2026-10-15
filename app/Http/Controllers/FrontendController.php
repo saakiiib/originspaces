@@ -50,7 +50,7 @@ class FrontendController extends Controller
 
         $productsJson = $products->map(fn ($p) => $this->productCard($p))->values();
         $featuredJson = $featured->map(fn ($p) => $this->productCard($p))->values();
-        $featuredCards = $products->where('is_featured', true)->values()->map(fn ($p) => $this->productCard($p))->values();
+        $featuredCards = $featured->map(fn ($p) => $this->productCard($p))->values();
         $categoriesJson = $categories->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])->values();
         $faqsJson = $this->faqsJson();
         $faqCatsJson = $this->faqCatsJson();

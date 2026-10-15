@@ -107,23 +107,23 @@
       </div>
 
       <!-- Action Bar -->
-      <div class="mt-4 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-6xl mx-auto">
-        <div class="flex flex-wrap sm:flex-nowrap items-center gap-1.5 w-full sm:w-auto justify-center">
-          <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-5 py-2.5 transition-all duration-300 rounded-md shadow-xs w-full sm:w-auto">
-            <span>Explore Collections</span>
-            <x-icon name="arrow-right" class="w-4 h-4" />
-          </a>
-          <button onclick="openEnquiryModal('General Consultation')" id="hero-request-quote-btn" class="inline-flex items-center justify-center gap-2 border border-[#e5e2da] hover:border-[#9a7b4f] bg-white hover:bg-[#faf9f5] text-[#1a1d24] text-xs uppercase tracking-[0.16em] px-4 py-2.5 rounded-md transition-all font-semibold shadow-2xs w-full sm:w-auto">
-            <x-icon name="layout" class="w-4 h-4 text-[#9a7b4f]" />
-            <span>Request Quote</span>
-          </button>
-        </div>
-        <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-3 py-2 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
+      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 max-w-6xl mx-auto">
+        <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-5 py-2.5 transition-all duration-300 rounded-md shadow-xs w-full sm:w-auto">
+          <span>Explore Collections</span>
+          <x-icon name="arrow-right" class="w-4 h-4" />
+        </a>
+        <button onclick="openEnquiryModal('General Consultation')" id="hero-request-quote-btn" class="inline-flex items-center justify-center gap-2 border border-[#e5e2da] hover:border-[#9a7b4f] bg-white hover:bg-[#faf9f5] text-[#1a1d24] text-xs uppercase tracking-[0.16em] px-4 py-2.5 rounded-md transition-all font-semibold shadow-2xs w-full sm:w-auto">
+          <x-icon name="layout" class="w-4 h-4 text-[#9a7b4f]" />
+          <span>Request Quote</span>
+        </button>
+        {{-- Hidden, kept for later use
+        <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" hidden class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-3 py-2 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
           <x-icon name="file-text" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Download Spec Pack (PDF)</span>
         </button>
-        <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 w-full sm:w-auto text-xs font-mono uppercase tracking-wider text-[#9a7b4f] hover:underline font-semibold px-2 py-2.5">
-          <x-icon name="youtube" class="w-4 h-4" />
+        --}}
+        <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#1a1d24] hover:border-[#9a7b4f] hover:bg-[#faf9f5] text-xs uppercase tracking-[0.16em] px-4 py-2.5 border border-[#e5e2da] rounded-md bg-white transition-all font-semibold shadow-2xs">
+          <x-icon name="youtube" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Watch on YouTube</span>
         </a>
       </div>
@@ -470,8 +470,67 @@
     </div>
   </section>
 
-  <!-- Philosophy Section - from index.html, placed after configurator -->
-  <section id="philosophy" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+  <!-- Curated Disciplines & Architectural Collections Section -->
+  <section id="collections-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Editorial Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-8 border-b border-[#e5e2da]">
+        <div>
+          <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">
+            Curated Disciplines
+          </span>
+          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-[#1a1d24] font-normal leading-[1.1]">
+            Explore Our Collections
+          </h2>
+        </div>
+        <div class="mt-4 md:mt-0 flex md:justify-end">
+          <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
+            <span>Browse Full Catalog</span>
+            <x-icon name="arrow-up-right" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Dynamic Collection Cards: featured products -->
+      @if($featuredCards->count())
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @foreach($featuredCards as $fp)
+        <a @spa href="/product/{{ $fp['slug'] }}" class="group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] hover:border-[#9a7b4f] rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col">
+          <div class="aspect-[16/10] w-full overflow-hidden relative">
+            <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+            <div class="absolute top-4 left-4 flex items-center gap-2">
+              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">Featured &middot; {{ $fp['category'] }}</span>
+              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">{{ $fp['modelCode'] }}</span>
+            </div>
+          </div>
+          <div class="p-7 sm:p-9 relative bg-white flex-1 flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[11px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold">{{ $fp['category'] }}</span>
+              <span class="w-8 h-8 rounded-full border border-[#e5e2da] group-hover:border-[#9a7b4f] group-hover:bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
+                <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors" />
+              </span>
+            </div>
+            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">{{ $fp['name'] }}</h3>
+            <p class="mt-2 text-sm text-[#374151] leading-relaxed line-clamp-2">{{ $fp['tagline'] }}</p>
+            <div class="mt-auto pt-4 flex items-center justify-between">
+              @if($fp['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>@endif
+              <span class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] group-hover:text-[#9a7b4f] font-semibold transition-colors">View Details &rarr;</span>
+            </div>
+          </div>
+        </a>
+        @endforeach
+      </div>
+      @else
+        <p class="text-center text-sm text-[#6b7280] py-10">Collections are being curated — check back soon.</p>
+      @endif
+
+    </div>
+  </section>
+
+  <!-- Philosophy Section - from index.html, placed after collections -->
+  <section id="philosophy" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
         <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— The OriginSpaces Philosophy</span>
@@ -525,65 +584,6 @@
     </div>
   </section>
 
-  <!-- Curated Disciplines & Architectural Collections Section -->
-  <section id="collections-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      
-      <!-- Section Editorial Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-8 border-b border-[#e5e2da]">
-        <div>
-          <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">
-            Curated Disciplines
-          </span>
-          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-[#1a1d24] font-normal leading-[1.1]">
-            Explore Our Collections
-          </h2>
-        </div>
-        <div class="mt-4 md:mt-0 flex md:justify-end">
-          <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
-            <span>Browse Full Catalog</span>
-            <x-icon name="arrow-up-right" class="w-4 h-4" />
-          </a>
-        </div>
-      </div>
-
-      <!-- Dynamic Collection Cards: featured products -->
-      @if($featuredCards->count())
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        @foreach($featuredCards as $fp)
-        <a @spa href="/product/{{ $fp['slug'] }}" class="group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] hover:border-[#9a7b4f] rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col">
-          <div class="aspect-[16/10] w-full overflow-hidden relative">
-            <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
-            <div class="absolute top-4 left-4 flex items-center gap-2">
-              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">Featured &middot; {{ $fp['category'] }}</span>
-              <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">{{ $fp['modelCode'] }}</span>
-            </div>
-          </div>
-          <div class="p-7 sm:p-9 relative bg-white flex-1 flex flex-col">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-[11px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold">{{ $fp['category'] }}</span>
-              <span class="w-8 h-8 rounded-full border border-[#e5e2da] group-hover:border-[#9a7b4f] group-hover:bg-[#9a7b4f] flex items-center justify-center transition-all duration-300">
-                <x-icon name="arrow-up-right" class="w-4 h-4 text-[#9a7b4f] group-hover:text-white transition-colors" />
-              </span>
-            </div>
-            <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">{{ $fp['name'] }}</h3>
-            <p class="mt-2 text-sm text-[#374151] leading-relaxed line-clamp-2">{{ $fp['tagline'] }}</p>
-            <div class="mt-auto pt-4 flex items-center justify-between">
-              <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>
-              <span class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] group-hover:text-[#9a7b4f] font-semibold transition-colors">View Details &rarr;</span>
-            </div>
-          </div>
-        </a>
-        @endforeach
-      </div>
-      @else
-        <p class="text-center text-sm text-[#6b7280] py-10">Collections are being curated — check back soon.</p>
-      @endif
-
-    </div>
-  </section>
-
   <!-- Product Detail Modal / Specification Drawer -->
   <div id="product-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181b20]/80 backdrop-blur-sm hidden" onclick="closeProductDetailModal()">
     <div class="bg-white rounded-2xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-[#e5e2da] relative max-h-[92vh] overflow-y-auto" onclick="event.stopPropagation()">
@@ -627,7 +627,7 @@
             <div class="pt-2 flex flex-wrap items-center gap-5">
               <button onclick="enquireProduct('{{ $fp['slug'] }}')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/{{ $fp['slug'] }}" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
-              <span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>
+              @if($fp['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>@endif
             </div>
           </div>
           <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-[460px] order-1 {{ $loop->odd ? 'lg:order-2' : 'lg:order-1' }}">
@@ -2342,10 +2342,10 @@
                 <span>Model Code:</span>
                 <span class="font-mono font-semibold text-[#1a1d24]">${product.modelCode}</span>
               </div>
-              <div class="flex items-center justify-between text-[#6b7280]">
+              ${(product.price && product.price !== 'On request') ? `<div class="flex items-center justify-between text-[#6b7280]">
                 <span>UK Base Price:</span>
                 <span class="font-serif text-lg font-bold text-[#1a1d24]">${product.price}</span>
-              </div>
+              </div>` : ''}
               <div class="flex items-center justify-between text-[#6b7280]">
                 <span>Manufacturing &amp; Logistics:</span>
                 <span class="font-mono text-[#9a7b4f] font-semibold">${product.leadTime}</span>
