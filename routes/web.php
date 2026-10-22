@@ -32,6 +32,15 @@ Auth::routes([
     'verify' => false,
 ]);
 
+Route::get('/dd-products', function () {
+    return response()->json(
+        \App\Models\Product::with(['category', 'materials', 'specs', 'techSpecs'])->get(),
+        200,
+        [],
+        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+    );
+});
+
 // Dashboard (must keep)
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
