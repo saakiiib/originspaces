@@ -22,7 +22,6 @@ class GalleryController extends Controller
             return DataTables::of($q->get())
                 ->addIndexColumn()
                 ->addColumn('image', fn ($r) => ($r->image ? '<img src="'.url($r->image).'" class="img-thumbnail" style="max-width:100px;">' : ($r->video_file ? '<span class="badge bg-info">Video file</span>' : ($r->video_url ? '<span class="badge bg-success">Video URL</span>' : '<span class="text-muted">-</span>'))))
-                ->addColumn('category', fn ($r) => $r->category?->name ?? '-')
                 ->addColumn('status', fn ($r) => '<div class="form-check form-switch"><input type="checkbox" class="form-check-input toggle-status" data-id="'.$r->id.'" '.($r->status ? 'checked' : '').'></div>')
                 ->addColumn('action', fn ($r) => '<button class="btn btn-sm btn-soft-secondary editBtn" data-id="'.$r->id.'"><i class="ri-pencil-fill"></i> Edit</button> <button class="btn btn-sm btn-soft-danger deleteBtn" data-delete-url="'.route('galleries.delete', $r->id).'" data-method="DELETE" data-table="#galleryTable"><i class="ri-delete-bin-fill"></i></button>')
                 ->rawColumns(['image', 'status', 'action'])

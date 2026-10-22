@@ -197,10 +197,20 @@ class FrontendController extends Controller
     {
         $this->seo('gallery');
 
-        $galleryJson = $this->galleryJson();
-        $galleryCatsJson = $this->galleryCatsJson();
+        $categories = Category::where('status', true)->orderBy('sort_order')->get();
+        $products = Product::with('category')->where('status', true)->orderBy('sort_order')->orderByDesc('id')->get();
+        $productsJson = $products->map(fn ($p) => [
+            'id' => 'prod-'.$p->id,
+            'slug' => $p->slug,
+            'name' => $p->name,
+            'category' => $p->category?->name ?? 'Collection',
+            'modelCode' => $p->model_code,
+            'tagline' => $p->tagline,
+            'heroImage' => ($p->hero_image ? url($p->hero_image) : ($p->category?->image ? url($p->category->image) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80')),
+        ])->values();
+        $categoriesJson = $categories->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])->values();
 
-        return spa('frontend.gallery', compact('galleryJson', 'galleryCatsJson'));
+        return spa('frontend.gallery', compact('productsJson', 'categoriesJson'));
     }
 
     public function downloads()

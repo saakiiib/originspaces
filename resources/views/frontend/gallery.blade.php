@@ -16,37 +16,22 @@
   <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($galleryJson) }})</button>
-        @forelse($galleryCatsJson as $gSlug => $gLabel)
-          <button onclick="filterGallery({{ json_encode($gSlug) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $gLabel }} ({{ collect($galleryJson)->where('cat', $gSlug)->count() }})</button>
-        @empty
-          <button onclick="filterGallery('exterior', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Exteriors</button>
-          <button onclick="filterGallery('interior', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Interiors</button>
-        @endforelse
+        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($productsJson) }})</button>
+        @foreach($categoriesJson as $cat)
+          <button onclick="filterGallery({{ json_encode($cat['name']) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $cat['name'] }} ({{ collect($productsJson)->where('category', $cat['name'])->count() }})</button>
+        @endforeach
       </div>
       <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        @forelse($galleryJson as $gi => $g)
-          <button onclick="openGallery({{ $gi }})" data-cat="{{ $g['cat'] }}" class="gallery-item group relative rounded-xl overflow-hidden border border-[#e5e2da] bg-white text-left">
-            @if(($g['type'] ?? '') === 'video')
-            <div class="relative w-full aspect-[4/3] bg-[#14171c]">
-              @if(!empty($g['src']))
-              <img src="{{ $g['src'] }}" alt="{{ $g['caption'] }}" loading="lazy" class="w-full h-full object-cover opacity-60" />
-              @else
-              <div class="w-full h-full bg-gradient-to-br from-[#181b20] to-[#2d3139]"></div>
-              @endif
-              <div class="absolute inset-0 flex items-center justify-center">
-                <span class="w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center"><x-icon name="play" class="w-6 h-6 text-white ml-1" /></span>
-              </div>
-            </div>
-            @else
-            <img src="{{ $g['src'] }}" alt="{{ $g['caption'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
-            @endif
+        @forelse($productsJson as $gi => $g)
+          <a @spa href="/product/{{ $g['slug'] }}" data-cat="{{ $g['category'] }}" class="gallery-item group relative rounded-xl overflow-hidden border border-[#e5e2da] bg-white block">
+            <img src="{{ $g['heroImage'] }}" alt="{{ $g['name'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
             <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['catLabel'] }}{{ ($g['type'] ?? '') === 'video' ? ' · Video' : '' }}</span>
-            <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#1a1d24] items-center justify-center hidden group-hover:flex">
-              <x-icon name="maximize-2" class="w-3.5 h-3.5" />
-            </span>
-          </button>
+            <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['category'] }}</span>
+            <div class="p-3.5">
+              <h4 class="font-serif text-base sm:text-lg text-[#1a1d24] font-semibold leading-tight group-hover:text-[#9a7b4f] transition-colors">{{ $g['name'] }}</h4>
+              <span class="text-[11px] font-mono text-[#6b7280]">{{ $g['modelCode'] }}</span>
+            </div>
+          </a>
         @empty
           <p class="col-span-full text-center text-sm text-[#6b7280] py-10">Gallery is being curated — check back soon.</p>
         @endforelse
@@ -73,15 +58,7 @@
 <script>
     /* toggleMobileMenu lives in header partial */
 
-    var GALLERY = @json($galleryJson);
     var activeGalleryCat = 'all';
-    var galleryView = [];
-    var galleryIdx = 0;
-
-    function galleryThumb(g, size) {
-      if (g.src) return g.src;
-      return 'https://images.unsplash.com/' + g.id + '?auto=format&fit=crop&w=' + size + '&q=80';
-    }
 
     function filterGallery(cat, btn) {
       activeGalleryCat = cat;
@@ -103,66 +80,6 @@
         el.classList.toggle('hidden', !show);
       });
     }
-
-    function openGallery(globalIdx) {
-      galleryView = GALLERY.map((g, i) => ({ ...g, index: i })).filter(g => activeGalleryCat === 'all' || g.cat === activeGalleryCat);
-      galleryIdx = Math.max(0, galleryView.findIndex(g => g.index === globalIdx));
-      showGalleryItem();
-      document.getElementById('lightbox-modal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function showGalleryItem() {
-      const g = galleryView[galleryIdx];
-      if (!g) return;
-      const img = document.getElementById('lightbox-img');
-      const video = document.getElementById('lightbox-video');
-      const frame = document.getElementById('lightbox-video-frame');
-      if (video) { video.pause(); video.removeAttribute('src'); video.load(); video.classList.add('hidden'); }
-      if (frame) { frame.removeAttribute('src'); frame.classList.add('hidden'); }
-      if (img) img.classList.remove('hidden');
-      if (g.type === 'video') {
-        if (g.videoEmbed && frame) {
-          frame.src = g.videoEmbed;
-          frame.classList.remove('hidden');
-          if (img) img.classList.add('hidden');
-        } else if (g.videoFile && video) {
-          video.src = g.videoFile;
-          video.classList.remove('hidden');
-          if (img) img.classList.add('hidden');
-          video.play().catch(function () {});
-        } else if (g.videoUrl && video) {
-          video.src = g.videoUrl;
-          video.classList.remove('hidden');
-          if (img) img.classList.add('hidden');
-          video.play().catch(function () {});
-        }
-      } else {
-        if (img) img.src = galleryThumb(g, 1600);
-      }
-      document.getElementById('lightbox-caption').textContent = g.caption;
-      document.getElementById('lightbox-counter').textContent = (galleryIdx + 1) + ' / ' + galleryView.length;
-    }
-
-    function lightboxNav(dir) {
-      if (!galleryView.length) return;
-      galleryIdx = (galleryIdx + dir + galleryView.length) % galleryView.length;
-      showGalleryItem();
-    }
-
-    function closeLightbox() {
-      if (window.resetLightboxMedia) window.resetLightboxMedia();
-      document.getElementById('lightbox-modal').classList.add('hidden');
-      document.body.style.overflow = '';
-    }
-
-    document.addEventListener('keydown', function (e) {
-      const modal = document.getElementById('lightbox-modal');
-      if (!modal || modal.classList.contains('hidden')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') lightboxNav(1);
-      if (e.key === 'ArrowLeft') lightboxNav(-1);
-    });
 
     renderGallery();
     if (window.lucide) lucide.createIcons();
