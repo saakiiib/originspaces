@@ -448,10 +448,10 @@
           </div>
 
           <!-- Base Guide Price -->
-          <div class="pt-4 border-t border-white/10 mb-5">
+          <div class="pt-4 border-t border-white/10 mb-5 hidden">
             <span class="text-[11px] text-[#9ca3af] block font-mono">Factory Ex-Works / FOB Guide</span>
             <div class="flex items-baseline gap-2 mt-1">
-              <span id="bill-price" class="font-serif text-2xl sm:text-3xl font-bold text-white">&pound;36,400</span>
+              <span id="bill-price" class="font-serif text-2xl sm:text-3xl font-bold text-white"></span>
               <span class="text-xs text-[#9ca3af]">+ UK haulage &amp; VAT</span>
             </div>
           </div>
@@ -515,7 +515,7 @@
             <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold group-hover:text-[#9a7b4f] transition-colors">{{ $fp['name'] }}</h3>
             <p class="mt-2 text-sm text-[#374151] leading-relaxed line-clamp-2">{{ $fp['tagline'] }}</p>
             <div class="mt-auto pt-4 flex items-center justify-between">
-              @if($fp['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>@endif
+              
               <span class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] group-hover:text-[#9a7b4f] font-semibold transition-colors">View Details &rarr;</span>
             </div>
           </div>
@@ -627,7 +627,7 @@
             <div class="pt-2 flex flex-wrap items-center gap-5">
               <button onclick="enquireProduct('{{ $fp['slug'] }}')" class="px-7 py-4 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-[0.18em] transition-all inline-flex items-center gap-2">Full Specification <x-icon name="arrow-right" class="w-4 h-4" /></button>
               <a @spa href="/product/{{ $fp['slug'] }}" class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Full Details &rarr;</a>
-              @if($fp['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-sm">{{ $fp['price'] }}</span>@endif
+              
             </div>
           </div>
           <div class="lg:col-span-7 relative min-h-[280px] lg:min-h-[460px] order-1 {{ $loop->odd ? 'lg:order-2' : 'lg:order-1' }}">
@@ -2342,10 +2342,6 @@
                 <span>Model Code:</span>
                 <span class="font-mono font-semibold text-[#1a1d24]">${product.modelCode}</span>
               </div>
-              ${(product.price && product.price !== 'On request') ? `<div class="flex items-center justify-between text-[#6b7280]">
-                <span>UK Base Price:</span>
-                <span class="font-serif text-lg font-bold text-[#1a1d24]">${product.price}</span>
-              </div>` : ''}
               <div class="flex items-center justify-between text-[#6b7280]">
                 <span>Manufacturing &amp; Logistics:</span>
                 <span class="font-mono text-[#9a7b4f] font-semibold">${product.leadTime}</span>

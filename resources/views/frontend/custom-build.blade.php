@@ -1,4 +1,4 @@
-@extends('frontend.layout')
+﻿@extends('frontend.layout')
 @section('title', 'Custom Build | OriginSpaces Modular UK')
 @section('content')
 
@@ -246,10 +246,10 @@
           </div>
 
           <!-- Base Guide Price -->
-          <div class="pt-4 border-t border-white/10 mb-5">
+          <div class="pt-4 border-t border-white/10 mb-5 hidden">
             <span class="text-[11px] text-[#9ca3af] block font-mono">Factory Ex-Works / FOB Guide</span>
             <div class="flex items-baseline gap-2 mt-1">
-              <span id="bill-price" class="font-serif text-2xl sm:text-3xl font-bold text-white">&pound;36,400</span>
+              <span id="bill-price" class="font-serif text-2xl sm:text-3xl font-bold text-white"></span>
               <span class="text-xs text-[#9ca3af]">+ UK haulage &amp; VAT</span>
             </div>
           </div>
@@ -286,10 +286,10 @@
     ];
 
     var CONFIG_SIZES = [
-      { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: '£24,800' },
-      { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: '£27,200' },
-      { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: '£36,400' },
-      { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: '£45,900' }
+      { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m' },
+      { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m' },
+      { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m' },
+      { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m' }
     ];
 
     var CONFIG_INSULATION = [
@@ -435,7 +435,7 @@
               <span class="text-[11px] text-[#6b7280] block mt-0.5">Footprint: ${sz.dims} &bull; Hydraulic Unfolding</span>
             </div>
             <div class="text-right">
-              <span class="font-serif text-lg font-bold text-[#1a1d24]">${sz.basePrice}</span>
+              <span class="font-serif text-lg font-bold text-[#1a1d24]"></span>
               <span class="text-[10px] text-[#6b7280] block font-mono">Factory Base</span>
             </div>
           </button>
@@ -610,7 +610,7 @@
       const sz = CONFIG_SIZES.find(s => s.id === configState.modelSize) || CONFIG_SIZES[2];
       const del = CONFIG_DELIVERY.find(d => d.id === configState.delivery) || CONFIG_DELIVERY[0];
 
-      const summaryText = `Model: ${sz.name} (${sz.area}) | Use-Case: ${uc.name} | Insulation: ${configState.insulation} | Facade: ${configState.facade} | Fulfillment: Dispatched from UK Central Warehouse (${del.name}) | Base Guide: ${sz.basePrice}`;
+      const summaryText = `Model: ${sz.name} (${sz.area}) | Use-Case: ${uc.name} | Insulation: ${configState.insulation} | Facade: ${configState.facade} | Fulfillment: Dispatched from UK Central Warehouse (${del.name})`;
 
       openEnquiryModal(`Custom Factory Order: ${uc.name}`, summaryText, configState.postcode);
     }

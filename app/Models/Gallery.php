@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Gallery extends Model
 {
-    protected $fillable = ['gallery_category_id', 'image', 'caption', 'status', 'sort_order'];
+    protected $fillable = ['gallery_category_id', 'image', 'video_file', 'video_url', 'caption', 'status', 'sort_order'];
 
     protected function casts(): array
     {

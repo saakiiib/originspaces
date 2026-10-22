@@ -27,9 +27,22 @@
       <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse($galleryJson as $gi => $g)
           <button onclick="openGallery({{ $gi }})" data-cat="{{ $g['cat'] }}" class="gallery-item group relative rounded-xl overflow-hidden border border-[#e5e2da] bg-white text-left">
+            @if(($g['type'] ?? '') === 'video')
+            <div class="relative w-full aspect-[4/3] bg-[#14171c]">
+              @if(!empty($g['src']))
+              <img src="{{ $g['src'] }}" alt="{{ $g['caption'] }}" loading="lazy" class="w-full h-full object-cover opacity-60" />
+              @else
+              <div class="w-full h-full bg-gradient-to-br from-[#181b20] to-[#2d3139]"></div>
+              @endif
+              <div class="absolute inset-0 flex items-center justify-center">
+                <span class="w-12 h-12 rounded-full bg-white/10 backdrop-blur border border-white/20 flex items-center justify-center"><x-icon name="play" class="w-6 h-6 text-white ml-1" /></span>
+              </div>
+            </div>
+            @else
             <img src="{{ $g['src'] }}" alt="{{ $g['caption'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+            @endif
             <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['catLabel'] }}</span>
+            <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['catLabel'] }}{{ ($g['type'] ?? '') === 'video' ? ' · Video' : '' }}</span>
             <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#1a1d24] items-center justify-center hidden group-hover:flex">
               <x-icon name="maximize-2" class="w-3.5 h-3.5" />
             </span>
@@ -102,7 +115,31 @@
     function showGalleryItem() {
       const g = galleryView[galleryIdx];
       if (!g) return;
-      document.getElementById('lightbox-img').src = galleryThumb(g, 1600);
+      const img = document.getElementById('lightbox-img');
+      const video = document.getElementById('lightbox-video');
+      const frame = document.getElementById('lightbox-video-frame');
+      if (video) { video.pause(); video.removeAttribute('src'); video.load(); video.classList.add('hidden'); }
+      if (frame) { frame.removeAttribute('src'); frame.classList.add('hidden'); }
+      if (img) img.classList.remove('hidden');
+      if (g.type === 'video') {
+        if (g.videoEmbed && frame) {
+          frame.src = g.videoEmbed;
+          frame.classList.remove('hidden');
+          if (img) img.classList.add('hidden');
+        } else if (g.videoFile && video) {
+          video.src = g.videoFile;
+          video.classList.remove('hidden');
+          if (img) img.classList.add('hidden');
+          video.play().catch(function () {});
+        } else if (g.videoUrl && video) {
+          video.src = g.videoUrl;
+          video.classList.remove('hidden');
+          if (img) img.classList.add('hidden');
+          video.play().catch(function () {});
+        }
+      } else {
+        if (img) img.src = galleryThumb(g, 1600);
+      }
       document.getElementById('lightbox-caption').textContent = g.caption;
       document.getElementById('lightbox-counter').textContent = (galleryIdx + 1) + ' / ' + galleryView.length;
     }
@@ -114,6 +151,7 @@
     }
 
     function closeLightbox() {
+      if (window.resetLightboxMedia) window.resetLightboxMedia();
       document.getElementById('lightbox-modal').classList.add('hidden');
       document.body.style.overflow = '';
     }

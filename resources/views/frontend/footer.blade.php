@@ -182,6 +182,8 @@
       <x-icon name="x" class="w-6 h-6" />
     </button>
     <img id="lightbox-img" src="" alt="Enlarged Architectural Detail" class="w-full max-h-[76vh] object-contain rounded-xl shadow-2xl" style="width:100%;max-height:76vh;object-fit:contain;display:block;background:transparent" />
+    <video id="lightbox-video" class="hidden w-full max-h-[76vh] object-contain rounded-xl shadow-2xl bg-black" style="width:100%;max-height:76vh;object-fit:contain;display:block" controls playsinline preload="metadata"></video>
+    <iframe id="lightbox-video-frame" class="hidden w-full aspect-video rounded-xl shadow-2xl bg-black" style="max-height:76vh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <button onclick="if(window.lightboxNav)lightboxNav(-1)" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-[#9a7b4f] text-white border border-white/20 flex items-center justify-center backdrop-blur-md transition-all">
       <x-icon name="chevron-left" class="w-5 h-5" />
     </button>
@@ -248,6 +250,15 @@
     document.body.style.overflow = '';
   };
   window.__footerOpenEnquiry = window.openEnquiryModal;
+  /* Stop any lightbox video before the modal is hidden or reused. */
+  window.resetLightboxMedia = function () {
+    var v = document.getElementById('lightbox-video');
+    if (v) { v.pause(); v.removeAttribute('src'); v.load(); v.classList.add('hidden'); }
+    var f = document.getElementById('lightbox-video-frame');
+    if (f) { f.removeAttribute('src'); f.classList.add('hidden'); }
+    var i = document.getElementById('lightbox-img');
+    if (i) i.classList.remove('hidden');
+  };
   window.openSampleModal = function () {
     document.getElementById('sample-modal').classList.remove('hidden');
     document.body.style.overflow = 'hidden';

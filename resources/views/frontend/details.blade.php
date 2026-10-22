@@ -101,18 +101,8 @@
             <div id="spec-docs" class="hidden mt-2.5 space-y-2"></div>
           </div>
 
-          <!-- 8. Pricing -->
+          <!-- 8. Enquiry -->
           <div class="pt-5 border-t border-[#EAE7DF] space-y-4">
-            <div class="bg-[#FAF8F5] p-4 rounded-xl border border-[#DDD7C9]">
-              <div class="flex items-center justify-between">
-                <div>
-                  <span class="text-[11px] font-mono uppercase text-[#786348] font-bold block">Estimated Specifier Total</span>
-                  <span id="spec-total" class="text-2xl font-serif text-[#1a1d24] font-bold">—</span>
-                </div>
-                <span class="text-xs text-right text-[#6b7280]">Excl. VAT<br />UK Delivery</span>
-              </div>
-              <div id="spec-breakdown" class="mt-3 pt-3 border-t border-[#EAE7DF] space-y-1 text-[11px] font-mono text-[#6b7280]"></div>
-            </div>
             <button type="button" id="spec-cta" onclick='openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, "")' class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
               <span>Request Information &amp; Spec Pack</span>
               <x-icon name="arrow-right" class="w-4 h-4" />
@@ -271,7 +261,7 @@
                 <div class="p-4">
                   <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">{{ $rel['category'] }}</span>
                   <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug mt-1">{{ $rel['name'] }}</h4>
-                  @if($rel['price'] !== 'On request')<span class="font-mono text-[#9a7b4f] font-bold text-xs mt-2 block">{{ $rel['price'] }}</span>@endif
+                  <span class="hidden"></span>
                 </div>
               </a>
             @endforeach
@@ -288,9 +278,9 @@
 <script defer src="https://unpkg.com/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
 <script defer src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
 <style>
-/* Gallery stage stays above the sticky site header (z-40) but below popups
-   (enquiry modal z-50, lightbox z-70) so they can cover it */
-#media-gallery{position:relative;z-index:45}
+/* Gallery stage stays below sticky site header (z-40) and below popups
+   (enquiry modal z-50, lightbox z-70) so it scrolls correctly */
+#media-gallery{position:relative;z-index:auto}
 /* Fullscreen gallery: fixed stage, whole photo fitted */
 #media-gallery:fullscreen{background:#0b0d10;border:none;border-radius:0;padding:1rem;overflow-y:auto}
 #media-gallery:fullscreen #gallery-fullscreen-wrap{height:calc(100vh - 230px);min-height:320px}
@@ -318,14 +308,6 @@
     var activeMediaTab = 'video';
     var galleryIdx = 0;
     var hotspotsOn = true;
-
-    function parseBasePrice(p) {
-      const m = String(p.price || '').replace(/[^0-9]/g, '');
-      return m ? parseInt(m, 10) : 0;
-    }
-    function gbp(n) {
-      return '£' + n.toLocaleString('en-GB');
-    }
 
     function initProduct() {
       currentProduct = @json($productJson);
@@ -360,7 +342,6 @@
       renderOptions();
       renderTech();
       renderDocs();
-      renderPricing();
       renderMedia();
       renderNarrative();
       renderTables();
@@ -388,7 +369,7 @@
           <img src="${p.heroImage.replace('w=1200', 'w=200')}" alt="${p.name}" loading="lazy" class="w-14 h-11 object-cover rounded border border-[#e5e2da] shrink-0" />
           <div class="min-w-0">
             <div class="text-[13px] font-semibold text-[#1a1d24] leading-snug">${p.name}</div>
-            <div class="text-[11px] text-[#6b7280] font-mono">${p.modelCode}${(p.price && p.price !== 'On request') ? ' &middot; ' + p.price : ''}</div>
+            <div class="text-[11px] text-[#6b7280] font-mono">${p.modelCode}</div>
           </div>
         </div>`;
     }
@@ -397,7 +378,7 @@
       document.getElementById('spec-config-list').innerHTML = CONFIG_OPTIONS.map(o => `
         <button onclick="setDetailOpt('config','${o.id}')" class="p-2.5 text-left rounded-lg border text-xs transition-all ${selConfig === o.id ? pillBtn(true) : pillBtn(false)}">
           <div class="font-semibold text-[#1a1d24]">${o.name}</div>
-          <div class="text-[11px] ${o.price ? 'text-[#9a7b4f] font-bold' : 'text-[#6b7280]'}">${o.price ? '+' + gbp(o.price) : o.sub}</div>
+          <div class="text-[11px] text-[#6b7280]">${o.sub || ''}</div>
         </button>`).join('');
       const f = FINISH_OPTIONS.find(x => x.id === selFinish);
       document.getElementById('spec-finish-label').textContent = f ? f.name.toUpperCase() : '—';
@@ -407,7 +388,7 @@
           <span class="w-5 h-5 rounded-full border border-black/20 shrink-0" style="background-color:${o.swatch};"></span>
           <span class="min-w-0">
             <span class="block text-xs font-semibold text-[#1a1d24] truncate">${o.name}</span>
-            <span class="block text-[10px] ${o.price ? 'text-[#9a7b4f] font-bold' : 'text-[#6b7280]'}">${o.price ? '+' + gbp(o.price) : o.sub}</span>
+            <span class="block text-[10px] text-[#6b7280]">${o.sub || ''}</span>
           </span>
         </button>`).join('');
       document.getElementById('spec-glazing-list').innerHTML = GLAZING_OPTIONS.map(o => {
@@ -418,7 +399,7 @@
             <span class="block text-xs font-semibold text-[#1a1d24]">${o.name}</span>
             <span class="block text-[11px] text-[#6b7280]">${o.sub}</span>
           </span>
-          <span class="text-xs font-mono text-[#9a7b4f] font-bold shrink-0">${o.price ? '+' + gbp(o.price) : 'Included'}</span>
+          <span class="hidden shrink-0"></span>
         </button>`;
       }).join('');
       document.getElementById('spec-upgrade-list').innerHTML = UPGRADE_OPTIONS.map(o => {
@@ -430,7 +411,7 @@
             <span class="block text-[11px] text-[#6b7280]">${o.sub}</span>
           </span>
           <span class="flex items-center gap-2 shrink-0">
-            <span class="text-xs font-mono text-[#9a7b4f] font-bold">${o.price ? '+' + gbp(o.price) : 'Included'}</span>
+            <span class="text-xs font-mono text-[#6b7280] shrink-0">${o.sub || ''}</span>
             <span class="w-5 h-5 rounded-md border ${on ? 'bg-[#9a7b4f] border-[#9a7b4f] text-white' : 'border-[#C4BEB1] text-transparent'} flex items-center justify-center text-xs">✓</span>
           </span>
         </button>`;
@@ -442,41 +423,13 @@
       if (group === 'finish') selFinish = id;
       if (group === 'glazing') selGlazing = id;
       renderOptions();
-      renderPricing();
       if (window.lucide) lucide.createIcons();
     }
 
     function toggleDetailUpgrade(id) {
       selUpgrades = selUpgrades.includes(id) ? selUpgrades.filter(x => x !== id) : [...selUpgrades, id];
       renderOptions();
-      renderPricing();
       if (window.lucide) lucide.createIcons();
-    }
-
-    function currentTotal() {
-      const base = parseBasePrice(currentProduct);
-      const c = CONFIG_OPTIONS.find(x => x.id === selConfig);
-      const f = FINISH_OPTIONS.find(x => x.id === selFinish);
-      const g = GLAZING_OPTIONS.find(x => x.id === selGlazing);
-      const u = UPGRADE_OPTIONS.filter(x => selUpgrades.includes(x.id)).reduce((s, x) => s + x.price, 0);
-      return { base, total: base + (c ? c.price : 0) + (f ? f.price : 0) + (g ? g.price : 0) + u };
-    }
-
-    function renderPricing() {
-      const t = currentTotal();
-      document.getElementById('spec-total').textContent = gbp(t.total);
-      const rows = [];
-      const c = CONFIG_OPTIONS.find(x => x.id === selConfig);
-      const f = FINISH_OPTIONS.find(x => x.id === selFinish);
-      const g = GLAZING_OPTIONS.find(x => x.id === selGlazing);
-      rows.push(['Base — ' + currentProduct.modelCode, t.base]);
-      if (c && c.price) rows.push([c.name, c.price]);
-      if (f && f.price) rows.push([f.name, f.price]);
-      if (g && g.price) rows.push([g.name, g.price]);
-      UPGRADE_OPTIONS.filter(x => selUpgrades.includes(x.id)).forEach(x => rows.push([x.name, x.price]));
-      document.getElementById('spec-breakdown').innerHTML = rows.map(([n, v]) =>
-        `<div class="flex justify-between gap-2"><span class="truncate">${n}</span><span class="font-semibold text-[#1a1d24] shrink-0">${gbp(v)}</span></div>`
-      ).join('');
     }
 
     function toggleSpecAccordion(id) {
@@ -533,7 +486,7 @@
 
     function downloadSpecFile(kind) {
       const p = currentProduct;
-      const body = ['OriginSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), 'Configured total: ' + gbp(currentTotal().total) + ' (excl. VAT)', '', 'The studio will issue this file within one working day.'].join('\n');
+      const body = ['OriginSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), '', 'The studio will issue this file within one working day.'].join('\n');
       const blob = new Blob([body], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
@@ -689,6 +642,7 @@
       showDetailLb();
     };
     window.closeLightbox = function () {
+      if (window.resetLightboxMedia) window.resetLightboxMedia();
       document.getElementById('lightbox-modal').classList.add('hidden');
       document.body.style.overflow = '';
     };

@@ -21,7 +21,7 @@ class GalleryController extends Controller
 
             return DataTables::of($q->get())
                 ->addIndexColumn()
-                ->addColumn('image', fn ($r) => '<img src="'.url($r->image).'" class="img-thumbnail" style="max-width:100px;">')
+                ->addColumn('image', fn ($r) => ($r->image ? '<img src="'.url($r->image).'" class="img-thumbnail" style="max-width:100px;">' : ($r->video_file ? '<span class="badge bg-info">Video file</span>' : ($r->video_url ? '<span class="badge bg-success">Video URL</span>' : '<span class="text-muted">-</span>'))))
                 ->addColumn('category', fn ($r) => $r->category?->name ?? '-')
                 ->addColumn('status', fn ($r) => '<div class="form-check form-switch"><input type="checkbox" class="form-check-input toggle-status" data-id="'.$r->id.'" '.($r->status ? 'checked' : '').'></div>')
                 ->addColumn('action', fn ($r) => '<button class="btn btn-sm btn-soft-secondary editBtn" data-id="'.$r->id.'"><i class="ri-pencil-fill"></i> Edit</button> <button class="btn btn-sm btn-soft-danger deleteBtn" data-delete-url="'.route('galleries.delete', $r->id).'" data-method="DELETE" data-table="#galleryTable"><i class="ri-delete-bin-fill"></i></button>')
@@ -38,71 +38,125 @@ class GalleryController extends Controller
     {
         $request->validate([
             'gallery_category_id' => 'nullable|exists:gallery_categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:4096',
+            'video_file' => 'nullable|file|mimes:mp4,webm,mov,m4v,ogg|max:51200',
+            'video_url' => 'nullable|string|max:2048',
         ]);
-        $path = public_path('uploads/gallery/');
-        if (! file_exists($path)) {
-            mkdir($path, 0755, true);
+        if (! $request->hasFile('image') && ! $request->hasFile('video_file') && ! $request->filled('video_url')) {
+            return response()->json(['message' => 'Add an image, a video file or a video URL.'], 422);
         }
-        $name = mt_rand(10000000, 99999999).'.webp';
-        Image::make($request->file('image'))->resize(1600, null, function ($c) {
-            $c->aspectRatio();
-            $c->upsize();
-        })->encode('webp', 75)->save($path.$name);
 
-        Gallery::create([
+        $data = [
             'gallery_category_id' => $request->gallery_category_id,
-            'image' => '/uploads/gallery/'.$name,
             'caption' => $request->caption,
             'sort_order' => (int) (Gallery::max('sort_order') ?? 0) + 1,
-        ]);
+        ];
 
-        return response()->json(['message' => 'Gallery image added']);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->storeImage($request->file('image'));
+        }
+        if ($request->hasFile('video_file')) {
+            $data['video_file'] = $this->storeVideoFile($request->file('video_file'));
+        }
+        if ($request->filled('video_url')) {
+            $data['video_url'] = $request->video_url;
+        }
+
+        Gallery::create($data);
+
+        return response()->json(['message' => 'Gallery item added']);
     }
 
     public function edit($id)
     {
         $g = Gallery::findOrFail($id);
 
-        return response()->json([...$g->toArray(), 'preview' => url($g->image)]);
+        return response()->json([
+            ...$g->toArray(),
+            'preview' => $g->image ? url($g->image) : null,
+            'video_preview' => $g->video_file ? url($g->video_file) : null,
+        ]);
     }
 
     public function update(Request $request)
     {
         $g = Gallery::findOrFail($request->id);
-        $request->validate(['gallery_category_id' => 'nullable|exists:gallery_categories,id']);
+        $request->validate([
+            'gallery_category_id' => 'nullable|exists:gallery_categories,id',
+            'video_file' => 'nullable|file|mimes:mp4,webm,mov,m4v,ogg|max:51200',
+            'video_url' => 'nullable|string|max:2048',
+        ]);
         $data = $request->only(['gallery_category_id', 'caption']);
         if ($request->hasFile('image')) {
-            if ($g->image && file_exists(public_path($g->image))) {
-                @unlink(public_path($g->image));
-            }
-            $path = public_path('uploads/gallery/');
-            if (! file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
-            $name = mt_rand(10000000, 99999999).'.webp';
-            Image::make($request->file('image'))->resize(1600, null, fn ($c) => $c->aspectRatio())->encode('webp', 75)->save($path.$name);
-            $data['image'] = '/uploads/gallery/'.$name;
+            $this->deleteUpload($g->image);
+            $data['image'] = $this->storeImage($request->file('image'));
         } elseif ($request->boolean('remove_image')) {
-            if ($g->image && file_exists(public_path($g->image))) {
-                @unlink(public_path($g->image));
-            }
+            $this->deleteUpload($g->image);
             $data['image'] = null;
+        }
+        if ($request->hasFile('video_file')) {
+            $this->deleteUpload($g->video_file);
+            $data['video_file'] = $this->storeVideoFile($request->file('video_file'));
+        } elseif ($request->boolean('remove_video_file')) {
+            $this->deleteUpload($g->video_file);
+            $data['video_file'] = null;
+        }
+        if ($request->filled('video_url')) {
+            $data['video_url'] = $request->video_url;
+        } elseif ($request->boolean('remove_video_url')) {
+            $data['video_url'] = null;
         }
         $g->update($data);
 
-        return response()->json(['message' => 'Gallery image updated']);
+        return response()->json(['message' => 'Gallery item updated']);
     }
 
     public function destroy($id)
     {
         $g = Gallery::findOrFail($id);
-        if ($g->image && file_exists(public_path($g->image))) {
-            @unlink(public_path($g->image));
-        }
+        $this->deleteUpload($g->image);
+        $this->deleteUpload($g->video_file);
         $g->delete();
 
-        return response()->json(['message' => 'Gallery image deleted']);
+        return response()->json(['message' => 'Gallery item deleted']);
+    }
+
+    /** Store an uploaded still image as webp and return its public path. */
+    private function storeImage($file): string
+    {
+        $path = public_path('uploads/gallery/');
+        if (! file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+        $name = mt_rand(10000000, 99999999).'.webp';
+        Image::make($file)->resize(1600, null, function ($c) {
+            $c->aspectRatio();
+            $c->upsize();
+        })->encode('webp', 75)->save($path.$name);
+
+        return '/uploads/gallery/'.$name;
+    }
+
+    /** Store an uploaded video file and return its public path. */
+    private function storeVideoFile($file): string
+    {
+        $path = public_path('uploads/gallery/videos/');
+        if (! file_exists($path)) {
+            mkdir($path, 0755, true);
+        }
+        $extension = strtolower($file->getClientOriginalExtension()) ?: 'mp4';
+        $name = mt_rand(10000000, 99999999).'.'.$extension;
+        $file->move($path, $name);
+
+        return '/uploads/gallery/videos/'.$name;
+    }
+
+    /** Delete an uploaded file from the public directory. */
+    private function deleteUpload(?string $path): void
+    {
+        if ($path && str_starts_with($path, '/uploads/') && file_exists(public_path($path))) {
+            @unlink(public_path($path));
+        }
     }
 
     public function toggleStatus(Request $request)

@@ -366,12 +366,20 @@ class FrontendController extends Controller
                 $unsplashId = $m[1];
             }
 
+            $videoFile = $this->imgUrl($g->video_file);
+            $videoUrl = $g->video_url;
+            $videoEmbed = $this->videoEmbedUrl($videoUrl);
+
             return [
                 'id' => $unsplashId ?? ('db-'.$g->id),
                 'src' => $this->imgUrl($g->image),
                 'cat' => $g->category?->slug ?? 'general',
                 'catLabel' => $g->category?->name ?? 'Gallery',
                 'caption' => $g->caption ?? '',
+                'type' => ($videoFile || $videoUrl) ? 'video' : 'image',
+                'videoFile' => $videoFile,
+                'videoUrl' => $videoUrl,
+                'videoEmbed' => $videoEmbed,
             ];
         })->values();
     }

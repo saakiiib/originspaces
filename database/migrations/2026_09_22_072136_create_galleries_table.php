@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('gallery_category_id')->nullable()->constrained('gallery_categories')->nullOnDelete();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('caption')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('sort_order')->default(0);
