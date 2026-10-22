@@ -69,7 +69,6 @@ class FrontendController extends Controller
 
         $categories = Category::where('status', true)->orderBy('sort_order')->get();
         $products = Product::with(['category', 'options'])
-            ->where('status', true)
             ->orderBy('sort_order')
             ->orderByDesc('id')
             ->get();
