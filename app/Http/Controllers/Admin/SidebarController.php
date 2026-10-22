@@ -17,14 +17,18 @@ class SidebarController
                 'href' => route('admin.dashboard'),
             ],
             [
-                'type' => 'group',
+                'type' => 'item',
                 'icon' => 'ri-folder-line',
-                'label' => 'Master Setup',
-                'id' => 'sidebarMasterSetup',
-                'children' => [
-                    ['label' => 'Category', 'route' => 'allcategory', 'href' => route('allcategory')],
-                    ['label' => 'Products', 'route' => 'products.*', 'href' => route('products.index')],
-                ],
+                'label' => 'Category',
+                'route' => 'allcategory',
+                'href' => route('allcategory'),
+            ],
+            [
+                'type' => 'item',
+                'icon' => 'ri-shopping-bag-line',
+                'label' => 'Product',
+                'route' => 'products.*',
+                'href' => route('products.index'),
             ],
             [
                 'type' => 'group',
