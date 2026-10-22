@@ -60,11 +60,28 @@
             </div>
 
             <div class="tab-pane fade" id="tab-images">
-                <form id="imgForm" class="row g-2 mb-3">
-                    <div class="col-md-5"><input type="file" class="form-control" id="imgFile" accept="image/*" required></div>
-                    <div class="col-md-5"><input type="text" class="form-control" id="imgCaption" placeholder="Caption (optional)"></div>
-                    <div class="col-md-2"><button class="btn btn-primary w-100" type="submit">Add Image</button></div>
-                </form>
+                <ul class="nav nav-tabs mb-3" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-media-image" type="button">Image</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-media-video" type="button">Video</button></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tab-media-image">
+                        <form id="imgForm" class="row g-2 mb-3">
+                            <div class="col-md-5"><input type="file" class="form-control" id="imgFile" accept="image/*"></div>
+                            <div class="col-md-5"><input type="text" class="form-control" id="imgCaption" placeholder="Caption (optional)"></div>
+                            <div class="col-md-2"><button class="btn btn-primary w-100" type="submit">Add Image</button></div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="tab-media-video">
+                        <form id="vidForm" class="row g-2 mb-3">
+                            <div class="col-md-4"><label class="form-label">Video File</label><input type="file" class="form-control" id="vidFile" accept="video/mp4,video/webm,video/quicktime"></div>
+                            <div class="col-md-4"><label class="form-label">…or Video URL</label><input type="url" class="form-control" id="vidUrl" placeholder="https://...mp4 or YouTube"></div>
+                            <div class="col-md-3"><label class="form-label">Caption (optional)</label><input type="text" class="form-control" id="vidCaption"></div>
+                            <div class="col-md-1"><label class="form-label d-block">&nbsp;</label><button class="btn btn-primary w-100" type="submit">Add</button></div>
+                        </form>
+                        <p class="small text-muted">Upload a file <strong>or</strong> paste a URL — leave one blank. Uploaded files are stored in <code>public/uploads/products/videos/</code>.</p>
+                    </div>
+                </div>
                 <div id="imgList" class="row g-2"></div>
             </div>
 
@@ -161,7 +178,13 @@ $(function () {
     let zoneCache = {};
     $('.optFilter').click(function () { optGroup = $(this).data('g'); loadOpt(); });
 
-    function loadImg() { $.get(`/admin/products/${PID}/images`, list => { $('#imgList').html(list.map(i => `<div class="col-md-3"><div class="card"><img src="${i.preview}" class="card-img-top"><div class="card-body p-2"><input class="form-control form-control-sm mb-1" value="${i.caption ?? ''}" onchange="updImg(${i.id},this.value)"><button class="btn btn-sm btn-danger" onclick="delImg(${i.id})">Delete</button></div></div></div>`).join('') || '<p class="text-muted">No images yet. First image acts as gallery backup to hero.</p>'); }); }
+    function loadImg() { $.get(`/admin/products/${PID}/images`, list => { $('#imgList').html(list.map(i => {
+        if (i.video_file || i.video_url) {
+            let vsrc = i.video_file ? i.video_file : i.video_url;
+            return `<div class="col-md-3"><div class="card"><video src="${vsrc}" class="card-img-top" style="max-height:200px;object-fit:cover" controls muted playsinline></video><div class="card-body p-2"><input class="form-control form-control-sm mb-1" value="${i.caption ?? ''}" onchange="updImg(${i.id},this.value)"><button class="btn btn-sm btn-danger" onclick="delImg(${i.id})">Delete</button></div></div></div>`;
+        }
+        return `<div class="col-md-3"><div class="card"><img src="${i.preview}" class="card-img-top"><div class="card-body p-2"><input class="form-control form-control-sm mb-1" value="${i.caption ?? ''}" onchange="updImg(${i.id},this.value)"><button class="btn btn-sm btn-danger" onclick="delImg(${i.id})">Delete</button></div></div></div>`;
+    }).join('') || '<p class="text-muted">No media yet.</p>'); }); }
     function loadMat() { $.get(`/admin/products/${PID}/materials`, list => { $('#matList').html(list.map(m => `<li class="list-group-item d-flex justify-content-between">${m.name}<span><button class="btn btn-sm btn-link" onclick="editMat(${m.id},'${m.name.replace(/'/g, "\\'")}')">Edit</button><button class="btn btn-sm btn-link text-danger" onclick="delMat(${m.id})">Delete</button></span></li>`).join('')); }); }
     function loadSpec() { $.get(`/admin/products/${PID}/specs`, list => { $('#specList').html(list.map(s => `<li class="list-group-item d-flex justify-content-between"><span>${s.point}</span><span><button class="btn btn-sm btn-link" onclick="editSpec(${s.id})">Edit</button><button class="btn btn-sm btn-link text-danger" onclick="delSpec(${s.id})">Delete</button></span></li>`).join('')); }); }
     function loadOpt() { $.get(`/admin/products/${PID}/options`, { group: optGroup }, list => { $('#optList').html(list.map(o => `<div class="list-group-item d-flex justify-content-between align-items-center"><div><strong>[${o.group}]</strong> ${o.name} <small class="text-muted">${o.subtitle ?? ''}</small> <span class="badge bg-light text-dark">${o.price_delta ? '+£' + Number(o.price_delta).toLocaleString() : 'Included'}</span> ${o.is_default ? '<span class="badge bg-success">Default</span>' : ''} ${o.swatch_color ? `<span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:${o.swatch_color};border:1px solid #ccc;"></span>` : ''}</div><span><button class="btn btn-sm btn-link" onclick="editOpt(${o.id},'${o.name.replace(/'/g, "\\'")}')">Edit</button><button class="btn btn-sm btn-link text-danger" onclick="delOpt(${o.id})">Delete</button></span></div>`).join('') || '<p class="text-muted">No options in this group yet.</p>'); }); }
@@ -173,6 +196,7 @@ $(function () {
     Object.values(reload).forEach(fn => fn());
 
     $('#imgForm').submit(e => { e.preventDefault(); const fd = new FormData(); fd.append('image', $('#imgFile')[0].files[0]); fd.append('caption', $('#imgCaption').val()); $.ajax({ url: `/admin/products/${PID}/images`, type: 'POST', data: fd, contentType: false, processData: false, success: d => { showSuccess(d.message); $('#imgForm')[0].reset(); loadImg(); }, error: xhr => showError(xhr.responseJSON?.message ?? 'Error') }); });
+    $('#vidForm').submit(e => { e.preventDefault(); const fd = new FormData(); if ($('#vidFile')[0].files[0]) fd.append('video_file', $('#vidFile')[0].files[0]); if ($('#vidUrl').val()) fd.append('video_url', $('#vidUrl').val()); fd.append('caption', $('#vidCaption').val()); $.ajax({ url: `/admin/products/${PID}/images`, type: 'POST', data: fd, contentType: false, processData: false, success: d => { showSuccess(d.message); $('#vidForm')[0].reset(); loadImg(); }, error: xhr => showError(xhr.responseJSON?.message ?? 'Error') }); });
     $('#matForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/materials`, { name: $('#matName').val() }, d => { showSuccess(d.message); $('#matName').val(''); loadMat(); }).fail(xhr => showError('Error')); });
     $('#specForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/specs`, { point: $('#specPoint').val() }, d => { showSuccess(d.message); $('#specPoint').val(''); loadSpec(); }).fail(() => showError('Error')); });
     $('#optForm').submit(e => { e.preventDefault(); $.post(`/admin/products/${PID}/options`, { group: $('#optGroup').val(), name: $('#optName').val(), subtitle: $('#optSub').val(), price_delta: $('#optPrice').val(), swatch_color: $('#optSwatch').val(), is_default: $('#optDefault').is(':checked') ? 1 : 0 }, d => { showSuccess(d.message); $('#optForm')[0].reset(); loadOpt(); }).fail(xhr => showError(xhr.status === 422 ? Object.values(xhr.responseJSON.errors)[0][0] : 'Error')); });

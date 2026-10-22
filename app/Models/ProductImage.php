@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProductImage extends Model
 {
-    protected $fillable = ['product_id', 'image', 'caption', 'sort_order'];
+    protected $fillable = ['product_id', 'image', 'caption', 'sort_order', 'video_file', 'video_url'];
 
     protected function casts(): array
     {

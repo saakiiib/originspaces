@@ -16,15 +16,19 @@
   <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($productsJson) }})</button>
+        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($items) }})</button>
         @foreach($categoriesJson as $cat)
-          <button onclick="filterGallery({{ json_encode($cat['name']) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $cat['name'] }} ({{ collect($productsJson)->where('category', $cat['name'])->count() }})</button>
+          <button onclick="filterGallery({{ json_encode($cat['name']) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $cat['name'] }} ({{ collect($items)->where('category', $cat['name'])->count() }})</button>
         @endforeach
       </div>
       <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-        @forelse($productsJson as $gi => $g)
+        @forelse($items as $gi => $g)
           <a @spa href="/product/{{ $g['slug'] }}" data-cat="{{ $g['category'] }}" class="gallery-item group relative rounded-xl overflow-hidden border border-[#e5e2da] bg-white block">
-            <img src="{{ $g['heroImage'] }}" alt="{{ $g['name'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+            @if($g['type'] === 'video')
+              <video src="{{ $g['image'] }}" class="w-full aspect-[4/3] object-cover" muted playsinline loop preload="none"></video>
+            @else
+              <img src="{{ $g['image'] }}" alt="{{ $g['name'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
+            @endif
             <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
             <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $g['category'] }}</span>
             <div class="p-3.5">

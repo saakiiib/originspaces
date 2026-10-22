@@ -40,8 +40,9 @@ class SidebarController
                     ['label' => 'Testimonials', 'route' => 'testimonial.index', 'href' => route('testimonial.index')],
                     ['label' => 'FAQ Categories', 'route' => 'faq-categories.*', 'href' => route('faq-categories.index')],
                     ['label' => 'FAQs', 'route' => 'faqs.*', 'href' => route('faqs.index')],
-                    ['label' => 'Gallery Categories', 'route' => 'gallery-categories.*', 'href' => route('gallery-categories.index')],
-                    ['label' => 'Galleries', 'route' => 'galleries.*', 'href' => route('galleries.index')],
+                    // Gallery categories and gallery module hidden per user request
+                    // ['label' => 'Gallery Categories', 'route' => 'gallery-categories.*', 'href' => route('gallery-categories.index')],
+                    // ['label' => 'Galleries', 'route' => 'galleries.*', 'href' => route('galleries.index')],
                     ['label' => 'Downloads', 'route' => 'downloads.*', 'href' => route('downloads.index')],
                 ],
             ],

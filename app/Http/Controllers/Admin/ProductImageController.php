@@ -13,50 +13,74 @@ class ProductImageController extends Controller
     {
         return response()->json(
             ProductImage::where('product_id', $productId)->orderBy('sort_order')->get()
-                ->map(fn ($i) => [...$i->toArray(), 'preview' => url($i->image)])
+                ->map(function ($i) {
+                    $data = [
+                        ...$i->toArray(),
+                        'preview' => $i->image ? url($i->image) : null,
+                        'video_preview' => $i->video_file ? url($i->video_file) : null,
+                        'video_url' => $i->video_url,
+                    ];
+                    return $data;
+                })
         );
     }
 
     public function store(Request $request, $productId)
     {
-        $request->validate(['image' => 'required|image|mimes:jpeg,png,jpg,webp|max:4096']);
+        $hasImage = $request->hasFile('image') && $request->file('image')->isValid();
+        $hasVideoFile = $request->hasFile('video_file') && $request->file('video_file')->isValid();
+        $videoUrl = $request->input('video_url', null);
 
-        $path = public_path('uploads/products/gallery/');
-        if (! file_exists($path)) {
-            mkdir($path, 0755, true);
+        if (! $hasImage && ! $hasVideoFile && empty($videoUrl)) {
+            return response()->json(['message' => 'Provide image or video'], 422);
         }
-        $name = mt_rand(10000000, 99999999).'.webp';
-        Image::make($request->file('image'))->resize(1600, null, function ($c) {
-            $c->aspectRatio();
-            $c->upsize();
-        })->encode('webp', 75)->save($path.$name);
 
-        $img = ProductImage::create([
+        $data = [
             'product_id' => $productId,
-            'image' => '/uploads/products/gallery/'.$name,
             'caption' => $request->caption,
             'sort_order' => (int) (ProductImage::where('product_id', $productId)->max('sort_order') ?? 0) + 1,
-        ]);
+        ];
 
-        return response()->json(['message' => 'Image added', 'data' => $img]);
+        if ($hasImage) {
+            $path = public_path('uploads/products/gallery/');
+            if (! file_exists($path)) mkdir($path, 0755, true);
+            $name = mt_rand(10000000, 99999999).'.webp';
+            Image::make($request->file('image'))->resize(1600, null, function ($c) {
+                $c->aspectRatio();
+                $c->upsize();
+            })->encode('webp', 75)->save($path.$name);
+            $data['image'] = '/uploads/products/gallery/'.$name;
+        }
+
+        if ($hasVideoFile) {
+            $vpath = public_path('uploads/products/videos/');
+            if (! file_exists($vpath)) mkdir($vpath, 0755, true);
+            $vname = mt_rand(10000000, 99999999).'.mp4';
+            $request->file('video_file')->move($vpath, $vname);
+            $data['video_file'] = '/uploads/products/videos/'.$vname;
+        }
+
+        if ($videoUrl) {
+            $data['video_url'] = $videoUrl;
+        }
+
+        $img = ProductImage::create($data);
+        return response()->json(['message' => 'Added', 'data' => $img]);
     }
 
     public function update(Request $request, $id)
     {
         $img = ProductImage::findOrFail($id);
-        $img->update($request->only(['caption']));
-
-        return response()->json(['message' => 'Caption updated']);
+        $img->update($request->only(['caption', 'video_url']));
+        return response()->json(['message' => 'Updated']);
     }
 
     public function destroy($id)
     {
         $img = ProductImage::findOrFail($id);
-        if ($img->image && file_exists(public_path($img->image))) {
-            @unlink(public_path($img->image));
-        }
+        if ($img->image && file_exists(public_path($img->image))) @unlink(public_path($img->image));
+        if ($img->video_file && file_exists(public_path($img->video_file))) @unlink(public_path($img->video_file));
         $img->delete();
-
-        return response()->json(['message' => 'Image deleted']);
+        return response()->json(['message' => 'Deleted']);
     }
 }

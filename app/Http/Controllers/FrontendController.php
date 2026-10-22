@@ -14,6 +14,7 @@ use App\Models\Gallery;
 use App\Models\GalleryCategory;
 use App\Models\PageSeo;
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use OpenGraph;
 use SEOMeta;
@@ -198,19 +199,41 @@ class FrontendController extends Controller
         $this->seo('gallery');
 
         $categories = Category::where('status', true)->orderBy('sort_order')->get();
-        $products = Product::with('category')->where('status', true)->orderBy('sort_order')->orderByDesc('id')->get();
-        $productsJson = $products->map(fn ($p) => [
-            'id' => 'prod-'.$p->id,
-            'slug' => $p->slug,
-            'name' => $p->name,
-            'category' => $p->category?->name ?? 'Collection',
-            'modelCode' => $p->model_code,
-            'tagline' => $p->tagline,
-            'heroImage' => ($p->hero_image ? url($p->hero_image) : ($p->category?->image ? url($p->category->image) : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80')),
-        ])->values();
+        $productImages = ProductImage::with('product.category')
+            ->whereHas('product', fn ($q) => $q->where('status', true))
+            ->orderByDesc('id')
+            ->get();
+
+        $items = $productImages->map(function ($pi) {
+            $p = $pi->product;
+            $isVideo = (bool) ($pi->video_file || $pi->video_url);
+            $mediaUrl = null;
+            $mediaType = 'image';
+
+            if ($isVideo) {
+                $mediaType = 'video';
+                $mediaUrl = $pi->video_file ? url($pi->video_file) : $pi->video_url;
+            } else {
+                $mediaUrl = $pi->image ? url($pi->image) : ($p && $p->hero_image ? url($p->hero_image) : null);
+            }
+
+            return [
+                'id' => 'pi-'.$pi->id,
+                'name' => $p ? $p->name : 'Untitled',
+                'slug' => $p ? $p->slug : '#',
+                'category' => $p && $p->category ? $p->category->name : 'Collection',
+                'modelCode' => $p ? $p->model_code : '',
+                'image' => $mediaUrl,
+                'type' => $mediaType,
+                'videoUrl' => $pi->video_url,
+                'videoFile' => $pi->video_file ? url($pi->video_file) : null,
+                'caption' => $pi->caption,
+            ];
+        })->values();
+
         $categoriesJson = $categories->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])->values();
 
-        return spa('frontend.gallery', compact('productsJson', 'categoriesJson'));
+        return spa('frontend.gallery', compact('items', 'categoriesJson'));
     }
 
     public function downloads()
