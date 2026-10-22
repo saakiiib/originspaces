@@ -89,8 +89,8 @@
             <div id="spec-tech" class="hidden mt-2.5 bg-[#FAF8F5] rounded-xl border border-[#e5e2da] px-4 py-2 text-xs text-[#374151]"></div>
           </div>
 
-          <!-- 7. Downloads (hidden, kept for later use) -->
-          <div hidden class="pt-3 border-t border-[#EAE7DF]">
+          <!-- 7. Downloads -->
+          <div class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-docs')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
                 <x-icon name="book-open" class="w-3.5 h-3.5 text-[#9a7b4f]" />
@@ -130,10 +130,6 @@
             <button id="tab-btn-gallery" onclick="switchMediaTab('gallery')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
               <x-icon name="image" class="w-4 h-4 text-gray-400" />
               <span id="gallery-tab-label" class="hidden min-[420px]:inline">Gallery</span>
-            </button>
-            <button id="tab-btn-floor" onclick="switchMediaTab('floor')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
-              <x-icon name="layout" class="w-4 h-4 text-gray-400" />
-              <span class="hidden min-[420px]:inline">Floor Plan</span>
             </button>
           </div>
           <div class="hidden md:block text-xs text-[#786348] font-mono pr-2 shrink-0">Selected: <strong id="viewer-finish-name" class="text-[#1a1d24]">—</strong></div>
@@ -181,21 +177,6 @@
           </div>
           <div class="mt-3 flex flex-wrap items-center gap-2" id="gallery-plates"></div>
           <div class="mt-3 grid grid-cols-3 sm:grid-cols-4 gap-2" id="gallery-thumbs"></div>
-        </div>
-
-        <!-- Floor plan stage -->
-        <div id="media-floor" class="hidden bg-white border border-[#e5e2da] rounded-2xl overflow-hidden shadow-xs p-4 sm:p-6">
-          <div class="relative rounded-xl overflow-hidden border border-[#2d3139] bg-[#14171c]">
-            <span class="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/10 backdrop-blur text-white text-[10px] font-mono uppercase tracking-widest border border-white/15">Ref: <span id="floor-ref">—</span></span>
-            <span class="absolute top-3 right-3 px-2.5 py-1 rounded bg-white/10 backdrop-blur text-white text-[10px] font-mono uppercase tracking-widest border border-white/15">Units: Metric (m²)</span>
-            <svg id="floor-svg" viewBox="0 0 640 360" class="w-full h-auto block"></svg>
-          </div>
-          <div class="mt-4">
-            <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-bold block mb-1">Active Zone Breakdown</span>
-            <h4 id="floor-zone-name" class="font-serif text-xl text-[#1a1d24] font-semibold">—</h4>
-            <p id="floor-zone-desc" class="text-xs text-[#374151] mt-1">—</p>
-            <div class="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2" id="floor-stats"></div>
-          </div>
         </div>
 
         <!-- 3D stage -->
@@ -748,6 +729,7 @@
     }
 
     function renderFloor() {
+      if (!document.getElementById('floor-svg')) return;
       const p = currentProduct;
       document.getElementById('floor-ref').textContent = p.modelCode;
       const svg = document.getElementById('floor-svg');
