@@ -117,10 +117,12 @@
         <!-- Media tabs -->
         <div class="bg-white border border-[#e5e2da] rounded-xl p-2 shadow-xs flex items-center justify-between gap-2 overflow-x-auto">
           <div class="flex items-center gap-1 sm:gap-2">
+            @if($product->show_3d)
             <button id="tab-btn-3d" onclick="switchMediaTab('3d')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]">
               <x-icon name="box" class="w-4 h-4 text-gray-400" />
               <span class="hidden min-[420px]:inline">3D Interactive</span>
             </button>
+            @endif
             <button id="tab-btn-video" onclick="switchMediaTab('video')" class="px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 bg-[#181B20] text-white shadow">
               <x-icon name="video" class="w-4 h-4 text-[#c5a880]" />
               <span class="hidden min-[420px]:inline">Video</span>
@@ -197,6 +199,7 @@
         </div>
 
         <!-- 3D stage -->
+        @if($product->show_3d)
         <div id="media-3d" class="hidden bg-white border border-[#e5e2da] rounded-2xl overflow-hidden shadow-xs p-4 sm:p-6">
           <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
             <div>
@@ -220,6 +223,7 @@
             <div class="absolute bottom-3 right-4 text-[10px] font-mono uppercase tracking-widest text-[#9a7b4f] font-semibold z-10" id="model3d-label">—</div>
           </div>
         </div>
+        @endif
 
         <!-- Description -->
         <div class="bg-white border border-[#e5e2da] rounded-2xl p-6 sm:p-8 shadow-xs">
@@ -502,10 +506,13 @@
          re-fit once the tab is visible. */
       if (tab === '3d') setTimeout(fitStage, 30);
       ['video', 'gallery', 'floor', '3d'].forEach(k => {
-        document.getElementById('media-' + k).classList.toggle('hidden', k !== tab);
+        const m = document.getElementById('media-' + k);
+        if (m) m.classList.toggle('hidden', k !== tab);
         const b = document.getElementById('tab-btn-' + k);
-        b.className = 'px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ' +
-          (k === tab ? 'bg-[#181B20] text-white shadow' : 'bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]');
+        if (b) {
+          b.className = 'px-3 sm:px-4 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ' +
+            (k === tab ? 'bg-[#181B20] text-white shadow' : 'bg-transparent text-[#4b5563] hover:text-[#1a1d24] hover:bg-[#F4F1EA]');
+        }
       });
       const v = document.getElementById('spec-video');
       if (v) {

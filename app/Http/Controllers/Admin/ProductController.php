@@ -80,7 +80,7 @@ class ProductController extends Controller
         ]));
         $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class);
         $product->model_code = $request->model_code;
-        $product->show_3d = $request->boolean('show_3d', true);
+        $product->show_3d = $request->boolean('show_3d', false);
         $product->is_featured = $request->boolean('is_featured');
         $product->status = true;
         $product->sort_order = (int) (Product::max('sort_order') ?? 0) + 1;
@@ -127,12 +127,9 @@ class ProductController extends Controller
         $product->model_code = $request->model_code;
         // Slug follows the latest name + code.
         $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class, $product->id);
-        if ($request->has('show_3d')) {
-            $product->show_3d = $request->boolean('show_3d');
-        }
-        if ($request->has('is_featured')) {
-            $product->is_featured = $request->boolean('is_featured');
-        }
+        // Unchecked checkboxes are absent from the request, so always write the boolean.
+        $product->show_3d = $request->boolean('show_3d');
+        $product->is_featured = $request->boolean('is_featured');
 
         if ($request->hasFile('hero_image')) {
             $this->deleteFile($product->hero_image);
