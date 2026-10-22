@@ -594,7 +594,11 @@
       const p = currentProduct;
       const video = document.getElementById('spec-video');
       if (video && video.tagName === 'VIDEO') {
-        if (p.video && !p.videoEmbed) video.src = p.video;
+        if (p.video && !p.videoEmbed) {
+          video.src = p.video;
+          video.load();
+          video.play().catch(() => {});
+        }
         video.poster = p.heroImage;
       }
       gallerySel = 0;
