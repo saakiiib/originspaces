@@ -66,10 +66,20 @@ class Product extends Model
         return $this->hasMany(FloorZone::class)->orderBy('sort_order');
     }
 
-    /** Effective video: product override else category video. */
+    /** Effective video: product override, then an uploaded product media video, else category video. */
     public function effectiveVideoUrl(): ?string
     {
-        return $this->video_url ?: $this->category?->video_url;
+        if ($this->video_url) {
+            return $this->video_url;
+        }
+
+        $mediaVideo = $this->images->first(fn ($i) => $i->video_file || $i->video_url);
+
+        if ($mediaVideo) {
+            return $mediaVideo->video_file ?: $mediaVideo->video_url;
+        }
+
+        return $this->category?->video_url;
     }
 
     /** Frontend SEO array shape for SEOMeta/OpenGraph. */

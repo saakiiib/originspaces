@@ -535,7 +535,7 @@
       const p = currentProduct;
       const plates = [{ img: p.heroImage, cap: p.name + ' — Hero View', cat: p.category }];
       (p.gallery || []).forEach(g => plates.push({ img: g.src, cap: g.caption || p.name, cat: p.category }));
-      return plates;
+      return plates.filter(x => x.img);
     }
 
     var galleryPlate = 'all';
@@ -549,6 +549,7 @@
 
     function renderGalleryMain() {
       const g = detailGallery();
+      if (!g.length) return;
       const visible = g.filter(x => galleryPlate === 'all' || x.cat === galleryPlate);
       let item = g[gallerySel];
       if (!item || (galleryPlate !== 'all' && item.cat !== galleryPlate)) {

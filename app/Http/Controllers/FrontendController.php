@@ -322,13 +322,15 @@ class FrontendController extends Controller
         return [
             ...$this->productCard($p),
             'description' => $p->description,
-            'video' => $p->effectiveVideoUrl(),
+            'video' => $this->imgUrl($p->effectiveVideoUrl()),
             'videoEmbed' => $this->videoEmbedUrl($p->effectiveVideoUrl()),
             'model3d' => $p->model_3d ? url($p->model_3d) : null,
             'show3d' => (bool) $p->show_3d,
-            'gallery' => $p->images->map(fn ($i) => [
-                'src' => $this->imgUrl($i->image), 'caption' => $i->caption,
-            ])->values()->all(),
+            'gallery' => $p->images
+                ->filter(fn ($i) => filled($i->image))
+                ->map(fn ($i) => [
+                    'src' => $this->imgUrl($i->image), 'caption' => $i->caption,
+                ])->values()->all(),
             'tech' => $p->techSpecs->map(fn ($t) => [
                 'label' => $t->label, 'value' => $t->value, 'highlight' => (bool) $t->highlight,
             ])->values()->all(),
