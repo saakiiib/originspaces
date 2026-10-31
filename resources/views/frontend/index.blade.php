@@ -63,51 +63,53 @@
           </div>
         </div>
 
-        <!-- Stage Tracker -->
-        <div class="p-5 sm:p-7 bg-[#FAF9F5] border-t border-[#eae7df]">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4">
-            <span class="text-sm sm:text-base uppercase font-mono tracking-[0.2em] text-[#9a7b4f] font-bold">Engineering Deployment Timeline</span>
-            <span class="text-sm sm:text-[15px] text-[#374151] font-mono font-semibold">Total Deployment Window: 15 to 45 Minutes on Site</span>
+        <!-- Delivery steps (replaces deployment timeline) -->
+        <div class="p-5 sm:p-7 bg-[#FAF9F5] border-t border-[#eae7df] osd-in">
+          <div class="osd-head">
+            <h2 class="osd-title"><span>From Delivery to Your New Space</span></h2>
+            <span class="osd-tag">Simple, Flexible &amp; Affordable</span>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-            <button id="hero-stage-card-1" onclick="setHeroStage(1)" class="p-4 sm:p-5 text-left border rounded-lg transition-all border-[#9a7b4f] bg-white text-[#1a1d24] shadow-md ring-1 ring-[#9a7b4f]">
-              <div class="flex items-center justify-between font-mono mb-2">
-                <span id="hero-stage-label-1" class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-[#9a7b4f]">Phase 1</span>
-                <span class="text-xs font-mono font-semibold text-[#6b7280]">00:00 &ndash; 05:00</span>
+          <p class="osd-lead">Our expandable modular buildings are supplied for a wide range of home and business uses. Here is a simple overview of how the process works.</p>
+  
+          <div class="osd-grid">
+            <div class="osd-card">
+              <span class="osd-icon"><x-icon name="home" /></span>
+              <div>
+                <span class="osd-step">Step 1</span>
+                <h3>Choose Your Modular Building</h3>
+                <p>Explore available expandable modular buildings and choose a model that suits your space, budget and intended use. Need something different? Ask us about custom-build options.</p>
               </div>
-              <div class="text-base sm:text-[17px] font-serif font-semibold text-[#1a1d24] mb-2 leading-snug">Laser Auto-Leveling</div>
-              <p class="text-[13px] sm:text-sm text-[#374151] leading-relaxed">Offloaded via HIAB crane onto prepared micro-piles. Hydraulic outriggers self-level to 1mm tolerance.</p>
-            </button>
-            <button id="hero-stage-card-2" onclick="setHeroStage(2)" class="p-4 sm:p-5 text-left border rounded-lg transition-all border-[#e5e2da] bg-white/80 text-[#374151] hover:border-[#c8c3b7] hover:bg-white shadow-2xs">
-              <div class="flex items-center justify-between font-mono mb-2">
-                <span id="hero-stage-label-2" class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-[#6b7280]">Phase 2</span>
-                <span class="text-xs font-mono font-semibold text-[#6b7280]">05:00 &ndash; 18:00</span>
+            </div>
+            <div class="osd-card">
+              <span class="osd-icon"><x-icon name="truck" /></span>
+              <div>
+                <span class="osd-step">Step 2</span>
+                <h3>Arrange Delivery</h3>
+                <p>Once your order is confirmed, we will discuss delivery availability, costs and arrangements for your location. Buildings are transported in a compact format.</p>
               </div>
-              <div class="text-base sm:text-[17px] font-serif font-semibold text-[#1a1d24] mb-2 leading-snug">Hydraulic Bi-Fold Unfolding</div>
-              <p class="text-[13px] sm:text-sm text-[#374151] leading-relaxed">Dual wings extend electronically via remote pendant. Floor plates and roof trusses expand automatically.</p>
-            </button>
-            <button id="hero-stage-card-3" onclick="setHeroStage(3)" class="p-4 sm:p-5 text-left border rounded-lg transition-all border-[#e5e2da] bg-white/80 text-[#374151] hover:border-[#c8c3b7] hover:bg-white shadow-2xs">
-              <div class="flex items-center justify-between font-mono mb-2">
-                <span id="hero-stage-label-3" class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-[#6b7280]">Phase 3</span>
-                <span class="text-xs font-mono font-semibold text-[#6b7280]">18:00 &ndash; 28:00</span>
+            </div>
+            <div class="osd-card">
+              <span class="osd-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M14 6a6 6 0 0 1 6 6v3"/><path d="M4 15v-3a6 6 0 0 1 6-6"/><rect x="2" y="15" width="20" height="4" rx="1"/></svg></span>
+              <div>
+                <span class="osd-step">Step 3</span>
+                <h3>Prepare Your Site</h3>
+                <p>Before delivery, make the necessary arrangements for access, site preparation, foundations, installation and utility connections.</p>
               </div>
-              <div class="text-base sm:text-[17px] font-serif font-semibold text-[#1a1d24] mb-2 leading-snug">Thermal Wall Locking</div>
-              <p class="text-[13px] sm:text-sm text-[#374151] leading-relaxed">PIR insulated composite wall panels are raised and locked into place with airtight structural gaskets.</p>
-            </button>
-            <button id="hero-stage-card-4" onclick="setHeroStage(4)" class="p-4 sm:p-5 text-left border rounded-lg transition-all border-[#e5e2da] bg-white/80 text-[#374151] hover:border-[#c8c3b7] hover:bg-white shadow-2xs">
-              <div class="flex items-center justify-between font-mono mb-2">
-                <span id="hero-stage-label-4" class="text-xs sm:text-[13px] font-bold uppercase tracking-wider text-[#6b7280]">Phase 4</span>
-                <span class="text-xs font-mono font-semibold text-[#6b7280]">28:00 &ndash; 45:00</span>
+            </div>
+            <div class="osd-card">
+              <span class="osd-icon"><x-icon name="key" /></span>
+              <div>
+                <span class="osd-step">Step 4</span>
+                <h3>Create Your Ideal Space</h3>
+                <p>After professional assembly and any required connections or approvals, your building can be prepared for use as an office, café, studio, annexe or other suitable space.</p>
               </div>
-              <div class="text-base sm:text-[17px] font-serif font-semibold text-[#1a1d24] mb-2 leading-snug">Turnkey Commissioning</div>
-              <p class="text-[13px] sm:text-sm text-[#374151] leading-relaxed">Integrated 32A electrical hookup engaged. Water supply connected to pre-fitted bathroom and kitchen.</p>
-            </button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Action Bar -->
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-2 max-w-6xl mx-auto">
+      {{-- <div class="mt-4 flex flex-wrap items-center justify-center gap-2 max-w-6xl mx-auto">
         <a @spa href="{{ route('collections') }}" id="hero-explore-models-btn" class="inline-flex items-center justify-center gap-2.5 bg-[#181b20] hover:bg-[#9a7b4f] text-white font-semibold text-xs uppercase tracking-[0.18em] px-5 py-2.5 transition-all duration-300 rounded-md shadow-xs w-full sm:w-auto">
           <span>Explore Collections</span>
           <x-icon name="arrow-right" class="w-4 h-4" />
@@ -116,46 +118,48 @@
           <x-icon name="layout" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Request Quote</span>
         </button>
-        {{-- Hidden, kept for later use
-        <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" id="hero-download-spec-btn" hidden class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#374151] hover:text-[#1a1d24] text-xs font-mono uppercase tracking-wider px-3 py-2 border border-[#e5e2da] rounded-md bg-white hover:bg-[#faf9f5] transition-colors font-semibold shadow-2xs">
-          <x-icon name="file-text" class="w-4 h-4 text-[#9a7b4f]" />
-          <span>Download Spec Pack (PDF)</span>
-        </button>
-        --}}
         <a id="hero-yt-watch-link" href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto text-[#1a1d24] hover:border-[#9a7b4f] hover:bg-[#faf9f5] text-xs uppercase tracking-[0.16em] px-4 py-2.5 border border-[#e5e2da] rounded-md bg-white transition-all font-semibold shadow-2xs">
           <x-icon name="youtube" class="w-4 h-4 text-[#9a7b4f]" />
           <span>Watch on YouTube</span>
         </a>
-      </div>
+      </div> --}}
 
-      <!-- Hero 4-Column Specification Strip -->
-      <div class="mt-8 pt-8 border-t border-[#e5e2da]">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
-          <div class="bg-white/80 p-5 rounded-xl border border-[#e5e2da] space-y-1">
-            <span class="text-[11px] uppercase font-mono tracking-wider text-[#6b7280] font-semibold block whitespace-nowrap">Chassis Frame</span>
-            <span class="font-serif text-xl sm:text-2xl font-semibold text-[#1a1d24] block whitespace-nowrap">Q355B Steel</span>
-            <span class="text-xs text-[#374151] block">Hot-dip galvanized &bull; 50yr design life</span>
-          </div>
-
-          <div class="bg-white/80 p-5 rounded-xl border border-[#e5e2da] space-y-1">
-            <span class="text-[11px] uppercase font-mono tracking-wider text-[#6b7280] font-semibold block whitespace-nowrap">Thermal Rating</span>
-            <span class="font-serif text-xl sm:text-2xl font-semibold text-[#1a1d24] block whitespace-nowrap">0.18 W/m&sup2;K</span>
-            <span class="text-xs text-[#374151] block">Part L UK compliant &bull; 100mm PIR core</span>
-          </div>
-
-          <div class="bg-white/80 p-5 rounded-xl border border-[#e5e2da] space-y-1">
-            <span class="text-[11px] uppercase font-mono tracking-wider text-[#6b7280] font-semibold block whitespace-nowrap">Folded Profile</span>
-            <span class="font-serif text-xl sm:text-2xl font-semibold text-[#1a1d24] block whitespace-nowrap">2.25m Width</span>
-            <span class="text-xs text-[#374151] block">Standard UK flatbed road freightable</span>
-          </div>
-
-          <div class="bg-white/80 p-5 rounded-xl border border-[#e5e2da] space-y-1">
-            <span class="text-[11px] uppercase font-mono tracking-wider text-[#6b7280] font-semibold block whitespace-nowrap">Site Setup</span>
-            <span class="font-serif text-xl sm:text-2xl font-semibold text-[#9a7b4f] block whitespace-nowrap">&lt; 60 Minutes</span>
-            <span class="text-xs text-[#374151] block">Integrated hydraulic leveling jacks</span>
-          </div>
+      <!-- From Delivery to Your New Space (replaces 4-column spec strip) -->
+      <style>
+        .osd{margin-top:20px;text-align:left}
+        .osd-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+        .osd-title{display:flex;align-items:center;gap:18px;margin:0}
+        .osd-title:before{content:"";width:64px;height:2px;background:#9a7b4f;flex-shrink:0}
+        .osd-title span{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,3.4vw,40px);font-weight:600;color:#1a1d24;text-transform:uppercase;line-height:1.1}
+        .osd-tag{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.18em;color:#9a7b4f}
+        .osd-lead{margin:14px 0 24px;font-size:15px;line-height:1.7;color:#374151;max-width:760px}
+        .osd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+        .osd-card{display:flex;gap:20px;background:#fff;border:1px solid #e5e2da;border-radius:16px;padding:24px}
+        .osd-icon{width:56px;height:56px;border-radius:50%;background:rgba(154,123,79,.1);display:grid;place-items:center;flex-shrink:0;color:#9a7b4f}
+        .osd-icon svg{width:26px;height:26px}
+        .osd-step{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.2em;color:#9a7b4f;text-transform:uppercase}
+        .osd-card h3{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:600;color:#1a1d24;margin:4px 0 8px;line-height:1.2}
+        .osd-card p{margin:0;font-size:14px;line-height:1.65;color:#374151}
+        .osd-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px}
+        .osd-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 22px;border-radius:8px;border:1px solid #e5e2da;background:#fff;color:#1a1d24;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;transition:all .2s;cursor:pointer;text-decoration:none}
+        .osd-btn svg{width:16px;height:16px;color:#9a7b4f}
+        .osd-btn:hover{border-color:#9a7b4f;background:#faf9f5}
+        .osd-btn.dark{background:#181b20;border-color:#181b20;color:#fff}
+        .osd-btn.dark svg{color:#fff}
+        .osd-btn.dark:hover{background:#9a7b4f;border-color:#9a7b4f}
+        .osd-note{margin:18px 0 0;text-align:center;font-size:11.5px;color:#6b7280}
+        @media(max-width:760px){.osd-grid{grid-template-columns:1fr}.osd-card{padding:20px;gap:16px}.osd-btn{width:100%}}
+      .osd-in .osd-head{margin-bottom:0}
+      </style>
+      <div class="osd">
+        <div class="osd-actions">
+          <a @spa href="{{ route('collections') }}" class="osd-btn dark"><span>Explore Our Buildings</span><x-icon name="arrow-right" /></a>
+          <button type="button" onclick="openEnquiryModal('General Consultation')" class="osd-btn"><x-icon name="file-text" /><span>Request a Quote</span></button>
+          <a href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="osd-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Watch Video</span></a>
         </div>
+        <p class="osd-note">Building supply only. Installation, site preparation and utility connections are not included. Planning or other approvals may be required depending on the intended use.</p>
       </div>
+
 
       <!-- Continue divider - scrolls to Explore Our Collections -->
       <div class="mt-10 text-center">
@@ -529,56 +533,77 @@
     </div>
   </section>
 
-  <!-- Philosophy Section - from index.html, placed after collections -->
+  <!-- Introduction to Modular Living (replaces Philosophy section) -->
   <section id="philosophy" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <style>
+      .osi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:start}
+      .osi-eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#9a7b4f;margin-bottom:16px}
+      .osi h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.8vw,39px);font-weight:600;line-height:1.18;color:#1a1d24;margin:0}
+      .osi h2 .l{display:block}
+      .osi h2 .l+.l{margin-top:4px}
+      .osi h2 em{font-style:italic;color:#9a7b4f}
+      .osi-p{margin:22px 0 0;font-size:15px;line-height:1.75;color:#374151;max-width:600px}
+      .osi-quote{margin:24px 0 0;border-left:2px solid #9a7b4f;padding-left:18px;font-size:15px;font-style:italic;line-height:1.7;color:#374151;max-width:600px}
+      .osi-feats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;max-width:640px}
+      .osi-feat{display:flex;gap:12px}
+      .osi-feat svg{width:28px;height:28px;color:#9a7b4f;flex-shrink:0;margin-top:2px}
+      .osi-feat b{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1a1d24;margin-bottom:6px}
+      .osi-feat span{display:block;font-size:13px;line-height:1.6;color:#374151}
+      .osi-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+      .osi-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:8px;border:1px solid #9a7b4f;background:transparent;color:#1a1d24;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;transition:all .2s;text-decoration:none}
+      .osi-btn svg{width:18px;height:18px;color:#9a7b4f}
+      .osi-btn:hover{background:#faf9f5}
+      .osi-btn.dark{background:#181b20;border-color:#181b20;color:#fff}
+      .osi-btn.dark svg{color:#fff}
+      .osi-btn.dark:hover{background:#9a7b4f;border-color:#9a7b4f}
+      .osi-media{position:relative;width:100%;padding-bottom:40px}
+      .osi-media img{display:block;width:100%;aspect-ratio:797/560;object-fit:cover;border-radius:20px;border:1px solid #e5e2da;box-shadow:0 22px 48px rgba(26,29,36,.14)}
+      .osi-badge{position:absolute;top:16px;left:16px;background:rgba(24,27,32,.85);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px;border-radius:999px}
+      .osi-float{position:absolute;left:24px;bottom:0;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e5e2da;border-radius:14px;box-shadow:0 14px 30px rgba(0,0,0,.12);padding:14px 20px}
+      .osi-float i{width:42px;height:42px;border-radius:50%;background:rgba(154,123,79,.1);display:grid;place-items:center;color:#9a7b4f;flex-shrink:0}
+      .osi-float i svg{width:20px;height:20px}
+      .osi-float b{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9a7b4f}
+      .osi-float span{display:block;font-size:12px;color:#374151;margin-top:2px}
+      @media(min-width:901px){.osi h2 .l:first-child{white-space:nowrap}}
+      @media(max-width:900px){.osi{grid-template-columns:1fr;gap:40px}}
+      @media(max-width:560px){.osi-feats{grid-template-columns:1fr}.osi-btn{width:100%}.osi-float{left:10px;right:10px}}
+    </style>
+    <div class="osi">
       <div>
-        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— The OriginSpaces Philosophy</span>
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold leading-[1.15]">
-          Designed for <em class="italic text-[#9a7b4f]">Modern Living.</em><br />Engineered for Generations.
-        </h2>
-        <p class="mt-5 text-sm sm:text-[15px] text-[#374151] leading-relaxed">
-          We reject transient decorative trends in favour of timeless architectural permanence. Every surface, tap, handle, and joinery module is conceived as an enduring component of your interior envelope — grounded in the geological weight of natural marble, the warmth of quarter-sawn British oak, and the calibrated precision of solid forged brass.
-        </p>
-        <blockquote class="mt-6 border-l-2 border-[#9a7b4f] pl-4 text-sm text-[#374151] italic leading-relaxed">
-          “An interior should calm the senses before demanding admiration. True luxury is not ornamentation — it is the quiet harmony of materials that age with dignified grace.”
-        </blockquote>
-        <p class="mt-2 text-[11px] font-mono uppercase tracking-wider text-[#9a7b4f] font-semibold">Julian Vance · Head of Architecture &amp; Design, OriginSpaces London</p>
-        <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-          <div>
-            <div class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-1.5">
-              <x-icon name="fingerprint" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-              <span>Sensory Tactility</span>
+        <span class="osi-eyebrow">— Introducing Origin Spaces</span>
+        <h2><span class="l">A Simple Introduction to <em>Modular Living.</em></span><span class="l">Affordable Space for Modern Life.</span></h2>
+        <p class="osi-p">Our first shipment is all about helping more people discover modular buildings in a simple and affordable way. Whether you are exploring extra family space, a garden office, a coffee shop or a small business unit, Origin Spaces offers a practical starting point with less commitment and more flexibility.</p>
+        <blockquote class="osi-quote">“Our aim is simple — help customers understand modular living, explore the possibilities and choose a space that suits their needs.”</blockquote>
+        <div class="osi-feats">
+          <div class="osi-feat">
+            <x-icon name="home" />
+            <div>
+              <b>Affordable First Shipment</b>
+              <span>Introductory pricing designed to help customers explore modular buildings more easily.</span>
             </div>
-            <p class="text-xs text-[#374151] leading-relaxed">Unlacquered living patinas, 400-grit matte honed stones, and calibrated mechanical return strokes.</p>
           </div>
-          <div>
-            <div class="flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-1.5">
-              <x-icon name="ruler" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-              <span>Millimetre Datum Alignment</span>
+          <div class="osi-feat">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            <div>
+              <b>Flexible Modular Uses</b>
+              <span>Suitable for garden offices, guest space, cafés, studios, retail kiosks and business use.</span>
             </div>
-            <p class="text-xs text-[#374151] leading-relaxed">Joinery and fixtures fabricated strictly to architectural datum lines without unsightly fillers.</p>
           </div>
         </div>
-        <div class="mt-7 flex flex-wrap items-center gap-6 text-xs font-semibold uppercase tracking-[0.14em]">
-          <button onclick="document.getElementById('downloads-section').scrollIntoView({behavior:'smooth'})" class="text-[#9a7b4f] hover:underline underline-offset-4">Read the Craft Monograph &rarr;</button>
-          <button onclick="openEnquiryModal('Studio Visit')" class="text-[#1a1d24] hover:text-[#9a7b4f] transition-colors">Visit Marylebone Studio</button>
+        <div class="osi-actions">
+          <a @spa href="{{ route('collections') }}" class="osi-btn dark"><span>Explore Our Buildings</span><x-icon name="arrow-right" /></a>
+          <a @spa href="{{ route('contact') }}" class="osi-btn"><x-icon name="message-circle" /><span>Speak to Our Team</span></a>
         </div>
       </div>
-      <div class="relative w-full max-w-[520px] ml-auto">
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85" alt="Studio craft and timber workshop residence at dusk" class="w-full rounded-2xl border border-[#e5e2da] shadow-lg object-cover aspect-[4/3]" />
-        <div class="absolute top-4 left-4 right-4 flex justify-between text-[10px] font-mono uppercase tracking-widest text-white/90">
-          <span class="bg-[#181b20]/60 backdrop-blur px-2.5 py-1 rounded-full">Studio Craft &amp; Timber Workshop</span>
-        </div>
-        <div class="absolute bottom-16 left-4 right-4 text-right text-[11px] text-white/85 font-light">…its final hand-applied organic wax</div>
-        <div class="absolute -bottom-5 left-5 bg-white rounded-xl border border-[#e5e2da] shadow-xl px-4 py-3 flex items-center gap-3">
-          <span class="w-9 h-9 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-            <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f]" />
-          </span>
-          <span>
-            <span class="block text-[10px] font-mono uppercase tracking-widest text-[#1a1d24] font-bold">UK 25-Year Guarantee</span>
-            <span class="block text-[11px] text-[#6b7280]">Exhaustive trade testing &amp; WRAS certification</span>
-          </span>
+      <div class="osi-media">
+        <img src="{{ asset('resources/frontend/images/modular-garden-space.jpg') }}" alt="Expandable modular garden building with timber cladding and sliding glass doors" loading="lazy" />
+        <span class="osi-badge">Expandable Modular Building</span>
+        <div class="osi-float">
+          <i><x-icon name="truck" /></i>
+          <div>
+            <b>Introductory First Shipment</b>
+            <span>Affordable pricing &bull; Enquire for availability</span>
+          </div>
         </div>
       </div>
     </div>
