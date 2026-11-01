@@ -33,17 +33,16 @@
           <div class="flex items-center gap-2.5">
             <span class="flex items-center gap-1.5 font-mono text-[11px] uppercase text-[#9a7b4f] font-semibold tracking-wider">
               <x-icon name="video" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-              <span id="hero-stream-badge">PRIMARY CAMERA &bull; UNFOLDING SEQUENCE</span>
+              <span id="hero-stream-badge">Video 1</span>
             </span>
             <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[#c8c3b7]"></span>
-            <span class="hidden sm:inline-block text-[#6b7280] font-mono text-[11px]">Model HS-VILLA 38 (415 sq ft)</span>
           </div>
           <div class="flex items-center gap-1.5">
-            <button id="hero-angle-btn-0" onclick="switchHeroAngle(0)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-[#9a7b4f] text-white border-[#9a7b4f] font-semibold shadow-xs">Angle 01: Unfolding Demo</button>
-            <button id="hero-angle-btn-1" onclick="switchHeroAngle(1)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-white text-[#374151] border-[#e5e2da] hover:text-[#1a1d24] hover:bg-[#faf9f5]">Angle 02: Interior Tour</button>
-            <button id="hero-theater-mode-btn" onclick="toggleHeroTheater()" title="Toggle Wide Theater View" class="p-1.5 bg-white hover:bg-[#faf9f5] text-[#374151] hover:text-[#9a7b4f] border border-[#e5e2da] rounded transition-colors ml-1 hidden sm:flex items-center gap-1 text-[11px] font-mono uppercase">
+            <button id="hero-angle-btn-0" onclick="switchHeroAngle(0)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-[#9a7b4f] text-white border-[#9a7b4f] font-semibold shadow-xs">Video 1</button>
+            <button id="hero-angle-btn-1" onclick="switchHeroAngle(1)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-white text-[#374151] border-[#e5e2da] hover:text-[#1a1d24] hover:bg-[#faf9f5]">Video 2</button>
+            <button id="hero-theater-mode-btn" onclick="toggleHeroTheater()" title="Toggle Full View" class="p-1.5 bg-white hover:bg-[#faf9f5] text-[#374151] hover:text-[#9a7b4f] border border-[#e5e2da] rounded transition-colors ml-1 hidden sm:flex items-center gap-1 text-[11px] font-mono uppercase">
               <x-icon name="maximize-2" class="w-3.5 h-3.5" />
-              <span id="hero-theater-text">Wide Theater</span>
+              <span id="hero-theater-text">Full View</span>
             </button>
           </div>
         </div>
@@ -77,7 +76,7 @@
               <div>
                 <span class="osd-step">Step 1</span>
                 <h3>Choose Your Modular Building</h3>
-                <p>Explore available expandable modular buildings and choose a model that suits your space, budget and intended use. Need something different? Ask us about custom-build options.</p>
+                <p>Explore available expandable modular buildings and choose a model that suits your space, budget and intended use. Need something different?</p>
               </div>
             </div>
             <div class="osd-card">
@@ -151,23 +150,7 @@
         @media(max-width:760px){.osd-grid{grid-template-columns:1fr}.osd-card{padding:20px;gap:16px}.osd-btn{width:100%}}
       .osd-in .osd-head{margin-bottom:0}
       </style>
-      <div class="osd">
-        <div class="osd-actions">
-          <a @spa href="{{ route('collections') }}" class="osd-btn dark"><span>Explore Our Buildings</span><x-icon name="arrow-right" /></a>
-          <button type="button" onclick="openEnquiryModal('General Consultation')" class="osd-btn"><x-icon name="file-text" /><span>Request a Quote</span></button>
-          <a href="https://www.youtube.com/watch?v=U7lB7lf-hAk" target="_blank" rel="noopener" class="osd-btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg><span>Watch Video</span></a>
-        </div>
-        <p class="osd-note">Building supply only. Installation, site preparation and utility connections are not included. Planning or other approvals may be required depending on the intended use.</p>
-      </div>
 
-
-      <!-- Continue divider - scrolls to Explore Our Collections -->
-      <div class="mt-10 text-center">
-        <button onclick="window.location.href='/collections'" class="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.3em] text-[#6b7280] hover:text-[#9a7b4f] transition-colors font-semibold">
-          <span>Continue to collections &amp; interior fittings</span>
-          <x-icon name="arrow-down" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-        </button>
-      </div>
     </div>
   </section>
 
@@ -218,263 +201,7 @@
     </div>
   </section>
 
-  <!-- Custom Factory Order Configurator Section - position 3 after applications -->
-  <section id="custom-build-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da] relative">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#9a7b4f]/30 text-[#9a7b4f] text-xs font-mono font-semibold uppercase tracking-[0.2em] mb-4">
-          <x-icon name="wrench" class="w-4 h-4" />
-          <span>Direct Chinese Factory Production</span>
-        </div>
-
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-4">
-          Custom Factory Order Configurator
-        </h2>
-
-        <p class="text-[#374151] text-base sm:text-lg leading-relaxed">
-          Configure your exact footprint, layout, UK climate insulation, and turnkey interior. Your custom requirements are engineered build-to-order at our Chinese factory atelier, then fulfilled and dispatched directly to your site from our UK Central Distribution Warehouse.
-        </p>
-      </div>
-
-      <!-- Main Configurator Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- Left 8 Cols: 4 Steps -->
-        <div class="lg:col-span-8 bg-white border border-[#e5e2da] rounded-2xl p-6 sm:p-8 shadow-sm">
-          <!-- Step Tabs -->
-          <div class="flex items-center justify-between border-b border-[#eae7df] pb-4 mb-8 overflow-x-auto gap-2">
-            <button onclick="goToConfigStep(1)" id="config-step-tab-1" class="step-tab-btn flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] sm:text-sm font-semibold transition-all whitespace-nowrap bg-[#181b20] text-white">
-              <span>1. UK Application</span>
-            </button>
-            <button onclick="goToConfigStep(2)" id="config-step-tab-2" class="step-tab-btn flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] sm:text-sm font-semibold transition-all whitespace-nowrap text-[#6b7280] hover:text-[#9a7b4f]">
-              <span>2. Footprint &amp; Chassis</span>
-            </button>
-            <button onclick="goToConfigStep(3)" id="config-step-tab-3" class="step-tab-btn flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] sm:text-sm font-semibold transition-all whitespace-nowrap text-[#6b7280] hover:text-[#9a7b4f]">
-              <span>3. Insulation &amp; Facade</span>
-            </button>
-            <button onclick="goToConfigStep(4)" id="config-step-tab-4" class="step-tab-btn flex items-center gap-2 px-3.5 py-2 rounded-lg text-[13px] sm:text-sm font-semibold transition-all whitespace-nowrap text-[#6b7280] hover:text-[#9a7b4f]">
-              <span>4. Equipment &amp; UK Delivery</span>
-            </button>
-          </div>
-
-          <!-- Step 1 Pane -->
-          <div id="config-step-pane-1" class="space-y-6">
-            <div class="flex items-center justify-between">
-              <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold">Select Intended UK Application</h3>
-              <span class="text-xs font-mono text-[#9a7b4f] uppercase font-semibold">Step 1 of 4</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="config-usecase-options">
-              <!-- Dynamically populated / styled via JS -->
-            </div>
-            <div class="pt-4 flex justify-end">
-              <button onclick="goToConfigStep(2)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
-                <span>Next: Footprint &amp; Chassis</span>
-                <x-icon name="arrow-right" class="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 2 Pane -->
-          <div id="config-step-pane-2" class="space-y-6 hidden">
-            <div class="flex items-center justify-between">
-              <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold">Chassis Length &amp; Bedroom Partitioning</h3>
-              <span class="text-xs font-mono text-[#9a7b4f] uppercase font-semibold">Step 2 of 4</span>
-            </div>
-            <div class="space-y-3" id="config-size-options">
-              <!-- Dynamically populated via JS -->
-            </div>
-            <div class="pt-4 flex justify-between items-center">
-              <button onclick="goToConfigStep(1)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
-              <button onclick="goToConfigStep(3)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
-                <span>Next: Insulation &amp; Facade</span>
-                <x-icon name="arrow-right" class="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 3 Pane -->
-          <div id="config-step-pane-3" class="space-y-6 hidden">
-            <div class="flex items-center justify-between">
-              <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold">UK Climate Insulation &amp; Cladding</h3>
-              <span class="text-xs font-mono text-[#9a7b4f] uppercase font-semibold">Step 3 of 4</span>
-            </div>
-            <div class="space-y-5">
-              <div>
-                <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold mb-2.5">Thermal Envelope Specification</label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="config-insulation-options"></div>
-              </div>
-              <div>
-                <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold mb-2.5">Exterior Facade Finish</label>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="config-facade-options"></div>
-              </div>
-            </div>
-            <div class="pt-4 flex justify-between items-center">
-              <button onclick="goToConfigStep(2)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
-              <button onclick="goToConfigStep(4)" class="inline-flex items-center gap-2 bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-6 py-3.5 rounded-lg transition-all">
-                <span>Next: Equipment &amp; UK Delivery</span>
-                <x-icon name="arrow-right" class="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-          <!-- Step 4 Pane -->
-          <div id="config-step-pane-4" class="space-y-6 hidden">
-            <div class="flex items-center justify-between">
-              <div>
-                <h3 class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold">Pre-Fitted Turnkey Equipment &amp; UK Warehouse Delivery</h3>
-                <p class="text-xs text-[#6b7280] mt-1">Direct fulfillment: Dispatched from our central UK warehouse with crane offload or customer collection.</p>
-              </div>
-              <span class="text-xs font-mono text-[#9a7b4f] uppercase font-semibold shrink-0 ml-3">Step 4 of 4</span>
-            </div>
-
-            <!-- Addon Checkboxes -->
-            <div>
-              <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold mb-2.5">Factory Pre-Installed Turnkey Packages</label>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="config-addons-options"></div>
-            </div>
-
-            <!-- Warehouse Dispatch Selection -->
-            <div class="pt-2">
-              <div class="flex items-center justify-between mb-2.5">
-                <label class="block text-xs uppercase font-mono tracking-wider text-[#6b7280] font-semibold">UK Warehouse Dispatch &amp; On-Site Delivery Method</label>
-                <span class="text-[11px] font-mono text-[#9a7b4f] font-semibold flex items-center gap-1">
-                  <x-icon name="truck" class="w-3.5 h-3.5" />
-                  Central UK Warehouse Dispatch
-                </span>
-              </div>
-              <div class="space-y-3" id="config-delivery-options"></div>
-
-              <!-- Postcode Input -->
-              <div class="mt-4 p-4 bg-[#FAF9F5] border border-[#E5E2DA] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div class="flex items-center gap-2.5">
-                  <x-icon name="truck" class="w-5 h-5 text-[#9a7b4f] shrink-0" />
-                  <div>
-                    <span class="text-xs font-semibold text-[#1a1d24] block">UK Delivery Postcode or County (Optional)</span>
-                    <span class="text-[11px] text-[#6b7280] block">Allows our logistics dispatch team to pre-calculate haulage route and crane access</span>
-                  </div>
-                </div>
-                <input 
-                  type="text" 
-                  id="input-delivery-postcode" 
-                  oninput="updateConfigPostcode(this.value)" 
-                  placeholder="e.g. GL54 3AA, Cotswolds..." 
-                  class="bg-white border border-[#dcd8cd] focus:border-[#9a7b4f] rounded-lg px-3.5 py-2 text-xs text-[#1a1d24] w-full sm:w-60 focus:outline-none"
-                />
-              </div>
-
-              <!-- Warehouse PDI Guarantee Banner -->
-              <div class="mt-3 p-3 bg-white border border-[#e5e2da] rounded-xl flex items-start gap-2.5">
-                <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f] shrink-0 mt-0.5" />
-                <p class="text-[11px] text-[#6b7280] leading-relaxed">
-                  <strong class="text-[#1a1d24]">Direct UK Warehouse Logistics:</strong> All custom orders are imported under bonded transit to our UK central warehouse, where they undergo rigorous 50-point PDI (Pre-Delivery Inspection) before flatbed dispatch to your plot.
-                </p>
-              </div>
-            </div>
-
-            <div class="pt-4 flex justify-between items-center">
-              <button onclick="goToConfigStep(3)" class="text-xs sm:text-sm font-semibold text-[#6b7280] hover:text-[#1a1d24]">&larr; Back</button>
-              <button onclick="submitConfiguratorEnquiry()" class="inline-flex items-center gap-2 bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs sm:text-sm uppercase tracking-wider font-semibold px-7 py-3.5 rounded-lg transition-all shadow-md">
-                <span>Submit Factory Custom Spec</span>
-                <x-icon name="arrow-right" class="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Right 4 Cols: Sticky Live Production Bill -->
-        <div class="lg:col-span-4 bg-[#181b20] text-white rounded-2xl p-6 sm:p-7 border border-[#2d3139] shadow-xl sticky top-28">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-5">
-            <div>
-              <span class="text-[10px] uppercase font-mono tracking-[0.25em] text-[#9a7b4f] font-semibold block">Live Production Bill</span>
-              <h4 class="font-serif text-lg font-semibold text-white">Factory Build Spec</h4>
-            </div>
-            <div class="px-2.5 py-1 rounded bg-[#9a7b4f]/20 border border-[#9a7b4f]/40 text-[#9a7b4f] text-[11px] font-mono font-bold">
-              BTO &bull; Build to Order
-            </div>
-          </div>
-
-          <!-- Spec List Summary -->
-          <div class="space-y-3.5 text-xs">
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Use-Case:</span>
-              <span id="bill-usecase" class="font-semibold text-white text-right">Garden Annex</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Chassis Model:</span>
-              <span id="bill-chassis" class="font-semibold text-white text-right">30ft Sanctuary</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Floor Area:</span>
-              <span id="bill-area" class="font-mono text-[#9a7b4f] font-bold text-right">56 m&sup2;</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Insulation:</span>
-              <span id="bill-insulation" class="font-semibold text-white text-right">100mm PIR (Part L)</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Turnkey Addons:</span>
-              <span id="bill-addons" class="font-semibold text-[#9a7b4f] text-right">3 Modules Pre-Fitted</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">Fulfillment Hub:</span>
-              <span class="font-semibold text-[#9a7b4f] text-right text-[11px]">UK Central Warehouse</span>
-            </div>
-
-            <div class="flex justify-between items-start pb-2.5 border-b border-white/5">
-              <span class="text-[#9ca3af]">UK Dispatch:</span>
-              <span id="bill-dispatch" class="font-semibold text-white text-right text-[11px] max-w-[190px]">Direct UK Site Delivery (Hiab)</span>
-            </div>
-
-            <div id="bill-postcode-row" class="flex justify-between items-start pb-2.5 border-b border-white/5 hidden">
-              <span class="text-[#9ca3af]">Site Location:</span>
-              <span id="bill-postcode" class="font-mono text-[#9a7b4f] text-right uppercase text-[11px]">GL54 3AA</span>
-            </div>
-          </div>
-
-          <!-- Production & Warehouse Schedule -->
-          <div class="my-5 p-3.5 rounded-xl bg-white/5 border border-white/10 space-y-2">
-            <div class="flex items-center gap-2 text-xs text-[#9a7b4f] font-mono font-semibold">
-              <x-icon name="calendar" class="w-3.5 h-3.5" />
-              <span>Production &amp; Warehouse Schedule:</span>
-            </div>
-            <div class="text-[11px] text-[#9ca3af] space-y-1 font-mono">
-              <div>&bull; Precision Factory Build: 25 &ndash; 30 Days</div>
-              <div>&bull; UK Warehouse Intake &amp; 50-Point PDI Check</div>
-              <div>&bull; Final Direct Haulage from UK Warehouse</div>
-              <div>&bull; On-Site Hydraulic Unfolding: &lt; 1 Hour</div>
-            </div>
-          </div>
-
-          <!-- Base Guide Price -->
-          <div class="pt-4 border-t border-white/10 mb-5 hidden">
-            <span class="text-[11px] text-[#9ca3af] block font-mono">Factory Ex-Works / FOB Guide</span>
-            <div class="flex items-baseline gap-2 mt-1">
-              <span id="bill-price" class="font-serif text-2xl sm:text-3xl font-bold text-white"></span>
-              <span class="text-xs text-[#9ca3af]">+ UK haulage &amp; VAT</span>
-            </div>
-          </div>
-
-          <button onclick="submitConfiguratorEnquiry()" class="w-full bg-[#9a7b4f] hover:bg-[#866940] text-white font-semibold text-xs sm:text-sm uppercase tracking-wider py-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
-            <span>Request Factory CAD &amp; Quote</span>
-            <x-icon name="arrow-right" class="w-4 h-4" />
-          </button>
-
-          <span class="text-[10px] text-[#6b7280] text-center block mt-3">
-            No deposit required to receive custom factory CAD drawings and feasibility review.
-          </span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Curated Disciplines & Architectural Collections Section -->
+  <!-- Modular Collections Section -->
   <section id="collections-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       
@@ -482,7 +209,7 @@
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 pb-8 border-b border-[#e5e2da]">
         <div>
           <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">
-            Curated Disciplines
+            — Modular Collections
           </span>
           <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-[#1a1d24] font-normal leading-[1.1]">
             Explore Our Collections
@@ -490,7 +217,7 @@
         </div>
         <div class="mt-4 md:mt-0 flex md:justify-end">
           <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
-            <span>Browse Full Catalog</span>
+            <span>Explore Products</span>
             <x-icon name="arrow-up-right" class="w-4 h-4" />
           </a>
         </div>
@@ -505,7 +232,7 @@
             <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
             <div class="absolute top-4 left-4 flex items-center gap-2">
-              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">Featured &middot; {{ $fp['category'] }}</span>
+              <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">— {{ $fp['category'] }}</span>
               <span class="px-3 py-1.5 rounded-full bg-[#181b20]/80 backdrop-blur-md text-white text-[10px] font-mono uppercase tracking-widest font-semibold border border-white/20">{{ $fp['modelCode'] }}</span>
             </div>
           </div>
@@ -536,7 +263,7 @@
   <!-- Introduction to Modular Living (replaces Philosophy section) -->
   <section id="philosophy" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
     <style>
-      .osi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.35fr .9fr;gap:48px;align-items:start}
+      .osi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.35fr .9fr;gap:10px;align-items:start}
       .osi-eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#9a7b4f;margin-bottom:16px}
       .osi h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.8vw,39px);font-weight:600;line-height:1.18;color:#1a1d24;margin:0}
       .osi h2 .l{display:block}
@@ -572,8 +299,8 @@
       <div>
         <span class="osi-eyebrow">— Introducing Origin Spaces</span>
         <h2><span class="l">A Simple Introduction to <em>Modular Living.</em></span><span class="l">Affordable Space for Modern Life.</span></h2>
-        <p class="osi-p">Our first shipment is all about helping more people discover modular buildings in a simple and affordable way. Whether you are exploring extra family space, a garden office, a coffee shop or a small business unit, Origin Spaces offers a practical starting point with less commitment and more flexibility.</p>
-        <blockquote class="osi-quote">“Our aim is simple — help customers understand modular living, explore the possibilities and choose a space that suits their needs.”</blockquote>
+        <p class="osi-p">Simple and affordable modular buildings for modern life — from garden offices to business units, with less commitment and more flexibility.</p>
+        <blockquote class="osi-quote">“Simple modular living, built around your needs.”</blockquote>
         <div class="osi-feats">
           <div class="osi-feat">
             <x-icon name="home" />
@@ -608,19 +335,6 @@
       </div>
     </div>
   </section>
-
-  <!-- Product Detail Modal / Specification Drawer -->
-  <div id="product-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#181b20]/80 backdrop-blur-sm hidden" onclick="closeProductDetailModal()">
-    <div class="bg-white rounded-2xl max-w-4xl w-full p-6 sm:p-8 shadow-2xl border border-[#e5e2da] relative max-h-[92vh] overflow-y-auto" onclick="event.stopPropagation()">
-      <button onclick="closeProductDetailModal()" class="absolute top-5 right-5 text-[#6b7280] hover:text-[#1a1d24] p-1.5 rounded-lg hover:bg-[#f4f2ef] transition-colors">
-        <x-icon name="x" class="w-5 h-5" />
-      </button>
-
-      <div id="product-detail-content">
-        <!-- Injected via openProductDetailModal(id) -->
-      </div>
-    </div>
-  </div>
 
   <!-- Featured Products - real products flagged Featured in admin; hidden unless 2+ -->
   @if(false && $featuredCards->count() > 1)
@@ -804,318 +518,7 @@
   </section>
   @endif
 
-  <section id="spaces-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-        <div>
-          <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Contextual Living</span>
-          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight">Spaces &amp; Inspiration</h2>
-        </div>
-        <div class="flex flex-wrap gap-2 text-xs">
-          <button onclick="selectSpace('kensington')" id="space-pill-kensington" class="space-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">The Kensington Townhouse</button>
-          <button onclick="selectSpace('cotswolds')" id="space-pill-cotswolds" class="space-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">The Cotswolds Stone Barn</button>
-          <button onclick="selectSpace('bath')" id="space-pill-bath" class="space-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">The New Town Bath Pavilion</button>
-        </div>
-      </div>
-      <div id="space-showcase">
-        <!-- Injected via JavaScript -->
-      </div>
-      <div class="mt-4 flex flex-col sm:flex-row justify-between sm:items-center gap-2 text-xs text-[#6b7280]">
-        <span>Tip: Click the pulsing gold pins to view detailed product specifications in context.</span>
-        <button onclick="openCollectionsModal('All')" class="text-[#9a7b4f] font-semibold hover:underline">Explore All Room Case Studies &rarr;</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust & Compliance Section -->
-  <section id="trust-standards-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-white border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-10">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF9F5] border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4">
-          <x-icon name="shield-check" class="w-3.5 h-3.5" />
-          <span>UK Standards &amp; Certification Guarantee</span>
-        </div>
-        <h2 hidden class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-3">
-          Trust &amp; Compliance Guarantee
-        </h2>
-        <p hidden class="text-sm sm:text-[15px] text-[#374151] leading-relaxed">
-          Importing directly from specialised modular facilities offers world-class precision engineering at unmatched value. We ensure every expandable unit meets stringent UK Building Regulations, electrical conformance, and full transport logistics.
-        </p>
-      </div>
-
-      <!-- Category Pills -->
-      <div hidden class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <button onclick="filterTrust('all', this)" class="trust-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Certifications &amp; Standards (9)</button>
-        <button onclick="filterTrust('codes', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">UK Building Codes &amp; Safety</button>
-        <button onclick="filterTrust('warranties', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Warranties &amp; Protection</button>
-        <button onclick="filterTrust('import', this)" class="trust-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Import, Customs &amp; Inspection</button>
-      </div>
-
-      <div hidden class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- 1 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Structural Integrity</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-STR-01</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="box" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Structural Steel Chassis &amp; Frame</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Hot-dip galvanised Q355B primary structure with a 50-year design life. Full structural calculation pack available.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Structural Chassis Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 2 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Thermal Performance</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-THM-02</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="thermometer" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Thermal Envelope &amp; Energy Efficiency</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">U-value &le; 0.18 W/m&sup2;K with a 100mm PIR core. Full Part L compliance documentation supplied with every unit.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Thermal Envelope Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 3 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Fire Safety</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-FIR-03</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="flame" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Fire Safety &amp; Reaction to Fire</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">A1 / A2-s1,d0 rated materials where required, with compartmentation and escape route guidance included.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Fire Safety Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 4 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Electrical</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-ELE-04</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="zap" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">BS 7671 18th Edition Electrics</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Pre-wired consumer unit with RCBO protection and standard UK 3-pin sockets. Full certificate of compliance.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Electrical Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 5 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="codes">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Planning Exemption</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-PLN-05</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="file-check" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Permitted Development Friendly</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Dimensions conform to Caravan Sites Act 1968 Section 13(2) for a streamlined planning pathway on many sites.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Planning Compliance Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 6 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="warranties">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Warranty</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-WAR-06</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="shield-check" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Structural Integrity Warranty</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">25-year structural frame warranty with 10-year joinery and envelope cover. Full manufacturer backing.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Warranty Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 7 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="import">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Inspection</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-QA-07</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="video" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Live Factory Video Inspection</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">Optional live video walkthrough of your unit on the production line before container loading.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Factory Inspection Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 8 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="import">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Logistics</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-LOG-08</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="truck" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Direct Warehouse to Site Delivery</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">UK Central Distribution Warehouse with Hiab crane unload and nationwide scheduled coverage.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Delivery & Logistics Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-        <!-- 9 -->
-        <div class="trust-card bg-[#FAF9F5] hover:bg-white rounded-md border border-[#e5e2da] p-5 shadow-xs hover:shadow-md transition-all flex flex-col" data-cat="import">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-[9px] font-mono uppercase tracking-wider text-[#9a7b4f] font-bold">Quality</span>
-            <span class="text-[9px] font-mono text-[#9ca3af]">HS-ISO-09</span>
-          </div>
-          <div class="w-9 h-9 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center mb-3">
-            <x-icon name="factory" class="w-4 h-4 text-[#9a7b4f]" />
-          </div>
-          <h4 class="font-serif text-lg text-[#1a1d24] font-semibold leading-snug">Certified Manufacturing Facility</h4>
-          <p class="text-xs text-[#374151] leading-relaxed mt-1.5 flex-1">ISO-aligned production with CE / UKCA marking where applicable. Full material certificates on request.</p>
-          <div class="flex items-center justify-between mt-4 pt-3 border-t border-[#f0ede6]">
-            <span class="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700"><x-icon name="badge-check" class="w-3.5 h-3.5" /> Verified UK Import</span>
-            <button onclick="openEnquiryModal('Factory Certification Pack')" class="text-[9px] font-mono text-[#9ca3af] hover:text-[#9a7b4f] transition-colors">FULL SPEC &rarr;</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dark protection panel -->
-      <div class="mt-10 bg-[#181b20] text-white rounded-2xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-        <div class="lg:col-span-4">
-          <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a880] font-semibold block mb-2.5">Guaranteed Buyer Peace of Mind</span>
-          <h3 class="font-serif text-2xl sm:text-[28px] font-semibold leading-snug">How We Protect Your UK Import Order</h3>
-          <p class="text-[13px] text-[#c9c4b7] mt-2.5 leading-relaxed">From Chinese factory floor to your UK site, your order is secured by milestone-based payments, independent video inspection, and complete customs management.</p>
-          <button onclick="openEnquiryModal('Full UK Compliance Pack')" class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[11px] font-semibold uppercase tracking-[0.14em] transition-all">Request Full UK Compliance Pack (PDF) <x-icon name="arrow-right" class="w-3.5 h-3.5" /></button>
-        </div>
-        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">01</span>
-            <h4 class="text-sm font-semibold mb-1.5">CAD Sign-off First</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">Every electrical outlet, window position, and room divider is agreed in detailed CAD drawings before manufacturing starts.</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">02</span>
-            <h4 class="text-sm font-semibold mb-1.5">Live Video PDI Test</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">You inspect the folded &amp; unfolded unit via live video with watertight monsoon spray tests before container loading.</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">03</span>
-            <h4 class="text-sm font-semibold mb-1.5">UK Port to Plot</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">Customs, VAT, UK port clearance, and crane flatbed delivery are coordinated door-to-door with complete insurance.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Taken out of hidden trust section -->
-  <section class="py-12 md:py-16 px-4 sm:px-6 lg:px-10 bg-[#181b20] border-b border-[#2d3139]">
-    <div class="max-w-6xl mx-auto">
-      <div class="bg-[#181b20] text-white rounded-2xl p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-        <div class="lg:col-span-4">
-          <span class="text-[10px] font-mono uppercase tracking-[0.25em] text-[#c5a880] font-semibold block mb-2.5">Guaranteed Buyer Peace of Mind</span>
-          <h3 class="font-serif text-2xl sm:text-[28px] font-semibold leading-snug">How We Protect Your UK Import Order</h3>
-          <p class="text-[13px] text-[#c9c4b7] mt-2.5 leading-relaxed">From Chinese factory floor to your UK site, your order is secured by milestone-based payments, independent video inspection, and complete customs management.</p>
-          <button onclick="openEnquiryModal('Full UK Compliance Pack')" class="mt-5 inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[11px] font-semibold uppercase tracking-[0.14em] transition-all">Request Full UK Compliance Pack (PDF) <x-icon name="arrow-right" class="w-3.5 h-3.5" /></button>
-        </div>
-        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">01</span>
-            <h4 class="text-sm font-semibold mb-1.5">CAD Sign-off First</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">Every electrical outlet, window position, and room divider is agreed in detailed CAD drawings before manufacturing starts.</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">02</span>
-            <h4 class="text-sm font-semibold mb-1.5">Live Video PDI Test</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">You inspect the folded &amp; unfolded unit via live video with watertight monsoon spray tests before container loading.</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-            <span class="w-8 h-8 rounded-full bg-[#9a7b4f]/20 text-[#c5a880] text-[11px] font-mono font-bold flex items-center justify-center mb-3">03</span>
-            <h4 class="text-sm font-semibold mb-1.5">UK Port to Plot</h4>
-            <p class="text-xs text-[#9ca3af] leading-relaxed">Customs, VAT, UK port clearance, and crane flatbed delivery are coordinated door-to-door with complete insurance.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Craftsmanship Section - interactive material explorer from index.html -->
-  <section id="craftsmanship" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-[#e5e2da] mb-12">
-        <div>
-          <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Artisan Scrutiny</span>
-          <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight">Craftsmanship &amp; Quality</h2>
-        </div>
-        <p class="text-sm text-[#374151] max-w-md leading-relaxed md:text-right">Every material is selected for its tactile integrity, authentic weight, and ability to acquire a distinguished patina through decades of daily use.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-        <div>
-          <p class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#6b7280] font-semibold mb-3">Select Material Profile</p>
-          <div class="space-y-2.5" id="material-profile-list">
-            <button onclick="selectMaterial('stone')" id="material-btn-stone" class="material-btn w-full flex items-center justify-between p-4 rounded-xl border-2 border-[#e5e2da] bg-white text-left hover:border-[#9a7b4f] transition-all">
-              <div>
-                <div class="text-[10px] font-mono uppercase text-[#9a7b4f] mb-0.5">Natural Geological Stone</div>
-                <div class="font-serif text-lg text-[#1a1d24]">Grigio Carnico Marble</div>
-                <div class="text-xs text-[#6b7280]">Origin: Friuli-Venezia Giulia, Northern Italy</div>
-              </div>
-              <span class="material-view text-[11px] font-mono text-[#6b7280] font-semibold">VIEW</span>
-            </button>
-            <button onclick="selectMaterial('oak')" id="material-btn-oak" class="material-btn w-full flex items-center justify-between p-4 rounded-xl border-2 border-[#e5e2da] bg-white text-left hover:border-[#9a7b4f] transition-all">
-              <div>
-                <div class="text-[10px] font-mono uppercase text-[#9a7b4f] mb-0.5">Architectural Hardwood</div>
-                <div class="font-serif text-lg text-[#1a1d24]">Quarter-Sawn English Smoked Oak</div>
-                <div class="text-xs text-[#6b7280]">Origin: Wiltshire &amp; Hampshire Woodlands, UK</div>
-              </div>
-              <span class="material-view text-[11px] font-mono text-[#6b7280] font-semibold">VIEW</span>
-            </button>
-            <button onclick="selectMaterial('brass')" id="material-btn-brass" class="material-btn w-full flex items-center justify-between p-4 rounded-xl border-2 border-[#e5e2da] bg-white text-left hover:border-[#9a7b4f] transition-all">
-              <div>
-                <div class="text-[10px] font-mono uppercase text-[#9a7b4f] mb-0.5">Forged &amp; Machined Alloys</div>
-                <div class="font-serif text-lg text-[#1a1d24]">Living Unlacquered Architectural Brass</div>
-                <div class="text-xs text-[#6b7280]">Origin: West Midlands, England</div>
-              </div>
-              <span class="material-view text-[11px] font-mono text-[#6b7280] font-semibold">VIEW</span>
-            </button>
-            <button onclick="selectMaterial('glass')" id="material-btn-glass" class="material-btn w-full flex items-center justify-between p-4 rounded-xl border-2 border-[#9a7b4f] bg-white text-left ring-1 ring-[#9a7b4f]/30 transition-all">
-              <div>
-                <div class="text-[10px] font-mono uppercase text-[#9a7b4f] mb-0.5">Blown Technical Glass</div>
-                <div class="font-serif text-lg text-[#1a1d24]">Borosilicate Fluted Optical Glass</div>
-                <div class="text-xs text-[#6b7280]">Origin: Cumbria, England</div>
-              </div>
-              <span class="material-view text-[11px] font-mono text-[#9a7b4f] font-semibold">VIEW</span>
-            </button>
-          </div>
-        </div>
-        <div id="material-detail" class="bg-white border border-[#e5e2da] rounded-2xl overflow-hidden shadow-sm lg:h-full lg:min-h-0 lg:flex lg:flex-col">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
+  <section id="faq-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-4xl mx-auto">
       <div class="text-center mb-10">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] text-[#9a7b4f] text-[11px] font-mono font-semibold uppercase tracking-[0.2em] mb-4 shadow-xs">
@@ -1165,142 +568,24 @@
           <span class="font-serif text-lg font-semibold text-[#1a1d24] block">Have a specific bespoke site requirement?</span>
           <span class="text-xs text-[#6b7280]">Our UK architectural technical team provides site feasibility reviews within 24 hours.</span>
         </div>
-        <button onclick="openEnquiryModal('Technical Consultation')" class="px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap">
-          Ask an Architect
-        </button>
+        <a @spa href="{{ route('contact') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all whitespace-nowrap">
+          <x-icon name="message-circle" class="w-4 h-4" />
+          <span>Talk to Us</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Gallery Section - matches live Gallery anchor -->
-  <section id="gallery-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Gallery</span>
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight">Expanded Living, Documented</h2>
-        <p class="mt-4 text-sm text-[#374151] leading-relaxed">Lifestyle, expanded and cutaway views for every chassis. Pick a category, click any image to expand in 4K, then step through with the arrows.</p>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($galleryJson) }})</button>
-        @forelse($galleryCatsJson as $hgSlug => $hgLabel)
-          <button onclick="filterGallery({{ json_encode($hgSlug) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $hgLabel }} ({{ collect($galleryJson)->where('cat', $hgSlug)->count() }})</button>
-        @empty
-          <button onclick="filterGallery('exterior', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Exteriors</button>
-          <button onclick="filterGallery('interior', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">Interiors</button>
-        @endforelse
-      </div>
-      <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        @forelse($galleryJson as $hgi => $hg)
-          <button onclick="openGallery({{ $hgi }})" data-cat="{{ $hg['cat'] }}" class="gallery-item group relative rounded-xl overflow-hidden border border-[#e5e2da] bg-white text-left">
-            <img src="{{ $hg['src'] }}" alt="{{ $hg['caption'] }}" loading="lazy" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" />
-            <span class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            <span class="absolute bottom-2 left-2 text-[10px] font-mono uppercase bg-[#181b20]/80 text-white px-2 py-1 rounded-full">{{ $hg['catLabel'] }}</span>
-            <span class="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 text-[#1a1d24] items-center justify-center hidden group-hover:flex">
-              <x-icon name="maximize-2" class="w-3.5 h-3.5" />
-            </span>
-          </button>
-        @empty
-          <p class="col-span-full text-center text-sm text-[#6b7280] py-10">Gallery is being curated — check back soon.</p>
-        @endforelse
+  <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-4xl mx-auto bg-[#181b20] text-white rounded-2xl p-8 sm:p-10 text-center">
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold">Like What You See?</h2>
+      <p class="text-sm text-[#c9c4b7] mt-2 mb-6">Configure the same chassis, finishes and interiors for your own plot.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-2.5">
+        <a @spa href="{{ route('collections') }}" class="px-6 py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all">Explore Products</a>
+        <a @spa href="{{ route('contact') }}" class="px-6 py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Talk To Us</a>
       </div>
     </div>
   </section>
-
-  <!-- Spaces / Case Studies Section - matches live Spaces anchor -->
-
-
-  <!-- Downloads Section - matches live Downloads anchor -->
-  <section id="downloads-section" hidden class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto">
-      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">Downloads</span>
-      <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-4">Spec Resources &amp; Monographs</h2>
-      <p class="text-sm text-[#374151] max-w-2xl mb-8">Catalogues, installation / MEP manuals, Revit / BIM families, material care guides.</p>
-
-      <!-- Search + format controls -->
-      <div class="bg-white rounded-xl border border-[#e5e2da] p-4 sm:p-5 shadow-xs mb-6 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div class="relative w-full sm:max-w-xs">
-            <x-icon name="search" class="w-4 h-4 text-[#9ca3af] absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              id="file-search-input"
-              oninput="handleFileSearch(this.value)"
-              placeholder="Search file name or product..."
-              class="w-full text-xs pl-10 pr-4 py-2.5 rounded-lg border border-[#e5e2da] focus:border-[#9a7b4f] focus:outline-none bg-[#FAF9F5] placeholder:text-[#9ca3af]"
-            />
-          </div>
-          <span class="text-xs text-[#6b7280] whitespace-nowrap">Found <strong id="file-count" class="text-[#1a1d24] font-semibold">{{ count($filesJson) }}</strong> technical files</span>
-        </div>
-        <div class="flex flex-wrap items-center gap-2 pt-4 border-t border-[#f0ede6]">
-          <span class="text-[10px] font-mono uppercase tracking-widest text-[#6b7280] font-semibold mr-1">Format:</span>
-          <button onclick="filterFiles('all', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#9a7b4f]/10 border-[#9a7b4f]/50 text-[#1a1d24]">All</button>
-          <button onclick="filterFiles('PDF Spec', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#FAF9F5] border-[#e5e2da] text-[#6b7280] hover:border-[#9a7b4f] hover:text-[#1a1d24]">PDF Spec</button>
-          <button onclick="filterFiles('CAD Drawing', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#FAF9F5] border-[#e5e2da] text-[#6b7280] hover:border-[#9a7b4f] hover:text-[#1a1d24]">CAD Drawing</button>
-          <button onclick="filterFiles('BIM/Revit', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#FAF9F5] border-[#e5e2da] text-[#6b7280] hover:border-[#9a7b4f] hover:text-[#1a1d24]">BIM/Revit</button>
-          <button onclick="filterFiles('Installation Manual', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#FAF9F5] border-[#e5e2da] text-[#6b7280] hover:border-[#9a7b4f] hover:text-[#1a1d24]">Installation Manual</button>
-          <button onclick="filterFiles('Care Guide', this)" class="file-format-pill px-3.5 py-1.5 rounded-lg text-[11px] font-mono font-semibold border transition-all bg-[#FAF9F5] border-[#e5e2da] text-[#6b7280] hover:border-[#9a7b4f] hover:text-[#1a1d24]">Care Guide</button>
-        </div>
-      </div>
-
-      <!-- File list (server-rendered; JS only filters) -->
-      <div id="file-list" class="bg-white rounded-xl border border-[#e5e2da] shadow-xs overflow-hidden divide-y divide-[#f0ede6]">
-        @forelse($filesJson as $hf)
-          <div class="file-row p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4" data-format="{{ $hf['format'] }}" data-search="{{ strtolower($hf['title'] . ' ' . ($hf['ref'] ?? '') . ' ' . $hf['suite']) }}">
-            <span class="w-11 h-11 rounded-lg bg-[#9a7b4f]/10 flex items-center justify-center shrink-0">
-              <x-icon name="file-text" class="w-5 h-5 text-[#9a7b4f]" />
-            </span>
-            <div class="flex-1 min-w-0">
-              <div class="text-[10px] font-mono uppercase tracking-[0.14em] text-[#9a7b4f] font-semibold">{{ $hf['ref'] }} &middot; {{ $hf['suite'] }}</div>
-              <h3 class="font-serif text-xl text-[#1a1d24] font-semibold mt-0.5">{{ $hf['title'] }}</h3>
-              <div class="text-[11px] font-mono text-[#6b7280] mt-1">Format: {{ $hf['format'] }} &middot; Size: {{ $hf['size'] }} &middot; Rev: {{ $hf['rev'] }}</div>
-            </div>
-            @if($hf['url'])
-              <a href="{{ $hf['url'] }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <x-icon name="download" class="w-3.5 h-3.5" /> Download File
-              </a>
-            @else
-              <a @spa href="{{ route('contact') }}" class="shrink-0 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] hover:text-[#9a7b4f] text-[11px] font-mono uppercase tracking-wider font-semibold text-[#374151] transition-all">
-                <x-icon name="download" class="w-3.5 h-3.5" /> Request File
-              </a>
-            @endif
-          </div>
-        @empty
-          <div class="p-10 text-center text-sm text-[#6b7280]">No technical files yet — ask the studio directly.</div>
-        @endforelse
-        <div id="file-empty" class="hidden p-10 text-center text-sm text-[#6b7280]">No files match your search. Try a different keyword or format.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section - matches live About anchor -->
-  <section id="about-section" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
-      <div class="lg:col-span-7">
-        <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono block mb-3 font-semibold">About OriginSpaces</span>
-        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight mb-4">Direct UK Import, Factory Precision</h2>
-        <p class="text-sm sm:text-base text-[#374151] leading-relaxed max-w-2xl">Precision-engineered factory buildings with full UK compliance, turnkey finishes and nationwide delivery. Build-to-order CAD, video PDI, customs handled, UK warehouse fulfilment, helical screw piles.</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-          <div class="bg-white p-5 rounded-xl border border-[#e5e2da]"><span class="text-[10px] font-mono uppercase text-[#9a7b4f] font-bold block">Tenet 01</span><h3 class="font-serif text-lg">Geological Weight</h3><p class="text-xs text-[#374151]">Monolithic stone, honest mass.</p></div>
-          <div class="bg-white p-5 rounded-xl border border-[#e5e2da]"><span class="text-[10px] font-mono uppercase text-[#9a7b4f] font-bold block">Tenet 02</span><h3 class="font-serif text-lg">Engineering Discipline</h3><p class="text-xs text-[#374151]">Robotic tolerance &plusmn;2mm.</p></div>
-          <div class="bg-white p-5 rounded-xl border border-[#e5e2da]"><span class="text-[10px] font-mono uppercase text-[#9a7b4f] font-bold block">Tenet 03</span><h3 class="font-serif text-lg">Living Patina</h3><p class="text-xs text-[#374151]">Unlacquered brass, smoked oak.</p></div>
-        </div>
-      </div>
-      <div class="lg:col-span-5">
-        <div class="bg-[#181b20] text-white rounded-2xl p-7 space-y-4">
-          <span class="text-[11px] font-mono uppercase tracking-widest text-[#c5a880] font-semibold">Compliance at a glance</span>
-          <ul class="space-y-2.5 text-sm text-white/85">
-            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> BS 7671 electrics, 230V plug-and-play</li>
-            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> UK Building Regulations / Part L</li>
-            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> Permitted Development / Caravan Act</li>
-            <li class="flex gap-2"><x-icon name="check" class="w-4 h-4 text-[#9a7b4f]" /> 50-point PDI, 25-year guarantee</li>
-          </ul>
-          <button onclick="openEnquiryModal('Compliance Pack')" class="w-full py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider">Request Compliance Pack</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer - matches live showrooms placement -->
   
 @endsection
 @section('script')
@@ -2247,14 +1532,14 @@
       heroMode = 'yt';
       heroYtMuted = true;
       if (idx === 0) {
-        if (badge) badge.textContent = 'PRIMARY CAMERA • UNFOLDING SEQUENCE';
+        if (badge) badge.textContent = 'Video 1';
         if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_0) frame.src = HERO_YT_ANGLE_0;
         else heroYt('playVideo');
         heroYt('mute');
         if (watchLink) watchLink.href = HERO_YT_WATCH_0;
         if (label) label.textContent = 'Muted (Click for Sound)';
       } else {
-        if (badge) badge.textContent = 'CAMERA 02 • INTERIOR FIT-OUT';
+        if (badge) badge.textContent = 'Video 2';
         if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_1) frame.src = HERO_YT_ANGLE_1;
         else heroYt('playVideo');
         heroYt('mute');
@@ -2297,7 +1582,7 @@
         stage.classList.remove('max-w-6xl', 'max-w-7xl');
         stage.classList.add(heroTheaterWide ? 'max-w-7xl' : 'max-w-6xl');
       }
-      if (label) label.textContent = heroTheaterWide ? 'Exit Theater' : 'Wide Theater';
+      if (label) label.textContent = heroTheaterWide ? 'Exit Full View' : 'Full View';
     }
 
     function downloadHeroSpecPack() {

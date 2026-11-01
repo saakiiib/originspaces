@@ -4,11 +4,10 @@
 
 
   <!-- Page Hero -->
-  <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
-    <div class="max-w-7xl mx-auto text-center max-w-3xl">
-      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-4">— Gallery</span>
-      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Expanded Living, Documented.</h1>
-      <p class="mt-5 text-sm sm:text-base text-[#374151] leading-relaxed max-w-2xl mx-auto">Lifestyle, expanded and cutaway views for every chassis. Pick a category, click any image to expand in 4K, then step through with the arrows.</p>
+  <section class="py-8 md:py-12 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
+    <div class="max-w-3xl mx-auto text-center">
+      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-2">— Gallery</span>
+      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Expanded Living, Documented.</h1>
     </div>
   </section>
 
@@ -16,9 +15,9 @@
   <section class="py-16 md:py-24 px-4 sm:px-6 lg:px-10 bg-[#FAF9F5] border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
       <div class="flex flex-wrap items-center justify-center gap-2 mb-10">
-        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Work ({{ count($items) }})</button>
-        @foreach($categoriesJson as $cat)
-          <button onclick="filterGallery({{ json_encode($cat['name']) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $cat['name'] }} ({{ collect($items)->where('category', $cat['name'])->count() }})</button>
+        <button onclick="filterGallery('all', this)" class="gallery-pill px-5 py-2.5 rounded-full bg-[#181b20] text-white text-[13px] font-semibold border border-[#181b20] transition-all">All Products ({{ count($items) }})</button>
+        @foreach($productsJson as $pr)
+          <button onclick="filterGallery({{ json_encode($pr['name']) }}, this)" class="gallery-pill px-5 py-2.5 rounded-full bg-white border border-[#e5e2da] text-[#6b7280] text-[13px] font-semibold hover:text-[#9a7b4f] hover:border-[#9a7b4f] transition-all">{{ $pr['name'] }} ({{ collect($items)->where('category', $pr['name'])->count() }})</button>
         @endforeach
       </div>
       <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4">
@@ -49,8 +48,8 @@
       <h2 class="font-serif text-3xl sm:text-4xl font-semibold">Like What You See?</h2>
       <p class="text-sm text-[#c9c4b7] mt-2 mb-6">Configure the same chassis, finishes and interiors for your own plot.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-2.5">
-        <a @spa href="{{ route('custom-build') }}" class="px-6 py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all">Custom Build</a>
-        <a @spa href="{{ route('contact') }}" class="px-6 py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Talk to the Studio</a>
+        <a @spa href="{{ route('collections') }}" class="px-6 py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all">Explore Products</a>
+        <a @spa href="{{ route('contact') }}" class="px-6 py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Talk To Us</a>
       </div>
     </div>
   </section>

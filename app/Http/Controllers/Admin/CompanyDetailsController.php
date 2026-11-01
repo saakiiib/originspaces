@@ -58,6 +58,8 @@ class CompanyDetailsController extends Controller
             'meta_description' => 'nullable|string',
             'meta_keywords' => 'nullable|string',
             'meta_image' => 'nullable|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'privacy_policy' => 'nullable|string',
+            'terms_and_conditions' => 'nullable|string',
             'google_site_verification' => 'nullable|string|max:255',
             'google_analytics_id' => 'nullable|string|max:255',
             'google_tag_manager_id' => 'nullable|string|max:255',
@@ -152,6 +154,8 @@ class CompanyDetailsController extends Controller
         $data->account_number = $request->account_number;
         $data->sort_code = $request->sort_code;
         $data->bank = $request->bank;
+        $data->privacy_policy = $request->privacy_policy;
+        $data->terms_and_conditions = $request->terms_and_conditions;
 
         // SEO & Analytics fields
         $data->meta_title = $request->meta_title;

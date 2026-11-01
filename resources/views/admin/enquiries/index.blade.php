@@ -1,7 +1,7 @@
 @extends('admin.pages.master')
 @section('title', 'Enquiries')
 @section('content')
-<div class="container-fluid"><div class="card"><div class="card-header"><h4>Enquiries — unified inbox (contact + custom-build + spec-pack)</h4></div>
+<div class="container-fluid"><div class="card"><div class="card-header"><h4>Enquiries — unified inbox (contact)</h4></div>
 <div class="card-body"><div class="table-responsive"><table id="enquiryTable" class="table table-bordered table-striped w-100"><thead><tr><th>Sl</th><th>Name</th><th>Email</th><th>Phone</th><th>Product</th><th>Guide Price</th><th>Source</th><th>Date</th><th>Read</th><th>Action</th></tr></thead></table></div></div></div></div>
 <div class="modal fade" id="viewModal" tabindex="-1"><div class="modal-dialog modal-lg"><div class="modal-content">
 <div class="modal-header"><h5 class="modal-title">Enquiry Details</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>

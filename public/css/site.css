@@ -36,3 +36,11 @@ h1, h2, h3, h4, .font-serif {
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .model3d-scene { position: relative; }
 .model3d-scene canvas { display: block; border-radius: 0.75rem; }
+
+/* Footer: brand column stays wide while the short menu column stays narrow,
+   so the collections list sits closer to the menu instead of drifting right. */
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1.2fr 0.5fr 1.1fr 1.05fr;
+  }
+}

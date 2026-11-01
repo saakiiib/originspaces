@@ -128,7 +128,7 @@
         <h1>More space.<br><em>More possibilities.</em></h1>
         <p class="lead">Discover versatile expandable modular buildings for your home, garden or business, offered at introductory prices for our first shipment. Interested in a custom build? Speak to us about your requirements and what options may be possible.</p>
         <div class="hero-actions">
-          <a href="#pricing" class="btn">Ask about introductory prices ↗</a>
+          <a @spa href="{{ route('contact') }}" class="btn">Ask about introductory prices ↗</a>
           <a @spa href="{{ route('contact') }}" class="btn outline">Discuss a custom build</a>
         </div>
         <div class="mini"><span class="dot"></span> Simple information. Clear purchasing terms.</div>
@@ -200,7 +200,7 @@
           <h3>Have a Different Idea?</h3>
           <p class="use-desc">Thinking of a custom layout, different size or another use? Speak to our team about possible options and specifications.</p>
           <div class="callout">Your idea could be our next project.</div>
-          <a class="use-link" @spa href="{{ route('custom-build') }}">Discuss a custom build <span aria-hidden="true">↗</span></a>
+          <a class="use-link" @spa href="{{ route('contact') }}">Discuss a custom build <span aria-hidden="true">↗</span></a>
         </article>
       </div>
 
@@ -238,8 +238,8 @@
           <span class="eyebrow on-dark">Starting prices</span>
           <h2>Expandable modular buildings</h2>
           <div class="price">£[PRICE TO CONFIRM]</div>
-          <p>Ask us about introductory pricing for the first shipment. Availability is subject to confirmation and prices depend on the model, specifications and delivery location. Want something different? Contact us to discuss possible custom-build options.</p>
-          <a class="btn light" @spa href="{{ route('contact') }}">Ask for a quote ↗</a>
+          <p>Ask us about introductory pricing for the first shipment. Availability is subject to confirmation and prices depend on the model, specifications and delivery location. Want something different?</p>
+          <div class="text-center mt-4"><a class="btn light" @spa href="{{ route('contact') }}">Talk To Us ↗</a></div>
         </div>
         <div class="conditions">
           <h3>Good to know before ordering</h3>

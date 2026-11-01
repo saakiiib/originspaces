@@ -34,10 +34,6 @@
       <aside class="w-full lg:w-[36%] xl:w-[34%] flex flex-col gap-5 lg:sticky lg:top-24">
         <div class="bg-white border border-[#e5e2da] rounded-2xl p-5 shadow-xs space-y-4">
           <div>
-            <div class="flex items-center justify-between gap-2 mb-1.5">
-              <span class="text-[11px] font-mono uppercase tracking-[0.18em] text-[#9a7b4f] font-bold">Turnkey Architectural Specification</span>
-              <span id="spec-leadtime" class="text-[11px] font-mono px-2 py-0.5 bg-[#F4F1EA] text-[#6b7280] rounded whitespace-nowrap">—</span>
-            </div>
             <h1 id="spec-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold tracking-tight leading-tight">—</h1>
             <p id="spec-tagline" class="text-sm text-[#374151] mt-1.5 font-semibold leading-relaxed">—</p>
           </div>
@@ -50,58 +46,58 @@
             <div id="spec-model-list"></div>
           </div>
 
-          <!-- 2. Configuration -->
-          <div class="pt-3 border-t border-[#EAE7DF] space-y-2">
-            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">2. Configuration / Footprint</label>
+          <!-- Configuration (hidden) -->
+          <div class="hidden pt-3 border-t border-[#EAE7DF] space-y-2">
+            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">Configuration / Footprint</label>
             <div class="grid grid-cols-2 gap-2" id="spec-config-list"></div>
           </div>
 
-          <!-- 3. Finish -->
-          <div class="pt-3 border-t border-[#EAE7DF] space-y-2">
+          <!-- Finish (hidden) -->
+          <div class="hidden pt-3 border-t border-[#EAE7DF] space-y-2">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">3. Exterior / Primary Finish</label>
+              <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">Exterior / Primary Finish</label>
               <span id="spec-finish-label" class="text-[11px] font-mono font-semibold text-[#9a7b4f]">—</span>
             </div>
             <div class="grid grid-cols-2 gap-2" id="spec-finish-list"></div>
           </div>
 
-          <!-- 4. Glazing -->
-          <div class="pt-3 border-t border-[#EAE7DF] space-y-2">
-            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">4. Glazing &amp; Metal Accents</label>
+          <!-- Glazing (hidden) -->
+          <div class="hidden pt-3 border-t border-[#EAE7DF] space-y-2">
+            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">Glazing &amp; Metal Accents</label>
             <div class="space-y-2" id="spec-glazing-list"></div>
           </div>
 
-          <!-- 5. Upgrades -->
-          <div class="pt-3 border-t border-[#EAE7DF] space-y-2">
-            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">5. Optional Technology &amp; Upgrades</label>
+          <!-- Upgrades (hidden) -->
+          <div class="hidden pt-3 border-t border-[#EAE7DF] space-y-2">
+            <label class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold">Optional Technology &amp; Upgrades</label>
             <div class="space-y-2" id="spec-upgrade-list"></div>
           </div>
 
-          <!-- 6. Tech specs -->
+          <!-- 2. Tech specs -->
           <div class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-tech')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
                 <x-icon name="paperclip" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-                <span>6. Technical Specifications</span>
+                <span>2. Technical Specifications</span>
               </span>
               <x-icon name="chevron-down" id="spec-tech-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform" />
             </button>
             <div id="spec-tech" class="hidden mt-2.5 bg-[#FAF8F5] rounded-xl border border-[#e5e2da] px-4 py-2 text-xs text-[#374151]"></div>
           </div>
 
-          <!-- 7. Downloads -->
+          <!-- 3. Downloads -->
           <div class="pt-3 border-t border-[#EAE7DF]">
             <button onclick="toggleSpecAccordion('spec-docs')" class="w-full flex items-center justify-between py-0.5 text-xs font-mono uppercase tracking-[0.15em] text-[#1a1d24] font-bold">
               <span class="flex items-center gap-2">
                 <x-icon name="book-open" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-                <span>7. Downloads &amp; Manuals</span>
+                <span>3. Downloads &amp; Manuals</span>
               </span>
               <x-icon name="chevron-down" id="spec-docs-chevron" class="w-4 h-4 text-[#9a7b4f] transition-transform" />
             </button>
             <div id="spec-docs" class="hidden mt-2.5 space-y-2"></div>
           </div>
 
-          <!-- 8. Enquiry -->
+          <!-- Enquiry -->
           <div class="pt-5 border-t border-[#EAE7DF] space-y-4">
             <button type="button" id="spec-cta" onclick='openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, "")' class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
               <span>Request Information &amp; Spec Pack</span>
@@ -132,7 +128,8 @@
               <span id="gallery-tab-label" class="hidden min-[420px]:inline">Gallery</span>
             </button>
           </div>
-          <div class="hidden md:block text-xs text-[#786348] font-mono pr-2 shrink-0">Selected: <strong id="viewer-finish-name" class="text-[#1a1d24]">—</strong></div>
+          <!-- Selected finish label (hidden: finish options are hidden) -->
+          <div class="hidden text-xs text-[#786348] font-mono pr-2 shrink-0">Selected: <strong id="viewer-finish-name" class="text-[#1a1d24]">—</strong></div>
         </div>
 
         <!-- Video stage -->
@@ -151,12 +148,6 @@
           <div class="p-5 sm:p-6">
             <h2 id="video-title" class="font-serif text-xl sm:text-2xl text-[#1a1d24] font-semibold">—</h2>
             <p id="video-desc" class="text-[13px] text-[#374151] mt-1">—</p>
-            @if(empty($videoEmbed))
-            <div class="mt-4" id="video-chapters-wrap">
-              <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-bold block mb-2">Key Chapters — Jump to Phase</span>
-              <div class="grid grid-cols-2 lg:grid-cols-4 gap-2" id="video-chapters"></div>
-            </div>
-            @endif
           </div>
         </div>
 
@@ -214,20 +205,13 @@
           <ul id="narrative-specs" class="mt-4 space-y-2"></ul>
         </div>
 
-        <!-- Spec tables -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Spec table -->
+        <div class="grid grid-cols-1 gap-5">
           <div class="bg-white border border-[#e5e2da] rounded-2xl p-6 shadow-xs">
             <h3 class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-4">Envelope &amp; Dimensions</h3>
             <div id="spec-table-envelope" class="space-y-2.5 text-xs"></div>
           </div>
-          <div class="bg-white border border-[#e5e2da] rounded-2xl p-6 shadow-xs">
-            <h3 class="text-xs font-mono uppercase tracking-wider text-[#1a1d24] font-bold mb-4">Systems &amp; Assurance</h3>
-            <div id="spec-table-systems" class="space-y-2.5 text-xs"></div>
-          </div>
         </div>
-
-        <!-- Logistics -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="logistics-row"></div>
 
         <!-- Related pieces -->
         @if(count($relatedJson))
@@ -330,7 +314,6 @@
       renderMedia();
       renderNarrative();
       renderTables();
-      renderLogistics();
       renderFloor();
       buildCube();
       if (window.lucide) lucide.createIcons();
@@ -341,7 +324,6 @@
       document.getElementById('crumb-category').textContent = p.category;
       document.getElementById('crumb-name').textContent = p.name;
       document.getElementById('crumb-model').textContent = p.modelCode;
-      document.getElementById('spec-leadtime').textContent = p.leadTime || '—';
       document.getElementById('spec-title').textContent = p.name;
       document.getElementById('spec-tagline').textContent = p.tagline;
       document.title = p.name + ' | OriginSpaces Modular UK';
@@ -429,12 +411,12 @@
       const p = currentProduct;
       const rows = [
         ['Model Reference', p.modelCode, false],
-        ['Expanded Dimensions', p.dimensions || '—', false],
-        ['Primary Materials', (p.materials || []).slice(0, 2).join(', ') || '—', false],
+        ['Expanded Dimensions', p.dimensions, false],
+        ['Primary Materials', (p.materials || []).slice(0, 2).join(', '), false],
       ].concat((p.tech || []).map(t => [t.label, t.value, !!t.highlight])).concat([
-        ['Lead Time', p.leadTime || '—', false],
-        ['Warranty Standard', p.warranty || '10-Year UK cover', false]
-      ]);
+        ['Lead Time', p.leadTime, false],
+        ['Warranty Standard', p.warranty, false]
+      ]).filter(r => r[1]);
       document.getElementById('spec-tech').innerHTML = rows.map(([k, v, gold]) =>
         `<div class="flex justify-between gap-3 py-1.5 border-b border-[#EAE6DC] last:border-0"><span class="text-[#6b7280] shrink-0">${k}:</span><span class="font-mono font-bold text-right ${gold ? 'text-[#9a7b4f]' : 'text-[#1a1d24]'}">${v}</span></div>`
       ).join('');
@@ -446,8 +428,8 @@
       if (!docs.length) {
         document.getElementById('spec-docs').innerHTML = `
         <div class="p-3 bg-[#FAF8F5] border border-[#e5e2da] rounded-lg flex items-center justify-between gap-3">
-          <div class="text-xs text-[#6b7280]">Full drawing set issued with every enquiry — browse the library.</div>
-          <a @spa href="{{ route('downloads') }}" class="text-xs text-[#374151] hover:text-[#9a7b4f] font-medium transition-colors shrink-0">Open Library</a>
+          <div class="text-xs text-[#6b7280]">Full drawing set issued with every enquiry.</div>
+          <button onclick="downloadSpecFile('lookbook')" class="text-xs text-[#374151] hover:text-[#9a7b4f] font-medium transition-colors shrink-0">Download</button>
         </div>`;
         return;
       }
@@ -460,12 +442,10 @@
               <div class="text-[11px] text-[#6b7280]">${d.s}</div>
             </div>
           </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <a @spa href="{{ route('downloads') }}" class="text-xs text-[#374151] hover:text-[#9a7b4f] font-medium transition-colors">Read</a>
-            <a href="${d.url}" target="_blank" class="text-[#9a7b4f] hover:text-[#866940] transition-colors">
-              <x-icon name="download" class="w-4 h-4" />
-            </a>
-          </div>
+          <a href="${d.url}" download class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-[11px] font-semibold uppercase tracking-wider transition-all">
+            <x-icon name="download" class="w-3.5 h-3.5" />
+            <span>Download</span>
+          </a>
         </div>`).join('');
     }
 
@@ -588,24 +568,7 @@
       document.getElementById('video-title').textContent = p.name + ': Turnkey Architectural Demonstration';
       document.getElementById('video-desc').textContent = p.tagline;
       document.getElementById('gallery-tab-label').textContent = 'Gallery (' + detailGallery().length + ')';
-      const chapters = [
-        { t: '00:00', n: 'Overview & Siting' },
-        { t: '00:45', n: 'Stone Mitres & Alignment' },
-        { t: '01:30', n: 'Concealed Downdraft Extraction' },
-        { t: '02:10', n: 'Internal Joinery & Walnut Inserts' }
-      ];
-      const chaptersEl = document.getElementById('video-chapters');
-      if (chaptersEl) chaptersEl.innerHTML = chapters.map((c, i) =>
-        `<button onclick="seekVideo(${i})" class="p-2.5 text-left rounded-lg border border-[#e5e2da] bg-white hover:border-[#9a7b4f] text-xs transition-all"><span class="block font-mono text-[10px] text-[#9a7b4f] font-bold">${c.t}</span><span class="font-serif font-semibold text-[#1a1d24] text-sm">${c.n}</span></button>`
-      ).join('');
       renderGalleryMain();
-    }
-
-    function seekVideo(i) {
-      const v = document.getElementById('spec-video');
-      if (!v || !v.duration || isNaN(v.duration)) return;
-      v.currentTime = Math.min(v.duration - 0.5, (v.duration / 4) * i);
-      v.play().catch(() => {});
     }
 
     function expandGallery() {
@@ -687,29 +650,14 @@
 
     function renderTables() {
       const p = currentProduct;
-      document.getElementById('spec-table-envelope').innerHTML =
-        specRow('Dimensions', p.dimensions || '—') +
-        specRow('Primary Materials', (p.materials || []).slice(0, 2).join(', ') || '—') +
-        specRow('Lead Time', p.leadTime || '—') +
-        specRow('Model Ref', p.modelCode);
-      document.getElementById('spec-table-systems').innerHTML =
-        specRow('Electrics', 'BS 7671 · 230V') +
-        specRow('Plumbing', 'Pre-plumbed · UK fittings') +
-        specRow('HVAC', 'Heat-pump ready') +
-        specRow('Warranty', p.warranty || '10-Year UK cover');
-    }
-
-    function renderLogistics() {
-      document.getElementById('logistics-row').innerHTML = [
-        ['factory', 'Factory Build', 'Precision build in 25–30 days with video PDI.'],
-        ['truck', 'Warehouse & Haulage', 'UK depot intake, 50-point check, Hiab to site.'],
-        ['key', 'Unfold & Handover', 'Hydraulic unfolding and levelling under 1 hour.']
-      ].map(([icon, t, d]) => `
-        <div class="bg-white border border-[#e5e2da] rounded-2xl p-5 shadow-xs">
-          <i data-lucide="${icon}" class="w-5 h-5 text-[#9a7b4f] mb-2.5"></i>
-          <h4 class="text-sm font-semibold text-[#1a1d24] mb-1">${t}</h4>
-          <p class="text-xs text-[#374151] leading-relaxed">${d}</p>
-        </div>`).join('');
+      const rows = [
+        ['Dimensions', p.dimensions],
+        ['Primary Materials', (p.materials || []).slice(0, 2).join(', ')],
+        ['Lead Time', p.leadTime],
+        ['Model Ref', p.modelCode],
+        ['Warranty', p.warranty],
+      ].filter(r => r[1]);
+      document.getElementById('spec-table-envelope').innerHTML = rows.map(r => specRow(r[0], r[1])).join('');
     }
 
     /* Floor plan plates */
@@ -755,7 +703,7 @@
         ['Expanded', p.dimensions || '—'],
         ['Lead Time', p.leadTime || '—'],
         ['Model Ref', p.modelCode],
-        ['Warranty', (p.warranty || '10-Year cover').split(',')[0]]
+        ['Warranty', (p.warranty || '—').split(',')[0]]
       ];
       document.getElementById('floor-stats').innerHTML = stats.map(([k, v]) =>
         `<div class="bg-[#FAF9F5] border border-[#e5e2da] rounded-lg p-3"><span class="block text-[9px] font-mono uppercase tracking-widest text-[#6b7280] font-semibold">${k}</span><span class="block text-[13px] font-semibold text-[#1a1d24] mt-0.5 leading-snug">${v}</span></div>`

@@ -153,24 +153,18 @@ class FrontendController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'topic' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:50',
             'postcode' => 'nullable|string|max:50',
             'message' => 'required|string',
         ]);
 
         Contact::create([
             ...$data,
-            'subject' => $data['topic'] ?? 'Website Enquiry',
+            'subject' => 'Website Enquiry',
+            'phone' => $data['phone'],
         ]);
 
-        return response()->json(['success' => true, 'message' => 'Enquiry received. The studio will reply within one working day.']);
-    }
-
-    public function customBuild()
-    {
-        $this->seo('custom-build');
-
-        return spa('frontend.custom-build');
+        return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
     }
 
     public function enquiriesStore(Request $request)
@@ -190,7 +184,7 @@ class FrontendController extends Controller
 
         Enquiry::create($data);
 
-        return response()->json(['success' => true, 'message' => 'Enquiry received. The studio will reply within one working day.']);
+        return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
     }
 
     public function gallery()
@@ -202,6 +196,9 @@ class FrontendController extends Controller
             ->whereHas('product', fn ($q) => $q->where('status', true))
             ->orderByDesc('id')
             ->get();
+
+        $products = Product::where('status', 1)->orderByDesc('is_featured')->orderBy('sort_order')->get(['name', 'slug', 'model_code']);
+        $productsJson = $products->map(fn ($pr) => ['name' => $pr->name, 'slug' => $pr->slug])->values();
 
         $items = $productImages->map(function ($pi) {
             $p = $pi->product;
@@ -220,7 +217,7 @@ class FrontendController extends Controller
                 'id' => 'pi-'.$pi->id,
                 'name' => $p ? $p->name : 'Untitled',
                 'slug' => $p ? $p->slug : '#',
-                'category' => $p && $p->category ? $p->category->name : 'Collection',
+                'category' => $p ? $p->name : 'Collection',
                 'modelCode' => $p ? $p->model_code : '',
                 'image' => $mediaUrl,
                 'type' => $mediaType,
@@ -230,18 +227,7 @@ class FrontendController extends Controller
             ];
         })->values();
 
-        $categoriesJson = $categories->map(fn ($c) => ['name' => $c->name, 'slug' => $c->slug])->values();
-
-        return spa('frontend.gallery', compact('items', 'categoriesJson'));
-    }
-
-    public function downloads()
-    {
-        $this->seo('downloads');
-
-        $filesJson = $this->filesJson();
-
-        return spa('frontend.downloads', compact('filesJson'));
+        return spa('frontend.gallery', compact('items', 'productsJson'));
     }
 
     public function downloadFile($id)

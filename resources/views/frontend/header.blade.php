@@ -1,6 +1,6 @@
 @php
   $navProducts = App\Models\Product::where('status', 1)->orderByDesc('is_featured')->orderBy('sort_order')->take(4)->get(['id', 'name', 'slug', 'model_code', 'hero_image']);
-  $logo = $company->company_logo ? asset('uploads/company/' . $company->company_logo) : asset('resources/frontend-raw/assets/logo.png');
+  $logo = $company->company_logo ? asset('uploads/company/' . $company->company_logo) : asset('assets/logo.png');
 @endphp
 <header class="sticky top-0 z-40 bg-white border-b border-[#e5e2da] transition-all">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between">
@@ -8,7 +8,7 @@
       <img src="{{ $logo }}" alt="{{ $company->company_name ?: 'OriginSpaces' }}" class="h-10 w-auto object-contain" />
     </a>
 
-    <nav class="hidden lg:flex items-center gap-7 text-[17px] font-semibold text-[#374151]">
+    <nav class="hidden lg:flex items-center gap-7 text-[18px] font-semibold text-[#374151]">
       <a @spa href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Home</a>
       <a @spa href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">About</a>
       <div class="relative group">
@@ -44,17 +44,12 @@
           </div>
         </div>
       </div>
-      <a @spa href="{{ route('downloads') }}" hidden class="{{ request()->routeIs('downloads') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Downloads</a>
       <a @spa href="{{ route('gallery') }}" class="{{ request()->routeIs('gallery') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Gallery</a>
       <a @spa href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'text-[#1a1d24]' : '' }} hover:text-[#1a1d24] transition-colors">Contact</a>
     </nav>
 
     <div class="hidden sm:flex items-center gap-2.5">
-      <a @spa href="{{ route('custom-build') }}" hidden style="display:none" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
-        <span>Custom Build</span>
-        <x-icon name="arrow-right" class="w-3.5 h-3.5" />
-      </a>
-      <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-xs">
+      <a @spa href="{{ route('collections') }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#9a7b4f] hover:bg-[#866940] text-white text-[13px] font-semibold uppercase tracking-wider transition-all shadow-xs">
         <x-icon name="sliders-horizontal" class="w-3.5 h-3.5" />
         <span>Explore Products</span>
       </a>
@@ -67,15 +62,13 @@
   </div>
 
   <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-[#e5e2da] px-6 py-5 space-y-4">
-    <a @spa href="{{ route('home') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Home</a>
-    <a @spa href="{{ route('about') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">About</a>
-    <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#9a7b4f]">Collection</a>
-    <a @spa href="{{ route('downloads') }}" hidden style="display:none" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Downloads</a>
-    <a @spa href="{{ route('gallery') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Gallery</a>
-    <a @spa href="{{ route('contact') }}" onclick="toggleMobileMenu()" class="block text-sm font-semibold text-[#1a1d24]">Contact</a>
+    <a @spa href="{{ route('home') }}" onclick="toggleMobileMenu()" class="block text-base font-semibold text-[#1a1d24]">Home</a>
+    <a @spa href="{{ route('about') }}" onclick="toggleMobileMenu()" class="block text-base font-semibold text-[#1a1d24]">About</a>
+    <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="block text-base font-semibold text-[#9a7b4f]">Collection</a>
+    <a @spa href="{{ route('gallery') }}" onclick="toggleMobileMenu()" class="block text-base font-semibold text-[#1a1d24]">Gallery</a>
+    <a @spa href="{{ route('contact') }}" onclick="toggleMobileMenu()" class="block text-base font-semibold text-[#1a1d24]">Contact</a>
     <div class="pt-4 border-t border-[#e5e2da] flex flex-col gap-2">
-      <a @spa href="{{ route('custom-build') }}" hidden onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#181b20] text-white text-xs font-semibold uppercase tracking-wider text-center">Custom Build</a>
-      <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider text-center">Explore Products</a>
+      <a @spa href="{{ route('collections') }}" onclick="toggleMobileMenu()" class="w-full py-2.5 rounded-lg bg-[#9a7b4f] text-white text-[13px] font-semibold uppercase tracking-wider text-center">Explore Products</a>
     </div>
   </div>
 </header>

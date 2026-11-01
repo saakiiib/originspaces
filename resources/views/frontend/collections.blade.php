@@ -49,13 +49,11 @@
               <span class="text-[11px] font-mono uppercase tracking-[0.2em] text-[#9a7b4f] font-semibold">{{ $p['category'] }}</span>
               <h3 class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold leading-tight">{{ $p['name'] }}</h3>
               <p class="text-sm text-[#374151] leading-relaxed">{{ $p['tagline'] }}</p>
-              <div class="grid grid-cols-2 gap-4 pt-3 border-t border-[#f0ede6] text-xs">
+              <div class="pt-3 border-t border-[#f0ede6] text-xs">
                 <div><span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280] font-semibold">Dimensions</span><span class="font-semibold text-[#1a1d24]">{{ $p['dimensions'] ?: '—' }}</span></div>
-                <div><span class="block text-[10px] font-mono uppercase tracking-widest text-[#6b7280] font-semibold">Lead Time</span><span class="font-semibold text-[#1a1d24]">{{ $p['leadTime'] ?: '—' }}</span></div>
               </div>
               <div class="pt-1 flex flex-wrap items-center gap-4">
                 <a @spa href="/product/{{ $p['slug'] }}" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Full Details <x-icon name="arrow-right" class="w-3.5 h-3.5" /></a>
-                <button type="button" onclick='openEnquiryModal(@json($p['name'] . ' — Spec Pack'), {{ $p['id'] }}, "")' class="text-[11px] font-mono uppercase tracking-wider text-[#6b7280] hover:text-[#9a7b4f] font-semibold transition-colors">Request This Spec &rarr;</button>
               </div>
               <div class="collection-specs hidden pt-4 border-t border-[#f0ede6] space-y-3">
                 <div>
@@ -69,9 +67,6 @@
             <div class="lg:col-span-7 relative min-h-[260px] order-1 {{ $i % 2 === 1 ? 'lg:order-1' : 'lg:order-2' }}">
               <img src="{{ $p['heroImage'] }}" alt="{{ $p['name'] }}" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
               <span class="absolute top-4 left-4 px-2.5 py-1 bg-white/90 backdrop-blur text-[10px] font-mono rounded shadow">{{ $p['modelCode'] }}</span>
-              <button onclick="toggleSaved(this)" title="Save piece" class="absolute top-4 right-4 w-9 h-9 rounded-lg bg-white border border-[#e5e2da] flex items-center justify-center transition-all shadow">
-                <x-icon name="bookmark" class="w-4 h-4 text-[#1a1d24]" />
-              </button>
             </div>
           </div>
         @empty

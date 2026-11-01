@@ -17,11 +17,11 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id={{ $company->google_analytics_id }}"></script>
         <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '{{ $company->google_analytics_id }}');</script>
     @endif
-    <link rel="icon" href="{{ $company->fav_icon ? asset('uploads/company/' . $company->fav_icon) : asset('resources/frontend-raw/assets/logo.png') }}" sizes="48x48">
+    <link rel="icon" href="{{ $company->fav_icon ? asset('uploads/company/' . $company->fav_icon) : asset('assets/logo.png') }}" sizes="48x48">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('resources/frontend-raw/css/site.css') }}?v={{ filemtime(public_path('resources/frontend-raw/css/site.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ filemtime(public_path('css/site.css')) }}">
     @yield('style')
 </head>
 
@@ -35,7 +35,7 @@
 
 @include('frontend.footer')
 
-<script src="{{ asset('resources/frontend-raw/js/icons.js') }}?v={{ filemtime(public_path('resources/frontend-raw/js/icons.js')) }}"></script>
+<script src="{{ asset('js/icons.js') }}?v={{ filemtime(public_path('js/icons.js')) }}"></script>
 
 @spaEngine
 

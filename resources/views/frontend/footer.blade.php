@@ -1,16 +1,16 @@
 @php
   $footCats = App\Models\Category::where('status', 1)->orderBy('sort_order')->take(5)->get(['name', 'slug']);
-  $footLogo = $company->footer_logo ? asset('uploads/company/' . $company->footer_logo) : ($company->company_logo ? asset('uploads/company/' . $company->company_logo) : asset('resources/frontend-raw/assets/logo.png'));
+  $footLogo = $company->footer_logo ? asset('uploads/company/' . $company->footer_logo) : ($company->company_logo ? asset('uploads/company/' . $company->company_logo) : asset('assets/logo.png'));
+  $navProducts = App\Models\Product::where('status', 1)->orderByDesc('is_featured')->orderBy('sort_order')->take(4)->get(['id', 'name', 'slug', 'model_code', 'hero_image']);
 @endphp
 <footer id="showrooms" class="bg-[#181b20] text-white pt-12 pb-6 px-4 sm:px-6 lg:px-10 border-t border-[#2d3139]">
   <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-white/10">
+    <div class="footer-grid grid grid-cols-2 lg:grid-cols-4 gap-6 pb-12 border-b border-white/10">
       <div class="space-y-4 sm:col-span-2 lg:col-span-1">
         <img src="{{ $footLogo }}" alt="Origin Spaces" class="h-11 w-auto object-contain bg-white rounded-lg px-3 py-1.5" />
         <p class="text-xs text-[#9ca3af] leading-relaxed">
           {{ $company->footer_content ?: 'Expandable modular homes manufactured build-to-order and fulfilled directly from our UK Central Distribution Warehouse.' }}
         </p>
-        <div class="text-[11px] font-mono text-[#9a7b4f]">Direct Warehouse Dispatch &bull; Nationwide UK Delivery</div>
         @if($company->facebook || $company->instagram || $company->linkedin || $company->youtube || $company->twitter)
         <div class="flex items-center gap-2.5 pt-1">
           @if($company->facebook)<a href="{{ $company->facebook }}" target="_blank" rel="noopener" aria-label="Facebook" class="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-[#c9c4b7] hover:text-white hover:border-[#9a7b4f] transition-all"><x-icon name="arrow-up-right" class="w-3.5 h-3.5" /></a>@endif
@@ -23,12 +23,10 @@
       </div>
 
       <div>
-        <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Architecture</span>
+        <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Menu</span>
         <ul class="space-y-2 text-xs text-[#c9c4b7]">
           <li><a @spa href="{{ route('home') }}" class="hover:text-white transition-colors">Home</a></li>
           <li><a @spa href="{{ route('about') }}" class="hover:text-white transition-colors">About</a></li>
-          <li hidden><a @spa href="{{ route('downloads') }}" class="hover:text-white transition-colors">Downloads</a></li>
-          <li><a @spa href="{{ route('home') }}#faq-section" class="hover:text-white transition-colors">FAQ</a></li>
           <li><a @spa href="{{ route('gallery') }}" class="hover:text-white transition-colors">Gallery</a></li>
           <li><a @spa href="{{ route('contact') }}" class="hover:text-white transition-colors">Contact</a></li>
         </ul>
@@ -37,49 +35,29 @@
       <div>
         <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Collections</span>
         <ul class="space-y-2 text-xs text-[#c9c4b7]">
-          @forelse($footCats as $fc)
-            <li><a @spa href="{{ route('collections', ['category' => $fc->slug]) }}" class="hover:text-white transition-colors">{{ $fc->name }}</a></li>
+          @forelse($navProducts as $np)
+            <li><a @spa href="{{ route('product.show', $np->slug) }}" class="hover:text-white transition-colors">{{ $np->name }}</a></li>
           @empty
-            <li><a @spa href="{{ route('collections') }}" class="hover:text-white transition-colors">The Architectural Kitchen</a></li>
-            <li><a @spa href="{{ route('collections') }}" class="hover:text-white transition-colors">Sanctuary &amp; Bath</a></li>
-            <li><a @spa href="{{ route('collections') }}" class="hover:text-white transition-colors">Sculptural Illumination</a></li>
-            <li><a @spa href="{{ route('collections') }}" class="hover:text-white transition-colors">Architectural Joinery</a></li>
+            <li><a @spa href="{{ route('collections') }}" class="hover:text-white transition-colors">All Products</a></li>
           @endforelse
-          <li class="pt-1"><a @spa href="{{ route('collections') }}" class="text-[#9a7b4f] hover:underline font-mono font-semibold block">Dedicated Collection Page &rarr;</a></li>
         </ul>
       </div>
 
       <div>
-        <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">UK Applications</span>
+        <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Contact</span>
         <ul class="space-y-2 text-xs text-[#c9c4b7]">
-          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Garden Annexes (Caravan Act)</a></li>
-          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Acoustic Garden Offices</a></li>
-          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Commercial Coffee Pods</a></li>
-          <li><a @spa href="{{ route('home') }}#collections-section" class="hover:text-white transition-colors">Luxury Glamping Retreats</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <span class="text-xs uppercase font-mono tracking-widest text-[#9a7b4f] font-semibold block mb-4">Showrooms &amp; Contact</span>
-        <ul class="space-y-2 text-xs text-[#c9c4b7]">
-          <li><span class="text-white">{{ $company->address1 ?: 'Mayfair Flagship, 14 Berkeley Square, W1J 6BQ' }}</span></li>
-          @if($company->address2)<li><span class="text-white">{{ $company->address2 }}</span></li>@endif
-          @if($company->address3)<li><span class="text-white">{{ $company->address3 }}</span></li>@endif
-          <li><span class="text-white">Tel {{ $company->phone1 ?: '+44 (0)20 7946 0880' }}, {{ $company->opening_time ?: 'Mon-Sat 10-18' }}</span></li>
-          @if($company->email1)<li><a href="mailto:{{ $company->email1 }}" class="hover:text-white transition-colors">{{ $company->email1 }}</a></li>@endif
-          @if($company->whatsapp)<li><a href="https://wa.me/{{ $company->whatsapp }}" target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp the studio</a></li>@endif
-          <li class="pt-2">
-            <button onclick="openEnquiryModal('Direct Callback')" class="text-xs text-[#9a7b4f] hover:underline font-semibold flex items-center gap-1">
-              <span>Request Callback / CAD Pack</span>
-              <x-icon name="arrow-right" class="w-3 h-3" />
-            </button>
-          </li>
+          <li class="flex items-center gap-2"><x-icon name="map-pin" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0" /><span class="text-[#c9c4b7]">{{ $company->address1 ?: 'Mayfair Flagship, 14 Berkeley Square, W1J 6BQ' }}</span></li>
+          @if($company->address2)<li class="flex items-center gap-2"><span class="w-3.5 text-[#9a7b4f]">•</span><span class="text-[#c9c4b7]">{{ $company->address2 }}</span></li>@endif
+          <li class="flex items-center gap-2"><x-icon name="phone" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0" /><span class="text-[#c9c4b7]">{{ $company->phone1 ?: '+44 (0)20 7946 0880' }}</span></li>
+          @if($company->phone2)<li class="flex items-center gap-2"><x-icon name="phone" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0" /><span class="text-[#c9c4b7]">{{ $company->phone2 }}</span></li>@endif
+          @if($company->email1)<li class="flex items-center gap-2"><x-icon name="mail" class="w-3.5 h-3.5 text-[#9a7b4f] shrink-0" /><a href="mailto:{{ $company->email1 }}" class="hover:text-white transition-colors">{{ $company->email1 }}</a></li>@endif
         </ul>
       </div>
     </div>
 
     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#6b7280] gap-4">
       <span>&copy; {{ date('Y') }} {{ $company->company_name ?: 'OriginSpaces Modular UK Ltd.' }} {{ $company->copyright ?: 'All rights reserved. Registered in England & Wales.' }}</span>
+      <a href="https://mentosoftware.co.uk/" target="_blank" rel="noopener" class="text-[#9a7b4f] hover:text-[#c5a880] font-medium">Developed by Mentosoftware</a>
       <div class="flex items-center gap-4">
         <a @spa href="{{ route('privacy') }}" class="hover:text-[#9ca3af]">Privacy Policy</a>
         <span>&bull;</span>

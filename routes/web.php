@@ -32,15 +32,6 @@ Auth::routes([
     'verify' => false,
 ]);
 
-Route::get('/dd-products', function () {
-    return response()->json(
-        \App\Models\Product::with(['category', 'materials', 'specs', 'techSpecs'])->get(),
-        200,
-        [],
-        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-    );
-});
-
 // Dashboard (must keep)
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
@@ -49,11 +40,8 @@ Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 Route::get('/collections', [FrontendController::class, 'collections'])->name('collections');
 Route::get('/product/{slug}', [FrontendController::class, 'productShow'])->name('product.show');
-Route::get('/custom-build', [FrontendController::class, 'customBuild'])->name('custom-build');
 Route::post('/enquiries', [FrontendController::class, 'enquiriesStore'])->name('enquiries.store');
 Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
-Route::get('/downloads', [FrontendController::class, 'downloads'])->name('downloads');
-Route::get('/downloads/{id}/file', [FrontendController::class, 'downloadFile'])->name('downloads.file');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
 

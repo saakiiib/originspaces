@@ -162,7 +162,6 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'is_admin']], funct
     Route::delete('/downloads/{id}', [DownloadController::class, 'destroy'])->name('downloads.delete');
     Route::post('/downloads/toggle-status', [DownloadController::class, 'toggleStatus'])->name('downloads.toggleStatus');
 
-    // Enquiries (unified inbox: contact + custom-build + spec-pack)
     Route::get('/enquiries', [EnquiryController::class, 'index'])->name('enquiries.index');
     Route::get('/enquiries/{id}', [EnquiryController::class, 'show'])->name('enquiries.show');
     Route::post('/enquiries/toggle-status', [EnquiryController::class, 'toggleStatus'])->name('enquiries.toggleStatus');

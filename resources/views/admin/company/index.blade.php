@@ -324,6 +324,20 @@
 
                                 <div class="col-12">
                                     <div class="form-group">
+                                        <label>{{ 'Privacy Policy' }}</label>
+                                        <textarea name="privacy_policy" id="privacy_policy" class="form-control summernote" cols="30" rows="3">{{ $data->privacy_policy }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>{{ 'Terms of Supply' }}</label>
+                                        <textarea name="terms_and_conditions" id="terms_and_conditions" class="form-control summernote" cols="30" rows="3">{{ $data->terms_and_conditions }}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
                                         <label>{{ 'Google Map Source Code' }}</label>
                                         <textarea name="google_map" id="google_map" class="form-control @error('google_map') is-invalid @enderror"
                                             cols="30" rows="3">{{ $data->google_map }}</textarea>
@@ -534,6 +548,7 @@
             $('.select2').select2({
                 width: '100%'
             });
+            $('.summernote').summernote({ height: 120 });
         });
     </script>
 @endsection
