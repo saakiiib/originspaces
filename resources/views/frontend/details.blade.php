@@ -24,6 +24,9 @@
 
   <!-- Main Split -->
   <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 py-8">
+    @if(isset($product))
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"{{ $product->name }}","description":"{{ $product->tagline ?? '' }}","image":"{{ $product->hero_image ? url($product->hero_image) : '' }}","sku":"{{ $product->model_code }}","brand":{"@type":"Brand","name":"OriginSpaces"},"offers":{"@type":"Offer","url":"{{ url('/product/' . $product->slug) }}","priceCurrency":"GBP","availability":"https://schema.org/InStock"}}</script>
+    @endif
     <div class="flex flex-col lg:flex-row items-start gap-8">
 
       <!-- LEFT: Configurator -->
