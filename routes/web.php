@@ -18,7 +18,7 @@ Route::get('/clear', function () {
 });
 
 Route::fallback(function () {
-    return redirect('/');
+    abort(404);
 });
 
 require __DIR__.'/admin.php';
@@ -44,6 +44,28 @@ Route::get('/product/{slug}', [FrontendController::class, 'productShow'])->name(
 Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
+
+Route::get('/sitemap.xml', function () {
+    $products = \App\Models\Product::where('status', true)->get();
+    $urls = [
+        url('/'),
+        url('/about'),
+        url('/collections'),
+        url('/gallery'),
+        url('/contact'),
+        url('/privacy-policy'),
+        url('/terms-of-service'),
+    ];
+    foreach ($products as $p) {
+        $urls[] = url('/product/' . $p->slug);
+    }
+    $xml = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($urls as $url) {
+        $xml .= '<url><loc>' . htmlspecialchars($url, ENT_XML1, 'UTF-8') . '</loc></url>';
+    }
+    $xml .= '</urlset>';
+    return response($xml, 200)->header('Content-Type', 'application/xml');
+})->name('sitemap');
 
 // Debug Routes
 Route::get('/debug/products', [FrontendController::class, 'debugProducts'])->name('debug.products');

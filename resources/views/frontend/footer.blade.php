@@ -109,7 +109,7 @@
         <select id="enquiry-topic" class="w-full text-xs px-3.5 py-2.5 rounded-lg border border-[#dcd8cd] focus:border-[#9a7b4f] focus:outline-none bg-white">
           <option>Direct UK Site Delivery with Hiab Crane Offload</option>
           <option>Full White-Glove Warehouse Delivery &amp; Turnkey Unfolding</option>
-          <option>Client / Haulier Collection from UK Warehouse Depot</option>
+          <option>Client / Haulier Collection from UK Logistics Depot</option>
         </select>
       </div>
       <div>

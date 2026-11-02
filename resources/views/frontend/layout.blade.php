@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="{{ $company->company_name ?? '' }}">
     <link rel="canonical" href="{{ url()->current() }}">
-    <title>@yield('title', config('app.name'))</title>
     {!! SEOMeta::generate() !!}
     {!! OpenGraph::generate() !!}
     {!! Twitter::generate() !!}

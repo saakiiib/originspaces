@@ -241,7 +241,7 @@
         @foreach($featuredCards as $fp)
         <a @spa href="/product/{{ $fp['slug'] }}" class="group cursor-pointer relative overflow-hidden bg-white border border-[#e5e2da] hover:border-[#9a7b4f] rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col">
           <div class="aspect-[16/10] w-full overflow-hidden relative">
-            <img src="{{ $fp['heroImage'] }}" alt="{{ $fp['name'] }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
+            <img src="{{ $fp['heroImage'] }}" srcset="{{ $fp['heroImage'] }} 1200w, {{ str_replace('w=1200', 'w=600', $fp['heroImage']) }} 600w" sizes="(max-width: 768px) 600px, 1200px" alt="{{ $fp['name'] }}" loading="lazy" width="1200" height="750" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
             <div class="absolute top-4 left-4 flex items-center gap-2">
               <span class="px-3 py-1.5 rounded-full bg-[#9a7b4f] text-white text-[10px] font-mono uppercase tracking-widest font-semibold shadow">— {{ $fp['category'] }}</span>
@@ -322,18 +322,18 @@
 
   <div class="rn">
     <div class="rn-left">
-      <span class="rn-eyebrow">In Stock at Our UK Warehouse</span>
+      <span class="rn-eyebrow">Available for UK Delivery</span>
       <h2>Modular Buildings <em>Ready Now</em></h2>
-      <p class="rn-p">A simple, cost-effective way to add extra space at home or for your business. Our first shipment is now <b>in stock at our UK warehouse,</b> with very competitive pricing.</p>
+      <p class="rn-p">A simple, cost-effective way to add extra space at home or for your business. Our modular buildings are available with competitive pricing and delivery options.</p>
 
       <div class="rn-icons">
         <div class="rn-ic">
           <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8"/><path d="M7 16h10"/></svg></i>
-          <span>Our UK<br>Warehouse</span>
+          <span>Direct<br>Delivery</span>
         </div>
         <div class="rn-ic">
           <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></i>
-          <span>Products<br>In Stock</span>
+          <span>Ready for<br>Delivery</span>
         </div>
         <div class="rn-ic">
           <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg></i>
@@ -349,7 +349,7 @@
     <div class="rn-card-wrap">
       <div class="rn-card">
         <div class="rn-card-in">
-          <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>UK <b>Warehouse Stock</b></span></div>
+          <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>UK <b>Delivery Ready</b></span></div>
           <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>Ready for <b>Quick Delivery</b></span></div>
           <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>Competitive <b>Pricing</b></span></div>
           <div class="rn-hr"></div>
@@ -634,7 +634,7 @@
         <div class="lt-pills">
         <div class="lt-pill">
             <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8"/><path d="M7 16h10"/></svg></i>
-            <span>UK Warehouse Stock</span>
+            <span>Available for Delivery</span>
         </div>
         <div class="lt-pill">
             <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg></i>
@@ -663,24 +663,24 @@
       annex: {
         id: 'annex',
         title: 'Residential Garden Annex',
-        badge: 'Caravan Sites Act 1968 &bull; Permitted Development',
-        desc: 'Purpose-engineered as a self-contained auxiliary dwelling for elderly relatives (granny annex), adult children, or guests. Conforms to Section 13(2) dimensions for streamlined non-planning installation in domestic curtilages.',
+        badge: 'Modular Annex — Verify Planning Locally',
+        desc: 'Purpose-engineered as a self-contained auxiliary dwelling for elderly relatives, adult children, or guests. Verify dimensions and planning requirements with your local authority before installation.',
         dims: '5.9m &times; 6.3m (37m&sup2;) &bull; 1 Bed + Ensuite',
-        price: 'From &pound;24,800 + UK Warehouse Delivery',
-        turnaround: '8-10 Weeks to Site Delivery',
+        price: 'Pricing available on request',
+        turnaround: 'Lead time available on request',
         img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
-        eyebrow: 'Garden Ext. & Permitted Development Ready',
+        eyebrow: 'Garden Extension — Confirm Specifications',
         imgTag: 'Residential & Family',
         imgCaption: 'House Extension & Garden Annex',
         imgSub: 'Unfolds & levels in under 15 mins',
         headline: 'A Luxury 1-2 Bed Self-Contained Home on Your Garden Plot',
-        reg: 'UK Regulatory Note: qualifies as movable accommodation under the Caravan Sites Act 1968, removing full planning in most garden curtilages.',
+        reg: 'Planning and building-regulation requirements vary by site; confirm with your local authority.',
         configLabel: 'Configure House Extension Spec',
         features: [
           'Pre-fitted ensuite with walk-in shower & dual-flush WC',
-          'Turnkey kitchenette with induction hob & sink',
-          'BS 7671 UK consumer unit with RCBO breakers',
-          'Conforms to Caravan Sites Act 1968 definition'
+          'Kitchenette with induction hob & sink',
+          'Consumer unit with RCBO breakers',
+          'Modular design for flexible installation'
         ]
       },
       office: {
@@ -689,15 +689,15 @@
         badge: 'Zero Commute &bull; Acoustic Soundproofed',
         desc: 'High-performance workspace featuring 100mm acoustic wall panels, concealed data conduits, climate inverter heat pump, and panoramic bi-fold glazing overlooking your garden landscape.',
         dims: '5.9m &times; 6.3m (37m&sup2;) &bull; Open-Plan Executive Studio',
-        price: 'From &pound;23,500 + UK Warehouse Delivery',
-        turnaround: '7-9 Weeks to Site Delivery',
+        price: 'Pricing available on request',
+        turnaround: 'Lead time available on request',
         img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
         eyebrow: 'Acoustic Workspace & Home Office Ready',
         imgTag: 'Work & Wellness',
         imgCaption: 'Executive Garden Studio',
         imgSub: 'Silent, connected, all-season comfort',
         headline: 'A Soundproofed Studio Office Steps From Your Back Door',
-        reg: 'UK Regulatory Note: typically falls under Permitted Development for home offices under 2.5m height at the boundary.',
+        reg: 'Planning rules vary by site; confirm permitted-development status and height restrictions with your local planning authority.',
         configLabel: 'Configure Garden Office Spec',
         features: [
           'Rockwool internal acoustic soundproofing rating',
@@ -709,18 +709,18 @@
       cafe: {
         id: 'cafe',
         title: 'Commercial Drive-Thru & Parkside Coffee Shop',
-        badge: 'Commercial Grade &bull; Rapid ROI',
+        badge: 'Commercial Hospitality — Confirm Licensing',
         desc: 'Turnkey food and beverage unit engineered with hydraulic gas-strut awning serving windows, commercial washable hygiene wall panels, 32A 3-phase electrical prep, and stainless prep counters.',
         dims: '5.9m &times; 6.3m (37m&sup2;) or 9.0m &times; 6.3m (56m&sup2;)',
-        price: 'From &pound;27,900 + UK Warehouse Delivery',
-        turnaround: '8-11 Weeks to Site Delivery',
+        price: 'Pricing available on request',
+        turnaround: 'Lead time available on request',
         img: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80',
         eyebrow: 'High-Street & Hospitality Ready',
         imgTag: 'Commercial & Retail',
         imgCaption: 'Coffee Shop & Bakery Pod',
         imgSub: 'Serving hatch live in 48 hours',
         headline: 'Turn Unused Commercial Land into a Thriving Cafe in 48 Hours',
-        reg: 'UK Regulatory Note: supplied with food-grade finishes and 32A prep; site-specific licensing checked per council.',
+        reg: 'Food-service licensing, planning and building regulations apply; verify with your local authority and environmental health before installation.',
         configLabel: 'Configure Coffee Pod Spec',
         features: [
           'Integrated fold-up commercial serving hatch counter',
@@ -735,18 +735,18 @@
         badge: 'High ADR Tourism &bull; 4-Season Climate',
         desc: 'Designed for farm diversification, country estates, and holiday parks. Delivers luxury hotel-grade guest experience with ensuite bathroom, stargazing skylights, and cedar cladding.',
         dims: '9.0m &times; 6.3m (56m&sup2;) &bull; 2 Beds + Kitchenette',
-        price: 'From &pound;36,400 + UK Warehouse Delivery',
-        turnaround: '8-10 Weeks to Site Delivery',
+        price: 'Pricing available on request',
+        turnaround: 'Lead time available on request',
         img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
         eyebrow: 'Tourism & Holiday Park Ready',
         imgTag: 'Leisure & Escape',
         imgCaption: 'Boutique Holiday Home',
         imgSub: '4-season comfort, hotel-grade suites',
         headline: 'A Boutique Holiday Home That Pays for Itself in Bookings',
-        reg: 'UK Regulatory Note: ideal for farm diversification and holiday parks under caravan and lodge site licensing.',
+        reg: 'Site licensing and planning rules vary; confirm with the local planning authority and site operator before installation.',
         configLabel: 'Configure Holiday Home Spec',
         features: [
-          'Part L insulation: full winter occupancy comfort',
+          'Insulated construction for year-round comfort',
           'Hotel-grade master bedroom with freestanding bathtub prep',
           'Keyless smart door lock system & keycard integration',
           'Integrated exterior architectural accent LED lighting'
@@ -758,15 +758,15 @@
         badge: 'Relocatable &bull; High Footfall',
         desc: 'Mobile commercial showroom designed for brand activations, exhibition spaces, estate agency sales suites, and festival retail points that can be relocated via flatbed at any time.',
         dims: '5.9m &times; 6.3m (37m&sup2;) &bull; Full Glass Frontage',
-        price: 'From &pound;25,200 + UK Warehouse Delivery',
-        turnaround: '7-9 Weeks to Site Delivery',
+        price: 'Pricing available on request',
+        turnaround: 'Lead time available on request',
         img: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
         eyebrow: 'Brand & High-Footfall Ready',
         imgTag: 'Pop-Up & Showcase',
         imgCaption: 'Retail Salon & Brand Pavilion',
         imgSub: 'Relocatable by flatbed anytime',
         headline: 'A Flagship Retail Salon That Moves With the Crowd',
-        reg: 'UK Regulatory Note: temporary-use friendly; relocate between pitches and activations on a standard flatbed.',
+        reg: 'Temporary-use and relocation rules vary by site; confirm with the local planning authority.',
         configLabel: 'Configure Retail Pod Spec',
         features: [
           'Full-width tempered bi-fold glass commercial display',
@@ -778,23 +778,23 @@
     };
 
     var CONFIG_USE_CASES = [
-      { id: 'annex', name: 'Residential Garden Annex (Caravan Act)', tag: 'Caravan Act Permitted' },
+      { id: 'annex', name: 'Residential Garden Annex', tag: 'Check Planning Requirements' },
       { id: 'cafe', name: 'Commercial Coffee Shop / Food Kiosk', tag: 'Flip-Up Serving Hatch' },
       { id: 'office', name: 'Acoustic Garden Workspace', tag: 'Soundproof & Cat6' },
-      { id: 'glamping', name: 'Luxury Holiday Glamping Suite', tag: '4-Season Part L' },
+      { id: 'glamping', name: 'Luxury Holiday Glamping Suite', tag: 'Confirm Site Licensing' },
       { id: 'retail', name: 'Retail Pop-Up / Brand Pavilion', tag: 'Full Glass Front' }
     ];
 
     var CONFIG_SIZES = [
-      { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: '£24,800' },
-      { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: '£27,200' },
-      { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: '£36,400' },
-      { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: '£45,900' }
+      { id: '20ft-compact', name: '20ft Compact Studio', area: '37 m²', dims: '5.9m × 6.3m', basePrice: 'On request' },
+      { id: '20ft-bifold', name: '20ft Bi-Fold Extended', area: '42 m²', dims: '5.9m × 7.2m', basePrice: 'On request' },
+      { id: '30ft-bifold', name: '30ft Sanctuary Bi-Fold', area: '56 m²', dims: '9.0m × 6.3m', basePrice: 'On request' },
+      { id: '40ft-trifold', name: '40ft Tri-Fold Residence', area: '74 m²', dims: '11.8m × 6.3m', basePrice: 'On request' }
     ];
 
     var CONFIG_INSULATION = [
-      { id: 'uk-part-l-100mm', name: '100mm PIR Core (UK Part L Building Regs)', rating: 'U ≤ 0.18 W/m²K &bull; All-Season UK Heat Retaining' },
-      { id: 'rockwool-noncombustible', name: '100mm Rockwool (A1 Non-Combustible Fire Rated)', rating: 'BS 476 Part 7 Fire Rated &bull; High Acoustic Dampening' }
+      { id: 'uk-part-l-100mm', name: '100mm PIR Core (Insulated Construction)', rating: 'U ≤ 0.18 W/m²K &bull; Energy Efficient' },
+      { id: 'rockwool-noncombustible', name: '100mm Rockwool (A1 Non-Combustible)', rating: 'Fire-rated insulation &bull; Acoustic dampening' }
     ];
 
     var CONFIG_FACADES = [
@@ -806,7 +806,7 @@
     var CONFIG_ADDONS = [
       { id: 'ensuite-bathroom', label: 'Factory Pre-Fitted Ensuite with Shower, Vanity & Dual-Flush WC' },
       { id: 'fitted-kitchenette', label: 'Turnkey Kitchenette / Bar Counter with Sink & Induction' },
-      { id: 'uk-consumer-unit', label: 'BS 7671 UK Consumer Unit with RCBO Circuit Breakers' },
+      { id: 'uk-consumer-unit', label: 'UK Consumer Unit with RCBO Circuit Breakers' },
       { id: 'inverter-heatpump', label: 'Split-System Heat Pump AC (Whisper-Quiet Heating & Cooling)' },
       { id: 'solar-prep', label: 'Pre-Wired Roof Solar PV Conduits & Inverter Ready' },
       { id: 'acoustic-lining', label: 'Extra Acoustic Rockwool Internal Soundproofing' }
@@ -822,9 +822,9 @@
       },
       {
         id: 'turnkey-installation',
-        name: 'Full White-Glove Warehouse Delivery & Turnkey Unfolding',
-        badge: 'Zero-Effort',
-        desc: 'Complete turnkey service from UK warehouse to handover: flatbed delivery, crane offloading, hydraulic unfolding of side wings, mechanical seal lock-in, and full electrical & plumbing connection check by our technician team.',
+        name: 'Full White-Glove Warehouse Delivery',
+        badge: 'White-Glove',
+        desc: 'Delivery, crane offloading and unfolding assistance included; installation and utility connections remain the customer\'s responsibility and must be arranged separately.',
         dispatch: 'UK Warehouse + On-Site Crew'
       },
       {

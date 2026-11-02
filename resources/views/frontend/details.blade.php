@@ -1,5 +1,5 @@
 @extends('frontend.layout')
-@section('title', 'Product Details | OriginSpaces Modular UK')
+@section('title', isset($product) ? $product->name . ' | OriginSpaces Modular UK' : 'Product Details | OriginSpaces Modular UK')
 @section('content')
 
 
@@ -25,7 +25,23 @@
   <!-- Main Split -->
   <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 py-8">
     @if(isset($product))
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"{{ $product->name }}","description":"{{ $product->tagline ?? '' }}","image":"{{ $product->hero_image ? url($product->hero_image) : '' }}","sku":"{{ $product->model_code }}","brand":{"@type":"Brand","name":"OriginSpaces"},"offers":{"@type":"Offer","url":"{{ url('/product/' . $product->slug) }}","priceCurrency":"GBP","availability":"https://schema.org/InStock"}}</script>
+    <script type="application/ld+json">@json([
+        '@context' => 'https://schema.org',
+        '@type' => 'Product',
+        'name' => $product->name,
+        'description' => $product->tagline ?? $product->description ?? '',
+        'image' => $product->hero_image ? url($product->hero_image) : '',
+        'sku' => $product->model_code,
+        'brand' => ['@type' => 'Brand', 'name' => 'OriginSpaces'],
+        'offers' => [
+            '@type' => 'Offer',
+            'url' => url('/product/' . $product->slug),
+            'priceCurrency' => 'GBP',
+            'price' => $product->base_price ? (float) $product->base_price : null,
+            'priceValidUntil' => now()->addMonths(6)->format('Y-m-d'),
+            'availability' => $product->status ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+        ],
+    ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)</script>
     @endif
     <div class="flex flex-col lg:flex-row items-start gap-8">
 
@@ -33,8 +49,8 @@
       <aside class="w-full lg:w-[36%] xl:w-[34%] flex flex-col gap-5 lg:sticky lg:top-24">
         <div class="bg-white border border-[#e5e2da] rounded-2xl p-5 shadow-xs space-y-4">
           <div>
-            <h1 id="spec-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold tracking-tight leading-tight">—</h1>
-            <p id="spec-tagline" class="text-sm text-[#374151] mt-1.5 font-semibold leading-relaxed">—</p>
+            <h1 id="spec-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold tracking-tight leading-tight">{{ $product->name ?? '—' }}</h1>
+            <p id="spec-tagline" class="text-sm text-[#374151] mt-1.5 font-semibold leading-relaxed">{{ $product->tagline ?? ($product->description ? (strlen($product->description) > 120 ? substr($product->description, 0, 120) . '...' : $product->description) : '—') }}</p>
           </div>
 
           <!-- 1. Model -->
@@ -135,7 +151,13 @@
         <div id="media-video" class="bg-white border border-[#e5e2da] rounded-2xl overflow-hidden shadow-xs">
           <div class="relative w-full bg-black aspect-video">
             @if(!empty($videoEmbed))
-            <iframe id="spec-video-frame" src="{{ $videoEmbed }}" title="Product video" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div id="spec-video-stage" class="relative w-full h-full bg-black">
+              <img src="https://img.youtube.com/vi/{{ preg_replace('~(?:youtube\.com/(?:watch\?[^#]*v=|embed/)|youtu\.be/)~', '', $videoEmbed) }}/maxresdefault.jpg" alt="Product video thumbnail" class="w-full h-full object-cover" />
+              <button onclick="loadSpecVideo()" class="absolute inset-0 m-auto w-16 h-16 rounded-full bg-white/90 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white flex items-center justify-center shadow-2xl transition-all z-10" aria-label="Play video">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </button>
+              <div id="spec-video-iframe" class="hidden w-full h-full"></div>
+            </div>
             @else
             <video id="spec-video" class="w-full h-full object-cover" playsinline preload="metadata" controls muted loop autoplay></video>
             <button id="spec-unmute-overlay" onclick="unmuteSpecVideo()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all shadow-md rounded">
@@ -199,9 +221,9 @@
         <!-- Description -->
         <div class="bg-white border border-[#e5e2da] rounded-2xl p-6 sm:p-8 shadow-xs">
           <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Architectural Heritage &amp; Monocoque Engineering</span>
-          <h2 id="narrative-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold mb-3">—</h2>
-          <div id="narrative-body" class="text-sm text-[#374151] leading-relaxed">—</div>
-          <ul id="narrative-specs" class="mt-4 space-y-2"></ul>
+          <h2 id="narrative-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold mb-3">{{ $product->name ?? '—' }}, Specified End to End</h2>
+          <div id="narrative-body" class="text-sm text-[#374151] leading-relaxed">{{ $product->description ?? ($product->tagline ?? '—') }}</div>
+          <ul id="narrative-specs" class="mt-4 space-y-2">@if($product->relationLoaded('specs'))@foreach($product->specs->pluck('point') as $spec)<li class="flex items-start gap-2.5 text-sm text-[#374151] leading-relaxed"><span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#9a7b4f] shrink-0"></span><span>{{ $spec }}</span></li>@endforeach@endif</ul>
         </div>
 
         <!-- Spec table -->
@@ -460,6 +482,14 @@
       setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
     }
 
+    function loadSpecVideo() {
+      const container = document.getElementById('spec-video-iframe');
+      if (container && container.innerHTML === '') {
+        container.innerHTML = '<iframe class="w-full h-full" src="{{ $videoEmbed }}?autoplay=1&rel=0" title="Product video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        document.getElementById('spec-video-stage').querySelector('button').style.display = 'none';
+        container.classList.remove('hidden');
+      }
+    }
     function switchMediaTab(tab) {
       activeMediaTab = tab;
       /* The 3D stage is hidden at init so the canvas boots at fallback width —
