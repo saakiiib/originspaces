@@ -6,7 +6,6 @@ use App\Models\Category;
 use App\Models\CompanyDetails;
 use App\Models\Contact;
 use App\Models\Download;
-use App\Models\Enquiry;
 use App\Models\Faq;
 use App\Models\FaqCategory;
 use App\Models\FloorZone;
@@ -163,26 +162,6 @@ class FrontendController extends Controller
             'subject' => 'Website Enquiry',
             'phone' => $data['phone'],
         ]);
-
-        return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
-    }
-
-    public function enquiriesStore(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:50',
-            'postcode' => 'nullable|string|max:50',
-            'topic' => 'nullable|string|max:255',
-            'message' => 'nullable|string',
-            'product_id' => 'nullable|exists:products,id',
-            'config_summary' => 'nullable|string',
-            'guide_price' => 'nullable|numeric|min:0',
-            'source_page' => 'nullable|string|max:50',
-        ]);
-
-        Enquiry::create($data);
 
         return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
     }

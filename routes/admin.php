@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CompanyDetailsController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DownloadController;
-use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\GalleryCategoryController;
@@ -162,8 +161,4 @@ Route::group(['prefix' => 'admin/', 'middleware' => ['auth', 'is_admin']], funct
     Route::delete('/downloads/{id}', [DownloadController::class, 'destroy'])->name('downloads.delete');
     Route::post('/downloads/toggle-status', [DownloadController::class, 'toggleStatus'])->name('downloads.toggleStatus');
 
-    Route::get('/enquiries', [EnquiryController::class, 'index'])->name('enquiries.index');
-    Route::get('/enquiries/{id}', [EnquiryController::class, 'show'])->name('enquiries.show');
-    Route::post('/enquiries/toggle-status', [EnquiryController::class, 'toggleStatus'])->name('enquiries.toggleStatus');
-    Route::delete('/enquiries/{id}', [EnquiryController::class, 'destroy'])->name('enquiries.delete');
 });

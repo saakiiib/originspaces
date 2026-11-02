@@ -99,10 +99,10 @@
 
           <!-- Enquiry -->
           <div class="pt-5 border-t border-[#EAE7DF] space-y-4">
-            <button type="button" id="spec-cta" onclick='openEnquiryModal(@json($product->name . ' — Spec Pack'), {{ $product->id }}, "")' class="w-full py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
+            <a @spa href="{{ route('contact') }}" class="w-full block py-3.5 px-6 bg-[#181B20] hover:bg-[#9A7B4F] text-white text-sm font-semibold tracking-wider uppercase transition-all duration-200 rounded-xl shadow-md flex items-center justify-center gap-2">
               <span>Request Information &amp; Spec Pack</span>
               <x-icon name="arrow-right" class="w-4 h-4" />
-            </button>
+            </a>
             <p class="text-[11px] text-center text-[#6b7280]">Includes personalised drawing set &amp; site feasibility review.</p>
           </div>
         </div>

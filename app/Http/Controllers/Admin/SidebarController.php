@@ -49,10 +49,9 @@ class SidebarController
             [
                 'type' => 'group',
                 'icon' => 'ri-mail-line',
-                'label' => 'Leads',
-                'id' => 'sidebarLeads',
+                'label' => 'Contact',
+                'id' => 'sidebarContact',
                 'children' => [
-                    ['label' => 'Enquiries', 'route' => 'enquiries.*', 'href' => route('enquiries.index')],
                     ['label' => 'Contacts', 'route' => 'admin.contacts.*', 'href' => route('admin.contacts.index')],
                 ],
             ],
