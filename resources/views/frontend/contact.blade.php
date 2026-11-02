@@ -4,10 +4,45 @@
 
 
   <!-- Page Hero -->
-  <section class="py-8 md:py-12 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
-    <div class="max-w-3xl mx-auto text-center">
-      <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-2">— Contact Us</span>
-      <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#1a1d24] font-semibold tracking-tight leading-[1.1]">Talk to Us About<br />Your Project.</h1>
+  <section class="py-14 md:py-16 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da] bg-[#FDFBF7]">
+    <style>
+      .lt{max-width:1100px;margin:0 auto;text-align:center}
+      .lt-eyebrow{display:inline-flex;align-items:center;gap:18px;font-family:'Montserrat','Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#9a7b4f}
+      .lt-eyebrow:before,.lt-eyebrow:after{content:"";width:36px;height:2px;background:#9a7b4f}
+      .lt h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,52px);font-weight:700;line-height:1.15;color:#14213d;margin:22px 0 0}
+      .lt h1 em{font-style:italic;font-weight:600;color:#9a7b4f;display:block}
+      .lt-p{margin:22px auto 0;max-width:900px;font-size:17px;line-height:1.7;color:#2d3a52}
+      .lt-p+.lt-p{margin-top:10px}
+      .lt-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:36px}
+      .lt-pill{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e8e3d6;border-radius:18px;padding:14px 28px 14px 16px;box-shadow:0 2px 8px rgba(26,29,36,.04)}
+      .lt-pill i{width:48px;height:48px;border-radius:50%;background:#f7eedb;display:grid;place-items:center;color:#9a7b4f;flex-shrink:0}
+      .lt-pill i svg{width:24px;height:24px}
+      .lt-pill span{font-size:17px;font-weight:700;color:#14213d;white-space:nowrap}
+      .lt-note{margin:28px 0 0;font-size:14px;font-style:italic;color:#374151}
+      @media(max-width:640px){.lt-pill{width:100%}.lt-p{font-size:15px}}
+    </style>
+    <div class="lt">
+      <span class="lt-eyebrow">Get in Touch with Origin Spaces</span>
+      <h1>Interested in an Expandable Modular Building? <em>Let’s Talk.</em></h1>
+      <p class="lt-p">Our first shipment of expandable modular buildings is available at attractive introductory prices.</p>
+      <p class="lt-p">Whether you're looking for a garden office, coffee shop, additional family space or a building for your business, we'd be happy to discuss your requirements.</p>
+
+      <div class="lt-pills">
+        <div class="lt-pill">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8"/><path d="M7 16h10"/></svg></i>
+          <span>UK Warehouse Stock</span>
+        </div>
+        <div class="lt-pill">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg></i>
+          <span>Introductory Prices</span>
+        </div>
+        <div class="lt-pill">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></i>
+          <span>Friendly Advice</span>
+        </div>
+      </div>
+
+      <p class="lt-note">Installation is not included. Delivery and other arrangements can be discussed with our team.</p>
     </div>
   </section>
 

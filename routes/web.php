@@ -45,6 +45,9 @@ Route::get('/gallery', [FrontendController::class, 'gallery'])->name('gallery');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
 
+// Debug Routes
+Route::get('/debug/products', [FrontendController::class, 'debugProducts'])->name('debug.products');
+
 // Static Pages
 Route::get('/privacy-policy', [FrontendController::class, 'privacy'])->name('privacy');
 Route::get('/terms-of-service', [FrontendController::class, 'terms'])->name('terms');

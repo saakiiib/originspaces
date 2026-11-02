@@ -6,25 +6,37 @@
   <!-- Hero Section - centered video hero brought from collections.html, video bigger -->
   <section id="home" class="relative pt-12 pb-20 md:pt-16 md:pb-24 px-4 sm:px-6 lg:px-10 overflow-hidden border-b border-[#e5e2da]">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center max-w-3xl mx-auto mb-8">
-        <!-- Live Telemetry Pill -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] shadow-xs text-xs font-mono uppercase tracking-wider text-[#374151] mb-4">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-          </span>
-          <span>Live Installation &bull; Expandable Modular Architecture</span>
-        </div>
+    <div class="text-center max-w-3xl mx-auto mb-8">
+    <!-- Live Telemetry Pill -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#e5e2da] shadow-xs text-xs font-mono uppercase tracking-wider text-[#374151] mb-4">
+        <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        <span>Watch the Expansion &bull; Expandable Modular Buildings</span>
+    </div>
 
-        <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1a1d24] font-semibold tracking-tight leading-[1.12]">
-          Watch an Expandable Home
-          <span class="italic font-normal text-[#9a7b4f]">Install in Minutes</span>
-        </h1>
+    <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl text-[#1a1d24] font-semibold tracking-tight leading-[1.12]">
+        See How an Expandable Modular Home
+        <span class="italic font-normal text-[#9a7b4f]">Comes to Life</span>
+    </h1>
 
-        <p class="mt-4 text-sm sm:text-base text-[#374151] font-normal max-w-2xl mx-auto leading-relaxed">
-          Observe our patented bi-fold chassis expand from a road-legal container pod into a 415 sq ft luxury residence with pre-fitted bathroom, kitchen, and double glazing.
-        </p>
-      </div>
+    <p class="mt-4 text-sm sm:text-base text-[#374151] font-normal max-w-2xl mx-auto leading-relaxed">
+        Watch how an expandable modular building transforms from a compact transportable unit into a spacious, practical building.
+    </p>
+
+    <p class="mt-3 text-sm sm:text-base text-[#374151] font-normal max-w-2xl mx-auto leading-relaxed">
+        Discover the possibilities for garden offices, coffee shops, family accommodation, studios and small businesses.
+    </p>
+
+    <p class="mt-4 text-sm sm:text-base text-[#9a7b4f] font-semibold tracking-wide max-w-2xl mx-auto leading-relaxed">
+        Affordable modular buildings, with introductory pricing on our first shipment.
+    </p>
+
+    <p class="mt-6 text-[11px] text-[#6b7280] max-w-2xl mx-auto leading-relaxed">
+        Video is for demonstration purposes. Features and specifications may vary by model. Installation is not included and must be arranged separately.
+    </p>
+    </div>
 
       <!-- Video Theater Stage - bigger -->
       <div id="hero-video-theater-stage" class="relative bg-white border border-[#e5e2da] shadow-[0_15px_45px_rgba(0,0,0,0.08)] rounded-xl overflow-hidden transition-all duration-500 max-w-6xl mx-auto">
@@ -260,81 +272,98 @@
     </div>
   </section>
 
-  <!-- Introduction to Modular Living (replaces Philosophy section) -->
-  <section id="philosophy" class="py-20 md:py-28 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
-    <style>
-      .osi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1.35fr .9fr;gap:10px;align-items:start}
-      .osi-eyebrow{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#9a7b4f;margin-bottom:16px}
-      .osi h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.8vw,39px);font-weight:600;line-height:1.18;color:#1a1d24;margin:0}
-      .osi h2 .l{display:block}
-      .osi h2 .l+.l{margin-top:4px}
-      .osi h2 em{font-style:italic;color:#9a7b4f}
-      .osi-p{margin:22px 0 0;font-size:15px;line-height:1.75;color:#374151;max-width:600px}
-      .osi-quote{margin:24px 0 0;border-left:2px solid #9a7b4f;padding-left:18px;font-size:15px;font-style:italic;line-height:1.7;color:#374151;max-width:600px}
-      .osi-feats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px;max-width:640px}
-      .osi-feat{display:flex;gap:12px}
-      .osi-feat svg{width:28px;height:28px;color:#9a7b4f;flex-shrink:0;margin-top:2px}
-      .osi-feat b{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#1a1d24;margin-bottom:6px}
-      .osi-feat span{display:block;font-size:13px;line-height:1.6;color:#374151}
-      .osi-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-      .osi-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 24px;border-radius:8px;border:1px solid #9a7b4f;background:transparent;color:#1a1d24;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.16em;transition:all .2s;text-decoration:none}
-      .osi-btn svg{width:18px;height:18px;color:#9a7b4f}
-      .osi-btn:hover{background:#faf9f5}
-      .osi-btn.dark{background:#181b20;border-color:#181b20;color:#fff}
-      .osi-btn.dark svg{color:#fff}
-      .osi-btn.dark:hover{background:#9a7b4f;border-color:#9a7b4f}
-      .osi-media{position:relative;width:100%;padding-bottom:40px}
-      .osi-media img{display:block;width:100%;aspect-ratio:797/560;object-fit:cover;border-radius:20px;border:1px solid #e5e2da;box-shadow:0 22px 48px rgba(26,29,36,.14)}
-      .osi-badge{position:absolute;top:16px;left:16px;background:rgba(24,27,32,.85);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px;border-radius:999px}
-      .osi-float{position:absolute;left:24px;bottom:0;display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e5e2da;border-radius:14px;box-shadow:0 14px 30px rgba(0,0,0,.12);padding:14px 20px}
-      .osi-float i{width:42px;height:42px;border-radius:50%;background:rgba(154,123,79,.1);display:grid;place-items:center;color:#9a7b4f;flex-shrink:0}
-      .osi-float i svg{width:20px;height:20px}
-      .osi-float b{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#9a7b4f}
-      .osi-float span{display:block;font-size:12px;color:#374151;margin-top:2px}
-      @media(min-width:901px){.osi h2 .l:first-child{white-space:nowrap}}
-      @media(max-width:900px){.osi{grid-template-columns:1fr;gap:40px}}
-      @media(max-width:560px){.osi-feats{grid-template-columns:1fr}.osi-btn{width:100%}.osi-float{left:10px;right:10px}}
-    </style>
-    <div class="osi">
-      <div>
-        <span class="osi-eyebrow">— Introducing Origin Spaces</span>
-        <h2><span class="l">A Simple Introduction to <em>Modular Living.</em></span><span class="l">Affordable Space for Modern Life.</span></h2>
-        <p class="osi-p">Simple and affordable modular buildings for modern life — from garden offices to business units, with less commitment and more flexibility.</p>
-        <blockquote class="osi-quote">“Simple modular living, built around your needs.”</blockquote>
-        <div class="osi-feats">
-          <div class="osi-feat">
-            <x-icon name="home" />
-            <div>
-              <b>Affordable First Shipment</b>
-              <span>Introductory pricing designed to help customers explore modular buildings more easily.</span>
-            </div>
-          </div>
-          <div class="osi-feat">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-            <div>
-              <b>Flexible Modular Uses</b>
-              <span>Suitable for garden offices, guest space, cafés, studios, retail kiosks and business use.</span>
-            </div>
-          </div>
+<!-- Modular Buildings Ready Now -->
+<section id="philosophy" class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 bg-[#f4f2ef] border-b border-[#e5e2da]">
+  <style>
+    .rn{max-width:1280px;margin:0 auto;position:relative;background:linear-gradient(180deg,#fbf9f4,#f7f4ec);border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(26,29,36,.10);min-height:400px}
+    .rn-left{position:relative;z-index:3;width:51%;padding:60px 0 52px 56px}
+    .rn-eyebrow{display:flex;align-items:center;gap:14px;font-family:'Montserrat','Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#9a7b4f}
+    .rn-eyebrow:before{content:"";width:32px;height:2px;background:#9a7b4f}
+    .rn h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(30px,3.7vw,48px);font-weight:700;line-height:1.1;color:#14213d;margin:22px 0 0;white-space:nowrap}
+    .rn h2 em{font-style:italic;font-weight:600;color:#9a7b4f;display:inline-block;position:relative}
+    .rn h2 em:after{content:"";position:absolute;left:4%;right:0;bottom:-6px;height:3px;border-radius:3px;background:linear-gradient(90deg,transparent,#9a7b4f 30%,#b8924f);transform:rotate(-1.5deg)}
+    .rn-p{margin:26px 0 0;font-size:16px;line-height:1.65;color:#1f2937;max-width:520px}
+    .rn-p b{color:#14213d;font-weight:700}
+    .rn-icons{display:flex;align-items:center;flex-wrap:nowrap;margin-top:34px}
+    .rn-ic{display:flex;align-items:center;gap:12px;padding:0 18px;white-space:nowrap}
+    .rn-ic:first-child{padding-left:0}
+    .rn-ic+.rn-ic{border-left:1px solid #e0dccf}
+    .rn-ic i{width:52px;height:52px;border-radius:50%;background:#dcebd9;display:grid;place-items:center;color:#14452f;flex-shrink:0}
+    .rn-ic i svg{width:25px;height:25px}
+    .rn-ic span{font-size:14px;font-weight:700;line-height:1.3;color:#14213d}
+    .rn-img{position:absolute;top:0;right:0;bottom:0;width:36%;z-index:1}
+    .rn-img img{width:100%;height:100%;object-fit:cover;display:block;clip-path:ellipse(100% 135% at 100% 50%)}
+    .rn-card-wrap{position:absolute;z-index:4;left:50%;top:50%;transform:translateY(-50%);width:29%;min-width:340px}
+    .rn-card{background:#0f4a2a;color:#fff;border-radius:26px;padding:32px 30px 26px;box-shadow:0 24px 50px rgba(0,0,0,.28);transform:skewX(-5deg)}
+    .rn-card-in{transform:skewX(5deg)}
+    .rn-li{display:flex;align-items:center;gap:14px;font-size:16px;margin-bottom:14px}
+    .rn-li i{width:32px;height:32px;border-radius:50%;background:#b8924f;display:grid;place-items:center;flex-shrink:0}
+    .rn-li i svg{width:17px;height:17px;color:#fff}
+    .rn-li b{font-weight:700}
+    .rn-hr{height:1px;background:rgba(255,255,255,.18);margin:20px 0}
+    .rn-int{text-align:center;font-size:22px;font-weight:700;margin-bottom:14px}
+    .rn-cta{display:flex;align-items:center;justify-content:center;gap:10px;background:#b8924f;color:#fff;border-radius:14px;padding:15px 18px;font-size:15px;font-weight:700;text-decoration:none;transition:background .2s;white-space:nowrap}
+    .rn-cta:hover{background:#9a7b4f}
+    .rn-cta svg{width:19px;height:19px}
+    @media(max-width:1100px){.rn-ic{padding:0 12px}.rn-ic i{width:44px;height:44px}.rn-ic span{font-size:13px}.rn-left{padding-left:36px}}
+    @media(max-width:900px){
+      .rn{min-height:0}
+      .rn-left{width:auto;padding:36px 24px 24px}
+      .rn h2{white-space:normal}
+      .rn-icons{flex-wrap:wrap;gap:16px}
+      .rn-ic,.rn-ic:first-child{padding:0}
+      .rn-ic+.rn-ic{border-left:0}
+      .rn-img{position:relative;width:auto;height:240px}
+      .rn-img img{clip-path:none}
+      .rn-card-wrap{position:relative;left:auto;top:auto;transform:none;width:auto;min-width:0;margin:-50px 16px 24px}
+      .rn-card,.rn-card-in{transform:none}
+    }
+  </style>
+
+  <div class="rn">
+    <div class="rn-left">
+      <span class="rn-eyebrow">In Stock at Our UK Warehouse</span>
+      <h2>Modular Buildings <em>Ready Now</em></h2>
+      <p class="rn-p">A simple, cost-effective way to add extra space at home or for your business. Our first shipment is now <b>in stock at our UK warehouse,</b> with very competitive pricing.</p>
+
+      <div class="rn-icons">
+        <div class="rn-ic">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8"/><path d="M7 16h10"/></svg></i>
+          <span>Our UK<br>Warehouse</span>
         </div>
-        <div class="osi-actions">
-          <a @spa href="{{ route('collections') }}" class="osi-btn dark"><span>Explore Our Buildings</span><x-icon name="arrow-right" /></a>
-          <a @spa href="{{ route('contact') }}" class="osi-btn"><x-icon name="message-circle" /><span>Speak to Our Team</span></a>
+        <div class="rn-ic">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></i>
+          <span>Products<br>In Stock</span>
         </div>
-      </div>
-      <div class="osi-media">
-        <img src="{{ asset('resources/frontend/images/modular-garden-space.jpg') }}" alt="Expandable modular garden building with timber cladding and sliding glass doors" loading="lazy" />
-        <span class="osi-badge">Expandable Modular Building</span>
-        <div class="osi-float">
-          <i><x-icon name="truck" /></i>
-          <div>
-            <b>Introductory First Shipment</b>
-            <span>Affordable pricing &bull; Enquire for availability</span>
-          </div>
+        <div class="rn-ic">
+          <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg></i>
+          <span>Very<br>Good Price</span>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="rn-img">
+      <img src="{{ asset('resources/frontend/images/modular-garden-space.jpg') }}" alt="Expandable modular garden building with sliding glass doors" loading="lazy" />
+    </div>
+
+    <div class="rn-card-wrap">
+      <div class="rn-card">
+        <div class="rn-card-in">
+          <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>UK <b>Warehouse Stock</b></span></div>
+          <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>Ready for <b>Quick Delivery</b></span></div>
+          <div class="rn-li"><i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></i><span>Competitive <b>Pricing</b></span></div>
+          <div class="rn-hr"></div>
+          <div class="rn-int">Interested?</div>
+          <a @spa href="{{ route('contact') }}" class="rn-cta">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.4 1.3 4.5 3.4 6L4 21l4.2-2.1c1.1.3 2.5.5 3.8.5 5.5 0 10-3.6 10-8S17.500 3 12 3z"/></svg>
+            <span>Discuss with Our Team</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Featured Products - real products flagged Featured in admin; hidden unless 2+ -->
   @if(false && $featuredCards->count() > 1)
@@ -576,16 +605,56 @@
     </div>
   </section>
 
-  <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da]">
-    <div class="max-w-4xl mx-auto bg-[#181b20] text-white rounded-2xl p-8 sm:p-10 text-center">
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold">Like What You See?</h2>
-      <p class="text-sm text-[#c9c4b7] mt-2 mb-6">Configure the same chassis, finishes and interiors for your own plot.</p>
-      <div class="flex flex-col sm:flex-row justify-center gap-2.5">
-        <a @spa href="{{ route('collections') }}" class="px-6 py-3 rounded-xl bg-[#9a7b4f] hover:bg-[#866940] text-white text-xs font-semibold uppercase tracking-wider transition-all">Explore Products</a>
-        <a @spa href="{{ route('contact') }}" class="px-6 py-3 rounded-xl border border-white/20 hover:border-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Talk To Us</a>
-      </div>
+    <section class="py-16 md:py-20 px-4 sm:px-6 lg:px-10 border-b border-[#e5e2da] bg-[#FDFBF7]">
+    <style>
+        .lt{max-width:1100px;margin:0 auto;text-align:center}
+        .lt-eyebrow{display:inline-flex;align-items:center;gap:18px;font-family:'Montserrat','Inter',sans-serif;font-size:13px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#9a7b4f}
+        .lt-eyebrow:before,.lt-eyebrow:after{content:"";width:36px;height:2px;background:#9a7b4f}
+        .lt h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(28px,4vw,52px);font-weight:700;line-height:1.15;color:#14213d;margin:22px 0 0}
+        .lt h2 em{font-style:italic;font-weight:600;color:#9a7b4f;display:block}
+        .lt-p{margin:22px auto 0;max-width:900px;font-size:17px;line-height:1.7;color:#2d3a52}
+        .lt-p+.lt-p{margin-top:10px}
+        .lt-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:36px}
+        .lt-pill{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #e8e3d6;border-radius:18px;padding:14px 28px 14px 16px;box-shadow:0 2px 8px rgba(26,29,36,.04)}
+        .lt-pill i{width:48px;height:48px;border-radius:50%;background:#f7eedb;display:grid;place-items:center;color:#9a7b4f;flex-shrink:0}
+        .lt-pill i svg{width:24px;height:24px}
+        .lt-pill span{font-size:17px;font-weight:700;color:#14213d;white-space:nowrap}
+        .lt-cta{display:inline-flex;align-items:center;justify-content:center;gap:14px;margin-top:40px;min-width:min(100%,440px);background:#9a7b4f;color:#fff;border-radius:16px;padding:20px 32px;font-size:16px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:background .2s;box-shadow:0 10px 24px rgba(154,123,79,.28)}
+        .lt-cta:hover{background:#7f6540}
+        .lt-cta svg{width:22px;height:22px}
+        .lt-note{margin:22px 0 0;font-size:14px;font-style:italic;color:#374151}
+        @media(max-width:640px){.lt-pill{width:100%}.lt-p{font-size:15px}.lt-cta{letter-spacing:.14em;padding:18px 20px;font-size:14px}}
+    </style>
+    <div class="lt">
+        <span class="lt-eyebrow">Get in Touch with Origin Spaces</span>
+        <h2>Interested in an Expandable Modular Building? <em>Let’s Talk.</em></h2>
+        <p class="lt-p">Our first shipment of expandable modular buildings is available at attractive introductory prices.</p>
+        <p class="lt-p">Whether you're looking for a garden office, coffee shop, additional family space or a building for your business, we'd be happy to discuss your requirements.</p>
+
+        <div class="lt-pills">
+        <div class="lt-pill">
+            <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12"/><path d="M7 21v-8h10v8"/><path d="M7 16h10"/></svg></i>
+            <span>UK Warehouse Stock</span>
+        </div>
+        <div class="lt-pill">
+            <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="8" cy="8" r="1.5"/></svg></i>
+            <span>Introductory Prices</span>
+        </div>
+        <div class="lt-pill">
+            <i><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></i>
+            <span>Friendly Advice</span>
+        </div>
+        </div>
+
+        <a @spa href="{{ route('contact') }}" class="lt-cta">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.2 7.5L3 21l2-5.600A8.500 8.500 0 1 1 21 11.500z"/><path d="M8.500 11.500h.01M12 11.500h.01M15.500 11.500h.01"/></svg>
+        <span>Speak to Our Team</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+
+        <p class="lt-note">Installation is not included. Delivery and other arrangements can be discussed with our team.</p>
     </div>
-  </section>
+    </section>
   
 @endsection
 @section('script')

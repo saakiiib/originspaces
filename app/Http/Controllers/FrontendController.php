@@ -194,6 +194,13 @@ class FrontendController extends Controller
         $categories = Category::where('status', true)->orderBy('sort_order')->get();
         $productImages = ProductImage::with('product.category')
             ->whereHas('product', fn ($q) => $q->where('status', true))
+            // Only fetch images, exclude videos
+            ->where(function ($query) {
+                $query->whereNotNull('image')
+                    ->where(function ($q) {
+                        $q->whereNull('video_file')->whereNull('video_url');
+                    });
+            })
             ->orderByDesc('id')
             ->get();
 
@@ -202,16 +209,7 @@ class FrontendController extends Controller
 
         $items = $productImages->map(function ($pi) {
             $p = $pi->product;
-            $isVideo = (bool) ($pi->video_file || $pi->video_url);
-            $mediaUrl = null;
-            $mediaType = 'image';
-
-            if ($isVideo) {
-                $mediaType = 'video';
-                $mediaUrl = $pi->video_file ? url($pi->video_file) : $pi->video_url;
-            } else {
-                $mediaUrl = $pi->image ? url($pi->image) : ($p && $p->hero_image ? url($p->hero_image) : null);
-            }
+            $mediaUrl = $pi->image ? url($pi->image) : ($p && $p->hero_image ? url($p->hero_image) : null);
 
             return [
                 'id' => 'pi-'.$pi->id,
@@ -220,14 +218,28 @@ class FrontendController extends Controller
                 'category' => $p ? $p->name : 'Collection',
                 'modelCode' => $p ? $p->model_code : '',
                 'image' => $mediaUrl,
-                'type' => $mediaType,
-                'videoUrl' => $pi->video_url,
-                'videoFile' => $pi->video_file ? url($pi->video_file) : null,
+                'type' => 'image',
                 'caption' => $pi->caption,
             ];
         })->values();
 
         return spa('frontend.gallery', compact('items', 'productsJson'));
+    }
+
+    public function debugProducts()
+    {
+        $products = Product::with([
+            'category',
+            'images',
+            'materials',
+            'specs',
+            'options',
+            'techSpecs',
+            'documents',
+            'floorZones',
+        ])->get();
+
+        return response()->json($products);
     }
 
     public function downloadFile($id)
