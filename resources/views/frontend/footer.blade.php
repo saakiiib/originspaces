@@ -248,7 +248,7 @@
   };
 
   function postEnquiry(payload, onOk) {
-    fetch("{{ route('enquiries.store') }}", {
+    fetch("{{ route('contact') }}", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf, 'Accept': 'application/json' },
       body: JSON.stringify(payload),
