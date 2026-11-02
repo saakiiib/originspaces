@@ -119,14 +119,18 @@ class ProductController extends Controller
             'model_3d' => 'nullable|file|max:51200',
         ]);
 
+        $oldName = $product->name;
+        $oldCode = $product->model_code;
         $product->fill($request->only([
             'category_id', 'name', 'tagline', 'description', 'dimensions',
             'lead_time', 'warranty', 'base_price', 'video_url',
             'meta_title', 'meta_description', 'meta_keywords',
         ]));
         $product->model_code = $request->model_code;
-        // Slug follows the latest name + code.
-        $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class, $product->id);
+        // Only rewrite slug if name or model_code changed; otherwise keep existing to avoid random suffixes.
+        if ($oldName !== $request->name || $oldCode !== $request->model_code) {
+            $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class, $product->id);
+        }
         // Unchecked checkboxes are absent from the request, so always write the boolean.
         $product->show_3d = $request->boolean('show_3d', $product->show_3d);
         $product->is_featured = $request->boolean('is_featured', $product->is_featured);
