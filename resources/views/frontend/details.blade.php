@@ -18,10 +18,6 @@
       </div>
       <div class="flex items-center gap-4">
         <span class="text-xs text-[#6b7280] font-mono">Model Ref: <strong id="crumb-model" class="text-[#1a1d24]">—</strong></span>
-        <span class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#F0EBE1] text-[#786348] text-xs font-mono font-medium border border-[#DDD5C5]">
-          <x-icon name="shield-check" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-          CE &amp; UK Part L Certified
-        </span>
       </div>
     </div>
   </div>

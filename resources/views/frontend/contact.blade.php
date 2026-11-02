@@ -75,33 +75,27 @@
       <div class="lg:col-span-7">
         <form onsubmit="return handleContactSubmit(event)" class="bg-white rounded-2xl border border-[#e5e2da] p-6 sm:p-9 shadow-xs">
           <div id="contact-form-fields" class="space-y-4">
-            <!-- Row 1: Name / Email -->
+            <!-- Row 1: Full Name -->
+            <div>
+              <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Full Name *</label>
+              <input type="text" id="contact-name" required placeholder="Jane Smith" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
+            </div>
+
+            <!-- Row 2: Email / Phone -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Full Name *</label>
-                <input type="text" id="contact-name" required placeholder="Jane Smith" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
-              </div>
               <div>
                 <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Email *</label>
                 <input type="email" id="contact-email" required placeholder="jane@example.co.uk" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
               </div>
-            </div>
-
-            <!-- Row 2: Phone / Postcode -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Phone *</label>
                 <input type="tel" id="contact-phone" required placeholder="+44 7700 900123" pattern="[+]?[0-9\s\-()]{7,}" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Site Postcode</label>
-                <input type="text" id="contact-postcode" placeholder="e.g. GL54 3AA" class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none" />
               </div>
             </div>
 
             <!-- Full width -->
             <div>
-              <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Project Details *</label>
+              <label class="block text-xs font-mono uppercase text-[#6b7280] mb-1.5 font-semibold">Description *</label>
               <textarea id="contact-message" rows="5" required placeholder="Plot size, intended use, timelines — anything that helps us quote accurately." class="w-full border border-[#e5e2da] rounded-lg p-3 text-sm text-[#1a1d24] focus:border-[#9a7b4f] focus:outline-none"></textarea>
             </div>
 
@@ -185,7 +179,6 @@
           email: document.getElementById('contact-email').value,
           phone: document.getElementById('contact-phone').value,
           captcha: captchaVal,
-          postcode: document.getElementById('contact-postcode').value,
           message: document.getElementById('contact-message').value,
         }),
       }).then(function (r) {
