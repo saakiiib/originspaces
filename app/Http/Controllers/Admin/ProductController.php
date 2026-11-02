@@ -128,8 +128,8 @@ class ProductController extends Controller
         // Slug follows the latest name + code.
         $product->slug = $this->uniqueSlug($request->name.'-'.$request->model_code, Product::class, $product->id);
         // Unchecked checkboxes are absent from the request, so always write the boolean.
-        $product->show_3d = $request->boolean('show_3d');
-        $product->is_featured = $request->boolean('is_featured');
+        $product->show_3d = $request->boolean('show_3d', $product->show_3d);
+        $product->is_featured = $request->boolean('is_featured', $product->is_featured);
 
         if ($request->hasFile('hero_image')) {
             $this->deleteFile($product->hero_image);
