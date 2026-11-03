@@ -60,8 +60,9 @@
         </div>
 
         <!-- Video Player -->
-        <div id="hero-video-display-box" class="relative w-full bg-black overflow-hidden transition-all duration-500 aspect-video min-h-[340px] sm:min-h-[480px] md:min-h-[560px]">
-          <iframe id="hero-yt-frame" class="w-full h-full" src="https://www.youtube.com/embed/U7lB7lf-hAk?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1" title="OriginSpaces unfolding demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div id="hero-video-display-box" class="relative w-full bg-black overflow-hidden transition-all duration-500">
+          <video id="hero-video-0" class="w-full h-auto block mx-auto" src="/resources/frontend/vidoes/video1.mp4" autoplay muted playsinline loop preload="auto" poster=""></video>
+          <video id="hero-video-1" class="w-full h-auto block mx-auto hidden" src="/resources/frontend/vidoes/video2.mp4" muted playsinline loop preload="auto" poster=""></video>
           <button id="hero-quick-unmute-btn" onclick="toggleHeroAudio()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all duration-300 shadow-md backdrop-blur-md rounded">
             <x-icon name="volume-2" class="w-4 h-4 animate-bounce" />
             <span>Click to listen with audio</span>
@@ -1578,43 +1579,44 @@
       if (e.key === 'ArrowLeft') lightboxNav(-1);
     });
 
-    // Hero video theater - Angle 01 and Angle 02 are both YouTube films, same player behaviour
-    var HERO_YT_ANGLE_0 = 'https://www.youtube.com/embed/U7lB7lf-hAk?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1';
-    var HERO_YT_ANGLE_1 = 'https://www.youtube.com/embed/Py_sfn9BTJ8?autoplay=1&mute=1&rel=0&playsinline=1&enablejsapi=1';
-    var HERO_YT_WATCH_0 = 'https://www.youtube.com/watch?v=U7lB7lf-hAk';
-    var HERO_YT_WATCH_1 = 'https://www.youtube.com/watch?v=Py_sfn9BTJ8';
-    var heroMode = 'yt';
-    var heroYtMuted = true;
-    function heroYt(cmd) {
-      const f = document.getElementById('hero-yt-frame');
-      if (f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: 'command', func: cmd, args: '' }), '*');
+    // Hero video theater - Angle 01 (video1) and Angle 02 (video2) local MP4
+    var heroCurrentAngle = 0;
+    var heroMuted = true;
+    function getHeroVideo(idx) {
+      return document.getElementById('hero-video-' + idx);
     }
     function switchHeroAngle(idx) {
       const badge = document.getElementById('hero-stream-badge');
       const b0 = document.getElementById('hero-angle-btn-0');
       const b1 = document.getElementById('hero-angle-btn-1');
-      const frame = document.getElementById('hero-yt-frame');
       const label = document.getElementById('hero-corner-audio-text');
-      const watchLink = document.getElementById('hero-yt-watch-link');
       const active = ['bg-[#9a7b4f]', 'text-white', 'border-[#9a7b4f]'];
       const idle = ['bg-white', 'text-[#374151]', 'border-[#e5e2da]'];
-      heroMode = 'yt';
-      heroYtMuted = true;
-      if (idx === 0) {
-        if (badge) badge.textContent = 'Video 1';
-        if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_0) frame.src = HERO_YT_ANGLE_0;
-        else heroYt('playVideo');
-        heroYt('mute');
-        if (watchLink) watchLink.href = HERO_YT_WATCH_0;
-        if (label) label.textContent = 'Muted (Click for Sound)';
-      } else {
-        if (badge) badge.textContent = 'Video 2';
-        if (frame && frame.getAttribute('src') !== HERO_YT_ANGLE_1) frame.src = HERO_YT_ANGLE_1;
-        else heroYt('playVideo');
-        heroYt('mute');
-        if (watchLink) watchLink.href = HERO_YT_WATCH_1;
-        if (label) label.textContent = 'Muted (Click for Sound)';
-      }
+      heroCurrentAngle = idx;
+      heroMuted = true;
+      // Update videos via opacity/z-index so preload works
+      [0, 1].forEach(i => {
+        const v = getHeroVideo(i);
+        if (!v) return;
+        if (i === idx) {
+          v.classList.remove('hidden');
+          v.muted = true;
+          v.currentTime = 0;
+          v.load();
+          setTimeout(function() {
+            v.play().catch(function() {
+              // Autoplay blocked; retry once after brief delay
+              setTimeout(function() { v.play().catch(function() {}); }, 300);
+            });
+          }, 50);
+        } else {
+          v.classList.add('hidden');
+          v.pause();
+          v.currentTime = 0;
+        }
+      });
+      if (badge) badge.textContent = idx === 0 ? 'Video 1' : 'Video 2';
+      if (label) label.textContent = 'Muted (Click for Sound)';
       [b0, b1].forEach((b, i) => {
         if (!b) return;
         active.forEach(c => b.classList.remove(c));
@@ -1625,10 +1627,15 @@
 
     function toggleHeroAudio() {
       const label = document.getElementById('hero-corner-audio-text');
-      heroYtMuted = !heroYtMuted;
-      heroYt(heroYtMuted ? 'mute' : 'unMute');
-      if (!heroYtMuted) heroYt('playVideo');
-      if (label) label.textContent = heroYtMuted ? 'Muted (Click for Sound)' : 'Sound on';
+      heroMuted = !heroMuted;
+      const v = getHeroVideo(heroCurrentAngle);
+      if (v) v.muted = heroMuted;
+      if (!heroMuted) {
+        if (v) v.play().catch(() => {});
+        if (label) label.textContent = 'Sound on';
+      } else {
+        if (label) label.textContent = 'Muted (Click for Sound)';
+      }
     }
 
     function setHeroStage(n) {
@@ -1825,6 +1832,16 @@
     renderFiles();
     renderConfiguratorOptions();
     updateLiveBill();
+    // Hero video init: desktop = video 1, mobile (< 768px) = video 2
+    (function initHeroVideo() {
+      const isMobile = window.innerWidth < 768;
+      switchHeroAngle(isMobile ? 1 : 0);
+      // Force play after a moment (browser autoplay delay)
+      setTimeout(function() {
+        const v = document.getElementById('hero-video-' + (isMobile ? 1 : 0));
+        if (v) { v.muted = true; v.play().catch(function() {}); }
+      }, 400);
+    })();
     if (window.lucide) {
       lucide.createIcons();
     }
