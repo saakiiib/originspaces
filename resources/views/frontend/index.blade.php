@@ -45,13 +45,10 @@
           <div class="flex items-center gap-2.5">
             <span class="flex items-center gap-1.5 font-mono text-[11px] uppercase text-[#9a7b4f] font-semibold tracking-wider">
               <x-icon name="video" class="w-3.5 h-3.5 text-[#9a7b4f]" />
-              <span id="hero-stream-badge">Video 1</span>
+              <span id="hero-stream-badge">Quick Installation</span>
             </span>
-            <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-[#c8c3b7]"></span>
           </div>
           <div class="flex items-center gap-1.5">
-            <button id="hero-angle-btn-0" onclick="switchHeroAngle(0)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-[#9a7b4f] text-white border-[#9a7b4f] font-semibold shadow-xs">Video 1</button>
-            <button id="hero-angle-btn-1" onclick="switchHeroAngle(1)" class="text-[11px] font-mono uppercase px-3 py-1 rounded transition-all border bg-white text-[#374151] border-[#e5e2da] hover:text-[#1a1d24] hover:bg-[#faf9f5]">Video 2</button>
             <button id="hero-theater-mode-btn" onclick="toggleHeroTheater()" title="Toggle Full View" class="p-1.5 bg-white hover:bg-[#faf9f5] text-[#374151] hover:text-[#9a7b4f] border border-[#e5e2da] rounded transition-colors ml-1 hidden sm:flex items-center gap-1 text-[11px] font-mono uppercase">
               <x-icon name="maximize-2" class="w-3.5 h-3.5" />
               <span id="hero-theater-text">Full View</span>
@@ -61,8 +58,8 @@
 
         <!-- Video Player -->
         <div id="hero-video-display-box" class="relative w-full bg-black overflow-hidden transition-all duration-500">
-          <video id="hero-video-0" class="w-full h-auto block mx-auto" src="/resources/frontend/vidoes/video1.mp4" autoplay muted playsinline loop preload="auto" poster=""></video>
-          <video id="hero-video-1" class="w-full h-auto block mx-auto hidden" src="/resources/frontend/vidoes/video2.mp4" muted playsinline loop preload="auto" poster=""></video>
+          <video id="hero-video-0" class="w-full h-auto block mx-auto hidden" data-src="/resources/frontend/vidoes/video1.mp4" muted playsinline loop preload="auto" poster=""></video>
+          <video id="hero-video-1" class="w-full h-auto block mx-auto hidden" data-src="/resources/frontend/vidoes/video2.mp4" muted playsinline loop preload="auto" poster=""></video>
           <button id="hero-quick-unmute-btn" onclick="toggleHeroAudio()" class="absolute top-4 left-4 z-20 flex items-center gap-2 bg-white/95 hover:bg-[#9a7b4f] text-[#1a1d24] hover:text-white border border-[#e5e2da] px-3.5 py-2 font-mono text-[11px] uppercase tracking-wider transition-all duration-300 shadow-md backdrop-blur-md rounded">
             <x-icon name="volume-2" class="w-4 h-4 animate-bounce" />
             <span>Click to listen with audio</span>
@@ -1410,6 +1407,7 @@
     }
 
     function updateLiveBill() {
+      if (!document.getElementById('bill-usecase')) return;
       const uc = CONFIG_USE_CASES.find(u => u.id === configState.useCase) || CONFIG_USE_CASES[0];
       const sz = CONFIG_SIZES.find(s => s.id === configState.modelSize) || CONFIG_SIZES[2];
       const del = CONFIG_DELIVERY.find(d => d.id === configState.delivery) || CONFIG_DELIVERY[0];
@@ -1579,49 +1577,33 @@
       if (e.key === 'ArrowLeft') lightboxNav(-1);
     });
 
-    // Hero video theater - Angle 01 (video1) and Angle 02 (video2) local MP4
+    // Hero video: mobile (< 768px) = video 2, web = video 1. No switcher.
     var heroCurrentAngle = 0;
     var heroMuted = true;
     function getHeroVideo(idx) {
       return document.getElementById('hero-video-' + idx);
     }
-    function switchHeroAngle(idx) {
-      const badge = document.getElementById('hero-stream-badge');
-      const b0 = document.getElementById('hero-angle-btn-0');
-      const b1 = document.getElementById('hero-angle-btn-1');
-      const label = document.getElementById('hero-corner-audio-text');
-      const active = ['bg-[#9a7b4f]', 'text-white', 'border-[#9a7b4f]'];
-      const idle = ['bg-white', 'text-[#374151]', 'border-[#e5e2da]'];
-      heroCurrentAngle = idx;
+    function initHeroVideo() {
+      const isMobile = window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
+      heroCurrentAngle = isMobile ? 1 : 0;   // mobile = video 2, web = video 1
       heroMuted = true;
-      // Update videos via opacity/z-index so preload works
-      [0, 1].forEach(i => {
+      const label = document.getElementById('hero-corner-audio-text');
+      if (label) label.textContent = 'Muted (Click for Sound)';
+      [0, 1].forEach(function (i) {
         const v = getHeroVideo(i);
         if (!v) return;
-        if (i === idx) {
+        if (i === heroCurrentAngle) {
           v.classList.remove('hidden');
+          if (!v.getAttribute('src')) v.src = v.dataset.src;
           v.muted = true;
-          v.currentTime = 0;
-          v.load();
-          setTimeout(function() {
-            v.play().catch(function() {
-              // Autoplay blocked; retry once after brief delay
-              setTimeout(function() { v.play().catch(function() {}); }, 300);
-            });
-          }, 50);
+          v.play().catch(function () {
+            setTimeout(function () { v.play().catch(function () {}); }, 300);
+          });
         } else {
           v.classList.add('hidden');
-          v.pause();
-          v.currentTime = 0;
+          v.removeAttribute('src');
+          v.load();
         }
-      });
-      if (badge) badge.textContent = idx === 0 ? 'Video 1' : 'Video 2';
-      if (label) label.textContent = 'Muted (Click for Sound)';
-      [b0, b1].forEach((b, i) => {
-        if (!b) return;
-        active.forEach(c => b.classList.remove(c));
-        idle.forEach(c => b.classList.remove(c));
-        (i === idx ? active : idle).forEach(c => b.classList.add(c));
       });
     }
 
@@ -1825,6 +1807,7 @@
 
     // Page init: runs on hard load (script sits at body end, DOM ready) and on
     // every SPA injection. DOMContentLoaded would never fire after SPA navigation.
+    initHeroVideo(); // first, so other init errors can't block the video
     renderApplicationShowcase('annex');
     renderSpace('kensington');
     renderMaterial('glass');
@@ -1832,16 +1815,6 @@
     renderFiles();
     renderConfiguratorOptions();
     updateLiveBill();
-    // Hero video init: desktop = video 1, mobile (< 768px) = video 2
-    (function initHeroVideo() {
-      const isMobile = window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
-      switchHeroAngle(isMobile ? 1 : 0);
-      // Force play after a moment (browser autoplay delay)
-      setTimeout(function() {
-        const v = document.getElementById('hero-video-' + (isMobile ? 1 : 0));
-        if (v) { v.muted = true; v.play().catch(function() {}); }
-      }, 400);
-    })();
     if (window.lucide) {
       lucide.createIcons();
     }
