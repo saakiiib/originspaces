@@ -1834,7 +1834,7 @@
     updateLiveBill();
     // Hero video init: desktop = video 1, mobile (< 768px) = video 2
     (function initHeroVideo() {
-      const isMobile = window.innerWidth < 768;
+      const isMobile = window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
       switchHeroAngle(isMobile ? 1 : 0);
       // Force play after a moment (browser autoplay delay)
       setTimeout(function() {
