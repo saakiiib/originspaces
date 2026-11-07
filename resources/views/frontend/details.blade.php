@@ -204,7 +204,13 @@
           <span class="text-[11px] uppercase tracking-[0.3em] text-[#9a7b4f] font-mono font-semibold block mb-3">Architectural Heritage &amp; Monocoque Engineering</span>
           <h2 id="narrative-title" class="font-serif text-2xl sm:text-3xl text-[#1a1d24] font-semibold mb-3">{{ $product->name ?? '—' }}, Specified End to End</h2>
           <div id="narrative-body" class="text-sm text-[#374151] leading-relaxed">{{ $product->description ?? ($product->tagline ?? '—') }}</div>
-          <ul id="narrative-specs" class="mt-4 space-y-2">@if($product->relationLoaded('specs'))@foreach($product->specs->pluck('point') as $spec)<li class="flex items-start gap-2.5 text-sm text-[#374151] leading-relaxed"><span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#9a7b4f] shrink-0"></span><span>{{ $spec }}</span></li>@endforeach@endif</ul>
+          <ul id="narrative-specs" class="mt-4 space-y-2">
+            @if($product->relationLoaded('specs'))
+                @foreach($product->specs->pluck('point') as $spec)
+                <li class="flex items-start gap-2.5 text-sm text-[#374151] leading-relaxed"><span class="mt-[7px] w-1.5 h-1.5 rounded-full bg-[#9a7b4f] shrink-0"></span><span>{{ $spec }}</span></li>
+                @endforeach
+            @endif
+            </ul>
         </div>
 
         <!-- Spec table -->
