@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactEnquiryMail;
 use App\Models\Category;
 use App\Models\CompanyDetails;
 use App\Models\Contact;
@@ -15,6 +16,8 @@ use App\Models\PageSeo;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use OpenGraph;
 use SEOMeta;
 use Twitter;
@@ -158,11 +161,18 @@ class FrontendController extends Controller
             'message' => 'required|string',
         ]);
 
-        Contact::create([
+        $contact = Contact::create([
             ...$data,
             'subject' => 'Website Enquiry',
             'phone' => $data['phone'],
         ]);
+
+        try {
+            Mail::to(config('mail.to.address'), config('mail.to.name'))
+                ->send(new ContactEnquiryMail($contact));
+        } catch (\Throwable $e) {
+            Log::error('Contact enquiry email failed', ['error' => $e->getMessage()]);
+        }
 
         return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
     }

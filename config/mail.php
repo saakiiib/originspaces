@@ -111,8 +111,24 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@originspaces.uk'),
+        'name' => env('MAIL_FROM_NAME', 'OriginSpaces'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Contact Notification Recipient
+    |--------------------------------------------------------------------------
+    |
+    | This is the inbox that receives frontend contact enquiries. Dummy data
+    | for now — set CONTACT_NOTIFICATION_EMAIL in .env to the real inbox later.
+    | Later this can be made dynamic (e.g. from CompanyDetails).
+    |
+    */
+
+    'to' => [
+        'address' => env('CONTACT_NOTIFICATION_EMAIL', 'admin@originspaces.uk'),
+        'name' => env('CONTACT_NOTIFICATION_NAME', 'OriginSpaces'),
     ],
 
 ];
