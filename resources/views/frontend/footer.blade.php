@@ -177,8 +177,9 @@
 
 <!-- Global Toast -->
 <div id="toast-notification" class="fixed bottom-6 right-6 z-[60] bg-[#181b20] text-white px-5 py-3.5 rounded-xl shadow-2xl border border-[#9a7b4f]/40 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300">
-  <div class="w-7 h-7 rounded-full bg-[#9a7b4f] flex items-center justify-center text-white shrink-0">
-    <x-icon name="check" class="w-4 h-4" />
+  <div id="toast-icon-circle" class="w-7 h-7 rounded-full bg-[#9a7b4f] flex items-center justify-center text-white shrink-0">
+    <span id="toast-icon-success" class="flex items-center justify-center"><x-icon name="check" class="w-4 h-4" /></span>
+    <span id="toast-icon-error" class="hidden flex items-center justify-center"><x-icon name="x" class="w-4 h-4" /></span>
   </div>
   <div class="text-xs">
     <span id="toast-title" class="font-semibold block text-white">Submitted Successfully</span>
@@ -190,9 +191,17 @@
 (function () {
   var csrf = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
 
-  window.showToast = function (title, message) {
+  window.showToast = function (title, message, type) {
     var t = document.getElementById('toast-notification');
     if (!t) return;
+    var isError = type === 'error';
+    var circle = document.getElementById('toast-icon-circle');
+    var iconOk = document.getElementById('toast-icon-success');
+    var iconErr = document.getElementById('toast-icon-error');
+    if (circle) circle.style.backgroundColor = isError ? '#dc2626' : '#9a7b4f';
+    if (iconOk) iconOk.classList.toggle('hidden', isError);
+    if (iconErr) iconErr.classList.toggle('hidden', !isError);
+    t.style.borderColor = isError ? 'rgba(220,38,38,0.55)' : 'rgba(154,123,79,0.4)';
     document.getElementById('toast-title').textContent = title || 'Submitted Successfully';
     document.getElementById('toast-message').textContent = message || 'Our team will be in touch shortly.';
     t.classList.remove('translate-y-24', 'opacity-0');
@@ -256,11 +265,11 @@
     .then(function (res) {
       if (!res.ok) {
         var msg = res.d.message || (res.d.errors ? Object.values(res.d.errors)[0][0] : 'Please check the form.');
-        showToast('Something went wrong', msg);
+        showToast('Something went wrong', msg, 'error');
         return;
       }
       onOk();
-    }).catch(function () { showToast('Something went wrong', 'Please try again.'); });
+    }).catch(function () { showToast('Something went wrong', 'Please try again.', 'error'); });
   }
 
   window.handleEnquirySubmit = function (e) {
@@ -281,7 +290,7 @@
       if (btn) btn.disabled = false;
       document.getElementById('enquiry-form').reset();
       closeEnquiryModal();
-      showToast('Enquiry received', 'Thank you — the studio will reply within one working day.');
+      showToast('Enquiry received', 'Thank you — the studio will reply shortly.');
     });
     return false;
   };

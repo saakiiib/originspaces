@@ -110,14 +110,14 @@
                 <button type="submit" class="w-full h-12 rounded-lg bg-[#181b20] hover:bg-[#9a7b4f] text-white text-xs font-semibold uppercase tracking-wider transition-all">Send Enquiry</button>
               </div>
             </div>
-            <p class="text-[11px] text-center text-[#6b7280]">No spam, no obligation — we reply within one working day.</p>
+            <p class="text-[11px] text-center text-[#6b7280]">No spam, no obligation — we reply shortly.</p>
           </div>
           <div id="contact-form-success" class="hidden text-center py-10">
             <span class="w-14 h-14 rounded-full bg-[#9a7b4f]/10 flex items-center justify-center mx-auto mb-4">
               <x-icon name="check" class="w-6 h-6 text-[#9a7b4f]" />
             </span>
             <h3 class="font-serif text-2xl text-[#1a1d24] font-semibold">Enquiry received.</h3>
-            <p class="text-sm text-[#374151] mt-2">Thank you — we will reply within one working day.</p>
+            <p class="text-sm text-[#374151] mt-2">Thank you — we will reply shortly.</p>
           </div>
         </form>
       </div>
@@ -156,15 +156,17 @@
       var q = document.getElementById('captcha-question');
       var input = document.getElementById('contact-captcha');
       if (q) q.textContent = a + ' ' + op + ' ' + b + ' = ?';
-      if (input) input.value = '';
+      if (input) { input.value = ''; input.style.borderColor = ''; }
     }
 
     function handleContactSubmit(e) {
       e.preventDefault();
       var captchaVal = document.getElementById('contact-captcha').value.trim();
       if (parseInt(captchaVal, 10) !== captchaAnswer) {
-        if (window.showToast) showToast('Verification failed', 'Please answer the quick check correctly.');
+        if (window.showToast) showToast('Verification failed', 'Please answer the quick check correctly.', 'error');
         newCaptcha();
+        var capInput = document.getElementById('contact-captcha');
+        if (capInput) { capInput.style.borderColor = '#dc2626'; capInput.focus(); }
         return false;
       }
       var csrf = (document.querySelector('meta[name="csrf-token"]') || {}).content || '';
@@ -187,7 +189,7 @@
         if (!r.ok) {
           return r.json().catch(function(){ return {}; }).then(function (d) {
             var msg = d.message || (d.errors ? Object.values(d.errors)[0][0] : 'Please check the form.');
-            if (window.showToast) showToast('Something went wrong', msg);
+            if (window.showToast) showToast('Something went wrong', msg, 'error');
           });
         }
         document.getElementById('contact-form-fields').classList.add('hidden');
@@ -197,7 +199,7 @@
       }).catch(function () {
         if (btn) btn.disabled = false;
         newCaptcha();
-        if (window.showToast) showToast('Something went wrong', 'Please try again.');
+        if (window.showToast) showToast('Something went wrong', 'Please try again.', 'error');
       });
       return false;
     }

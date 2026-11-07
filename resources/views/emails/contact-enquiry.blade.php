@@ -75,7 +75,7 @@
 <tr>
 <td style="padding:24px 32px 6px;text-align:center;">
 <a href="mailto:{{ $contact->email }}?subject={{ urlencode('Re: Your enquiry — OriginSpaces') }}" style="display:inline-block;background-color:#181B20;color:#ffffff;text-decoration:none;font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:14px 28px;border-radius:10px;">Reply to {{ $contact->name }}</a>
-<p style="font-size:12px;line-height:1.6;color:#6b7280;margin:14px 0 0;">This reply goes directly to <a href="mailto:{{ $contact->email }}" style="color:#9a7b4f;text-decoration:none;font-weight:600;">{{ $contact->email }}</a>. We aim to reply within one working day.</p>
+<p style="font-size:12px;line-height:1.6;color:#6b7280;margin:14px 0 0;">This reply goes directly to <a href="mailto:{{ $contact->email }}" style="color:#9a7b4f;text-decoration:none;font-weight:600;">{{ $contact->email }}</a>. We aim to reply shortly.</p>
 </td>
 </tr>
 <!-- Footer -->

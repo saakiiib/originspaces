@@ -167,14 +167,30 @@ class FrontendController extends Controller
             'phone' => $data['phone'],
         ]);
 
+        $mailTo = config('mail.to.address');
+
         try {
-            Mail::to(config('mail.to.address'), config('mail.to.name'))
+            Mail::to($mailTo, config('mail.to.name'))
                 ->send(new ContactEnquiryMail($contact));
+
+            Log::info('Contact enquiry email sent (log mailer — check this log to verify receipt)', [
+                'contact_id' => $contact->id,
+                'to' => $mailTo,
+                'from' => config('mail.from.address'),
+                'reply_to' => $contact->email,
+                'subject' => 'New Website Enquiry — '.$contact->name.' | OriginSpaces',
+                'mailer' => config('mail.default'),
+                'visitor_name' => $contact->name,
+            ]);
         } catch (\Throwable $e) {
-            Log::error('Contact enquiry email failed', ['error' => $e->getMessage()]);
+            Log::error('Contact enquiry email failed', [
+                'contact_id' => $contact->id,
+                'to' => $mailTo,
+                'error' => $e->getMessage(),
+            ]);
         }
 
-        return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply within one working day.']);
+        return response()->json(['success' => true, 'message' => 'Enquiry received. We will reply shortly.']);
     }
 
     public function gallery()

@@ -9,7 +9,9 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\SentMessage;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ContactEnquiryMail extends Mailable
 {
@@ -45,5 +47,15 @@ class ContactEnquiryMail extends Mailable
                 'company' => $this->company,
             ],
         );
+    }
+
+    public function sent(SentMessage $message): void
+    {
+        Log::info('ContactEnquiryMail handed to mailer', [
+            'contact_id' => $this->contact->id,
+            'to' => array_keys($message->getMessage()->getTo()),
+            'subject' => $message->getMessage()->getSubject(),
+            'mailer' => config('mail.default'),
+        ]);
     }
 }

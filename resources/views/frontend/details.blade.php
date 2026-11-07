@@ -459,7 +459,7 @@
 
     function downloadSpecFile(kind) {
       const p = currentProduct;
-      const body = ['OriginSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), '', 'The studio will issue this file within one working day.'].join('\n');
+      const body = ['OriginSpaces Specification Request', '', 'Product: ' + p.name, 'Model: ' + p.modelCode, 'Document: ' + (kind === 'lookbook' ? 'Architectural Lookbook & CAD' : 'Technical Specification Sheet'), '', 'The studio will issue this file shortly.'].join('\n');
       const blob = new Blob([body], { type: 'text/plain' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
