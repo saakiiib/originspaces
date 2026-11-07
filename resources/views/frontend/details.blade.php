@@ -24,25 +24,6 @@
 
   <!-- Main Split -->
   <main class="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-10 py-8">
-    @if(isset($product))
-    <script type="application/ld+json">@json([
-        '@context' => 'https://schema.org',
-        '@type' => 'Product',
-        'name' => $product->name,
-        'description' => $product->tagline ?? $product->description ?? '',
-        'image' => $product->hero_image ? url($product->hero_image) : '',
-        'sku' => $product->model_code,
-        'brand' => ['@type' => 'Brand', 'name' => 'OriginSpaces'],
-        'offers' => [
-            '@type' => 'Offer',
-            'url' => url('/product/' . $product->slug),
-            'priceCurrency' => 'GBP',
-            'price' => $product->base_price ? (float) $product->base_price : null,
-            'priceValidUntil' => now()->addMonths(6)->format('Y-m-d'),
-            'availability' => $product->status ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-        ],
-    ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)</script>
-    @endif
     <div class="flex flex-col lg:flex-row items-start gap-8">
 
       <!-- LEFT: Configurator -->
