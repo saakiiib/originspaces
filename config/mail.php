@@ -127,7 +127,7 @@ return [
     */
 
     'to' => [
-        'address' => env('CONTACT_NOTIFICATION_EMAIL', 'admin@originspaces.uk'),
+        'address' => env('CONTACT_NOTIFICATION_EMAIL', 'hello@originspaces.uk'),
         'name' => env('CONTACT_NOTIFICATION_NAME', 'OriginSpaces'),
     ],
 
